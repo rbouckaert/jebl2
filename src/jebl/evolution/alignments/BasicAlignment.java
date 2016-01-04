@@ -57,11 +57,13 @@ public class BasicAlignment implements Alignment {
     /**
      * @return a set containing all the sequences in this alignment.
      */
-    public Set<Sequence> getSequences() {
+    @Override
+	public Set<Sequence> getSequences() {
         return new HashSet<Sequence>(sequences.values());
     }
 
-    public List<Sequence> getSequenceList() {
+    @Override
+	public List<Sequence> getSequenceList() {
         List<Sequence> seqs = new ArrayList<Sequence>();
         for (Taxon taxon : taxonList) {
             seqs.add(sequences.get(taxon));
@@ -69,33 +71,40 @@ public class BasicAlignment implements Alignment {
         return seqs;
     }
 
+	@Override
 	public SequenceType getSequenceType() {
 		return sequenceType;
 	}
 
+	@Override
 	public Sequence getSequence(Taxon taxon) {
 	    return sequences.get(taxon);
 	}
 
+	@Override
 	public int getSiteCount() {
 	    return patterns.size();
 	}
 
-    public int getPatternCount() {
+    @Override
+	public int getPatternCount() {
         return patterns.size();
     }
 
+	@Override
 	public int getPatternLength() {
 		return taxonList.size();
 	}
 
-    public List<Pattern> getPatterns() {
+    @Override
+	public List<Pattern> getPatterns() {
         return patterns;
     }
 
 	/**
 	 * @return the list of taxa that the state values correspond to.
 	 */
+	@Override
 	public List<Taxon> getTaxa() {
 	    return taxonList;
 	}
@@ -170,40 +179,47 @@ public class BasicAlignment implements Alignment {
         /**
          * @return the data type of the states in this pattern.
          */
-        public SequenceType getSequenceType() {
+        @Override
+		public SequenceType getSequenceType() {
             return sequenceType;
         }
 
-        public int getLength() {
+        @Override
+		public int getLength() {
             return states.size();
         }
 
         /**
          * @return the list of taxa that the state values correspond to.
          */
-        public List<Taxon> getTaxa() {
+        @Override
+		public List<Taxon> getTaxa() {
             return taxonList;
         }
 
-	    public State getState(int index) {
+	    @Override
+		public State getState(int index) {
 		    return states.get(index);
 	    }
 
 	    /**
 	     * @return the list of state values of this pattern.
 	     */
-	    public List<State> getStates() {
+	    @Override
+		public List<State> getStates() {
 	        return states;
 	    }
 
 	    /**
 	     * @return the set of state values of this pattern.
 	     */
-	    public Set<State> getStateSet() {
+	    @Override
+		public Set<State> getStateSet() {
 	        return new HashSet<State>(states);
 	    }
 
-	    public double getWeight() {
+	    @Override
+		public double getWeight() {
 		    return 1.0;
 	    }
 
@@ -211,7 +227,8 @@ public class BasicAlignment implements Alignment {
 	     * Get the most frequent state in this pattern.
 	     * @return the most frequent state
 	     */
-	    public State getMostFrequentState() {
+	    @Override
+		public State getMostFrequentState() {
             return getMostFrequentState(false);
 	    }
 
@@ -220,7 +237,8 @@ public class BasicAlignment implements Alignment {
          * @param includeAmbiguous whether ambiguous states and gaps are included
          * @return the most frequent state
          */
-        public State getMostFrequentState(boolean includeAmbiguous) {
+        @Override
+		public State getMostFrequentState(boolean includeAmbiguous) {
             int maxCount = 0;
             State mostFrequentState = null;
             int[] counts = new int[sequenceType.getStateCount()];
@@ -237,11 +255,13 @@ public class BasicAlignment implements Alignment {
             return mostFrequentState;
         }
 
-	    public double getStateFrequency(State state) {
+	    @Override
+		public double getStateFrequency(State state) {
 		    return ((double)getStateCount(state)) / states.size();
 	    }
 
-        public int getStateCount(State state) {
+        @Override
+		public int getStateCount(State state) {
             int count = 0;
             for (State s : states) {
                 if (s == state) {

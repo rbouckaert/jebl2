@@ -48,6 +48,7 @@ public class ExponentialLogistic extends LogisticGrowth {
 
 	// Implementation of abstract methods
 
+	@Override
 	public double getDemographic(double t) {
 
         double transition_time = getTime();
@@ -62,18 +63,22 @@ public class ExponentialLogistic extends LogisticGrowth {
         }
 	}
 
+	@Override
 	public double getIntensity(double t) {
         throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public double getInverseIntensity(double x) {
         throw new UnsupportedOperationException();
 	}
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return false;
     }
 
+	@Override
 	public double getIntegral(double start, double finish) {
         throw new UnsupportedOperationException();
 	}

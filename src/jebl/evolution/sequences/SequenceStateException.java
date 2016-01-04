@@ -15,7 +15,12 @@ package jebl.evolution.sequences;
  * @version $Id: SequenceStateException.java 185 2006-01-23 23:03:18Z rambaut $
  */
 public class SequenceStateException extends Exception {
-    public SequenceStateException(String s) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SequenceStateException(String s) {
         super(s);
     }
 }

@@ -86,12 +86,15 @@ public interface MinimiserMonitor {
 				this.sw_ = new StringWriter();
 				this.pw_ = new PrintWriter(sw_,true);
 			}
+			@Override
 			public void updateProgress(double progress) {
 				pw_.println("Update Progress:"+progress);
 			}
+			@Override
 			public void newMinimum(double value, double[] parameterValues, MultivariateFunction beingOptimized) {
 				pw_.println("New Minimum:"+value);
 			}
+			@Override
 			public String toString() {
 				return sw_.toString();
 			}
@@ -100,8 +103,11 @@ public interface MinimiserMonitor {
 		private static final class NullMonitor implements MinimiserMonitor {
 			public static final MinimiserMonitor INSTANCE = new NullMonitor();
 			public NullMonitor() {   }
+			@Override
 			public void updateProgress(double progress) {}
+			@Override
 			public void newMinimum(double value, double[] parameterValues, MultivariateFunction beingOptimized) {}
+			@Override
 			public String toString() { return "Null Monitor";   }
 		}
 
@@ -113,10 +119,12 @@ public interface MinimiserMonitor {
 			public Split(MinimiserMonitor a, MinimiserMonitor b) {
 				this.a_ = a; this.b_ = b;
 			}
+			@Override
 			public void updateProgress(double progress) {
 				a_.updateProgress(progress);
 				b_.updateProgress(progress);
 			}
+			@Override
 			public void newMinimum(double value, double[] parameterValues, MultivariateFunction mf) {
 				a_.newMinimum(value,parameterValues,mf);
 				b_.newMinimum(value,parameterValues,mf);
@@ -127,21 +135,27 @@ public interface MinimiserMonitor {
 			Simple(PrintWriter output) {
 				this.output_ = output;
 			}
+			@Override
 			public void updateProgress(double progress) {		}
+			@Override
 			public void newMinimum(double value, double[] parameterValues, MultivariateFunction mf) {
 				output_.println("New Minimum:"+value);
 			}
 		}
 		private static class SystemOutput implements MinimiserMonitor {
 			static final SystemOutput INSTANCE = new SystemOutput();
+			@Override
 			public void updateProgress(double progress) {		}
+			@Override
 			public void newMinimum(double value, double[] parameterValues, MultivariateFunction mf) {
 				System.out.println("New Minimum:"+value);
 			}
 		}
 		private static class SystemError implements MinimiserMonitor {
 			static final SystemError INSTANCE = new SystemError();
+			@Override
 			public void updateProgress(double progress) {		}
+			@Override
 			public void newMinimum(double value, double[] parameterValues, MultivariateFunction mf) {
 				System.err.println("New Minimum:"+value);
 			}

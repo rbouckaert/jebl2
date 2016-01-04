@@ -77,7 +77,8 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
         this.supportThreshold = supportThreshold;
     }
 
-    public String getMethodDescription() {
+    @Override
+	public String getMethodDescription() {
         return getSupportDescription(supportThreshold) + " greedy clustering";
     }
 
@@ -144,7 +145,8 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
     //          add not done adj to scan list
     //          remove n from scan and add it to done list
 
-    public final Tree build() {
+    @Override
+	public final Tree build() {
 
         try {
             Map<FixedBitSet, Support> support = new LinkedHashMap<FixedBitSet, Support>();
@@ -170,7 +172,8 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
                     sumBranchesOfExternal[position] += tree.getEdgeLength(n, tree.getAdjacencies(n).get(0));
                 }
 
-                int nInternalEdges = nExternalNodes - 3;
+                @SuppressWarnings("unused")
+				int nInternalEdges = nExternalNodes - 3;
 
                 List<Node> intr = new ArrayList<Node>(tree.getInternalNodes());
 
@@ -259,7 +262,8 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
 
             // sorts support from largest to smallest
             final Comparator<Map.Entry<FixedBitSet, Support>> comparator = new Comparator<Map.Entry<FixedBitSet, Support>>() {
-                public int compare(Map.Entry<FixedBitSet, Support> o1, Map.Entry<FixedBitSet, Support> o2) {
+                @Override
+				public int compare(Map.Entry<FixedBitSet, Support> o1, Map.Entry<FixedBitSet, Support> o2) {
                     return o2.getValue().nTreesWithClade - o1.getValue().nTreesWithClade;
                 }
             };

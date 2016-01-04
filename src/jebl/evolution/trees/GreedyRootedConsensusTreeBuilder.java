@@ -39,7 +39,8 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
 	    this.supportThreshold = supportThreshold;
 	}
 
-    public String getMethodDescription() {
+    @Override
+	public String getMethodDescription() {
         String supporDescription = getSupportDescription(supportThreshold);
         return supporDescription + " greedy clustering";
     }
@@ -121,7 +122,8 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
     }
 
 
-    public final RootedTree build() {
+    @Override
+	public final RootedTree build() {
 
         // establish support
         Map<FixedBitSet, Support> support = new LinkedHashMap<FixedBitSet, Support>();
@@ -163,7 +165,8 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
 
         // sorts support from largest to smallest
         final Comparator<Map.Entry<FixedBitSet, Support>> comparator = new Comparator<Map.Entry<FixedBitSet, Support>>() {
-            public int compare(Map.Entry<FixedBitSet, Support> o1, Map.Entry<FixedBitSet, Support> o2) {
+            @Override
+			public int compare(Map.Entry<FixedBitSet, Support> o1, Map.Entry<FixedBitSet, Support> o2) {
                 return o2.getValue().nTreesWithClade - o1.getValue().nTreesWithClade;
             }
         };

@@ -97,13 +97,15 @@ public class RootedFromUnrooted implements RootedTree {
 		parents = new LinkedHashMap<Node, Node>();
 
 		// This is just a handle used to refer to the root so create the simplest possible implementation...
-        root = new BaseNode() { public int getDegree() { return 2; } };
+        root = new BaseNode() { @Override
+		public int getDegree() { return 2; } };
 
 		parents.put(root, null);
         setParent(left, root);
         setParent(right, root);
     }
 
+	@Override
 	public List<Node> getChildren(Node node) {
 		ArrayList<Node> s = new ArrayList<Node>(getAdjacencies(node));
 		if( node != root ) {
@@ -112,6 +114,7 @@ public class RootedFromUnrooted implements RootedTree {
 		return s;
 	}
 
+	@Override
 	public boolean hasHeights() {
 		return false;
 	}
@@ -126,6 +129,7 @@ public class RootedFromUnrooted implements RootedTree {
 		return h;
 	}
 
+	@Override
 	public double getHeight(Node node) {
 		double hr = findNodeHeightFromTips(root);
 		if( node == root ) {
@@ -140,10 +144,12 @@ public class RootedFromUnrooted implements RootedTree {
 		return hr - toRoot;
 	}
 
+	@Override
 	public boolean hasLengths() {
 		return true;
 	}
 
+	@Override
 	public double getLength(Node node) {
 		if( node == root ) return 0.0;
 		if( node == topLeft ) return rootToLeft;
@@ -157,45 +163,55 @@ public class RootedFromUnrooted implements RootedTree {
 		return l;
 	}
 
+	@Override
 	public Node getParent(Node node) {
 		return parents.get(node);
 	}
 
-    public Node getRootNode() {
+    @Override
+	public Node getRootNode() {
         return root;
     }
 
+	@Override
 	public boolean conceptuallyUnrooted() {
 		return intentUnrooted;
 	}
 
+	@Override
 	public Set<Node> getExternalNodes() {
 		return source.getExternalNodes();
 	}
 
+	@Override
 	public Set<Node> getInternalNodes() {
 		HashSet<Node> s = new LinkedHashSet<Node>(source.getInternalNodes());
 		s.add(root);
 		return s;
 	}
 
+	@Override
 	public Set<Taxon> getTaxa() {
 		return source.getTaxa();
 	}
 
+	@Override
 	public Taxon getTaxon(Node node) {
 		if( node == root ) return null;
 		return source.getTaxon(node);
 	}
 
+	@Override
 	public boolean isExternal(Node node) {
 		return node != root && source.isExternal(node);
 	}
 
+	@Override
 	public Node getNode(Taxon taxon) {
 		return source.getNode(taxon);
 	}
 
+	@Override
 	public void renameTaxa(Taxon from, Taxon to) {
 		source.renameTaxa(from, to);
 	}
@@ -206,14 +222,17 @@ public class RootedFromUnrooted implements RootedTree {
 	 * @param node
 	 * @return the set of nodes that are attached by edges to the given node.
 	 */
+	@Override
 	public List<Edge> getEdges(Node node) {
 		return source.getEdges(node);
 	}
 
+	@Override
 	public Node[] getNodes(Edge edge) {
 		return source.getNodes(edge);
 	}
 
+	@Override
 	public List<Node> getAdjacencies(Node node) {
 		// special case when syntetic root
 		if( topLeft != null ) {
@@ -231,6 +250,7 @@ public class RootedFromUnrooted implements RootedTree {
 		return source.getAdjacencies(node);
 	}
 
+	@Override
 	public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
 		// special case when syntetic root
 		if( topLeft != null ) {
@@ -249,10 +269,12 @@ public class RootedFromUnrooted implements RootedTree {
 		return source.getEdgeLength(node1, node2);
 	}
 
+	@Override
 	public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
 		return source.getEdge(node1, node2);
 	}
 
+	@Override
 	public Set<Node> getNodes() {
 		Set<Node> nodes = new LinkedHashSet<Node>(getInternalNodes());
 		nodes.addAll(getExternalNodes());
@@ -265,6 +287,7 @@ public class RootedFromUnrooted implements RootedTree {
 	/**
 	 * @return the set of all edges in this graph.
 	 */
+	@Override
 	public Set<Edge> getEdges() {
 		return source.getEdges();
 	}
@@ -273,6 +296,7 @@ public class RootedFromUnrooted implements RootedTree {
 	 * The set of external edges.
 	 * @return the set of external edges.
 	 */
+	@Override
 	public Set<Edge> getExternalEdges() {
 		return source.getExternalEdges();
 	}
@@ -281,10 +305,12 @@ public class RootedFromUnrooted implements RootedTree {
 	 * The set of internal edges.
 	 * @return the set of internal edges.
 	 */
+	@Override
 	public Set<Edge> getInternalEdges() {
 		return source.getInternalEdges();
 	}
 
+	@Override
 	public Set<Node> getNodes(int degree) {
 		Set<Node> nodes = source.getNodes(degree);
 		if( degree == 2 ) {
@@ -293,28 +319,34 @@ public class RootedFromUnrooted implements RootedTree {
 		return nodes;
 	}
 
+	@Override
 	public boolean isRoot(Node node) {
 		return node == root;
 	}
 
 	// Attributable IMPLEMENTATION
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		source.setAttribute(name, value);
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		return source.getAttribute(name);
 	}
 
+	@Override
 	public void removeAttribute(String name) {
 		source.removeAttribute(name);
 	}
 
+	@Override
 	public Set<String> getAttributeNames() {
 		return source.getAttributeNames();
 	}
 
+	@Override
 	public Map<String, Object> getAttributeMap() {
 		return source.getAttributeMap();
 	}

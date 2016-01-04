@@ -8,5 +8,6 @@ public abstract class Traceback {
 
     public final int getY() { return j; }
 
-    public String toString() { return "("+getX() + ", " + getY()+")";};
+    @Override
+	public String toString() { return "("+getX() + ", " + getY()+")";};
 }

@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @version $Id: State.java 1002 2009-05-27 03:33:19Z matt_kearse $
  */
-public abstract class State implements Comparable {
+public abstract class State implements Comparable<State> {
 
     State(String name, String stateCode, int index) {
         this.name = name;
@@ -81,11 +81,13 @@ public abstract class State implements Comparable {
         return false;
     }
 
-    public int compareTo(Object o) {
-        return index - ((State)o).index;
+    @Override
+	public int compareTo(State o) {
+        return index - o.index;
     }
 
-    public String toString() { return stateCode; }
+    @Override
+	public String toString() { return stateCode; }
 
     public abstract boolean isGap();
 

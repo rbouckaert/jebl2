@@ -73,5 +73,5 @@ public class TaxonomicLevel {
     /**
      * A hash map containing name, object pairs.
      */
-    private static Map taxonomicLevels = new HashMap();
+    private static Map taxonomicLevels = new HashMap<>();
 }

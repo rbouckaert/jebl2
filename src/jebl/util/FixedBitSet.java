@@ -190,7 +190,8 @@ public class FixedBitSet {
         return (bits[unitIndex] & bit(i)) != 0;
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         int code = 0;
 
         for (int bit : bits) {
@@ -199,7 +200,8 @@ public class FixedBitSet {
         return code;
     }
 
-    public boolean equals(Object x) {
+    @Override
+	public boolean equals(Object x) {
         if (x instanceof FixedBitSet) {
             final FixedBitSet b = (FixedBitSet) x;
 
@@ -208,7 +210,8 @@ public class FixedBitSet {
         return false;
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         StringBuilder rep = new StringBuilder();
         rep.append("{");
         for (int b = 0; b < size; ++b) {

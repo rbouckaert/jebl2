@@ -99,7 +99,8 @@ public class HKYDistanceMatrix extends BasicDistanceMatrix {
          * Calculate the distance between two of the sequences from the alignment.
          * @throws CannotBuildDistanceMatrixException
          */
-        public double calculatePairwiseDistance(int taxon1, int taxon2) throws CannotBuildDistanceMatrixException {
+        @Override
+		public double calculatePairwiseDistance(int taxon1, int taxon2) throws CannotBuildDistanceMatrixException {
             double sumTs = 0.0; // total weight of all columns that have a transition for these taxa
             double sumTv = 0.0; // total weight of all columns that have a transversion for these taxa
             double sumWeight = 0.0; // total weight of all columns (ignoring those with ambiguities, but

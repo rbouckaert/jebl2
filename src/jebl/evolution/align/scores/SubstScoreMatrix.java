@@ -38,11 +38,13 @@ public class SubstScoreMatrix extends Scores {
         return logValues;
     }
 
-    public String getName() {
+    @Override
+	public String getName() {
         return toString();
     }
 
-    public String getAlphabet() {
+    @Override
+	public String getAlphabet() {
         return alphabet;
     }
 }

@@ -80,6 +80,7 @@ public class CladeHeightMetric implements RootedTreeMetric {
 		}
 	}
 
+	@Override
 	public double getMetric(RootedTree tree1, RootedTree tree2) {
 
 		if (!tree1.getTaxa().equals(tree2.getTaxa())) {
@@ -202,7 +203,8 @@ public class CladeHeightMetric implements RootedTreeMetric {
 	        return size;
 	    }
 
-	    public int compareTo(Clade clade) {
+	    @Override
+		public int compareTo(Clade clade) {
 	        int i = bits.cardinality();
 	        int j = clade.bits.cardinality();
 	        return (i < j ? -1 : (i > j ? 1 : 0));

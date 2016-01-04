@@ -50,7 +50,8 @@ public class TamuraNeiDistanceMatrix extends BasicDistanceMatrix {
          * Calculate a pairwise distance
          * @throws CannotBuildDistanceMatrixException
          */
-        public double calculatePairwiseDistance(int taxon1, int taxon2) throws CannotBuildDistanceMatrixException {
+        @Override
+		public double calculatePairwiseDistance(int taxon1, int taxon2) throws CannotBuildDistanceMatrixException {
 
             double sumTsAG = 0.0;
             double sumTsCT = 0.0;

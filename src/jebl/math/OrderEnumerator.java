@@ -13,7 +13,7 @@ package jebl.math;
 
 
 /**
- * A means for describing odering information, and Utilities for creating such Orderings
+ * A means for describing ordering information, and Utilities for creating such Orderings
  *
  * @version $Id: OrderEnumerator.java 849 2007-12-06 00:10:14Z twobeers $
  *
@@ -184,12 +184,16 @@ public interface OrderEnumerator {
 			public Constant(int index) {
 				this.index_ = index;
 			}
+			@Override
 			public boolean hasMore() { return hasMore_; }
+			@Override
 			public int getNext() { hasMore_ = false; return index_; }
+			@Override
 			public void reset() { hasMore_ = true; }
 			/**
 				* For generating an ordering from 0..size-1. Enumerator doesn't have to actually produce
 				*/
+			@Override
 			public OrderEnumerator createOrderEnumerator(int size) {
 				return this;
 			}
@@ -207,15 +211,19 @@ public interface OrderEnumerator {
 				this.size_= size;
 				reset();
 			}
+			@Override
 			public boolean hasMore() {
 				return index_<size_;
 			}
+			@Override
 			public int getNext() { return index_++; }
+			@Override
 			public void reset() { index_ = 0; }
 			//=====================================================
 			//================= Factory ===========================
 			static class Factory implements OrderEnumerator.OEFactory {
 				static final Factory INSTANCE = new Factory();
+				@Override
 				public OrderEnumerator createOrderEnumerator(int size) {
 					return new Ordered(size);
 				}
@@ -238,10 +246,13 @@ public interface OrderEnumerator {
 				}
 				reset();
 			}
+			@Override
 			public boolean hasMore() {
 				return currentIndex_<size_;
 			}
+			@Override
 			public int getNext() { return indexes_[currentIndex_++]; }
+			@Override
 			public void reset() { currentIndex_ = 0; random_.shuffle(indexes_); }
 
 			//=====================================================
@@ -249,6 +260,7 @@ public interface OrderEnumerator {
 			static class Factory implements OrderEnumerator.OEFactory {
 				static final Factory INSTANCE = new Factory();
 
+				@Override
 				public OrderEnumerator createOrderEnumerator(int size) {
 					return new Shuffled(size);
 				}
@@ -272,6 +284,7 @@ public interface OrderEnumerator {
 				this.top_ = minimum+range;
 				reset();
 			}
+			@Override
 			public boolean hasMore() {
 				return hasMore_;
 			}
@@ -286,7 +299,9 @@ public interface OrderEnumerator {
 					}
 				}
 			}
+			@Override
 			public int getNext() { int myNext = next_; updateNext(); return myNext; }
+			@Override
 			public void reset() { toAdjust_.reset(); updateNext(); }
 
 			//=====================================================
@@ -299,6 +314,7 @@ public interface OrderEnumerator {
 					this.minimum_ = minimum;
 					this.range_ = range;
 				}
+				@Override
 				public OrderEnumerator createOrderEnumerator(int size) {
 					return new Restricted(toAdjustFactory_.createOrderEnumerator(size),minimum_,range_);
 				}
@@ -319,10 +335,13 @@ public interface OrderEnumerator {
 				this.adjustmentAmount_ = adjustmentAmount;
 				reset();
 			}
+			@Override
 			public boolean hasMore() {
 				return toAdjust_.hasMore();
 			}
+			@Override
 			public int getNext() { return toAdjust_.getNext()+adjustmentAmount_; }
+			@Override
 			public void reset() { toAdjust_.reset(); }
 
 			//=====================================================
@@ -334,6 +353,7 @@ public interface OrderEnumerator {
 					this.toAdjustFactory_ = toAdjustFactory;
 					this.adjustmentAmount_ = adjustmentAmount;
 				}
+				@Override
 				public OrderEnumerator createOrderEnumerator(int size) {
 					return new Adjust(toAdjustFactory_.createOrderEnumerator(size-adjustmentAmount_),adjustmentAmount_);
 				}
@@ -356,9 +376,11 @@ public interface OrderEnumerator {
 				this.secondary_ = secondary;
 				reset();
 			}
+			@Override
 			public boolean hasMore() {
 				return primary_.hasMore()||secondary_.hasMore();
 			}
+			@Override
 			public int getNext() {
 				int toReturn;
 				if(onSecondary_&&secondary_.hasMore()) {
@@ -371,6 +393,7 @@ public interface OrderEnumerator {
 				}
 				return toReturn;
 			}
+			@Override
 			public void reset() {
 				primary_.reset();
 				secondary_.reset();
@@ -385,6 +408,7 @@ public interface OrderEnumerator {
 					this.primary_ = primary;
 					this.secondary_ = secondary;
 				}
+				@Override
 				public OrderEnumerator createOrderEnumerator(int size) {
 					return new Alternate(primary_.createOrderEnumerator(size),secondary_.createOrderEnumerator(size));
 				}
@@ -408,9 +432,11 @@ public interface OrderEnumerator {
 				reset();
 			}
 
+			@Override
 			public boolean hasMore() {
 				return(primary_.hasMore()||(onSecondary_&&secondary_.hasMore()));
 			}
+			@Override
 			public int getNext() {
 				if(onSecondary_) {
 					int toReturn = secondary_.getNext();
@@ -422,6 +448,7 @@ public interface OrderEnumerator {
 					return primary_.getNext();
 				}
 			}
+			@Override
 			public void reset() {
 				primary_.reset();
 				onSecondary_ = false;
@@ -435,6 +462,7 @@ public interface OrderEnumerator {
 					this.primary_ = primary;
 					this.secondary_ = secondary;
 				}
+				@Override
 				public OrderEnumerator createOrderEnumerator(int size) {
 					return new BiasAlternate(primary_.createOrderEnumerator(size),secondary_.createOrderEnumerator(size));
 				}

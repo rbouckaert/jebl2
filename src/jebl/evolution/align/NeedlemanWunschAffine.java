@@ -16,7 +16,8 @@ public class NeedlemanWunschAffine extends AlignAffine {
      * @param sq1
      * @param sq2
      */
-    public void doAlignment(String sq1, String sq2) {
+    @Override
+	public void doAlignment(String sq1, String sq2) {
         this.seq1 = sq1;
         this.seq2 = sq2;
 
@@ -46,7 +47,8 @@ public class NeedlemanWunschAffine extends AlignAffine {
 
     }
 
-    public void prepareAlignment(String sq1, String sq2) {
+    @Override
+	public void prepareAlignment(String sq1, String sq2) {
 
         n = sq1.length();
         m = sq2.length();
@@ -113,7 +115,7 @@ public class NeedlemanWunschAffine extends AlignAffine {
 //        char[] s2 = seq2.toCharArray();
 
 //        int n = this.n, m = this.m;
-        float[][] score = sub.score;
+        //float[][] score = sub.score;
         float[][] M = F[0], Ix = F[1], Iy = F[2];
         float val;
         float s, a, b, c;
@@ -269,7 +271,8 @@ public class NeedlemanWunschAffine extends AlignAffine {
 
     }
 
-    public String[] getMatch() {
+    @Override
+	public String[] getMatch() {
         return getMatch(seq1.toCharArray(), seq2.toCharArray());
 
     }
@@ -318,7 +321,8 @@ public class NeedlemanWunschAffine extends AlignAffine {
     }
 
 
-    public float getScore() {
+    @Override
+	public float getScore() {
         return F[B0k][B0i][B0j];
     }
 

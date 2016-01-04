@@ -43,6 +43,7 @@ public class CoalescentIntervalGenerator implements IntervalGenerator {
 	 * @param currentHeight the starting height
 	 * @return the interval time
 	 */
+	@Override
 	public double getInterval(double criticalValue, int lineageCount, double currentHeight) {
 
         assert lineageCount >= 2;

@@ -26,7 +26,8 @@ public class EmpiricalDemographicFunction implements DemographicFunction {
     /**
      * Gets the value of the demographic function N(t) at time t.
      */
-    public double getDemographic(double t) {
+    @Override
+	public double getDemographic(double t) {
 
         assert(t >= 0.0);
 
@@ -63,7 +64,8 @@ public class EmpiricalDemographicFunction implements DemographicFunction {
      * Returns value of demographic intensity function at time t
      * (= integral 1/N(x) dx from 0 to t).
      */
-    public double getIntensity(double t) {
+    @Override
+	public double getIntensity(double t) {
         throw new UnsupportedOperationException("getIntensity is not implemented in jebl.evolution.treesimulation.EmpiricalDemographicFunction");
     }
 
@@ -71,56 +73,65 @@ public class EmpiricalDemographicFunction implements DemographicFunction {
      * Returns value of inverse demographic intensity function
      * (returns time, needed for simulation of coalescent intervals).
      */
-    public double getInverseIntensity(double x) {
+    @Override
+	public double getInverseIntensity(double x) {
         throw new UnsupportedOperationException("getInverseIntensity is not implemented in jebl.evolution.treesimulation.EmpiricalDemographicFunction");
     }
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return false;
     }
 
-    public double getIntegral(double start, double finish) {
+    @Override
+	public double getIntegral(double start, double finish) {
         return 0;
     }
 
     /**
      * Returns the number of arguments for this function.
      */
-    public int getArgumentCount() {
+    @Override
+	public int getArgumentCount() {
         return 0;
     }
 
     /**
      * Returns the name of the nth argument of this function.
      */
-    public String getArgumentName(int n) {
+    @Override
+	public String getArgumentName(int n) {
         return null;
     }
 
     /**
      * Returns the value of the nth argument of this function.
      */
-    public double getArgument(int n) {
+    @Override
+	public double getArgument(int n) {
         return 0;
     }
 
     /**
      * Sets the value of the nth argument of this function.
      */
-    public void setArgument(int n, double value) {
+    @Override
+	public void setArgument(int n, double value) {
     }
 
     /**
      * Returns the lower bound of the nth argument of this function.
      */
-    public double getLowerBound(int n) {
+    @Override
+	public double getLowerBound(int n) {
         return 0;
     }
 
     /**
      * Returns the upper bound of the nth argument of this function.
      */
-    public double getUpperBound(int n) {
+    @Override
+	public double getUpperBound(int n) {
         return 0;
     }
 

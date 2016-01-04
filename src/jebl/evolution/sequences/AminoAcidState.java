@@ -28,7 +28,7 @@ public final class AminoAcidState extends State {
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(State o) {
         // throws ClassCastException on across-class comparison
         AminoAcidState that = (AminoAcidState) o;
         return super.compareTo(that);
@@ -44,7 +44,8 @@ public final class AminoAcidState extends State {
     // we do not need to override equals() and hashCode() because there is only one
     // unique instance of each state
 
-    public boolean isGap() {
+    @Override
+	public boolean isGap() {
 		return this == AminoAcids.GAP_STATE;
 	}
 

@@ -163,7 +163,8 @@ public class FastaImporter implements SequenceImporter, ImmediateSequenceImporte
                     if (illegalCharacterPolicyForThisImport.get().equals(IllegalCharacterPolicy.askUser)) {
                         try {
                             SwingUtilities.invokeAndWait(new Runnable() {
-                                public void run() {
+                                @Override
+								public void run() {
                                     IllegalCharacterPolicy[] options = {IllegalCharacterPolicy.abort, IllegalCharacterPolicy.strip};
                                     int choice = JOptionPane.showOptionDialog(null,errorMessage +  " What do you want to do?", "Illegal characters in sequences",
                                             JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
@@ -231,7 +232,7 @@ public class FastaImporter implements SequenceImporter, ImmediateSequenceImporte
      *         replaced.
      */
     static void removeNonAminoAcidOrNucleotideCharacters(StringBuilder sequence) {
-        StringBuilder result = new StringBuilder();
+        //StringBuilder result = new StringBuilder();
         int writeIndex = 0;
         for (int readIndex = 0; readIndex < sequence.length(); readIndex++) {
             char c = sequence.charAt(readIndex);
@@ -249,11 +250,13 @@ public class FastaImporter implements SequenceImporter, ImmediateSequenceImporte
      * @throws IOException
      * @throws ImportException
      */
-    public final List<Sequence> importSequences() throws IOException, ImportException {
+    @Override
+	public final List<Sequence> importSequences() throws IOException, ImportException {
         return read(null, ProgressListener.EMPTY);
     }
 
-    public void importSequences(Callback callback, ProgressListener progressListener) throws IOException, ImportException {
+    @Override
+	public void importSequences(Callback callback, ProgressListener progressListener) throws IOException, ImportException {
         read(callback, progressListener);
     }
 }

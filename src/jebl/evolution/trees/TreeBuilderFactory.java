@@ -19,7 +19,8 @@ public class TreeBuilderFactory {
      */
     public static enum Method { NEIGHBOR_JOINING("Neighbor-Joining"), UPGMA("UPGMA");
         Method(String name) { this.name = name; }
-        public String toString() { return getName(); }
+        @Override
+		public String toString() { return getName(); }
         public String getName() { return name; }
         private String name;
     }
@@ -64,8 +65,8 @@ public class TreeBuilderFactory {
      * @param distances Pre computed pairwise distances.
      * @return A tree builder using method and distance matrix
      */
-    static public ClusteringTreeBuilder getBuilder(Method method, DistanceMatrix distances) {
-        ClusteringTreeBuilder builder;
+    static public ClusteringTreeBuilder<Tree> getBuilder(Method method, DistanceMatrix distances) {
+        ClusteringTreeBuilder<Tree> builder;
         switch( method ) {
             case UPGMA:
             {
@@ -83,7 +84,7 @@ public class TreeBuilderFactory {
     }
 
     // trees must have the same taxa
-    static public ConsensusTreeBuilder buildUnRooted(Tree[] trees, Taxon outGroup, double supportThreshold, ConsensusMethod method) {
+    static public ConsensusTreeBuilder<Tree> buildUnRooted(Tree[] trees, Taxon outGroup, double supportThreshold, ConsensusMethod method) {
         if( ! (supportThreshold >= 0 && supportThreshold <= 1) ) {
              throw new IllegalArgumentException("support not in [0..1]: " + supportThreshold);
         }
@@ -91,13 +92,14 @@ public class TreeBuilderFactory {
             case GREEDY: {
                 return new GreedyUnrootedConsensusTreeBuilder(trees, outGroup, supportThreshold);
             }
+            default:
         }
         // bug
         throw new IllegalArgumentException(method.toString());
     }
 
     // trees must have the same taxa
-    static public ConsensusTreeBuilder buildRooted(RootedTree[] trees, double supportThreshold, ConsensusMethod method) {
+    static public ConsensusTreeBuilder<RootedTree> buildRooted(RootedTree[] trees, double supportThreshold, ConsensusMethod method) {
         if( ! (supportThreshold >= 0 && supportThreshold <= 1) ) {
              throw new IllegalArgumentException("Expected support value in [0..1], got " + String.format("%.3f", supportThreshold));
         }
@@ -120,7 +122,7 @@ public class TreeBuilderFactory {
      * @param method which consensus method to use
      * @return consensus tree builder
      */
-    static public ConsensusTreeBuilder buildRooted(Tree[] trees, double supportThreshold, ConsensusMethod method) {
+    static public ConsensusTreeBuilder<RootedTree> buildRooted(Tree[] trees, double supportThreshold, ConsensusMethod method) {
         RootedTree[] rtrees = new RootedTree[trees.length];
         for(int i = 0; i < trees.length; ++i) {
             rtrees[i] = (RootedTree)trees[i];

@@ -19,7 +19,7 @@ import jebl.util.Attributable;
  *
  * @version $Id: Sequence.java 365 2006-06-28 07:34:56Z pepster $
  */
-public interface Sequence extends Attributable, Comparable {
+public interface Sequence extends Attributable, Comparable<Object> {
 
     /**
      * @return the taxon that this sequence represents (primarily used to match sequences with tree nodes)

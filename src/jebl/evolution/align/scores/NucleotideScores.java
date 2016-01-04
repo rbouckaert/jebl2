@@ -21,12 +21,12 @@ public class NucleotideScores extends Scores {
     float mismatchTransition = -4;
     float mismatchTransversion = -4;
     String name = "";
-    private boolean includeAmbiguities;
+    //private boolean includeAmbiguities;
     private String alphabet =
-            Nucleotides.CANONICAL_STATES[0].getCode() +
-                    Nucleotides.CANONICAL_STATES[1].getCode() +
-                    Nucleotides.CANONICAL_STATES[2].getCode() +
-                    Nucleotides.CANONICAL_STATES[3].getCode() +"U";
+            Nucleotides.getCanonicalStates().get(0).getCode() +
+                    Nucleotides.getCanonicalStates().get(1).getCode() +
+                    Nucleotides.getCanonicalStates().get(2).getCode() +
+                    Nucleotides.getCanonicalStates().get(3).getCode() +"U";
 
     public static final NucleotideScores IUB = new NucleotideScores(1.0f, -0.9f);
     public static final NucleotideScores CLUSTALW = new NucleotideScores(1.0f, 0.0f);
@@ -96,15 +96,15 @@ public class NucleotideScores extends Scores {
         this.match = match;
         this.mismatchTransition = mismatchTransition;
         this.mismatchTransversion = mismatchTransversion;
-        this.includeAmbiguities = includeAmbiguities;
+        //this.includeAmbiguities = includeAmbiguities;
 
 //        final int states = includeAmbiguities? Nucleotides.getStateCount():Nucleotides.getCanonicalStateCount();
         List<NucleotideState> states = new ArrayList<NucleotideState>();
         StringBuilder builder = new StringBuilder();
-        for (NucleotideState state : Nucleotides.STATES) {
+        for (State state : Nucleotides.getStates()) {
             if (state.isGap()) continue;
             if (state.isAmbiguous()&& !includeAmbiguities) continue;
-            states.add (state);
+            states.add ((NucleotideState) state);
             builder.append (state.getCode ());
         }
         // Add RNA "U" and the corresponding canonical state which is T_STATE to the list:
@@ -153,15 +153,18 @@ public class NucleotideScores extends Scores {
     }
     */
 
-    public String getName() {
+    @Override
+	public String getName() {
         return name;
     }
 
-    public final String getAlphabet() {
+    @Override
+	public final String getAlphabet() {
         return alphabet + getExtraResidues ();
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         String result = match + "/" + mismatchTransition;
         if(mismatchTransversion != mismatchTransition) {
             result = result + "/" + mismatchTransversion;

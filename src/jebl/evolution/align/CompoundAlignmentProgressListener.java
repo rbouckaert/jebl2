@@ -7,7 +7,7 @@ import jebl.util.ProgressListener;
  * @version $Id: CompoundAlignmentProgressListener.java 1057 2010-05-24 03:20:46Z matt_kearse $
  */
 class CompoundAlignmentProgressListener  {
-    private boolean cancelled = false;
+    //private boolean cancelled = false;
     private int sectionsCompleted = 0;
     private int totalSections;
     private final ProgressListener progress;
@@ -36,7 +36,8 @@ class CompoundAlignmentProgressListener  {
     }
 
     private ProgressListener minorProgress = new ProgressListener() {
-        protected void _setProgress(double fractionCompleted) {
+        @Override
+		protected void _setProgress(double fractionCompleted) {
             assert fractionCompleted>=0 && fractionCompleted<=1;
 //            System.out.println("progress =" + fractionCompleted+ " sections =" + sectionsCompleted+ "/" + totalSections);
             double totalProgress = (sectionsCompleted + fractionCompleted*sectionSize) / totalSections;
@@ -44,15 +45,18 @@ class CompoundAlignmentProgressListener  {
             progress.setProgress(totalProgress);
         }
 
-        protected void _setIndeterminateProgress() {
+        @Override
+		protected void _setIndeterminateProgress() {
             progress.setIndeterminateProgress();
         }
 
-        protected void _setMessage(String message) {
+        @Override
+		protected void _setMessage(String message) {
             progress.setMessage(message);
         }
 
-        public boolean isCanceled() {
+        @Override
+		public boolean isCanceled() {
             return progress.isCanceled();
         }
     };

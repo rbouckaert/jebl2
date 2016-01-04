@@ -5,6 +5,11 @@ package jebl.evolution.taxa;
  * @version $Id: MissingTaxonException.java 304 2006-04-25 11:04:53Z rambaut $
  */
 public class MissingTaxonException extends Throwable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MissingTaxonException(Taxon taxon) {
 		super("Taxon, " + taxon.getName() + ", is missing.");
 	}

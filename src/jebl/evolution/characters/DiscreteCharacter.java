@@ -38,26 +38,33 @@ public class DiscreteCharacter implements Character{
 		this.taxa = taxa;
     }
 	
+	@Override
 	public void setName(String name){
 		this.name = name;
 	}
 	
+	@Override
 	public String getName(){ return name; }
 	
+	@Override
 	public void setDesc(String desc){
 		this.desc = desc;
 	}
 	
+	@Override
 	public String getDesc(){ return desc; }
 	
+	@Override
 	public CharacterType getType(){
 		return charType;
 	}
 	
+	@Override
 	public void addTaxon(Taxon taxon){
 		taxa.add(taxon);
 	}
 	
+	@Override
 	public Object getValue(Taxon taxon){
 		int value = ((Integer)taxon.getAttribute(name)).intValue();
 		return value;
@@ -90,6 +97,7 @@ public class DiscreteCharacter implements Character{
 		this.numOfStates = numOfStates;
 	}
 	
+	@Override
 	public Set<Taxon> getTaxa(){ return taxa; }
 	
 	/**

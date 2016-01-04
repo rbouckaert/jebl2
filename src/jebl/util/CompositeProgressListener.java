@@ -97,7 +97,7 @@ public final class CompositeProgressListener extends ProgressListener {
         double[] lengths = new double[n];
         int i =0;
         for (File file : files) {
-            lengths[i++] = (double) file.length();
+            lengths[i++] = file.length();
         }
         return new CompositeProgressListener(listener, lengths);
     }
@@ -134,7 +134,8 @@ public final class CompositeProgressListener extends ProgressListener {
         currentSubTaskMessage = message;
     }
 
-    protected void _setProgress(double fractionCompleted) {
+    @Override
+	protected void _setProgress(double fractionCompleted) {
         if (fractionCompleted > 1.0000001) { // Allow 1.0000001 to handle rounding errors
             assert false:"Progress should be <= 1.  Passed in " + fractionCompleted;
         }
@@ -159,11 +160,13 @@ public final class CompositeProgressListener extends ProgressListener {
         }
     }
 
-    protected void _setIndeterminateProgress() {
+    @Override
+	protected void _setIndeterminateProgress() {
         listener._setIndeterminateProgress();
     }
 
-    protected void _setMessage(String message) {
+    @Override
+	protected void _setMessage(String message) {
         if (currentSubTaskMessage.length()>0) {
             message=currentSubTaskMessage+(message.length()>0?": "+message:"");
             // concatentate the parent message and the sub-task messages. Previous behaviour was
@@ -172,7 +175,8 @@ public final class CompositeProgressListener extends ProgressListener {
         listener._setMessage(message);
     }
 
-    public boolean isCanceled() {
+    @Override
+	public boolean isCanceled() {
         return listener.isCanceled();
     }
 

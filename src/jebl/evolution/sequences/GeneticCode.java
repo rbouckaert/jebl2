@@ -412,7 +412,8 @@ public final class GeneticCode {
      * Same as getDescription() (so that GeneticCode objects can be used e.g. in a JComboBox).
      * @return the description of this genetic code
      */
-    public String toString() {
+    @Override
+	public String toString() {
         return getDescription();
     }
 }

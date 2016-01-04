@@ -37,14 +37,16 @@ public class BasicDistanceMatrix implements DistanceMatrix {
      *
      * @return the size
      */
-    public int getSize() {
+    @Override
+	public int getSize() {
         return distances.length;
     }
 
     /**
      * @return the list of taxa that the state values correspond to.
      */
-    public List<Taxon> getTaxa() {
+    @Override
+	public List<Taxon> getTaxa() {
         return taxa;
     }
 
@@ -55,7 +57,8 @@ public class BasicDistanceMatrix implements DistanceMatrix {
      * @param column the column index
      * @return the distance
      */
-    public double getDistance(int row, int column) {
+    @Override
+	public double getDistance(int row, int column) {
         return distances[row][column];
     }
 
@@ -66,7 +69,8 @@ public class BasicDistanceMatrix implements DistanceMatrix {
      * @param taxonColumn
      * @return the distance
      */
-    public double getDistance(Taxon taxonRow, Taxon taxonColumn) {
+    @Override
+	public double getDistance(Taxon taxonRow, Taxon taxonColumn) {
         int row = taxa.indexOf(taxonRow);
         if (row == -1) {
             throw new IllegalArgumentException("The row taxon, " + taxonRow.getName() + " is not found in this matrix");
@@ -87,7 +91,8 @@ public class BasicDistanceMatrix implements DistanceMatrix {
      * @param taxonSubset
      * @return the new submatrix
      */
-    public DistanceMatrix getSubmatrix(Collection<Taxon> taxonSubset) {
+    @Override
+	public DistanceMatrix getSubmatrix(Collection<Taxon> taxonSubset) {
         double[][] newDistances = new double[taxonSubset.size()][taxonSubset.size()];
         int i = 0;
         for (Taxon taxonRow : taxonSubset) {
@@ -116,7 +121,8 @@ public class BasicDistanceMatrix implements DistanceMatrix {
      *
      * @return the distances
      */
-    public double[][] getDistances() {
+    @Override
+	public double[][] getDistances() {
         return distances;
     }
 

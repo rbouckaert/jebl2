@@ -94,9 +94,11 @@ public class OrthogonalSearch extends MultivariateMinimum
 
 	// implementation of abstract method
 
+	@Override
 	public void optimize(MultivariateFunction f, double[] xvec, double tolfx, double tolx) {
 		optimize(f,xvec,tolfx,tolx,null);
 	}
+	@Override
 	public void optimize(MultivariateFunction f, double[] xvec, double tolfx, double tolx, MinimiserMonitor monitor) {
 		int numArgs = f.getNumArguments();
 
@@ -107,9 +109,9 @@ public class OrthogonalSearch extends MultivariateMinimum
 
 		RoundOptimiser od = generateOrthogonalRoundOptimiser(f);
 		UnivariateMinimum um = generateUnivariateMinimum();
-		double lastFX;
+		//double lastFX;
 		while (true) {
-			lastFX = fx;
+			//lastFX = fx;
             fx = od.doRound(xvec,um,tolx,fx, (frequentMonitoring_ ? monitor : null));
 			if(monitor!=null) {
 				monitor.newMinimum(fx,xvec,f);
@@ -179,6 +181,7 @@ public class OrthogonalSearch extends MultivariateMinimum
 	private static final class SearchFactory implements Factory {
 		boolean shuffle_;
 		private SearchFactory(boolean shuffle) {	this.shuffle_ = shuffle;	}
+		@Override
 		public MultivariateMinimum generateNewMinimiser() {		return new OrthogonalSearch(shuffle_);	}
 	}
 	//============== A means for doing Orthogonal optimisation ==================
@@ -192,6 +195,7 @@ public class OrthogonalSearch extends MultivariateMinimum
 			olf_ = new OrthogonalLineFunction(base_);
 			this.order_ = orthogonalOrderingFactory_.createOrderEnumerator(base_.getNumArguments());
 		}
+		@Override
 		public double doRound(double[] xvec, UnivariateMinimum um, double tolx,double fx, MinimiserMonitor monitor) {
 			olf_.setAllArguments(xvec);
 
@@ -250,6 +254,7 @@ public class OrthogonalSearch extends MultivariateMinimum
 		}
 
 
+		@Override
 		public double doRound(double[] xvec, UnivariateMinimum um, double tolx,double fx, MinimiserMonitor monitor) {
 			olf_.setAllArguments(xvec);
 

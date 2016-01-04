@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * @version $Id: Taxon.java 1008 2009-07-19 23:08:37Z matt_kearse $
  */
-public final class Taxon implements Attributable, Comparable {
+public final class Taxon implements Attributable, Comparable<Taxon> {
 
     /**
      * A private constructor. Taxon objects can only be created by the static Taxon.getTaxon()
@@ -62,6 +62,7 @@ public final class Taxon implements Attributable, Comparable {
 
 	// Attributable IMPLEMENTATION
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		if (helper == null) {
 			helper = new AttributableHelper();
@@ -69,6 +70,7 @@ public final class Taxon implements Attributable, Comparable {
 		helper.setAttribute(name, value);
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		if (helper == null) {
 			return null;
@@ -76,19 +78,22 @@ public final class Taxon implements Attributable, Comparable {
 		return helper.getAttribute(name);
 	}
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         if( helper != null ) {
             helper.removeAttribute(name);
         }
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         if (helper == null) {
             return Collections.emptySet();
         }
         return helper.getAttributeNames();
     }
 
+	@Override
 	public Map<String, Object> getAttributeMap() {
 		if (helper == null) {
 			return Collections.emptyMap();
@@ -190,12 +195,14 @@ public final class Taxon implements Attributable, Comparable {
      */
     private final TaxonomicLevel taxonomicLevel;
 
-    public String toString() {
+    @Override
+	public String toString() {
         return name;
     }
 
-	public int compareTo(Object o) {
-		return name.compareTo(((Taxon)o).getName());
+	@Override
+	public int compareTo(Taxon o) {
+		return name.compareTo(o.getName());
 	}
 
 
@@ -203,7 +210,8 @@ public final class Taxon implements Attributable, Comparable {
 	    return name.equals(t.getName());
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return name.hashCode();
     }
 }

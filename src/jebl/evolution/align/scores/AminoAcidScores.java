@@ -9,11 +9,13 @@ public class AminoAcidScores extends Scores {
 
     private String residues = "ARNDCQEGHILKMFPSTWYV";
 
-    public String getName() {
+    @Override
+	public String getName() {
         return toString();
     }
 
-    public final String getAlphabet() { return residues + getExtraResidues(); }
+    @Override
+	public final String getAlphabet() { return residues + getExtraResidues(); }
 
 
     public AminoAcidScores() {

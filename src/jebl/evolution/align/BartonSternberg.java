@@ -287,7 +287,8 @@ public class BartonSternberg implements MultipleAligner {
         }
     }
 
-    public Alignment doAlign(List<Sequence> seqs, RootedTree guideTree, ProgressListener progress) {
+    @Override
+	public Alignment doAlign(List<Sequence> seqs, RootedTree guideTree, ProgressListener progress) {
         final int count = seqs.size();
         final CompoundAlignmentProgressListener p = new CompoundAlignmentProgressListener(progress, count - 1);
 
@@ -306,7 +307,8 @@ public class BartonSternberg implements MultipleAligner {
     }
 
 
-    public Alignment doAlign(Alignment a1, Alignment a2, ProgressListener progress) {
+    @Override
+	public Alignment doAlign(Alignment a1, Alignment a2, ProgressListener progress) {
         List<Sequence> seqs1 = a1.getSequenceList();
         List<Sequence> seqs2 = a2.getSequenceList();
 
@@ -332,7 +334,8 @@ public class BartonSternberg implements MultipleAligner {
         return new BasicAlignment(aSeqs);
     }
 
-    public Alignment doAlign(Alignment alignment, Sequence sequence, ProgressListener progress) {
+    @Override
+	public Alignment doAlign(Alignment alignment, Sequence sequence, ProgressListener progress) {
 
         for (Sequence seq : alignment.getSequenceList()) {
             if (seq.getTaxon().getName().equals(sequence.getTaxon().getName())) {

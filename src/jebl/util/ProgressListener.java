@@ -190,7 +190,8 @@ public abstract class ProgressListener implements Cancelable { // TT: Should we 
      *
      * @return true if the user has requested that this operation be canceled.
      */
-    public abstract boolean isCanceled();
+    @Override
+	public abstract boolean isCanceled();
 
     /* TT: commented this method out for now because Matt voted to have
      * ProgressListener implement Cancelable (see bug 3515). We may still decide
@@ -220,17 +221,21 @@ public abstract class ProgressListener implements Cancelable { // TT: Should we 
     public static final ProgressListener EMPTY = new EmptyProgressListener();
 
     private static class EmptyProgressListener extends ProgressListener {
-        protected void _setProgress(double fractionCompleted) {
+        @Override
+		protected void _setProgress(double fractionCompleted) {
         }
 
-        protected void _setMessage(String message) {
+        @Override
+		protected void _setMessage(String message) {
         }
 
-        public boolean isCanceled() {
+        @Override
+		public boolean isCanceled() {
             return false;
         }
 
-        protected void _setIndeterminateProgress() {
+        @Override
+		protected void _setIndeterminateProgress() {
         }
     }
 
@@ -249,19 +254,23 @@ public abstract class ProgressListener implements Cancelable { // TT: Should we 
             this.internalProgressListener = internalProgressListener;
         }
 
-        protected void _setProgress(double fractionCompleted) {
+        @Override
+		protected void _setProgress(double fractionCompleted) {
             internalProgressListener._setProgress(fractionCompleted);
         }
 
-        protected void _setIndeterminateProgress() {
+        @Override
+		protected void _setIndeterminateProgress() {
             internalProgressListener._setIndeterminateProgress();
         }
 
-        protected void _setMessage(String message) {
+        @Override
+		protected void _setMessage(String message) {
             internalProgressListener._setMessage(message);
         }
 
-        public boolean isCanceled() {
+        @Override
+		public boolean isCanceled() {
             return internalProgressListener.isCanceled();
         }
 

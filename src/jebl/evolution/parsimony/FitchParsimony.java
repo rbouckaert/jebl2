@@ -85,6 +85,7 @@ public class FitchParsimony implements ParsimonyCriterion {
 	 * @param tree a tree object to reconstruct the characters on
 	 * @return number of parsimony siteScores
 	 */
+	@Override
 	public double[] getSiteScores(Tree tree) {
 
 		if (tree == null) {
@@ -117,6 +118,7 @@ public class FitchParsimony implements ParsimonyCriterion {
 		return siteScores;
 	}
 
+	@Override
 	public double getScore(Tree tree) {
 
 		getSiteScores(tree);
@@ -140,6 +142,7 @@ public class FitchParsimony implements ParsimonyCriterion {
 	 * @param node the node of the tree
 	 * @return an array containing the reconstructed states for this node
 	 */
+	@Override
 	public State[] getStates(Tree tree, Node node) {
 
 		getSiteScores(tree);
@@ -239,31 +242,31 @@ public class FitchParsimony implements ParsimonyCriterion {
 	}
 
 
-	private String printState(boolean[][] stateSet) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0, n = stateSet.length; i < n; i++) {
-			sb.append("site " + i);
-			for (int j = 0, l = stateSet[i].length; j < l; j++) {
-				sb.append(" " + (stateSet[i][j] ? "T" : "F"));
-			}
-			sb.append("\n");
-		}
-		return sb.toString();
-	}
-
-
-	private String printState(boolean[] stateSet) {
-		StringBuffer sb = new StringBuffer();
-//			for(int i=0,n=stateSet.length; i<n; i++) {
-//		int i = 0;
-//				sb.append("site "+i);
-		for (int j = 0, l = stateSet.length; j < l; j++) {
-			sb.append(" " + (stateSet[j] ? "T" : "F"));
-		}
-//				sb.append("\n");
+//	private String printState(boolean[][] stateSet) {
+//		StringBuffer sb = new StringBuffer();
+//		for (int i = 0, n = stateSet.length; i < n; i++) {
+//			sb.append("site " + i);
+//			for (int j = 0, l = stateSet[i].length; j < l; j++) {
+//				sb.append(" " + (stateSet[i][j] ? "T" : "F"));
 //			}
-		return sb.toString();
-	}
+//			sb.append("\n");
+//		}
+//		return sb.toString();
+//	}
+
+
+//	private String printState(boolean[] stateSet) {
+//		StringBuffer sb = new StringBuffer();
+////			for(int i=0,n=stateSet.length; i<n; i++) {
+////		int i = 0;
+////				sb.append("site "+i);
+//		for (int j = 0, l = stateSet.length; j < l; j++) {
+//			sb.append(" " + (stateSet[j] ? "T" : "F"));
+//		}
+////				sb.append("\n");
+////			}
+//		return sb.toString();
+//	}
 
 
 	/**

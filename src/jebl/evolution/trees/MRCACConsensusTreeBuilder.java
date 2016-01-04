@@ -43,11 +43,13 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
         }
     }
 
-    public RootedTree build() {
+    @Override
+	public RootedTree build() {
         return earliestCommonAncestorClustering(supportThreshold);
     }
 
-    public String getMethodDescription() {
+    @Override
+	public String getMethodDescription() {
         return getSupportDescription(supportThreshold) + " MRCACC";
     }
 

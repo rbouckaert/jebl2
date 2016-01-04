@@ -52,7 +52,7 @@ public class ByteBuilder implements CharSequence, Appendable {
     }
 
     public static boolean isCharacterAscii(final char c) {
-        return ((int) c) < 128;
+        return (c) < 128;
     }
 
     /**
@@ -61,7 +61,8 @@ public class ByteBuilder implements CharSequence, Appendable {
      * @return this ByteBuilder
      * @throws IllegalArgumentException if c is not an ASCII character
      */
-    public ByteBuilder append(char c) {
+    @Override
+	public ByteBuilder append(char c) {
         if( current + 1 > data.length ) {
             ensureCapacity(current + 1); // will throw an exception if insufficient capacity (maxCapacity reached)
         }
@@ -79,30 +80,36 @@ public class ByteBuilder implements CharSequence, Appendable {
      * @return this ByteBuilder
      * @throws IllegalArgumentException if charSequence contains non-ASCII characters
      */
-    public ByteBuilder append(CharSequence charSequence) throws IOException {
+    @Override
+	public ByteBuilder append(CharSequence charSequence) throws IOException {
         return append(charSequence, 0, charSequence.length());
     }
 
-    public ByteBuilder append(CharSequence csq, int start, int end) throws IOException {
+    @Override
+	public ByteBuilder append(CharSequence csq, int start, int end) throws IOException {
         for (int i = start; i < end; i++) {
             append(csq.charAt(i));
         }
         return this;
     }
 
-    public int length() {
+    @Override
+	public int length() {
         return current;
     }
 
-    public char charAt(int index) {
+    @Override
+	public char charAt(int index) {
         return (char)data[index];
     }
 
-    public CharSequence subSequence(int start, int end) {
+    @Override
+	public CharSequence subSequence(int start, int end) {
         return new String(data, start, end - start);
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         return new String(data, 0, current);
     }
 }

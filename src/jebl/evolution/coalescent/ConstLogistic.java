@@ -39,6 +39,7 @@ public class ConstLogistic extends LogisticGrowth {
 
 	// Implementation of abstract methods
 
+	@Override
 	public double getDemographic(double t) {
 
 		double nZero = getN0();
@@ -50,18 +51,22 @@ public class ConstLogistic extends LogisticGrowth {
 		return nOne + ((nZero - nOne) * (1 + c) * common) / (c + common);
 	}
 
+	@Override
 	public double getIntensity(double t) {
         throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public double getInverseIntensity(double x) {
         throw new UnsupportedOperationException();
 	}
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return false;
     }
 
+	@Override
 	public double getIntegral(double start, double finish) {
         throw new UnsupportedOperationException();
 	}

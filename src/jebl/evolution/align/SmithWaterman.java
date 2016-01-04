@@ -50,7 +50,8 @@ public class SmithWaterman extends AlignSimple {
         B0 = new TracebackSimple(maxi, maxj);
     }
 
-    public void doAlignment(String sq1, String sq2) {
+    @Override
+	public void doAlignment(String sq1, String sq2) {
         doAlignment(sq1, sq2, null);
     }
 }

@@ -143,7 +143,8 @@ public final class SimpleTree implements Tree {
      * @param node
      * @return the set of nodes that are attached by edges to the given node.
      */
-    public List<Edge> getEdges(Node node) {
+    @Override
+	public List<Edge> getEdges(Node node) {
         //return null;
         List<Node> adjacencies = getAdjacencies(node);
         List<Edge> edges = new ArrayList<Edge>();
@@ -160,7 +161,8 @@ public final class SimpleTree implements Tree {
      * @param node
      * @return the set of nodes that are attached by edges to the given node.
      */
-    public List<Node> getAdjacencies(Node node) {
+    @Override
+	public List<Node> getAdjacencies(Node node) {
         return ((SimpleNode)node).getAdjacencies();
     }
 
@@ -173,7 +175,8 @@ public final class SimpleTree implements Tree {
      * @throws jebl.evolution.graphs.Graph.NoEdgeException
      *          if the nodes are not directly connected by an edge.
      */
-    public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
         Edge edge = edges.get(new HashPair<Node>(node1, node2));
         if( edge == null ) {
             // not connected
@@ -186,7 +189,8 @@ public final class SimpleTree implements Tree {
      * @return a set of all nodes that have degree 1.
      *         These nodes are often refered to as 'tips'.
      */
-    public Set<Node> getExternalNodes() {
+    @Override
+	public Set<Node> getExternalNodes() {
         return new LinkedHashSet<Node>(externalNodes.values());
     }
 
@@ -194,7 +198,8 @@ public final class SimpleTree implements Tree {
      * @return a set of all nodes that have degree 2 or more.
      *         These nodes are often refered to as internal nodes.
      */
-    public Set<Node> getInternalNodes() {
+    @Override
+	public Set<Node> getInternalNodes() {
         return new LinkedHashSet<Node>(internalNodes);
     }
 
@@ -203,6 +208,7 @@ public final class SimpleTree implements Tree {
 	 *         nodes of this tree. The size of this set should be the
 	 *         same as the size of the external nodes set.
 	 */
+	@Override
 	public Set<Taxon> getTaxa() {
 	    return new LinkedHashSet<Taxon>(externalNodes.keySet());
 	}
@@ -211,7 +217,8 @@ public final class SimpleTree implements Tree {
      * @return the taxon object associated with the given node, or null
      *         if the node is an internal node.
      */
-    public Taxon getTaxon(Node node) {
+    @Override
+	public Taxon getTaxon(Node node) {
         return ((SimpleNode)node).getTaxon();
     }
 
@@ -219,7 +226,8 @@ public final class SimpleTree implements Tree {
      * @param node the node
      * @return true if the node is of degree 1.
      */
-    public boolean isExternal(Node node) {
+    @Override
+	public boolean isExternal(Node node) {
         return node.getDegree() == 1;
     }
 
@@ -236,11 +244,13 @@ public final class SimpleTree implements Tree {
      * @return the external node associated with the given taxon, or null
      *         if the taxon is not a member of the taxa set associated with this tree.
      */
-    public Node getNode(Taxon taxon) {
+    @Override
+	public Node getNode(Taxon taxon) {
         return externalNodes.get(taxon);
     }
 
-    public void renameTaxa(Taxon from, Taxon to) {
+    @Override
+	public void renameTaxa(Taxon from, Taxon to) {
         SimpleNode node = (SimpleNode)externalNodes.get(from);
         node.setTaxa(to);
 
@@ -254,7 +264,8 @@ public final class SimpleTree implements Tree {
      * @return the length of the edge connecting node1 and node2.
      * @throws NoEdgeException if the nodes are not directly connected by an edge.
      */
-    public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
         return getEdge(node1, node2).getLength();
     }
 
@@ -264,6 +275,7 @@ public final class SimpleTree implements Tree {
 	 * @param edge
 	 * @return an array of 2 edges
 	 */
+	@Override
 	public Node[] getNodes(Edge edge) {
 		return new Node[] { ((SimpleEdge)edge).getNode1(), ((SimpleEdge)edge).getNode2() };
 	}
@@ -271,6 +283,7 @@ public final class SimpleTree implements Tree {
 	/**
 	 * @return the set of all nodes in this graph.
 	 */
+	@Override
 	public Set<Node> getNodes() {
 	    Set<Node> nodes = new LinkedHashSet<Node>(internalNodes);
 	    nodes.addAll(externalNodes.values());
@@ -280,7 +293,8 @@ public final class SimpleTree implements Tree {
     /**
      * @return the set of all edges in this graph.
      */
-    public Set<Edge> getEdges() {
+    @Override
+	public Set<Edge> getEdges() {
         return new LinkedHashSet<Edge>(edges.values());
     }
 
@@ -288,7 +302,8 @@ public final class SimpleTree implements Tree {
      * @param degree the number of edges connected to a node
      * @return a set containing all nodes in this graph of the given degree.
      */
-    public Set<Node> getNodes(int degree) {
+    @Override
+	public Set<Node> getNodes(int degree) {
         Set<Node> nodes = new LinkedHashSet<Node>();
         for (Node node : getNodes()) {
             if (((SimpleNode)node).getDegree() == degree) nodes.add(node);
@@ -301,6 +316,7 @@ public final class SimpleTree implements Tree {
 	 * a new set is constructed each time this is called.
 	 * @return the set of external edges.
 	 */
+	@Override
 	public Set<Edge> getExternalEdges() {
 		Set<Edge> externalEdges = new LinkedHashSet<Edge>();
 		for (Edge edge : getEdges()) {
@@ -316,6 +332,7 @@ public final class SimpleTree implements Tree {
 	 * a new set is constructed each time this is called.
 	 * @return the set of internal edges.
 	 */
+	@Override
 	public Set<Edge> getInternalEdges() {
 		Set<Edge> internalEdges = new LinkedHashSet<Edge>();
 		for (Edge edge : getEdges()) {
@@ -328,34 +345,39 @@ public final class SimpleTree implements Tree {
 
     // Attributable IMPLEMENTATION
 
-    public void setAttribute(String name, Object value) {
+    @Override
+	public void setAttribute(String name, Object value) {
         if (helper == null) {
             helper = new AttributableHelper();
         }
         helper.setAttribute(name, value);
     }
 
-    public Object getAttribute(String name) {
+    @Override
+	public Object getAttribute(String name) {
         if (helper == null) {
             return null;
         }
         return helper.getAttribute(name);
     }
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         if( helper != null ) {
             helper.removeAttribute(name);
         }
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         if (helper == null) {
             return Collections.emptySet();
         }
         return helper.getAttributeNames();
     }
 
-    public Map<String, Object> getAttributeMap() {
+    @Override
+	public Map<String, Object> getAttributeMap() {
         if (helper == null) {
             return Collections.emptyMap();
         }
@@ -370,7 +392,7 @@ public final class SimpleTree implements Tree {
     /**
      * A mapping between edges and edge length.
      */
-    Map<HashPair, Edge> edges = new LinkedHashMap<HashPair, Edge>();
+    Map<HashPair, Edge> edges = new LinkedHashMap<>();
 
     final class SimpleNode extends BaseNode {
 
@@ -406,7 +428,8 @@ public final class SimpleTree implements Tree {
             return taxon;
         }
 
-        public int getDegree() {
+        @Override
+		public int getDegree() {
             return (adjacencies == null ? 0 : adjacencies.size());
         }
 
@@ -440,6 +463,7 @@ public final class SimpleTree implements Tree {
 			return node2;
 		}
 
+		@Override
 		public double getLength() {
 			return length;
 		}

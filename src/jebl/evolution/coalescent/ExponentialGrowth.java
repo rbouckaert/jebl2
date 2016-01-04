@@ -58,6 +58,7 @@ public class ExponentialGrowth extends ConstantPopulation {
 
 	// Implementation of abstract methods
 
+	@Override
 	public double getDemographic(double t) {
 
 		double r = getGrowthRate();
@@ -68,6 +69,7 @@ public class ExponentialGrowth extends ConstantPopulation {
 		}
 	}
 
+	@Override
 	public double getIntensity(double t)
 	{
 		double r = getGrowthRate();
@@ -78,6 +80,7 @@ public class ExponentialGrowth extends ConstantPopulation {
 		}
 	}
 
+	@Override
 	public double getInverseIntensity(double x) {
 
 		double r = getGrowthRate();

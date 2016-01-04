@@ -16,9 +16,11 @@ abstract class AlignLinearSpace extends AlignSimple {
      * @param seq1
      * @param seq2
      */
-    public abstract void doAlignment(String seq1, String seq2);
+    @Override
+	public abstract void doAlignment(String seq1, String seq2);
 
-    public void prepareAlignment(String sq1, String sq2) {
+    @Override
+	public void prepareAlignment(String sq1, String sq2) {
     	this.n = sq1.length(); this.m = sq2.length();
 		this.seq1 = strip(sq1); this.seq2 = strip(sq2);
     	F = new float[2][m+1];
@@ -29,7 +31,8 @@ abstract class AlignLinearSpace extends AlignSimple {
      * 
      * @param out Output to print to.
      */
-    public void printf(Output out) {
+    @Override
+	public void printf(Output out) {
         for (int j=0; j<=m; j++) {
             for (int i = 0; i < F.length; i++) {
                 float[] f = F[i];

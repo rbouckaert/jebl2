@@ -39,7 +39,8 @@ public class SequenceShuffler {
             final int j = i;
             if (monitor != null) {
                 Runnable runnable = new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         monitor.setProgress(j);
                     }
                 };

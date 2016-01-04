@@ -32,22 +32,26 @@ public interface StateClassification {
             }
         }
 
-        public String getName() {
+        @Override
+		public String getName() {
             return name;
         }
 
-        public Set<String> getSetNames() {
+        @Override
+		public Set<String> getSetNames() {
             return stateMap.keySet();
         }
 
-        public String getSetName(State state) {
+        @Override
+		public String getSetName(State state) {
             for (String setName : getSetNames()) {
                 if (getStateSet(setName).contains(state)) return setName;
             }
             return null;
         }
 
-        public Set<State> getStateSet(String setName) {
+        @Override
+		public Set<State> getStateSet(String setName) {
             return stateMap.get(setName);
         }
 

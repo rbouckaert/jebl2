@@ -81,7 +81,12 @@ public interface Graph extends Attributable {
      * This class is thrown by getEdgeLength(node1, node2) if node1 and node2
      * are not directly connected by an edge.
      */
-    public class NoEdgeException extends Exception {}
+    public class NoEdgeException extends Exception {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;}
 
     public class Utils {
         private Utils() { }  // make class uninstantiable

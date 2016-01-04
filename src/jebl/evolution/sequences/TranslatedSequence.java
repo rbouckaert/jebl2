@@ -13,6 +13,7 @@ public class TranslatedSequence extends FilteredSequence {
 		this.geneticCode = geneticCode;
 	}
 
+	@Override
 	protected State[] filterSequence(Sequence source) {
 		return jebl.evolution.sequences.Utils.translate(source.getStates(), geneticCode);
 	}
@@ -20,7 +21,8 @@ public class TranslatedSequence extends FilteredSequence {
     /**
      * @return the type of symbols that this sequence is made up of.
      */
-    public SequenceType getSequenceType() {
+    @Override
+	public SequenceType getSequenceType() {
         return SequenceType.AMINO_ACID;
     }
 

@@ -2,7 +2,7 @@ package jebl.evolution.align;
 
 import jebl.evolution.align.scores.Scores;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +23,8 @@ public class NeedlemanWunschLinearSpace extends AlignLinearSpace {
      * @param sq1
      * @param sq2
      */
-    public void doAlignment(String sq1, String sq2) {
+    @Override
+	public void doAlignment(String sq1, String sq2) {
 
         super.prepareAlignment(sq1, sq2);
 
@@ -65,7 +66,8 @@ public class NeedlemanWunschLinearSpace extends AlignLinearSpace {
 
     public int getV() { return c[1][m]; }
 
-    public String[] getMatch() {
+    @Override
+	public String[] getMatch() {
         int v = getV();
         if (n > 1 && m > 1) {
             NeedlemanWunschLinearSpace al1, al2;
@@ -83,28 +85,29 @@ public class NeedlemanWunschLinearSpace extends AlignLinearSpace {
         }
     }
 
-    public void traceback(TracebackPlotter plotter) {
+    @Override
+	public void traceback(TracebackPlotter plotter) {
 
         traceback(plotter, 0, 0, seq1, seq2);
     }
 
     public void traceback(TracebackPlotter plotter, int startx, int starty, String sq1, String sq2) {
 
-        List tracebacks = tracebackList(startx,starty);
+        List<Traceback> tracebacks = tracebackList(startx,starty);
 
         plotter.newTraceBack(sq1, sq2);
 
         for (int i = 0; i < tracebacks.size(); i++) {
-            Traceback traceback = (Traceback)tracebacks.get(i);
-            plotter.traceBack((Traceback)tracebacks.get(i));
+            //Traceback traceback = tracebacks.get(i);
+            plotter.traceBack(tracebacks.get(i));
         }
         plotter.finishedTraceBack();
     }
 
 
-    private List tracebackList(int startx, int starty) {
+    private List<Traceback> tracebackList(int startx, int starty) {
 
-        List tracebacks = new ArrayList();
+        //List<Traceback> tracebacks = new ArrayList<>();
 
         int v = getV();
         if (n > 1 && m > 1) {
@@ -113,8 +116,8 @@ public class NeedlemanWunschLinearSpace extends AlignLinearSpace {
             al1.doAlignment(seq1.substring(0, u), seq2.substring(0, v));
             al2 = new NeedlemanWunschLinearSpace(sub, d);
             al2.doAlignment(seq1.substring(u), seq2.substring(v));
-            List tracebackList1 = al1.tracebackList(startx, starty);
-            List tracebackList2 = al2.tracebackList(startx+u,starty+v);
+            List<Traceback> tracebackList1 = al1.tracebackList(startx, starty);
+            List<Traceback> tracebackList2 = al2.tracebackList(startx+u,starty+v);
             tracebackList1.addAll(tracebackList2);
             return  tracebackList1;
         } else {
@@ -127,5 +130,6 @@ public class NeedlemanWunschLinearSpace extends AlignLinearSpace {
 
 
 
-    public float getScore() { return F[1][m]; }
+    @Override
+	public float getScore() { return F[1][m]; }
 }

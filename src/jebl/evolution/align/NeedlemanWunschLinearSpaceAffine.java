@@ -110,7 +110,8 @@ public class NeedlemanWunschLinearSpaceAffine extends AlignLinearSpaceAffine imp
     }
 
 
-    public void doAlignment(String sq1, String sq2) {
+    @Override
+	public void doAlignment(String sq1, String sq2) {
         doAlignment(sq1, sq2, null);
     }
 
@@ -190,7 +191,8 @@ public class NeedlemanWunschLinearSpaceAffine extends AlignLinearSpaceAffine imp
         return new AlignmentResult[]{result1, result2};
     }
 
-    public String[] getMatch() {
+    @Override
+	public String[] getMatch() {
         return matchResult;
     }
 
@@ -649,8 +651,8 @@ public class NeedlemanWunschLinearSpaceAffine extends AlignLinearSpaceAffine imp
         final int repeat = 1;
 
         start = System.currentTimeMillis();
-        String[] results2 = null, results = null, results3 = null;
-        NeedlemanWunschAffine align2 = null;
+        String[] /*results2 = null,*/ results = null, results3 = null;
+        //NeedlemanWunschAffine align2 = null;
         NeedlemanWunschLinearSpaceAffine align = null;
         OldNeedlemanWunschAffine align3 = null;
 
@@ -711,7 +713,8 @@ public class NeedlemanWunschLinearSpaceAffine extends AlignLinearSpaceAffine imp
         debug = display;
     }
 
-    public Result doAlignment(Sequence seq1, Sequence seq2, ProgressListener progress) {
+    @Override
+	public Result doAlignment(Sequence seq1, Sequence seq2, ProgressListener progress) {
         doAlignment(seq1.getString(), seq2.getString(), progress);
         if (progress.setProgress(1)) return null;
         List<Sequence> seqs = new ArrayList<Sequence>(2);
@@ -721,7 +724,8 @@ public class NeedlemanWunschLinearSpaceAffine extends AlignLinearSpaceAffine imp
         return new Result(new BasicAlignment(seqs), getScore());
     }
 
-    public double getScore(Sequence seq1, Sequence seq2) {
+    @Override
+	public double getScore(Sequence seq1, Sequence seq2) {
         doAlignment(seq1.getString(), seq2.getString(), null, true);
         return getScore();
     }

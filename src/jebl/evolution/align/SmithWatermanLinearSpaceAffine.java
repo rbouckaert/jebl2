@@ -80,19 +80,22 @@ public class SmithWatermanLinearSpaceAffine extends AlignLinearSpaceAffine {
     }
 
 
-    public void doAlignment(String sequence1, String sequence2) {
+    @Override
+	public void doAlignment(String sequence1, String sequence2) {
         doAlignment(sequence1, sequence2, null);
     }
 
     /**
      * @return the score of the best alignment
      */
-    public float getScore() { return maxval; }
+    @Override
+	public float getScore() { return maxval; }
 
     /**
      * @return two-element array containing an alignment with maximal score
      */
-    public String[] getMatch() {
+    @Override
+	public String[] getMatch() {
 
         String subseq1 = seq1.substring(start1, end1);
         String subseq2 = seq2.substring(start2, end2);
@@ -104,7 +107,8 @@ public class SmithWatermanLinearSpaceAffine extends AlignLinearSpaceAffine {
         return nwa1.getMatch();
     }
 
-    public void traceback(TracebackPlotter plotter) {
+    @Override
+	public void traceback(TracebackPlotter plotter) {
 
         String subseq1 = seq1.substring(start1, end1);
         String subseq2 = seq2.substring(start2, end2);

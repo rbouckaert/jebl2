@@ -19,7 +19,7 @@ import java.util.Arrays;
  * Adapted from BEAST code.
  */
 
-class UPGMATreeBuilder extends ClusteringTreeBuilder {
+class UPGMATreeBuilder extends ClusteringTreeBuilder<Tree> {
      // want a rooted tree
     private final SimpleRootedTree tree;
 
@@ -37,35 +37,40 @@ class UPGMATreeBuilder extends ClusteringTreeBuilder {
     // Protected and Private stuff
     //
 
-    protected Tree getTree() {
+    @Override
+	protected Tree getTree() {
         return tree;
     }
 
-    protected Node createExternalNode(Taxon taxon) {
+    @Override
+	protected Node createExternalNode(Taxon taxon) {
         return tree.createExternalNode(taxon);
     }
 
-    protected Node createInternalNode(Node[] nodes, double[] distances) {
+    @Override
+	protected Node createInternalNode(Node[] nodes, double[] distances) {
         List<Node> a = Arrays.asList(nodes);
         Node node = tree.createInternalNode(a);
         tree.setHeight(node, distances[0]);
         return node;
     }
 
-    protected double[] joinClusters() {
+    @Override
+	protected double[] joinClusters() {
         Double d = getDist(besti, bestj) / 2.0;
         return new double[] {d};
     }
 
-    protected double updatedDistance(int k) {
+    @Override
+	protected double updatedDistance(int k) {
         int i = besti;
         int j = bestj;
         int ai = alias[i];
         int aj = alias[j];
 
-        double tipSum = (double) (tipCount[ai] + tipCount[aj]);
+        double tipSum = tipCount[ai] + tipCount[aj];
 
-        return 	(((double)tipCount[ai]) / tipSum) * getDist(k, i) +
-                (((double)tipCount[aj]) / tipSum) * getDist(k, j);
+        return 	((tipCount[ai]) / tipSum) * getDist(k, i) +
+                ((tipCount[aj]) / tipSum) * getDist(k, j);
     }
 }

@@ -44,14 +44,16 @@ public class CodonSequence implements Sequence {
     /**
      * @return the type of symbols that this sequence is made up of.
      */
-    public SequenceType getSequenceType() {
+    @Override
+	public SequenceType getSequenceType() {
         return sequenceType;
     }
 
     /**
      * @return a string representing the sequence of symbols.
      */
-    public String getString() {
+    @Override
+	public String getString() {
         StringBuilder buffer = new StringBuilder(sequenceStates.length);
         for (State state : sequenceStates) {
             buffer.append(state.getCode());
@@ -71,11 +73,13 @@ public class CodonSequence implements Sequence {
     /**
      * @return an array of state objects.
      */
-    public State[] getStates() {
+    @Override
+	public State[] getStates() {
         return sequenceType.toStateArray(getStateIndices());
     }
 
-    public byte[] getStateIndices() {
+    @Override
+	public byte[] getStateIndices() {
         byte results[]=new byte[sequenceStates.length];
         for (int i = 0; i < sequenceStates.length; i++) {
              results [i] = (byte) getState(i).getIndex();
@@ -99,7 +103,8 @@ public class CodonSequence implements Sequence {
     /**
      * @return the state at site.
      */
-    public State getState(int site) {
+    @Override
+	public State getState(int site) {
         return sequenceStates[site];
     }
 
@@ -108,14 +113,16 @@ public class CodonSequence implements Sequence {
      *
      * @return the length
      */
-    public int getLength() {
+    @Override
+	public int getLength() {
         return sequenceStates.length;
     }
 
     /**
      * @return that taxon that this sequence represents (primarily used to match sequences with tree nodes)
      */
-    public Taxon getTaxon() {
+    @Override
+	public Taxon getTaxon() {
         return taxon;
     }
 
@@ -125,44 +132,51 @@ public class CodonSequence implements Sequence {
      * @param o another sequence
      * @return an integer
      */
-    public int compareTo(Object o) {
+    @Override
+	public int compareTo(Object o) {
         return taxon.compareTo(((Sequence) o).getTaxon());
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         return getString();
     }
     
     // Attributable IMPLEMENTATION
 
-    public void setAttribute(String name, Object value) {
+    @Override
+	public void setAttribute(String name, Object value) {
         if (helper == null) {
             helper = new AttributableHelper();
         }
         helper.setAttribute(name, value);
     }
 
-    public Object getAttribute(String name) {
+    @Override
+	public Object getAttribute(String name) {
         if (helper == null) {
             return null;
         }
         return helper.getAttribute(name);
     }
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         if (helper != null) {
             helper.removeAttribute(name);
         }
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         if (helper == null) {
             return Collections.emptySet();
         }
         return helper.getAttributeNames();
     }
 
-    public Map<String, Object> getAttributeMap() {
+    @Override
+	public Map<String, Object> getAttributeMap() {
         if (helper == null) {
             return Collections.emptyMap();
         }

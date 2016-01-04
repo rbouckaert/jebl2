@@ -29,6 +29,7 @@ public class NonOverlapMultipleLocalAffine extends AlignRepeatAffine {
      * @param sq1
      * @param sq2
      */
+	@Override
 	public void doAlignment(String sq1, String sq2) {
 
 		if(sq1.length() < sq2.length())	{			//sq2 is the shorter seq (is not dissected).
@@ -72,6 +73,7 @@ public class NonOverlapMultipleLocalAffine extends AlignRepeatAffine {
 	/**
      * @return two-element array containing all of the local alignments separated by " - ";
      */
+	@Override
 	public String[] getMatch() {
 		String sq1 = "";
 		String sq2 = "";
@@ -120,6 +122,7 @@ public class NonOverlapMultipleLocalAffine extends AlignRepeatAffine {
 	/**
      * @return the score of the best alignment
      */
+	@Override
 	public float getScore() {
 		float score = 0;
         for (LocalAlignment la : localAligns) {
@@ -165,7 +168,8 @@ public class NonOverlapMultipleLocalAffine extends AlignRepeatAffine {
      *
      * @param out Output to print to.
      */
-    public void printf(Output out) {
+    @Override
+	public void printf(Output out) {
     	swlsa.printf(out);
     }
 }

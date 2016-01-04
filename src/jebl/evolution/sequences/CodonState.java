@@ -26,7 +26,8 @@ public final class CodonState extends State {
         super(name, stateCode, index, ambiguities);
     }
 
-    public boolean isGap() {
+    @Override
+	public boolean isGap() {
 		return this == Codons.GAP_STATE;
 	}
 }

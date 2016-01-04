@@ -17,9 +17,11 @@ abstract class AlignSimple extends Align {
      * @param sq1
      * @param sq2
      */
-    public abstract void doAlignment(String sq1, String sq2);
+    @Override
+	public abstract void doAlignment(String sq1, String sq2);
 
-    public void prepareAlignment(String sq1, String sq2) {
+    @Override
+	public void prepareAlignment(String sq1, String sq2) {
 
         //first time running this alignment. Create all new matrices.
         if(F == null) {
@@ -59,7 +61,8 @@ abstract class AlignSimple extends Align {
      * @param tb current Traceback
      * @return next Traceback
      */
-    public Traceback next(Traceback tb) {
+    @Override
+	public Traceback next(Traceback tb) {
         TracebackSimple tb2 = (TracebackSimple)tb;
         if((tb.i == 0 && tb.j == 0 && B[tb2.i][tb2.j].i == 0 && B[tb2.i][tb2.j].j == 0) || tb.i == -1)
             return null;
@@ -70,14 +73,16 @@ abstract class AlignSimple extends Align {
     /**
      * @return the score of the best alignment
      */
-    public float getScore() { return F[B0.i][B0.j]; }
+    @Override
+	public float getScore() { return F[B0.i][B0.j]; }
 
     /**
      * Print matrix used to calculate this alignment.
      * 
      * @param out Output to print to.
      */
-    public void printf(Output out) {
+    @Override
+	public void printf(Output out) {
 
         for (int j=0; j<=m; j++) {
             for (int i = 0; i < F.length; i++) {

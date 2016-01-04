@@ -25,13 +25,14 @@ public final class NucleotideState extends State {
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(State o) {
         // throws ClassCastException on across-class comparison
         NucleotideState that = (NucleotideState) o;
         return super.compareTo(that);
     }
 
-    public boolean isGap() {
+    @Override
+	public boolean isGap() {
 		return this == Nucleotides.GAP_STATE;
 	}
 

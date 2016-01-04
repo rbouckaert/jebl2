@@ -91,6 +91,7 @@ public class OrthogonalLineFunction implements UnivariateFunction
 
 	// implementation of UnivariateFunction
 
+	@Override
 	public double evaluate(double arg)
 	{
 		x[n] = arg;
@@ -100,11 +101,13 @@ public class OrthogonalLineFunction implements UnivariateFunction
 		return v;
 	}
 
+	@Override
 	public double getLowerBound()
 	{
 		return f.getLowerBound(n);
 	}
 
+	@Override
 	public double getUpperBound()
 	{
 		return f.getUpperBound(n);
@@ -118,5 +121,5 @@ public class OrthogonalLineFunction implements UnivariateFunction
 	private MultivariateFunction f;
 	private int numArgs, n;
 	private double bak;
-	private double[] s, x;
+	private double[] /*s,*/ x;
 }

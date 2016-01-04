@@ -35,18 +35,23 @@ public class ContinuousCharacter implements Character{
 		this.taxa = taxa;
     }
 	
+	@Override
 	public void setName(String name){
 		this.name = name;
 	}
 	
+	@Override
 	public String getName(){ return name; }
 	
+	@Override
 	public void setDesc(String desc){
 		this.desc = desc;
 	}
 	
+	@Override
 	public String getDesc(){ return desc; }
 	
+	@Override
 	public CharacterType getType(){
 		return charType;
 	}
@@ -59,10 +64,12 @@ public class ContinuousCharacter implements Character{
 		this.taxa = taxa;
 	}
 	
+	@Override
 	public void addTaxon(Taxon taxon){
 		taxa.add(taxon);
 	}
 	
+	@Override
 	public Object getValue(Taxon taxon){
 		double value = ((Double)taxon.getAttribute(name)).doubleValue();
 		return value;
@@ -80,6 +87,7 @@ public class ContinuousCharacter implements Character{
 		return value;
 	}
 	
+	@Override
 	public Set<Taxon> getTaxa(){ return taxa; }
 	
 	private String desc;

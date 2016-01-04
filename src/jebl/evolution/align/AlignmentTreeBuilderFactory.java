@@ -58,7 +58,7 @@ public class AlignmentTreeBuilderFactory {
         DistanceMatrix distanceMatrix = distanceMatrixBuilder.buildDistanceMatrix(progressListener);
         logger.fine("took " +(System.currentTimeMillis() - start) + " to build distance matrix");
         progressListener.beginSubtask("Building tree");
-        TreeBuilder treeBuilder = TreeBuilderFactory.getBuilder(method, distanceMatrix);
+        TreeBuilder<Tree> treeBuilder = TreeBuilderFactory.getBuilder(method, distanceMatrix);
         treeBuilder.addProgressListener(progressListener);
         Result result = new Result(treeBuilder.build(), distanceMatrix);
         treeBuilder.removeProgressListener(progressListener);
@@ -80,7 +80,8 @@ public class AlignmentTreeBuilderFactory {
             throws CannotBuildDistanceMatrixException
     {
         DistanceMatrixBuilder matrixBuilder = new DistanceMatrixBuilder() {
-            public DistanceMatrix buildDistanceMatrix(final ProgressListener progressListener) throws CannotBuildDistanceMatrixException {
+            @Override
+			public DistanceMatrix buildDistanceMatrix(final ProgressListener progressListener) throws CannotBuildDistanceMatrixException {
                 switch( model ) {
                     case F84:
                         return new F84DistanceMatrix(alignment, progressListener);
@@ -140,7 +141,8 @@ public class AlignmentTreeBuilderFactory {
             throws CannotBuildDistanceMatrixException
     {
         DistanceMatrixBuilder matrixBuilder = new DistanceMatrixBuilder() {
-            public DistanceMatrix buildDistanceMatrix(final ProgressListener progressListener) throws CannotBuildDistanceMatrixException {
+            @Override
+			public DistanceMatrix buildDistanceMatrix(final ProgressListener progressListener) throws CannotBuildDistanceMatrixException {
                 return new SequenceAlignmentsDistanceMatrix(seqs, aligner, progressListener, model);
             }
         };

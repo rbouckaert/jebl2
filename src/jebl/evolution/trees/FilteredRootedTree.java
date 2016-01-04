@@ -23,128 +23,159 @@ public abstract class FilteredRootedTree implements RootedTree {
 		return source;
 	}
 
-    public boolean conceptuallyUnrooted() {
+    @Override
+	public boolean conceptuallyUnrooted() {
         return source.conceptuallyUnrooted();
     }
 
-    public List<Node> getChildren(Node node) {
+    @Override
+	public List<Node> getChildren(Node node) {
 	    return source.getChildren(node);
     }
 
-    public boolean hasHeights() {
+    @Override
+	public boolean hasHeights() {
         return source.hasHeights();
     }
 
-    public double getHeight(Node node) {
+    @Override
+	public double getHeight(Node node) {
         return source.getHeight(node);
     }
 
-    public boolean hasLengths() {
+    @Override
+	public boolean hasLengths() {
         return source.hasLengths();
     }
 
-    public double getLength(Node node) {
+    @Override
+	public double getLength(Node node) {
         return source.getLength(node);
     }
 
-    public Node getParent(Node node) {
+    @Override
+	public Node getParent(Node node) {
         return source.getParent(node);
     }
 
-    public Node getRootNode() {
+    @Override
+	public Node getRootNode() {
         return source.getRootNode();
     }
 
-    public Set<Node> getExternalNodes() {
+    @Override
+	public Set<Node> getExternalNodes() {
         return source.getExternalNodes();
     }
 
-    public Set<Node> getInternalNodes() {
+    @Override
+	public Set<Node> getInternalNodes() {
         return source.getInternalNodes();
     }
 
+	@Override
 	public Set<Edge> getExternalEdges() {
 		return source.getExternalEdges();
 	}
 
+	@Override
 	public Set<Edge> getInternalEdges() {
 		return source.getInternalEdges();
 	}
 
-    public Node getNode(Taxon taxon) {
+    @Override
+	public Node getNode(Taxon taxon) {
         return source.getNode(taxon);
     }
 
-    public Set<Taxon> getTaxa() {
+    @Override
+	public Set<Taxon> getTaxa() {
         return source.getTaxa();
     }
 
-    public Taxon getTaxon(Node node) {
+    @Override
+	public Taxon getTaxon(Node node) {
         return source.getTaxon(node);
     }
 
-    public boolean isExternal(Node node) {
+    @Override
+	public boolean isExternal(Node node) {
         return source.isExternal(node);
     }
 
-    public List<Node> getAdjacencies(Node node) {
+    @Override
+	public List<Node> getAdjacencies(Node node) {
         return source.getAdjacencies(node);
     }
 
-    public List<Edge> getEdges(Node node) {
+    @Override
+	public List<Edge> getEdges(Node node) {
         return source.getEdges(node);
     }
 
-    public Set<Edge> getEdges() {
+    @Override
+	public Set<Edge> getEdges() {
         return source.getEdges();
     }
 
+	@Override
 	public Node[] getNodes(Edge edge) {
 	    return source.getNodes(edge);
 	}
 
-    public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
         return source.getEdge(node1, node2);
     }
 
-    public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
         return source.getEdgeLength(node1, node2);
     }
 
-    public Set<Node> getNodes() {
+    @Override
+	public Set<Node> getNodes() {
         return source.getNodes();
     }
 
-    public Set<Node> getNodes(int degree) {
+    @Override
+	public Set<Node> getNodes(int degree) {
         return source.getNodes(degree);
     }
 
+	@Override
 	public boolean isRoot(Node node) {
 		return source.isRoot(node);
 	}
 
-    public void renameTaxa(Taxon from, Taxon to) {
+    @Override
+	public void renameTaxa(Taxon from, Taxon to) {
         source.renameTaxa(from, to);
     }
 
     // Attributable IMPLEMENTATION
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		source.setAttribute(name, value);
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		return source.getAttribute(name);
 	}
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         source.removeAttribute(name);
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
 		return source.getAttributeNames();
 	}
 
+	@Override
 	public Map<String, Object> getAttributeMap() {
 		return source.getAttributeMap();
 	}

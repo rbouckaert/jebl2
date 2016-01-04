@@ -95,10 +95,10 @@ public interface DemographicFunction {
 		 */
 		public static void testConsistency(DemographicFunction demographicFunction, int steps, double maxTime) {
 
-			double delta = maxTime / (double)steps;
+			double delta = maxTime / steps;
 
 			for (int i =0; i <= steps; i++) {
-				double time = (double)i * delta;
+				double time = i * delta;
 				double intensity = demographicFunction.getIntensity(time);
 				double newTime = demographicFunction.getInverseIntensity(intensity);
 

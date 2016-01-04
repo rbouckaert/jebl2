@@ -79,7 +79,8 @@ public class JukesCantorDistanceMatrix extends BasicDistanceMatrix {
          * Calculate a pairwise distance between the i'th and j'th taxons/sequences
          * @throws CannotBuildDistanceMatrixException
          */
-        public double calculatePairwiseDistance(int taxon1, int taxon2) throws CannotBuildDistanceMatrixException {
+        @Override
+		public double calculatePairwiseDistance(int taxon1, int taxon2) throws CannotBuildDistanceMatrixException {
             double obsDist = anySubstitutionRatio(taxon1, taxon2);
 
             if (obsDist == 0.0) return 0.0;

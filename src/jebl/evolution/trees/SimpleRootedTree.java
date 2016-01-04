@@ -300,14 +300,16 @@ final public class SimpleRootedTree implements RootedTree {
      * @return the list of nodes that are the children of the given node.
      *         The list may be empty for a terminal node (a tip).
      */
-    public List<Node> getChildren(Node node) {
+    @Override
+	public List<Node> getChildren(Node node) {
         return new ArrayList<Node>(((SimpleRootedNode)node).getChildren());
     }
 
     /**
      * @return Whether this tree has node heights available
      */
-    public boolean hasHeights() {
+    @Override
+	public boolean hasHeights() {
         return hasHeights;
     }
 
@@ -316,7 +318,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @return the height of the given node. The height will be
      *         less than the parent's height and greater than it children's heights.
      */
-    public double getHeight(Node node) {
+    @Override
+	public double getHeight(Node node) {
         if (!hasHeights) throw new IllegalArgumentException("This tree has no node heights");
         if (!heightsKnown) calculateNodeHeights();
         return ((SimpleRootedNode)node).getHeight();
@@ -325,7 +328,8 @@ final public class SimpleRootedTree implements RootedTree {
     /**
      * @return Whether this tree has branch lengths available
      */
-    public boolean hasLengths() {
+    @Override
+	public boolean hasLengths() {
         return hasLengths;
     }
 
@@ -333,7 +337,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @param node the node whose branch length (to its parent) is being requested.
      * @return the length of the branch to the parent node (0.0 if the node is the root).
      */
-    public double getLength(Node node) {
+    @Override
+	public double getLength(Node node) {
         if (!hasLengths) throw new IllegalArgumentException("This tree has no branch lengths");
         if (!lengthsKnown) calculateBranchLengths();
         return ((SimpleRootedNode)node).getLength();
@@ -344,7 +349,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @return the parent node of the given node, or null
      *         if the node is the root node.
      */
-    public Node getParent(Node node) {
+    @Override
+	public Node getParent(Node node) {
         if (!(node instanceof SimpleRootedNode)) {
             throw new IllegalArgumentException("Node, " + node.toString() + " is not an instance of SimpleRootedNode");
         }
@@ -364,7 +370,8 @@ final public class SimpleRootedTree implements RootedTree {
      *
      * @return the root of the tree.
      */
-    public Node getRootNode() {
+    @Override
+	public Node getRootNode() {
         return rootNode;
     }
 
@@ -373,7 +380,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @return a set of all nodes that have degree 1.
      *         These nodes are often refered to as 'tips'.
      */
-    public Set<Node> getExternalNodes() {
+    @Override
+	public Set<Node> getExternalNodes() {
         return externalNodes;
 //        return new LinkedHashSet<Node>(externalNodes.values());
     }
@@ -382,7 +390,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @return a set of all nodes that have degree 2 or more.
      *         These nodes are often refered to as internal nodes.
      */
-    public Set<Node> getInternalNodes() {
+    @Override
+	public Set<Node> getInternalNodes() {
         return new LinkedHashSet<Node>(internalNodes);
     }
 
@@ -391,7 +400,8 @@ final public class SimpleRootedTree implements RootedTree {
      *         nodes of this tree. The size of this set should be the
      *         same as the size of the external nodes set.
      */
-    public Set<Taxon> getTaxa() {
+    @Override
+	public Set<Taxon> getTaxa() {
         return taxa;
 //        return new LinkedHashSet<Taxon>(externalNodes.keySet());
     }
@@ -401,7 +411,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @return the taxon object associated with the given node, or null
      *         if the node is an internal node.
      */
-    public Taxon getTaxon(Node node) {
+    @Override
+	public Taxon getTaxon(Node node) {
         if (!(node instanceof SimpleRootedNode)) {
             throw new IllegalArgumentException("Node, " + node.toString() + " is not an instance of SimpleRootedNode.  It is an instance of "+node.getClass().getName());
         }
@@ -412,7 +423,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @param node the node
      * @return true if the node is of degree 1.
      */
-    public boolean isExternal(Node node) {
+    @Override
+	public boolean isExternal(Node node) {
         if (!(node instanceof SimpleRootedNode)) {
             throw new IllegalArgumentException("Node, " + node.toString() + " is not an instance of SimpleRootedNode.  It is an instance of "+node.getClass().getName());
         }
@@ -424,7 +436,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @return the external node associated with the given taxon, or null
      *         if the taxon is not a member of the taxa set associated with this tree.
      */
-    public Node getNode(Taxon taxon) {
+    @Override
+	public Node getNode(Taxon taxon) {
         if (externalNodeMap == null) {
             externalNodeMap = new LinkedHashMap<Taxon, Node>();
             for (Node node : getExternalNodes()) {
@@ -434,7 +447,8 @@ final public class SimpleRootedTree implements RootedTree {
         return externalNodeMap.get(taxon);
     }
 
-    public void renameTaxa(Taxon from, Taxon to) {
+    @Override
+	public void renameTaxa(Taxon from, Taxon to) {
         SimpleRootedNode node = (SimpleRootedNode)getNode(from);
 
         // TT: The javadoc doesn't specify whether renameTaxa() should fail or silently do nothing
@@ -456,7 +470,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @param node
      * @return the set of nodes that are attached by edges to the given node.
      */
-    public List<Edge> getEdges(Node node) {
+    @Override
+	public List<Edge> getEdges(Node node) {
         List<Edge> edges = new ArrayList<Edge>();
         for (Node adjNode : getAdjacencies(node)) {
             edges.add(((SimpleRootedNode)adjNode).getEdge());
@@ -469,7 +484,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @param node
      * @return the set of nodes that are attached by edges to the given node.
      */
-    public List<Node> getAdjacencies(Node node) {
+    @Override
+	public List<Node> getAdjacencies(Node node) {
         return ((SimpleRootedNode)node).getAdjacencies();
     }
 
@@ -482,7 +498,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @throws jebl.evolution.graphs.Graph.NoEdgeException
      *          if the nodes are not directly connected by an edge.
      */
-    public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
         if (((SimpleRootedNode)node1).getParent() == node2) {
             return ((SimpleRootedNode)node1).getEdge();
         } else if (((SimpleRootedNode)node2).getParent() == node1) {
@@ -499,7 +516,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @throws jebl.evolution.graphs.Graph.NoEdgeException
      *          if the nodes are not directly connected by an edge.
      */
-    public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
         if (((SimpleRootedNode)node1).getParent() == node2) {
             if (heightsKnown) {
                 return ((SimpleRootedNode)node2).getHeight() - ((SimpleRootedNode)node1).getHeight();
@@ -523,6 +541,7 @@ final public class SimpleRootedTree implements RootedTree {
 	 * @param edge
 	 * @return an array of 2 edges
 	 */
+	@Override
 	public Node[] getNodes(Edge edge) {
 		for (Node node : getNodes()) {
 			if (((SimpleRootedNode)node).getEdge() == edge) {
@@ -535,6 +554,7 @@ final public class SimpleRootedTree implements RootedTree {
 	/**
 	 * @return the set of all nodes in this graph.
 	 */
+	@Override
 	public Set<Node> getNodes() {
 	    Set<Node> nodes = new LinkedHashSet<Node>(internalNodes);
 	    nodes.addAll(getExternalNodes());
@@ -544,7 +564,8 @@ final public class SimpleRootedTree implements RootedTree {
     /**
      * @return the set of all edges in this graph.
      */
-    public Set<Edge> getEdges() {
+    @Override
+	public Set<Edge> getEdges() {
         Set<Edge> edges = new LinkedHashSet<Edge>();
         for (Node node : getNodes()) {
             if (node != getRootNode()) {
@@ -560,6 +581,7 @@ final public class SimpleRootedTree implements RootedTree {
 	 * a new set is constructed each time this is called.
 	 * @return the set of external edges.
 	 */
+	@Override
 	public Set<Edge> getExternalEdges() {
 		Set<Edge> edges = new LinkedHashSet<Edge>();
 		for (Node node : getExternalNodes()) {
@@ -573,6 +595,7 @@ final public class SimpleRootedTree implements RootedTree {
 	 * a new set is constructed each time this is called.
 	 * @return the set of internal edges.
 	 */
+	@Override
 	public Set<Edge> getInternalEdges() {
 		Set<Edge> edges = new LinkedHashSet<Edge>();
 		for (Node node : getInternalNodes()) {
@@ -587,7 +610,8 @@ final public class SimpleRootedTree implements RootedTree {
      * @param degree the number of edges connected to a node
      * @return a set containing all nodes in this graph of the given degree.
      */
-    public Set<Node> getNodes(int degree) {
+    @Override
+	public Set<Node> getNodes(int degree) {
         Set<Node> nodes = new LinkedHashSet<Node>();
         for (Node node : getNodes()) {
             // Account for no anncesstor of root, assumed by default in getDegree
@@ -672,44 +696,51 @@ final public class SimpleRootedTree implements RootedTree {
         conceptuallyUnrooted = intent;
     }
 
-    public boolean conceptuallyUnrooted() {
+    @Override
+	public boolean conceptuallyUnrooted() {
         return conceptuallyUnrooted;
     }
 
+	@Override
 	public boolean isRoot(Node node) {
 		return node == rootNode;
 	}
 
 	// Attributable IMPLEMENTATION
 
-    public void setAttribute(String name, Object value) {
+    @Override
+	public void setAttribute(String name, Object value) {
         if (helper == null) {
             helper = new AttributableHelper();
         }
         helper.setAttribute(name, value);
     }
 
-    public Object getAttribute(String name) {
+    @Override
+	public Object getAttribute(String name) {
         if (helper == null) {
             return null;
         }
         return helper.getAttribute(name);
     }
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         if( helper != null ) {
             helper.removeAttribute(name);
         }
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         if (helper == null) {
             return Collections.emptySet();
         }
         return helper.getAttributeNames();
     }
 
-    public Map<String, Object> getAttributeMap() {
+    @Override
+	public Map<String, Object> getAttributeMap() {
         if (helper == null) {
             return Collections.emptyMap();
         }
@@ -760,7 +791,8 @@ final public class SimpleRootedTree implements RootedTree {
             children = Collections.unmodifiableList(c);
         }
 
-        public void replaceChildren(List<SimpleRootedNode> nodes) {
+        @SuppressWarnings("unused")
+		public void replaceChildren(List<SimpleRootedNode> nodes) {
             for( SimpleRootedNode n : nodes ) {
                 n.setParent(this);
             }
@@ -809,7 +841,8 @@ final public class SimpleRootedTree implements RootedTree {
             this.length = length;
         }
 
-        public int getDegree() {
+        @Override
+		public int getDegree() {
             return children.size() +(this==rootNode?0:1);
         }
 
@@ -824,7 +857,8 @@ final public class SimpleRootedTree implements RootedTree {
         public Edge getEdge() {
             if (edge == null) {
                 edge = new BaseEdge() {
-                    public double getLength() {
+                    @Override
+					public double getLength() {
                         return length;
                     }
 

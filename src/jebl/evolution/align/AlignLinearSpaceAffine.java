@@ -18,9 +18,11 @@ abstract class AlignLinearSpaceAffine extends AlignAffine {
      * @param sq1
      * @param sq2
      */
-    public abstract void doAlignment(String sq1, String sq2);
+    @Override
+	public abstract void doAlignment(String sq1, String sq2);
     
-    public void prepareAlignment(String sq1, String sq2) {
+    @Override
+	public void prepareAlignment(String sq1, String sq2) {
     	this.n = sq1.length(); this.m = sq2.length();
 		this.seq1 = sq1;
         this.seq2 = sq2;
@@ -32,7 +34,8 @@ abstract class AlignLinearSpaceAffine extends AlignAffine {
      * 
      * @param out Output to print to.
      */
-    public void printf(Output out) {
+    @Override
+	public void printf(Output out) {
     	for (int k=0; k<3; k++) {
     		out.println("F[" + k + "]:");
     		for (int j=0; j<=m; j++) {

@@ -59,39 +59,48 @@ public class ResampledAlignment implements Alignment {
         alignment = new BasicAlignment(newSeqs);
     }
 
-    public List<Sequence> getSequenceList() {
+    @Override
+	public List<Sequence> getSequenceList() {
         return alignment.getSequenceList();
     }
 
-    public int getPatternCount() {
+    @Override
+	public int getPatternCount() {
         return alignment.getPatternCount();
     }
 
-    public int getPatternLength() {
+    @Override
+	public int getPatternLength() {
         return alignment.getPatternLength();
     }
 
-    public List<Pattern> getPatterns() {
+    @Override
+	public List<Pattern> getPatterns() {
         return alignment.getPatterns();
     }
 
-    public List<Taxon> getTaxa() {
+    @Override
+	public List<Taxon> getTaxa() {
         return alignment.getTaxa();
     }
 
-    public SequenceType getSequenceType() {
+    @Override
+	public SequenceType getSequenceType() {
         return alignment.getSequenceType();
     }
 
-    public int getSiteCount() {
+    @Override
+	public int getSiteCount() {
         return alignment.getSiteCount();
     }
 
-    public Set<Sequence> getSequences() {
+    @Override
+	public Set<Sequence> getSequences() {
         return alignment.getSequences();
     }
 
-    public Sequence getSequence(Taxon taxon) {
+    @Override
+	public Sequence getSequence(Taxon taxon) {
         return alignment.getSequence(taxon);
     }
 }

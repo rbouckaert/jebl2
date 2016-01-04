@@ -190,7 +190,8 @@ public class MostProbableTopology {
     }
 
     private class UnrootedTreeInfo extends TraversableTree implements Info {
-        public Tree getTree() {
+        @Override
+		public Tree getTree() {
             return t;
         }
 
@@ -215,15 +216,18 @@ public class MostProbableTopology {
             super(t);
             m = new LinkedHashMap<FixedBitSet, EdgeInfo>();
             traverse(new EdgeCallback() {
-                public void visit(Edge e, FixedBitSet tipSet) {
+                @Override
+				public void visit(Edge e, FixedBitSet tipSet) {
                      m.put(tipSet, new EdgeInfo(e));
                 }
             } );
         }
 
-        public void setBranches() {
+        @Override
+		public void setBranches() {
             traverse(new EdgeCallback() {
-                public void visit(Edge e, FixedBitSet tipSet) {
+                @Override
+				public void visit(Edge e, FixedBitSet tipSet) {
                     final EdgeInfo info = m.get(tipSet);                            assert(info != null);
                     final double h = info.length();
 
@@ -288,19 +292,23 @@ public class MostProbableTopology {
             super(t);
             m = new LinkedHashMap<FixedBitSet, NodeInfo>();
             traverse(new NodeCallback() {
-                public void visit(Node n, FixedBitSet tipSet) {
+                @Override
+				public void visit(Node n, FixedBitSet tipSet) {
                      m.put(tipSet, new NodeInfo(n));
                 }
             } );
         }
 
-        public Tree getTree() {
+        @Override
+		public Tree getTree() {
             return t;
         }
 
-        public void setBranches() {
+        @Override
+		public void setBranches() {
             traverse(new NodeCallback() {
-                public void visit(Node n, FixedBitSet tipSet) {
+                @Override
+				public void visit(Node n, FixedBitSet tipSet) {
                     final NodeInfo info = m.get(tipSet);                                  assert(info != null);
                     double h = info.length();
                     for( Node c : t.getChildren(info.n) ) {
@@ -347,7 +355,8 @@ public class MostProbableTopology {
 
         // sorts support from largest to smallest
         final Comparator<Map.Entry<String, TopologyEntry>> comparator = new Comparator<Map.Entry<String, TopologyEntry>>() {
-            public int compare(Map.Entry<String, TopologyEntry> o1, Map.Entry<String, TopologyEntry> o2) {
+            @Override
+			public int compare(Map.Entry<String, TopologyEntry> o1, Map.Entry<String, TopologyEntry> o2) {
                 return o2.getValue().count - o1.getValue().count;
             }
         };
@@ -395,7 +404,8 @@ public class MostProbableTopology {
             if( rootedSet ) {
                 final RootedTree t = (RootedTree)trees.get(nTree);
                 new TraversableRootedTree(t).traverse(new NodeCallback() {
-                    public void visit(Node n, FixedBitSet tipSet) {
+                    @Override
+					public void visit(Node n, FixedBitSet tipSet) {
                         final double height = t.getHeight(n);
                         for( Info ti : candidates ) {
                             final TreeInfo.NodeInfo ni = ((TreeInfo)ti).m.get(tipSet);
@@ -410,7 +420,8 @@ public class MostProbableTopology {
 
                 final Tree t = trees.get(nTree);
                 new TraversableTree(t).traverse(new EdgeCallback() {
-                    public void visit(Edge e, FixedBitSet tipSet) {
+                    @Override
+					public void visit(Edge e, FixedBitSet tipSet) {
                         final double length = e.getLength();
                         for( Info ti : candidates ) {
                             final UnrootedTreeInfo.EdgeInfo ei = ((UnrootedTreeInfo)ti).m.get(tipSet);

@@ -24,14 +24,16 @@ public abstract class FilteredSequence implements Sequence {
     /**
      * @return the type of symbols that this sequence is made up of.
      */
-    public SequenceType getSequenceType() {
+    @Override
+	public SequenceType getSequenceType() {
         return source.getSequenceType();
     }
 
     /**
      * @return a string representing the sequence of symbols.
      */
-    public String getString() {
+    @Override
+	public String getString() {
         if (sequence == null) {
             sequence = filterSequence(source);
         }
@@ -46,14 +48,16 @@ public abstract class FilteredSequence implements Sequence {
     /**
      * @return an array of state objects.
      */
-    public State[] getStates() {
+    @Override
+	public State[] getStates() {
         if (sequence == null) {
             sequence = filterSequence(source);
         }
         return sequence;
     }
 
-    public byte[] getStateIndices() {
+    @Override
+	public byte[] getStateIndices() {
         if (sequence == null) {
             sequence = filterSequence(source);
         }
@@ -69,7 +73,8 @@ public abstract class FilteredSequence implements Sequence {
     /**
      * @return the state at site.
      */
-    public State getState(int site) {
+    @Override
+	public State getState(int site) {
         if (sequence == null) {
             sequence = filterSequence(source);
         }
@@ -81,7 +86,8 @@ public abstract class FilteredSequence implements Sequence {
      *
      * @return the length
      */
-    public int getLength() {
+    @Override
+	public int getLength() {
         if (sequence == null) {
             sequence = filterSequence(source);
         }
@@ -93,37 +99,45 @@ public abstract class FilteredSequence implements Sequence {
     /**
      * @return that taxon that this sequence represents
      */
-    public Taxon getTaxon() {
+    @Override
+	public Taxon getTaxon() {
         return source.getTaxon();
     }
 
-    public int compareTo(Object o) {
+    @Override
+	public int compareTo(Object o) {
         return source.compareTo(o);
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         return getString();
     }
 
     // Attributable implementation
 
-    public void setAttribute(String name, Object value) {
+    @Override
+	public void setAttribute(String name, Object value) {
         source.setAttribute(name, value);
     }
 
-    public Object getAttribute(String name) {
+    @Override
+	public Object getAttribute(String name) {
         return source.getAttribute(name);
     }
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         source.removeAttribute(name);
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         return source.getAttributeNames();
     }
 
-    public Map<String, Object> getAttributeMap() {
+    @Override
+	public Map<String, Object> getAttributeMap() {
         return source.getAttributeMap();
     }
 

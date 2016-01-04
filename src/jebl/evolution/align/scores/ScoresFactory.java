@@ -49,7 +49,7 @@ public class ScoresFactory {
 	 */
 	public static Scores generateScores(String nameVal) {
 		int i = 0;
-		while((int)nameVal.charAt(i) > 64) { //while(charAt(i) is a letter)
+		while(nameVal.charAt(i) > 64) { //while(charAt(i) is a letter)
 			i++;
 		}
 		Scores sub = null;
@@ -78,7 +78,7 @@ public class ScoresFactory {
 		
 		Scores sub = null;
 		try {
-			Class c = Class.forName("jebl.evolution.align.scores." + name + val);
+			Class<?> c = Class.forName("jebl.evolution.align.scores." + name + val);
 			sub = (Scores)(c.newInstance());
 		}
 		catch(Exception e) {
@@ -100,8 +100,8 @@ public class ScoresFactory {
 		
 		Scores sub = null;
 		try {
-			Class c = Class.forName("jebl.evolution.align.scores." + name);
-			Constructor con[] = c.getConstructors();
+			Class<?> c = Class.forName("jebl.evolution.align.scores." + name);
+			Constructor<?> con[] = c.getConstructors();
 			sub = (Scores)(con[0].newInstance(new Object[] {new Float(val)}));
 		}
         

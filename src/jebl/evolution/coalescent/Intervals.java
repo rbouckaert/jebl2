@@ -97,7 +97,7 @@ public class Intervals implements IntervalList {
     public void addMigrationEvent(double time, int destination) {
         events[eventCount].time = time;
         events[eventCount].type = IntervalType.MIGRATION;
-        events[eventCount].info = destination;
+        //events[eventCount].info = destination;
         eventCount++;
         intervalsKnown = false;
     }
@@ -109,25 +109,30 @@ public class Intervals implements IntervalList {
 		intervalsKnown = false;
 	}
 
+	@Override
 	public int getSampleCount() {
 		return sampleCount;
 	}
 
+	@Override
 	public int getIntervalCount() {
 		if (!intervalsKnown) calculateIntervals();
 		return intervalCount;
 	}
 
+	@Override
 	public double getInterval(int i) {
 		if (!intervalsKnown) calculateIntervals();
 		return intervals[i];
 	}
 
+	@Override
 	public int getLineageCount(int i) {
 		if (!intervalsKnown) calculateIntervals();
 		return lineageCounts[i];
 	}
 
+	@Override
 	public int getCoalescentEvents(int i) {
 		if (!intervalsKnown) calculateIntervals();
 		if (i < intervalCount-1) {
@@ -137,19 +142,23 @@ public class Intervals implements IntervalList {
 		}
 	}
 
+	@Override
 	public IntervalType getIntervalType(int i)
 	{
 		if (!intervalsKnown) calculateIntervals();
 		return intervalTypes[i];
 	}
 
+	@Override
 	public double getTotalDuration() {
 
 		if (!intervalsKnown) calculateIntervals();
 		return events[eventCount - 1].time;
 	}
 
+	@Override
 	public boolean isBinaryCoalescent() { return true; }
+	@Override
 	public boolean isCoalescentOnly() { return true; }
 
 	private void calculateIntervals() {
@@ -184,17 +193,18 @@ public class Intervals implements IntervalList {
 		intervalsKnown = true;
 	}
 
-	private class Event implements Comparable {
+	private class Event implements Comparable<Event> {
 
-        public int compareTo(Object o) {
-			double t = ((Event)o).time;
+        @Override
+		public int compareTo(Event o) {
+			double t = o.time;
 			if (t < time) {
 				return 1;
 			} else if (t > time) {
 				return -1;
 			} else {
 				// events are at exact same time so sort by type
-				return type.compareTo(((Event)o).type);
+				return type.compareTo(o.type);
 			}
 		}
 
@@ -211,7 +221,7 @@ public class Intervals implements IntervalList {
         /**
          * Some extra information for the event (e.g., destination of a migration)
          */
-        int info;
+        //int info;
 
     }
 

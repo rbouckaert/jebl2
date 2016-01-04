@@ -33,7 +33,12 @@ abstract public class AbstractRateMatrix implements RateMatrix
     // - frequencies * rate matrix = 0 (stationarity)
     // - expected number of substitutions = 1 (Sum_i pi_i*R_ii = 0)
 
-    /** dimension */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** dimension */
     private int dimension;
 
     /** stationary frequencies (sum = 1.0) */
@@ -72,26 +77,31 @@ abstract public class AbstractRateMatrix implements RateMatrix
         rebuildModel_ = true;
     }
 
-    public int getDimension() {   return dimension;  }
+    @Override
+	public int getDimension() {   return dimension;  }
 
     /**
      * @return stationary frequencies (sum = 1.0)
      */
-    public double[] getEquilibriumFrequencies() {  return frequency;  }
+    @Override
+	public double[] getEquilibriumFrequencies() {  return frequency;  }
 
     /**
         * @return stationary frequencie (sum = 1.0) for ith state
         */
-    public double getEquilibriumFrequency(int i) {   return frequency[i];  }
+    @Override
+	public double getEquilibriumFrequency(int i) {   return frequency[i];  }
 
-    public SequenceType getSequenceType() {   return sequenceType;  }
+    @Override
+	public SequenceType getSequenceType() {   return sequenceType;  }
 
     protected final void setSequenceType(SequenceType dt) { this.sequenceType = dt; }
 
     /**
      * @return rate matrix (transition: from 1st index to 2nd index)
      */
-    public double[][] getRelativeRates() {  return rate;  }
+    @Override
+	public double[][] getRelativeRates() {  return rate;  }
 
     /**
      * @return the probability of going from one state to another
@@ -99,7 +109,8 @@ abstract public class AbstractRateMatrix implements RateMatrix
      * @param fromState The state from which we are starting
      * @param toState The resulting state
      */
-    public double getTransitionProbability(int fromState, int toState) {
+    @Override
+	public double getTransitionProbability(int fromState, int toState) {
         return matrixExp_.getTransitionProbability(fromState,toState);
     }
 
@@ -118,7 +129,8 @@ abstract public class AbstractRateMatrix implements RateMatrix
     /** Sets the distance (such as time/branch length) used when calculating
      *       	the probabilities.
      */
-    public final void setDistance(double distance) {
+    @Override
+	public final void setDistance(double distance) {
         handleRebuild();
         matrixExp_.setDistance(distance);
     }
@@ -135,7 +147,8 @@ abstract public class AbstractRateMatrix implements RateMatrix
     /** A utility method for speed, transfers trans prob information quickly
      *       	into store
      */
-    public final void getTransitionProbabilities(double[][] probabilityStore) {
+    @Override
+	public final void getTransitionProbabilities(double[][] probabilityStore) {
         matrixExp_.getTransitionProbabilities(probabilityStore);
     }
 

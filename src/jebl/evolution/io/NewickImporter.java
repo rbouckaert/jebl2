@@ -38,10 +38,12 @@ public class NewickImporter implements TreeImporter {
      *
      * @return an Iterator.
      */
-    public Iterator<Tree> iterator() {
+    @Override
+	public Iterator<Tree> iterator() {
         return new Iterator<Tree>() {
 
-            public boolean hasNext() {
+            @Override
+			public boolean hasNext() {
                 boolean hasNext = false;
                 try {
                     hasNext = hasTree();
@@ -53,7 +55,8 @@ public class NewickImporter implements TreeImporter {
                 return hasNext;
             }
 
-            public Tree next() {
+            @Override
+			public Tree next() {
                 Tree tree = null;
                 try {
                     tree = importNextTree();
@@ -66,13 +69,15 @@ public class NewickImporter implements TreeImporter {
                 return tree;
             }
 
-            public void remove() {
+            @Override
+			public void remove() {
                 throw new UnsupportedOperationException("operation is not supported by this Iterator");
             }
         };
     }
 
-    public boolean hasTree() throws IOException, ImportException {
+    @Override
+	public boolean hasTree() throws IOException, ImportException {
         try {
             helper.skipUntil("(");
             helper.unreadCharacter('(');
@@ -83,7 +88,8 @@ public class NewickImporter implements TreeImporter {
         return true;
     }
 
-    public Tree importNextTree() throws IOException, ImportException {
+    @Override
+	public Tree importNextTree() throws IOException, ImportException {
 
         try {
             helper.skipUntil("(");
@@ -96,7 +102,8 @@ public class NewickImporter implements TreeImporter {
         }
     }
 
-    public List<Tree> importTrees() throws IOException, ImportException {
+    @Override
+	public List<Tree> importTrees() throws IOException, ImportException {
         List<Tree> trees = new ArrayList<Tree>();
 
         while (hasTree()) {

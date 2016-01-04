@@ -24,6 +24,7 @@ public class RobinsonsFouldMetric implements RootedTreeMetric {
 		}
 	}
 
+	@Override
 	public double getMetric(RootedTree tree1, RootedTree tree2) {
 
 		Map<Taxon, Integer> tm = taxonMap;

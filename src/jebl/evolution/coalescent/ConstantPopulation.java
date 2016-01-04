@@ -56,11 +56,15 @@ public class ConstantPopulation implements DemographicFunction
 
 	// Implementation of abstract methods
 
+	@Override
 	public double getDemographic(double t) { return getN0(); }
+	@Override
 	public double getIntensity(double t) { return t/getN0(); }
+	@Override
 	public double getInverseIntensity(double x) { return getN0()*x; }
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return true;
     }
 
@@ -69,31 +73,38 @@ public class ConstantPopulation implements DemographicFunction
 	 * inherited function in DemographicFunction.Abstract calls a
 	 * numerical integrater which is unecessary.
 	 */
+	@Override
 	public double getIntegral(double start, double finish) {
 		return getIntensity(finish) - getIntensity(start);
 	}
 
-    public int getArgumentCount() {
+    @Override
+	public int getArgumentCount() {
         return 1;
     }
 
-    public String getArgumentName(int n) {
+    @Override
+	public String getArgumentName(int n) {
         return "N0";
     }
 
-    public double getArgument(int n) {
+    @Override
+	public double getArgument(int n) {
         return getN0();
     }
 
-    public void setArgument(int n, double value) {
+    @Override
+	public void setArgument(int n, double value) {
         setN0(value);
     }
 
-    public double getLowerBound(int n) {
+    @Override
+	public double getLowerBound(int n) {
         return 0.0;
     }
 
-    public double getUpperBound(int n) {
+    @Override
+	public double getUpperBound(int n) {
         return Double.POSITIVE_INFINITY;
     }
 	//

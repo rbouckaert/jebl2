@@ -4,11 +4,8 @@ import jebl.evolution.sequences.Sequence;
 import jebl.evolution.sequences.SequenceType;
 import jebl.evolution.sequences.State;
 import jebl.evolution.taxa.Taxon;
-import jebl.util.Attributable;
 import jebl.util.AttributableHelper;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -46,14 +43,16 @@ public class ConsensusSequence implements Sequence {
     /**
      * @return the type of symbols that this sequence is made up of.
      */
-    public SequenceType getSequenceType() {
+    @Override
+	public SequenceType getSequenceType() {
         return source.getSequenceType();
     }
 
     /**
      * @return a string representing the sequence of symbols.
      */
-    public String getString() {
+    @Override
+	public String getString() {
         if (sequence == null) {
             sequence = jebl.evolution.sequences.Utils.getStateIndices(constructConsensus(source, includeAmbiguities));
         }
@@ -69,14 +68,16 @@ public class ConsensusSequence implements Sequence {
     /**
      * @return an array of state objects.
      */
-    public State[] getStates() {
+    @Override
+	public State[] getStates() {
         if (sequence == null) {
             sequence = jebl.evolution.sequences.Utils.getStateIndices(constructConsensus(source, includeAmbiguities));
         }
         return getSequenceType().toStateArray(sequence);
     }
 
-    public byte[] getStateIndices() {
+    @Override
+	public byte[] getStateIndices() {
         if (sequence == null) {
             sequence = jebl.evolution.sequences.Utils.getStateIndices(constructConsensus(source, includeAmbiguities));
         }
@@ -86,7 +87,8 @@ public class ConsensusSequence implements Sequence {
     /**
      * @return the state at site.
      */
-    public State getState(int site) {
+    @Override
+	public State getState(int site) {
         if (sequence == null) {
             sequence = jebl.evolution.sequences.Utils.getStateIndices(constructConsensus(source, includeAmbiguities));
         }
@@ -98,7 +100,8 @@ public class ConsensusSequence implements Sequence {
      *
      * @return the length
      */
-    public int getLength() {
+    @Override
+	public int getLength() {
         if (sequence == null) {
             sequence = jebl.evolution.sequences.Utils.getStateIndices(constructConsensus(source, includeAmbiguities));
         }
@@ -119,7 +122,8 @@ public class ConsensusSequence implements Sequence {
     /**
      * @return that taxon that this sequence represents (primarily used to match sequences with tree nodes)
      */
-    public Taxon getTaxon() {
+    @Override
+	public Taxon getTaxon() {
         return taxon;
     }
 
@@ -129,29 +133,35 @@ public class ConsensusSequence implements Sequence {
      * @param o another sequence
      * @return an integer
      */
-    public int compareTo(Object o) {
+    @Override
+	public int compareTo(Object o) {
         return taxon.compareTo(((Sequence) o).getTaxon());
     }
 
     // Attributable implementation
 
-    public void setAttribute(String name, Object value) {
+    @Override
+	public void setAttribute(String name, Object value) {
         attributableHelper.setAttribute(name, value);
     }
 
-    public Object getAttribute(String name) {
+    @Override
+	public Object getAttribute(String name) {
         return attributableHelper.getAttribute(name);
     }
 
-    public void removeAttribute(final String name) {
+    @Override
+	public void removeAttribute(final String name) {
         attributableHelper.removeAttribute(name);
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         return attributableHelper.getAttributeNames();
     }
 
-    public Map<String, Object> getAttributeMap() {
+    @Override
+	public Map<String, Object> getAttributeMap() {
         return attributableHelper.getAttributeMap();
     }
 

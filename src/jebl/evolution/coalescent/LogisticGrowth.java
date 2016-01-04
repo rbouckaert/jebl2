@@ -58,6 +58,7 @@ public class LogisticGrowth extends ExponentialGrowth {
      * @param t the time
      * @return the value of the demographic function N(t) at time t.
      */
+	@Override
 	public double getDemographic(double t) {
 
 		double nZero = getN0();
@@ -76,6 +77,7 @@ public class LogisticGrowth extends ExponentialGrowth {
 	 * Returns value of demographic intensity function at time t
 	 * (= integral 1/N(x) dx from 0 to t).
 	 */
+	@Override
 	public double getIntensity(double t) {
         throw new UnsupportedOperationException();
 	}
@@ -84,14 +86,17 @@ public class LogisticGrowth extends ExponentialGrowth {
 	 * Returns value of demographic intensity function at time t
 	 * (= integral 1/N(x) dx from 0 to t).
 	 */
+	@Override
 	public double getInverseIntensity(double x) {
         throw new UnsupportedOperationException();
 	}
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return true;
     }
 
+	@Override
 	public double getIntegral(double start, double finish) {
 
 		double intervalLength = finish - start;

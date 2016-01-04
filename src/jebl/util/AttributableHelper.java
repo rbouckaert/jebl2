@@ -9,22 +9,27 @@ import java.util.*;
  */
 public class AttributableHelper implements Attributable {
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		attributeMap.put(name, value);
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		return attributeMap.get(name);
 	}
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
 		attributeMap.remove(name);
 	}
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
 		return attributeMap.keySet();
 	}
 
+	@Override
 	public Map<String, Object> getAttributeMap() {
 		return Collections.unmodifiableMap(attributeMap);
 	}

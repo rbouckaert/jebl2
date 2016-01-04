@@ -30,18 +30,18 @@ public class MachineAccuracy
 	public static final double SQRT_SQRT_EPSILON = 1.220703125E-4;
 
 	/** compute EPSILON from scratch */
-	private static double computeEpsilon() // used to determine the EPSILON constant above
-	{
-		double eps = 1.0;
-
-		while( eps + 1.0 != 1.0 )
-		{
-			eps /= 2.0;
-		}
-		eps *= 2.0;
-		
-		return eps;
-	}
+//	private static double computeEpsilon() // used to determine the EPSILON constant above
+//	{
+//		double eps = 1.0;
+//
+//		while( eps + 1.0 != 1.0 )
+//		{
+//			eps /= 2.0;
+//		}
+//		eps *= 2.0;
+//		
+//		return eps;
+//	}
 
     /*
 

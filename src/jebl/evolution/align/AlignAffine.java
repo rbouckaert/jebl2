@@ -26,9 +26,11 @@ abstract class AlignAffine extends Align {
      * @param sq1
      * @param sq2
      */
-    public abstract void doAlignment(String sq1, String sq2);
+    @Override
+	public abstract void doAlignment(String sq1, String sq2);
 
-    public void prepareAlignment(String sq1, String sq2) {
+    @Override
+	public void prepareAlignment(String sq1, String sq2) {
 
         n = sq1.length();
         m = sq2.length();
@@ -78,7 +80,8 @@ abstract class AlignAffine extends Align {
      * @param tb current Traceback
      * @return next Traceback
      */
-    public Traceback next(Traceback tb) {
+    @Override
+	public Traceback next(Traceback tb) {
         TracebackAffine tb3 = (TracebackAffine)tb;
 
         //traceback has reached the origin, therefore stop.
@@ -92,7 +95,8 @@ abstract class AlignAffine extends Align {
     /**
      * @return score for this alignment
      */
-    public float getScore() {
+    @Override
+	public float getScore() {
         return F[((TracebackAffine)B0).k][B0.i][B0.j];
     }
 
@@ -101,7 +105,8 @@ abstract class AlignAffine extends Align {
      * 
      * @param out Output to print to.
      */
-    public void printf(Output out) {
+    @Override
+	public void printf(Output out) {
 
         for (int k=0; k<3; k++) {
             out.println("F[" + k + "]:");

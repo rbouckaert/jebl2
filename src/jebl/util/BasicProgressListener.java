@@ -13,20 +13,24 @@ public class BasicProgressListener extends ProgressListener {
     private volatile String message="";
     private volatile double fractionCompleted = 0;
     private volatile boolean indeterminate = false;
-    protected void _setProgress(double fractionCompleted) {
+    @Override
+	protected void _setProgress(double fractionCompleted) {
         this.indeterminate = false;
         this.fractionCompleted = fractionCompleted;
     }
 
-    protected void _setIndeterminateProgress() {
+    @Override
+	protected void _setIndeterminateProgress() {
         this.indeterminate = true;
     }
 
-    protected void _setMessage(String message) {
+    @Override
+	protected void _setMessage(String message) {
         this.message = message;
     }
 
-    public boolean isCanceled() {
+    @Override
+	public boolean isCanceled() {
         return canceled;
     }
 

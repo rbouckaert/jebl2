@@ -24,7 +24,8 @@ public class TransformedRootedTree extends FilteredRootedTree {
 	        this.name = name;
 	    }
 
-	    public String toString() { return name; }
+	    @Override
+		public String toString() { return name; }
 
 	    private String name;
 	}
@@ -34,11 +35,13 @@ public class TransformedRootedTree extends FilteredRootedTree {
         this.transform = transform;
     }
 
-    public boolean hasHeights() {
+    @Override
+	public boolean hasHeights() {
         return true;
     }
 
-    public double getHeight(Node node) {
+    @Override
+	public double getHeight(Node node) {
         switch (transform) {
             case EQUAL_LENGTHS:
                 int treeLength = getMaxPathLength(getRootNode());
@@ -53,11 +56,13 @@ public class TransformedRootedTree extends FilteredRootedTree {
         }
     }
 
-    public boolean hasLengths() {
+    @Override
+	public boolean hasLengths() {
         return true;
     }
 
-    public double getLength(Node node) {
+    @Override
+	public double getLength(Node node) {
         switch (transform) {
             case EQUAL_LENGTHS:
                 return 1.0;

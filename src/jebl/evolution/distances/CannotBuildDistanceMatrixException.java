@@ -6,7 +6,12 @@ package jebl.evolution.distances;
  */
 public class CannotBuildDistanceMatrixException extends IllegalArgumentException {
 
-    public CannotBuildDistanceMatrixException(String matrix, String taxon1, String taxon2){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public CannotBuildDistanceMatrixException(String matrix, String taxon1, String taxon2){
         super("It is not possible to compute the " + matrix + " genetic distance for these sequences " +
                 "because at least one pair of sequences (" + taxon1 + " and " + taxon2 + ") do not overlap "
                 + "(or have only ambiguities in common) in the alignment.");

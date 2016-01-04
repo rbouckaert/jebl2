@@ -19,7 +19,8 @@ public class NeedlemanWunsch extends AlignSimple {
      * @param sq1
      * @param sq2
      */
-    public void doAlignment(String sq1, String sq2) {
+    @Override
+	public void doAlignment(String sq1, String sq2) {
 
         prepareAlignment(sq1, sq2);
 
@@ -62,9 +63,9 @@ public class NeedlemanWunsch extends AlignSimple {
         maxScore = F[curr][m];
     }
 
-    List tracebackList(int startx, int starty) {
+    List<Traceback> tracebackList(int startx, int starty) {
 
-        List<TracebackSimple> tracebacks = new ArrayList<TracebackSimple>();
+        List<Traceback> tracebacks = new ArrayList<>();
 
         Traceback tb = B0;
         while (tb != null) {
@@ -79,5 +80,6 @@ public class NeedlemanWunsch extends AlignSimple {
     /**
      * @return the score of the best alignment
      */
-    public float getScore() { return maxScore; }
+    @Override
+	public float getScore() { return maxScore; }
 }

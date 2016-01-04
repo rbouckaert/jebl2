@@ -72,7 +72,11 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
      * Thrown when a block is missing that is required for importing a particular type of data from the nexus input.
      */
     public static class MissingBlockException extends ImportException {
-        public MissingBlockException() { super(); }
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public MissingBlockException() { super(); }
         public MissingBlockException(String message) { super(message); }
     }
 
@@ -169,10 +173,12 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
     /**
      * @return an Iterator over the trees in the nexus input.
      */
-    public Iterator<Tree> iterator() {
+    @Override
+	public Iterator<Tree> iterator() {
         return new Iterator<Tree>() {
 
-            public boolean hasNext() {
+            @Override
+			public boolean hasNext() {
                 boolean hasNext = false;
                 try {
                     hasNext = hasTree();
@@ -184,7 +190,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
                 return hasNext;
             }
 
-            public Tree next() {
+            @Override
+			public Tree next() {
                 Tree tree = null;
                 try {
                     tree = importNextTree();
@@ -197,7 +204,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
                 return tree;
             }
 
-            public void remove() {
+            @Override
+			public void remove() {
                 throw new UnsupportedOperationException("operation is not supported by this Iterator");
             }
         };
@@ -250,7 +258,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
     /**
      * Import all alignments in the input from the current position.
      */
-    public List<Alignment> importAlignments() throws IOException, ImportException
+    @Override
+	public List<Alignment> importAlignments() throws IOException, ImportException
     {
         boolean done = false;
 
@@ -301,7 +310,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
     /**
      * Import all sequences in the input from the current position
      */
-    public List<Sequence> importSequences() throws IOException, ImportException {
+    @Override
+	public List<Sequence> importSequences() throws IOException, ImportException {
         boolean done = false;
 
         List<Taxon> taxonList = null;
@@ -355,7 +365,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
      *
      * @return true if another tree is available, false otherwise.
      */
-    public boolean hasTree() throws IOException, ImportException {
+    @Override
+	public boolean hasTree() throws IOException, ImportException {
         if (!isReadingTreesBlock) {
             isReadingTreesBlock = startReadingTrees();
             translationMap = readTreesBlockHeader(treeTaxonList, lastToken);
@@ -379,7 +390,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
      *
      * @return the next available tree or null if no more trees are available
      */
-    public Tree importNextTree() throws IOException, ImportException
+    @Override
+	public Tree importNextTree() throws IOException, ImportException
     {
         // call hasTree to do the hard work...
         if (!hasTree()) {
@@ -400,7 +412,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
      * @throws IOException
      * @throws ImportException
      */
-    public List<Tree> importTrees() throws IOException, ImportException {
+    @Override
+	public List<Tree> importTrees() throws IOException, ImportException {
         // We can't call startReadingTrees() here because if hasTree() was called before
         // then this importer will already have read into the trees block. However
         // is hasTree() was called then the following is still guaranteed to work as
@@ -447,7 +460,8 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
     /**
      * Import all distance matrices from all DISTANCES blocks in the input form the current position.
      */
-    public List<DistanceMatrix> importDistanceMatrices() throws IOException, ImportException {
+    @Override
+	public List<DistanceMatrix> importDistanceMatrices() throws IOException, ImportException {
         boolean done = false;
         List<Taxon> taxonList = null;
         List<DistanceMatrix> distanceMatrices = new ArrayList<DistanceMatrix>();
@@ -910,7 +924,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
 
         Triangle triangle = Triangle.LOWER;
         boolean diagonal = true;
-        boolean labels = false;
+        //boolean labels = false;
 
         boolean ttl = false, fmt = false;
 
@@ -954,7 +968,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
                             // in a valid file, triangle != both
                             diagonal = false;
                         } else if (token2.equalsIgnoreCase("LABELS")) {
-                            labels = true;
+                            //labels = true;
                         }
 
                 } while (helper.getLastDelimiter() != ';');

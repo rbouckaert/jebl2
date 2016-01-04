@@ -17,7 +17,8 @@ public class SmithWatermanLinearSpace extends AlignLinearSpace {
 	 * @param sq1
 	 * @param sq2
 	 */
-    public void doAlignment(String sq1, String sq2) {
+    @Override
+	public void doAlignment(String sq1, String sq2) {
     	
     	super.prepareAlignment(sq1, sq2);
     	
@@ -67,12 +68,14 @@ public class SmithWatermanLinearSpace extends AlignLinearSpace {
     /**
      * @return the score of the best alignment
      */
-    public float getScore() { return maxval; }
+    @Override
+	public float getScore() { return maxval; }
 
     /**
      * @return two-element array containing an alignment with maximal score
      */
-    public String[] getMatch() {
+    @Override
+	public String[] getMatch() {
         String subseq1 = seq1.substring(start1, end1);
         String subseq2 = seq2.substring(start2, end2);
         // The optimal local alignment between seq1 and seq2 is the
@@ -82,7 +85,8 @@ public class SmithWatermanLinearSpace extends AlignLinearSpace {
         return nwls1.getMatch();
     }
 
-    public void traceback(TracebackPlotter plotter) {
+    @Override
+	public void traceback(TracebackPlotter plotter) {
         String subseq1 = seq1.substring(start1, end1);
         String subseq2 = seq2.substring(start2, end2);
         // The optimal local alignment between seq1 and seq2 is the

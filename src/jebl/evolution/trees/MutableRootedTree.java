@@ -97,7 +97,7 @@ public class MutableRootedTree implements RootedTree {
      *  @param parent from which it should be removed
      */
     public void removeChild(Node child, Node parent) {
-        ((MutableRootedNode)parent).removeChild((MutableRootedNode)child);
+        ((MutableRootedNode)parent).removeChild(child);
     }
 
     /**
@@ -320,14 +320,16 @@ public class MutableRootedTree implements RootedTree {
      * @return the list of nodes that are the children of the given node.
      *         The list may be empty for a terminal node (a tip).
      */
-    public List<Node> getChildren(Node node) {
+    @Override
+	public List<Node> getChildren(Node node) {
         return new ArrayList<Node>(((MutableRootedNode)node).getChildren());
     }
 
     /**
      * @return Whether this tree has node heights available
      */
-    public boolean hasHeights() {
+    @Override
+	public boolean hasHeights() {
         return hasHeights;
     }
 
@@ -336,7 +338,8 @@ public class MutableRootedTree implements RootedTree {
      * @return the height of the given node. The height will be
      *         less than the parent's height and greater than it children's heights.
      */
-    public double getHeight(Node node) {
+    @Override
+	public double getHeight(Node node) {
         if (!hasHeights) throw new IllegalArgumentException("This tree has no node heights");
         if (!heightsKnown) calculateNodeHeights();
         return ((MutableRootedNode)node).getHeight();
@@ -345,7 +348,8 @@ public class MutableRootedTree implements RootedTree {
     /**
      * @return Whether this tree has branch lengths available
      */
-    public boolean hasLengths() {
+    @Override
+	public boolean hasLengths() {
         return hasLengths;
     }
 
@@ -353,7 +357,8 @@ public class MutableRootedTree implements RootedTree {
      * @param node the node whose branch length (to its parent) is being requested.
      * @return the length of the branch to the parent node (0.0 if the node is the root).
      */
-    public double getLength(Node node) {
+    @Override
+	public double getLength(Node node) {
         if (!hasLengths) throw new IllegalArgumentException("This tree has no branch lengths");
         if (!lengthsKnown) calculateBranchLengths();
         return ((MutableRootedNode)node).getLength();
@@ -364,7 +369,8 @@ public class MutableRootedTree implements RootedTree {
      * @return the parent node of the given node, or null
      *         if the node is the root node.
      */
-    public Node getParent(Node node) {
+    @Override
+	public Node getParent(Node node) {
         return ((MutableRootedNode)node).getParent();
     }
 
@@ -377,10 +383,12 @@ public class MutableRootedTree implements RootedTree {
      *
      * @return the root of the tree.
      */
-    public Node getRootNode() {
+    @Override
+	public Node getRootNode() {
         return rootNode;
     }
 
+	@Override
 	public boolean isRoot(Node node) {
 		return node == rootNode;
 	}
@@ -389,7 +397,8 @@ public class MutableRootedTree implements RootedTree {
      * @return a set of all nodes that have degree 1.
      *         These nodes are often refered to as 'tips'.
      */
-    public Set<Node> getExternalNodes() {
+    @Override
+	public Set<Node> getExternalNodes() {
         return new LinkedHashSet<Node>(externalNodes.values());
     }
 
@@ -397,7 +406,8 @@ public class MutableRootedTree implements RootedTree {
      * @return a set of all nodes that have degree 2 or more.
      *         These nodes are often refered to as internal nodes.
      */
-    public Set<Node> getInternalNodes() {
+    @Override
+	public Set<Node> getInternalNodes() {
         return new LinkedHashSet<Node>(internalNodes);
     }
 
@@ -406,7 +416,8 @@ public class MutableRootedTree implements RootedTree {
      *         nodes of this tree. The size of this set should be the
      *         same as the size of the external nodes set.
      */
-    public Set<Taxon> getTaxa() {
+    @Override
+	public Set<Taxon> getTaxa() {
         return new LinkedHashSet<Taxon>(externalNodes.keySet());
     }
 
@@ -415,7 +426,8 @@ public class MutableRootedTree implements RootedTree {
      * @return the taxon object associated with the given node, or null
      *         if the node is an internal node.
      */
-    public Taxon getTaxon(Node node) {
+    @Override
+	public Taxon getTaxon(Node node) {
         return ((MutableRootedNode)node).getTaxon();
     }
 
@@ -423,7 +435,8 @@ public class MutableRootedTree implements RootedTree {
      * @param node the node
      * @return true if the node is of degree 1.
      */
-    public boolean isExternal(Node node) {
+    @Override
+	public boolean isExternal(Node node) {
         return ((MutableRootedNode)node).getChildren().size() == 0;
     }
 
@@ -432,11 +445,13 @@ public class MutableRootedTree implements RootedTree {
      * @return the external node associated with the given taxon, or null
      *         if the taxon is not a member of the taxa set associated with this tree.
      */
-    public Node getNode(Taxon taxon) {
+    @Override
+	public Node getNode(Taxon taxon) {
         return externalNodes.get(taxon);
     }
 
-    public void renameTaxa(Taxon from, Taxon to) {
+    @Override
+	public void renameTaxa(Taxon from, Taxon to) {
         MutableRootedNode node = (MutableRootedNode)externalNodes.get(from);
         node.setTaxa(to);
 
@@ -450,7 +465,8 @@ public class MutableRootedTree implements RootedTree {
      * @param node
      * @return the set of nodes that are attached by edges to the given node.
      */
-    public List<Edge> getEdges(Node node) {
+    @Override
+	public List<Edge> getEdges(Node node) {
         List<Edge> edges = new ArrayList<Edge>();
         for (Node adjNode : getAdjacencies(node)) {
             edges.add(((MutableRootedNode)adjNode).getEdge());
@@ -465,6 +481,7 @@ public class MutableRootedTree implements RootedTree {
 	 * @param edge
 	 * @return an array of 2 edges
 	 */
+	@Override
 	public Node[] getNodes(Edge edge) {
 		for (Node node : getNodes()) {
 			if (((MutableRootedNode)node).getEdge() == edge) {
@@ -479,7 +496,8 @@ public class MutableRootedTree implements RootedTree {
      * @param node
      * @return the set of nodes that are attached by edges to the given node.
      */
-    public List<Node> getAdjacencies(Node node) {
+    @Override
+	public List<Node> getAdjacencies(Node node) {
         return ((MutableRootedNode)node).getAdjacencies();
     }
 
@@ -492,7 +510,8 @@ public class MutableRootedTree implements RootedTree {
      * @throws jebl.evolution.graphs.Graph.NoEdgeException
      *          if the nodes are not directly connected by an edge.
      */
-    public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
         if (((MutableRootedNode)node1).getParent() == node2) {
             return ((MutableRootedNode)node1).getEdge();
         } else if (((MutableRootedNode)node2).getParent() == node1) {
@@ -509,7 +528,8 @@ public class MutableRootedTree implements RootedTree {
      * @throws jebl.evolution.graphs.Graph.NoEdgeException
      *          if the nodes are not directly connected by an edge.
      */
-    public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
         if (((MutableRootedNode)node1).getParent() == node2) {
             if (heightsKnown) {
                 return ((MutableRootedNode)node2).getHeight() - ((MutableRootedNode)node1).getHeight();
@@ -530,7 +550,8 @@ public class MutableRootedTree implements RootedTree {
     /**
      * @return the set of all nodes in this graph.
      */
-    public Set<Node> getNodes() {
+    @Override
+	public Set<Node> getNodes() {
         Set<Node> nodes = new LinkedHashSet<Node>(internalNodes);
         nodes.addAll(externalNodes.values());
         return nodes;
@@ -539,7 +560,8 @@ public class MutableRootedTree implements RootedTree {
     /**
      * @return the set of all edges in this graph.
      */
-    public Set<Edge> getEdges() {
+    @Override
+	public Set<Edge> getEdges() {
         Set<Edge> edges = new LinkedHashSet<Edge>();
         for (Node node : getNodes()) {
             if (node != getRootNode()) {
@@ -555,6 +577,7 @@ public class MutableRootedTree implements RootedTree {
 	 * a new set is constructed each time this is called.
 	 * @return the set of external edges.
 	 */
+	@Override
 	public Set<Edge> getExternalEdges() {
 		Set<Edge> edges = new LinkedHashSet<Edge>();
 		for (Node node : getExternalNodes()) {
@@ -568,6 +591,7 @@ public class MutableRootedTree implements RootedTree {
 	 * a new set is constructed each time this is called.
 	 * @return the set of internal edges.
 	 */
+	@Override
 	public Set<Edge> getInternalEdges() {
 		Set<Edge> edges = new LinkedHashSet<Edge>();
 		for (Node node : getInternalNodes()) {
@@ -582,7 +606,8 @@ public class MutableRootedTree implements RootedTree {
      * @param degree the number of edges connected to a node
      * @return a set containing all nodes in this graph of the given degree.
      */
-    public Set<Node> getNodes(int degree) {
+    @Override
+	public Set<Node> getNodes(int degree) {
         Set<Node> nodes = new LinkedHashSet<Node>();
         for (Node node : getNodes()) {
             // Account for no anncesstor of root, assumed by default in getDegree
@@ -667,40 +692,46 @@ public class MutableRootedTree implements RootedTree {
         conceptuallyUnrooted = intent;
     }
 
-    public boolean conceptuallyUnrooted() {
+    @Override
+	public boolean conceptuallyUnrooted() {
         return conceptuallyUnrooted;
     }
 
     // Attributable IMPLEMENTATION
 
-    public void setAttribute(String name, Object value) {
+    @Override
+	public void setAttribute(String name, Object value) {
         if (helper == null) {
             helper = new AttributableHelper();
         }
         helper.setAttribute(name, value);
     }
 
-    public Object getAttribute(String name) {
+    @Override
+	public Object getAttribute(String name) {
         if (helper == null) {
             return null;
         }
         return helper.getAttribute(name);
     }
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         if( helper != null ) {
             helper.removeAttribute(name);
         }
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         if (helper == null) {
             return Collections.emptySet();
         }
         return helper.getAttributeNames();
     }
 
-    public Map<String, Object> getAttributeMap() {
+    @Override
+	public Map<String, Object> getAttributeMap() {
         if (helper == null) {
             return Collections.emptyMap();
         }
@@ -786,7 +817,8 @@ public class MutableRootedTree implements RootedTree {
             this.length = length;
         }
 
-        public int getDegree() {
+        @Override
+		public int getDegree() {
             return children.size() + (this==rootNode?0:1);
         }
 
@@ -797,7 +829,8 @@ public class MutableRootedTree implements RootedTree {
         public Edge getEdge() {
             if (edge == null) {
                 edge = new BaseEdge() {
-                    public double getLength() {
+                    @Override
+					public double getLength() {
                         return length;
                     }
                 };

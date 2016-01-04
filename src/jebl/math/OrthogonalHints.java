@@ -97,6 +97,7 @@ public interface OrthogonalHints {
 				this.toAdjust_ = toAdjust;
 				this.adjustmentFactor_ = adjustmentFactor;
 			}
+			@Override
 			public OrderEnumerator getSuggestedOrdering(OrderEnumerator defaultOrdering) {
 				OrderEnumerator sub = toAdjust_.getSuggestedOrdering(defaultOrdering);
 				if(sub==null||sub==defaultOrdering) {
@@ -104,6 +105,7 @@ public interface OrthogonalHints {
 				}
 				return OrderEnumerator.Utils.getAdjusted(sub,adjustmentFactor_);
 			}
+			@Override
 			public int getInternalParameterBoundaries(int parameter, double[] storage) {
 				return toAdjust_.getInternalParameterBoundaries(parameter-adjustmentFactor_,storage);
 			}
@@ -116,9 +118,11 @@ public interface OrthogonalHints {
 		private final static class Null implements OrthogonalHints {
 			public static final Null INSTANCE = new Null();
 			public Null() {	}
+			@Override
 			public OrderEnumerator getSuggestedOrdering(OrderEnumerator defaultOrdering) {
 				return defaultOrdering;
 			}
+			@Override
 			public int getInternalParameterBoundaries(int parameter, double[] storage) {
 				return 0;
 			}
@@ -149,6 +153,7 @@ public interface OrthogonalHints {
 			 * the respecitive hint are given by the given ordering and the remaining ordering information
 			 * is shuffled.
 			 */
+			@Override
 			public OrderEnumerator getSuggestedOrdering(OrderEnumerator defaultOrdering) {
 				OrderEnumerator oe1 = hintsOne_.getSuggestedOrdering(null);
 				OrderEnumerator oe2 = hintsTwo_.getSuggestedOrdering(null);
@@ -191,6 +196,7 @@ public interface OrthogonalHints {
 			/**
 
 			 */
+			@Override
 			public int getInternalParameterBoundaries(int parameter, double[] storage) {
 				if(parameter<hintOneParameterCount_) {
 					return hintsOne_.getInternalParameterBoundaries(parameter,storage);

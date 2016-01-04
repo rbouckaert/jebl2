@@ -106,7 +106,8 @@ public abstract class ConsensusTreeBuilder<T extends Tree> implements TreeBuilde
 		return supportAsPercent;
 	}
 
-    public void addProgressListener(ProgressListener listener) {
+    @Override
+	public void addProgressListener(ProgressListener listener) {
         synchronized(listeners) {
             listeners.add(listener);
         }
@@ -117,7 +118,8 @@ public abstract class ConsensusTreeBuilder<T extends Tree> implements TreeBuilde
      * the listener may keep receiving progress for a short while after this method returns.
      * @param listener The ProgressListener for which to no longer report progress.
      */
-    public void removeProgressListener(ProgressListener listener) {
+    @Override
+	public void removeProgressListener(ProgressListener listener) {
         synchronized(listeners) {
             listeners.remove(listener);
         }

@@ -17,7 +17,8 @@ public class MaximalSegmentPair extends AlignSimple {
 	 * @param sq1
 	 * @param sq2
 	 */
-    public final void doAlignment(String sq1, String sq2) {
+    @Override
+	public final void doAlignment(String sq1, String sq2) {
     	
     	super.prepareAlignment(sq1, sq2);
 
@@ -45,7 +46,8 @@ public class MaximalSegmentPair extends AlignSimple {
         B0 = new TracebackSimple(maxi, maxj);
     }
 
-    public final Traceback next(Traceback tb) {
+    @Override
+	public final Traceback next(Traceback tb) {
 
         Traceback next = super.next(tb);
         if (next != null) {

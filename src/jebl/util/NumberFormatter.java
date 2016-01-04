@@ -46,7 +46,7 @@ public class NumberFormatter {
 		cutoffTable = new double[sf];
 		long num = 10;
 		for (int i = 0; i < cutoffTable.length; i++) {
-			cutoffTable[i] = (double)num;
+			cutoffTable[i] = num;
 			num *= 10;
 		}
 		decimalFormat.setGroupingUsed(false);

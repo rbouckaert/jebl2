@@ -27,7 +27,8 @@ public enum IllegalCharacterPolicy {
         return null;
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         return description;
     }
 }

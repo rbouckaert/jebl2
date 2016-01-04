@@ -11,6 +11,7 @@ public class GaplessSequence extends FilteredSequence {
 		super(source);
 	}
 
+	@Override
 	protected State[] filterSequence(Sequence source) {
 		return jebl.evolution.sequences.Utils.stripGaps(source.getStates());
 	}

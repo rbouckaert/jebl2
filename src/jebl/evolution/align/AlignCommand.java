@@ -51,7 +51,8 @@ public class AlignCommand {
 				sq2 = sq2.concat(line.trim());
 				line = br2.readLine();
 			}
-			
+			br1.close();
+			br2.close();
 		}
 		catch(Exception e) {
 			System.out.println("error reading from sequence file\n" + e);

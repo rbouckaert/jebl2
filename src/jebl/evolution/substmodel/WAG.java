@@ -18,6 +18,11 @@ package jebl.evolution.substmodel;
 public class WAG extends AminoAcidModel
 {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * constructor
      *
      * @param f amino acid frequencies
@@ -74,7 +79,8 @@ public class WAG extends AminoAcidModel
 
     // WAG model of amino acid evolution
     // Whelan, S. and N. Goldman. 2000. in prep.
-    protected void rebuildRateMatrix(double[][] rate, double[] parameters)	{
+    @Override
+	protected void rebuildRateMatrix(double[][] rate, double[] parameters)	{
         // Q matrix
         rate[0][1] = 0.610810; rate[0][2] = 0.569079;
         rate[0][3] = 0.821500; rate[0][4] = 1.141050;
@@ -196,7 +202,8 @@ public class WAG extends AminoAcidModel
         rate[18][19] = 0.347826;
     }
 
-    public String getUniqueName() {
+    @Override
+	public String getUniqueName() {
         return "WAG";
     }
 }

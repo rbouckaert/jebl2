@@ -54,7 +54,9 @@ public class MEGAExporter implements AlignmentExporter {
      * @param alignment
      * @throws IOException
      */
-    public void exportAlignment(Alignment alignment) throws IOException {
+    @Deprecated
+	@Override
+	public void exportAlignment(Alignment alignment) throws IOException {
         List<Sequence> seqs = alignment.getSequenceList();
 
         for( Sequence seq : seqs )  {

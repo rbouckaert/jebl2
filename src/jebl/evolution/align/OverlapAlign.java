@@ -14,7 +14,8 @@ public class OverlapAlign extends AlignSimple {
 	 * @param sq1
      * @param sq2
      */
-  public void doAlignment(String sq1, String sq2) {
+  @Override
+public void doAlignment(String sq1, String sq2) {
 	  
     super.prepareAlignment(sq1, sq2);
     

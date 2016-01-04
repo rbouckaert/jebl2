@@ -34,6 +34,10 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 	// Private stuff
 	//
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Eigenvalues, eigenvectors, and inverse eigenvectors
 	private final double[] Eval;
 	private final double[][] Evec;

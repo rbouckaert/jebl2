@@ -82,6 +82,7 @@ public class TreeSimulator {
 		this.taxa = taxa;
 		this.heightAttributeName = heightAttributeName;
 		Collections.sort(this.taxa, new Comparator<Taxon>() {
+			@Override
 			public int compare(Taxon taxon1, Taxon taxon2) {
 				double height1 = 0.0;
 				double height2 = 0.0;

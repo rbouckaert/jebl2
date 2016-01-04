@@ -25,6 +25,7 @@ public class SequenceTester {
                 sq1 = sq1.concat(line.trim());
                 line = br1.readLine();
             }
+            br1.close();
             return sq1;
         }
         catch (Exception e) {

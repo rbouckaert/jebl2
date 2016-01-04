@@ -17,13 +17,15 @@ public class HashPair<T> {
         }
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return first.hashCode() + second.hashCode();
     }
 
-    public boolean equals(Object x) {
+    @Override
+	public boolean equals(Object x) {
         if( x instanceof HashPair ) {
-            return ((HashPair) x).first.equals(first) &&  ((HashPair )x).second.equals(second);
+            return ((HashPair<?>) x).first.equals(first) &&  ((HashPair<?>)x).second.equals(second);
         }
         return false;
     }

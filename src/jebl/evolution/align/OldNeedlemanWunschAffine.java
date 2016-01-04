@@ -14,7 +14,8 @@ public class OldNeedlemanWunschAffine extends AlignAffine {
 	 * @param sq1
 	 * @param sq2
 	 */
-    public void doAlignment(String sq1, String sq2) {
+    @Override
+	public void doAlignment(String sq1, String sq2) {
 
     	prepareAlignment(sq1, sq2);
 

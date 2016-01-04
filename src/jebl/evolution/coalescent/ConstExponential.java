@@ -43,6 +43,7 @@ public class ConstExponential extends ExponentialGrowth {
 
 	// Implementation of abstract methods
 
+	@Override
 	public double getDemographic(double t) {
 
 		double N0 = getN0();
@@ -58,6 +59,7 @@ public class ConstExponential extends ExponentialGrowth {
 		return N1;
 	}
 
+	@Override
 	public double getIntensity(double t) {
         double r = getGrowthRate();
         double time = Math.log(getN0()/getN1())/r;
@@ -71,6 +73,7 @@ public class ConstExponential extends ExponentialGrowth {
         }
   	}
 
+	@Override
 	public double getInverseIntensity(double x) {
         /* AER - I think this is right but until someone checks it...
             double nZero = getN0();
@@ -88,11 +91,13 @@ public class ConstExponential extends ExponentialGrowth {
         throw new UnsupportedOperationException();
 	}
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return false;
     }
 
-    public double getIntegral(double start, double finish) {
+    @Override
+	public double getIntegral(double start, double finish) {
         throw new UnsupportedOperationException();
     }
 

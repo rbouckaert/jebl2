@@ -44,6 +44,7 @@ public class Expansion extends ExponentialGrowth {
 
 	// Implementation of abstract methods
 
+	@Override
 	public double getDemographic(double t) {
 
 		double N0 = getN0();
@@ -55,18 +56,22 @@ public class Expansion extends ExponentialGrowth {
 		return N1 + ((N0 - N1) * Math.exp(-r*t));
 	}
 
+	@Override
 	public double getIntensity(double t) {
         throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public double getInverseIntensity(double x) {
         throw new UnsupportedOperationException();
 	}
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return false;
     }
 
+	@Override
 	public double getIntegral(double start, double finish) {
         throw new UnsupportedOperationException();
 	}

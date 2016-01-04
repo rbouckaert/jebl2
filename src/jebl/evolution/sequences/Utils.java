@@ -139,8 +139,8 @@ public class Utils {
         int length=seq.getLength();
         StringBuilder results =new StringBuilder();
         for (int i =  length-1; i >=0; i--) {
-            State state= seq.getState(i);
-            NucleotideState complementaryState = Nucleotides.COMPLEMENTARY_STATES[state.getIndex()];
+        	NucleotideState state= (NucleotideState) seq.getState(i);
+            NucleotideState complementaryState = Nucleotides.getComplementaryState(state);
             if (predominantlyRNA && complementaryState.equals(Nucleotides.T_STATE)) {
                 results.append('U');
             }
@@ -246,7 +246,7 @@ public class Utils {
     public static NucleotideState[] complement(final NucleotideState[] sequence) {
         NucleotideState[] complemented = new NucleotideState[sequence.length];
         for (int i = 0; i < sequence.length; i++) {
-            complemented[i] = Nucleotides.COMPLEMENTARY_STATES[sequence[i].getIndex()];
+            complemented[i] = Nucleotides.getComplementaryState(sequence[i]);
         }
         return complemented;
     }
@@ -254,7 +254,7 @@ public class Utils {
     public static NucleotideState[] reverseComplement(final NucleotideState[] sequence) {
         NucleotideState[] reverseComplemented = new NucleotideState[sequence.length];
         for (int i = 0; i < sequence.length; i++) {
-            reverseComplemented[i] = Nucleotides.COMPLEMENTARY_STATES[sequence[sequence.length - i - 1].getIndex()];
+            reverseComplemented[i] = Nucleotides.getComplementaryState(sequence[sequence.length - i - 1]);
         }
         return reverseComplemented;
     }

@@ -56,14 +56,16 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
     /**
      * exportAlignment.
      */
-    public void exportAlignment(Alignment alignment) throws IOException {
+    @Override
+	public void exportAlignment(Alignment alignment) throws IOException {
     	exportSequences(alignment.getSequences());
     }
 
     /**
      * export alignment.
      */
-    public void exportSequences(Collection<? extends Sequence> sequences) throws IOException, IllegalArgumentException {
+    @Override
+	public void exportSequences(Collection<? extends Sequence> sequences) throws IOException, IllegalArgumentException {
 
         establishSequenceTaxa(sequences);
 
@@ -85,7 +87,7 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
         writer.println("\tdimensions nchar=" + maxLength + ";");
         if( seqType != null ) {
             writer.println("\tformat datatype=" + seqType.getNexusDataType() +
-                    " missing=" + seqType.getUnknownState().getName() +
+                    " missing=" + seqType.getUnknownState().getCode() +
                     " gap=" + seqType.getGapState().getCode() + (interleave ? " interleave=yes" : "") + ";");
 
             writer.println("\tmatrix");
@@ -119,7 +121,8 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
      * @param tree
      * @throws java.io.IOException
      */
-    public void exportTree(Tree tree) throws IOException {
+    @Override
+	public void exportTree(Tree tree) throws IOException {
         List<Tree> trees = new ArrayList<Tree>();
         trees.add(tree);
         exportTrees(trees);
@@ -160,7 +163,8 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
         }
     }
 
-    public void exportTrees(Collection<? extends Tree> trees) throws IOException {
+    @Override
+	public void exportTrees(Collection<? extends Tree> trees) throws IOException {
         exportTrees(trees, false);
     }
 

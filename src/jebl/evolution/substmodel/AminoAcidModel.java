@@ -24,7 +24,12 @@ public abstract class AminoAcidModel extends AbstractRateMatrix
     // Protected stuff
     //
 
-    // Constructor
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// Constructor
     protected AminoAcidModel(double[] f)
     {
         // Dimension = 20

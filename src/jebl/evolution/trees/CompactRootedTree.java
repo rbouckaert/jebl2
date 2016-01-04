@@ -143,18 +143,21 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
             this.index = index;
         }
 
-        public int getDegree() {
+        @Override
+		public int getDegree() {
             return nSons(index) + (this==getRootNode()?0:1);
         }
 
-        Map<String, Object> getExistingMap() {
+        @Override
+		Map<String, Object> getExistingMap() {
             if( hasAttributeMap(index) ) {
                 return aMap(index);
             }
             return null;
         }
 
-        Map<String, Object> getMap() {
+        @Override
+		Map<String, Object> getMap() {
             return aMap(index);
         }
     }
@@ -181,7 +184,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
             this.index = index;
         }
 
-        Map<String, Object> getExistingMap() {
+        @Override
+		Map<String, Object> getExistingMap() {
             final short i = (short)(nodes.length + index);
             if( hasAttributeMap(i) ) {
                 return aMap(i);
@@ -189,11 +193,13 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
             return null;
         }
 
-        Map<String, Object> getMap() {
+        @Override
+		Map<String, Object> getMap() {
             return aMap((short)(nodes.length + index));
         }
 
-        public double getLength() {
+        @Override
+		public double getLength() {
             return heights[parent[index]] - heights[index];
         }
     }
@@ -286,7 +292,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         }
     }
 
-    public List<Node> getChildren(Node node) {
+    @Override
+	public List<Node> getChildren(Node node) {
         final int index = ((SimpleRootedNode) node).index;
         final int nSon = nSons(index);
         final ArrayList<Node> clist = new ArrayList<Node>(nSon);
@@ -296,21 +303,25 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return clist;
     }
 
-    public boolean hasHeights() {
+    @Override
+	public boolean hasHeights() {
         return hasHeights;
     }
 
-    public double getHeight(Node node) {
+    @Override
+	public double getHeight(Node node) {
         assert hasHeights;
 
         return heights[((SimpleRootedNode)node).index];
     }
 
-    public boolean hasLengths() {
+    @Override
+	public boolean hasLengths() {
         return hasLengths;
     }
 
-    public double getLength(Node node) {
+    @Override
+	public double getLength(Node node) {
         assert hasLengths;
 
         final int index = ((SimpleRootedNode) node).index;
@@ -321,7 +332,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return heights[index];
     }
 
-    public Node getParent(Node node) {
+    @Override
+	public Node getParent(Node node) {
         final int index = ((SimpleRootedNode) node).index;
         return index == 0 ? null : nodes[parent[index]];
     }
@@ -330,11 +342,13 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 		throw new UnsupportedOperationException("getParentEdge not implemented in CompactRootedTree");
 	}
 
-    public Node getRootNode() {
+    @Override
+	public Node getRootNode() {
         return nodes[0];
     }
 
-    public boolean conceptuallyUnrooted() {
+    @Override
+	public boolean conceptuallyUnrooted() {
         return conceptuallyUnrooted;
     }
 
@@ -342,12 +356,14 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         this.conceptuallyUnrooted = conceptuallyUnrooted;
     }
 
-    public boolean isRoot(Node node) {
+    @Override
+	public boolean isRoot(Node node) {
         return ((SimpleRootedNode)node).index == 0;
     }
 
     // O(number of nodes)
-    public Set<Node> getExternalNodes() {
+    @Override
+	public Set<Node> getExternalNodes() {
         Set<Node> n = new LinkedHashSet<Node>();
         for(int i = 0; i < nodes.length; ++i) {
             if( (noSons[i] & 0x8000) != 0 ) {
@@ -358,7 +374,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
     }
 
     // O(number of nodes)
-    public Set<Node> getInternalNodes() {
+    @Override
+	public Set<Node> getInternalNodes() {
         Set<Node> n = new LinkedHashSet<Node>();
         for(int i = 0; i < nodes.length; ++i) {
             if( (noSons[i] & 0x8000) == 0 ) {
@@ -368,7 +385,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return n;
     }
 
-    public Set<Edge> getExternalEdges() {
+    @Override
+	public Set<Edge> getExternalEdges() {
         Set<Edge> edges = new LinkedHashSet<Edge>();
         for (Node node : getExternalNodes()) {
             edges.add( establishEdge( ((SimpleRootedNode)node).index) ) ;
@@ -376,7 +394,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return edges;
     }
 
-    public Set<Edge> getInternalEdges() {
+    @Override
+	public Set<Edge> getInternalEdges() {
         Set<Edge> edges = new LinkedHashSet<Edge>();
         for (Node node : getInternalNodes()) {
             if (node != getRootNode()) {
@@ -386,11 +405,13 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return edges;
     }
 
-    public Set<Taxon> getTaxa() {
+    @Override
+	public Set<Taxon> getTaxa() {
         return new LinkedHashSet<Taxon>(Arrays.asList(taxa));
     }
 
-    public Taxon getTaxon(Node node) {
+    @Override
+	public Taxon getTaxon(Node node) {
         final short index = ((SimpleRootedNode) node).index;
         if( (noSons[index] & 0x8000) != 0 ) {
             return taxa[noSons[index] & 0x7FFF];
@@ -398,12 +419,14 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return null;
     }
 
-    public boolean isExternal(Node node) {
+    @Override
+	public boolean isExternal(Node node) {
         return nSons(((SimpleRootedNode)node).index) == 0;
     }
 
     // O(number of nodes)
-    public Node getNode(Taxon taxon) {
+    @Override
+	public Node getNode(Taxon taxon) {
         int i = Arrays.asList(taxa).indexOf(taxon);
         for(int k = 0; k < nodes.length; ++k) {
             if( noSons[k] == (short)(0x8000 | i) ) {
@@ -413,7 +436,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return null;
     }
 
-    public void renameTaxa(Taxon from, Taxon to) {
+    @Override
+	public void renameTaxa(Taxon from, Taxon to) {
         for(int n = 0; n < taxa.length; ++n) {
             if( from.equals(taxa[n]) ) {
                 taxa[n] = to;
@@ -422,7 +446,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         }
     }
 
-    public List<Edge> getEdges(Node node) {
+    @Override
+	public List<Edge> getEdges(Node node) {
         List<Edge> e = new ArrayList<Edge>();
         final short index = ((SimpleRootedNode) node).index;
         if( index != 0 ) {
@@ -435,7 +460,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return e;
     }
 
-    public List<Node> getAdjacencies(Node node) {
+    @Override
+	public List<Node> getAdjacencies(Node node) {
         List<Node> adjacencies = new ArrayList<Node>();
         final short index = ((SimpleRootedNode) node).index;
         final int nSon = nSons(index);
@@ -459,7 +485,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return  edges[index];
     }
 
-    public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
         short index1 = ((SimpleRootedNode) node1).index;
         short index2 = ((SimpleRootedNode) node2).index;
         // make index1 the parent of index2
@@ -473,7 +500,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return establishEdge(index2);
     }
 
-    public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
+    @Override
+	public double getEdgeLength(Node node1, Node node2) throws NoEdgeException {
         final short index1 = ((SimpleRootedNode) node1).index;
         final short index2 = ((SimpleRootedNode) node2).index;
         if( ! (parent[index1] == index2 || parent[index2] == index1) ) {
@@ -482,7 +510,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return Math.abs(heights[index1] - heights[index2]);
     }
 
-    public Node[] getNodes(Edge edge) {
+    @Override
+	public Node[] getNodes(Edge edge) {
         Node[] ns = new Node[2];
         final short index = ((SimpleRootedEdge) edge).index;
         ns[0] = nodes[index];
@@ -491,18 +520,21 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return ns;
     }
 
-    public Set<Node> getNodes() {
+    @Override
+	public Set<Node> getNodes() {
         return new LinkedHashSet<Node>(Arrays.asList(nodes));
     }
 
-    public Set<Edge> getEdges() {
+    @Override
+	public Set<Edge> getEdges() {
         for(int k = 1; k < nodes.length; ++k) {
             establishEdge((short)k);
         }
         return new LinkedHashSet<Edge>( Arrays.asList(edges));
     }
 
-    public Set<Node> getNodes(int degree) {
+    @Override
+	public Set<Node> getNodes(int degree) {
         Set<Node> ns = new LinkedHashSet<Node>();
         // check non root nodes
         for(int k = 1; k < nodes.length; ++k) {
@@ -516,7 +548,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return ns;
     }
 
-    Map<String, Object> getExistingMap() {
+    @Override
+	Map<String, Object> getExistingMap() {
         final short index = (short) nodes.length;
         if( hasAttributeMap(index) ) {
             return aMap(index);
@@ -524,7 +557,8 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         return null;
     }
 
-    Map<String, Object> getMap() {
+    @Override
+	Map<String, Object> getMap() {
         final short index = (short) nodes.length;
         return aMap(index);
     }
@@ -550,19 +584,23 @@ abstract class AttributableImp implements Attributable {
     abstract Map<String, Object> getExistingMap();
 
 
-    public void setAttribute(String name, Object value) {
+    @Override
+	public void setAttribute(String name, Object value) {
         getMap().put(name, value);
     }
 
-    public Object getAttribute(String name) {
+    @Override
+	public Object getAttribute(String name) {
         return getMap().get(name);
     }
 
-    public void removeAttribute(String name) {
+    @Override
+	public void removeAttribute(String name) {
         getMap().remove(name);
     }
 
-    public Set<String> getAttributeNames() {
+    @Override
+	public Set<String> getAttributeNames() {
         Map<String, Object> map = getExistingMap();
         if( map != null ) {
             return map.keySet();
@@ -570,7 +608,8 @@ abstract class AttributableImp implements Attributable {
         return Collections.emptySet();
     }
 
-    public Map<String, Object> getAttributeMap() {
+    @Override
+	public Map<String, Object> getAttributeMap() {
         Map<String, Object> map = getExistingMap();
         if( map != null ) {
             return map;

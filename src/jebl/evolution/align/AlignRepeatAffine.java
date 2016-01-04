@@ -21,9 +21,11 @@ abstract class AlignRepeatAffine extends AlignRepeat {
      * @param sq1
      * @param sq2
      */
-    public abstract void doAlignment(String sq1, String sq2);
+    @Override
+	public abstract void doAlignment(String sq1, String sq2);
 
-    public void prepareAlignment(String sq1, String sq2) {
+    @Override
+	public void prepareAlignment(String sq1, String sq2) {
 
         //first time running this alignment. Create all new matrices.
         if(F == null) {
@@ -71,7 +73,8 @@ abstract class AlignRepeatAffine extends AlignRepeat {
      * @param tb current Traceback
      * @return next Traceback
      */
-    public Traceback next(Traceback tb) {
+    @Override
+	public Traceback next(Traceback tb) {
         TracebackAffine tb3 = (TracebackAffine)tb;
         if(tb3.i + tb3.j + B[tb3.k][tb3.i][tb3.j].i + B[tb3.k][tb3.i][tb3.j].j == 0)
             return null;	//traceback has reached origin therefore stop.
@@ -82,14 +85,16 @@ abstract class AlignRepeatAffine extends AlignRepeat {
     /**
      * @return the score of the best alignment
      */
-    public float getScore() { return F[((TracebackAffine)B0).k][B0.i][B0.j]; }
+    @Override
+	public float getScore() { return F[((TracebackAffine)B0).k][B0.i][B0.j]; }
 
     /**
      * Print matrix used to calculate this alignment.
      * 
      * @param out Output to print to.
      */
-    public void printf(Output out) {
+    @Override
+	public void printf(Output out) {
 
         for (int k=0; k<3; k++) {
             out.println("F[" + k + "]:");

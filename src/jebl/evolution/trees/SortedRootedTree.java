@@ -21,6 +21,7 @@ public class SortedRootedTree extends FilteredRootedTree {
 			this.name = name;
 		}
 
+		@Override
 		public String toString() { return name; }
 
 		private String name;
@@ -31,26 +32,28 @@ public class SortedRootedTree extends FilteredRootedTree {
 	    switch (branchOrdering) {
 		    case INCREASING_NODE_DENSITY:
 			    this.comparator = new Comparator<Node>() {
-			        public int compare(Node node1, Node node2) {
+			        @Override
+					public int compare(Node node1, Node node2) {
 			            return jebl.evolution.trees.Utils.getExternalNodeCount(source, node2) -
 					            jebl.evolution.trees.Utils.getExternalNodeCount(source, node1);
 			        }
 
-			        public boolean equals(Node node1, Node node2) {
-			            return compare(node1, node2) == 0;
-			        }
+			        //public boolean equals(Node node1, Node node2) {
+			        //   return compare(node1, node2) == 0;
+			        //}
 			    };
 			break;
 		    case DECREASING_NODE_DENSITY:
 			    this.comparator = new Comparator<Node>() {
-			        public int compare(Node node1, Node node2) {
+			        @Override
+					public int compare(Node node1, Node node2) {
 			            return jebl.evolution.trees.Utils.getExternalNodeCount(source, node1) -
 					            jebl.evolution.trees.Utils.getExternalNodeCount(source, node2);
 			        }
 
-			        public boolean equals(Node node1, Node node2) {
-			            return compare(node1, node2) == 0;
-			        }
+			        //public boolean equals(Node node1, Node node2) {
+			        //    return compare(node1, node2) == 0;
+			        //}
 			    };
 			break;
 		    default:
@@ -63,7 +66,8 @@ public class SortedRootedTree extends FilteredRootedTree {
         this.comparator = comparator;
     }
 
-    public List<Node> getChildren(Node node) {
+    @Override
+	public List<Node> getChildren(Node node) {
         List<Node> sourceList = source.getChildren(node);
         Collections.sort(sourceList, comparator);
         return sourceList;

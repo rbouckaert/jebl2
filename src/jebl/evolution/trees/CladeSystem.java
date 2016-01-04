@@ -108,6 +108,7 @@ public class CladeSystem {
 			return frequency;
 		}
 
+		@SuppressWarnings("unused")
 		public void setFrequency(double frequency) {
 			this.frequency = frequency;
 		}
@@ -120,6 +121,7 @@ public class CladeSystem {
 
 		private final Set<Taxon> taxa;
 
+		@Override
 		public boolean equals(Object o) {
 			if (this == o) return true;
 			if (o == null || getClass() != o.getClass()) return false;
@@ -131,6 +133,7 @@ public class CladeSystem {
 			return true;
 		}
 
+		@Override
 		public int hashCode() {
 			return taxa.hashCode();
 		}

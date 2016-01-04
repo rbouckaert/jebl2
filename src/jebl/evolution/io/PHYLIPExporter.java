@@ -90,7 +90,8 @@ public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
         return pnames;
     }
 
-    public void exportAlignment(Alignment alignment) throws IOException {
+    @Override
+	public void exportAlignment(Alignment alignment) throws IOException {
         List<Sequence> seqs = alignment.getSequenceList();
         final int alignmentLength = (seqs.isEmpty() ? 0 : seqs.get(0).getLength()); // # columns 
         writer.println(" " + seqs.size() + " " + alignmentLength);
@@ -104,13 +105,15 @@ public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
 
     // Should call those only after the alignment
 
-    public void exportTree(Tree tree) throws IOException {
+    @Override
+	public void exportTree(Tree tree) throws IOException {
         final RootedTree rtree = Utils.rootTheTree(tree);
         writer.print(Utils.toNewick(rtree));
         writer.println(";");
     }
 
-    public void exportTrees(Collection<? extends Tree> trees) throws IOException {
+    @Override
+	public void exportTrees(Collection<? extends Tree> trees) throws IOException {
        for( Tree t : trees ) {
            exportTree(t);
        }

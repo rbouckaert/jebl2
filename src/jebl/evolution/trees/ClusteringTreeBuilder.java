@@ -22,7 +22,8 @@ import java.util.List;
 
 public abstract class ClusteringTreeBuilder<T extends Tree> implements TreeBuilder<T> {
 
-    public T build() {
+    @Override
+	public T build() {
         init(distanceMatrix);
 
         // TT: This should probably be ints, and instead we should write
@@ -48,11 +49,13 @@ public abstract class ClusteringTreeBuilder<T extends Tree> implements TreeBuild
         return getTree();
     }
 
-    public void addProgressListener(ProgressListener listener) {
+    @Override
+	public void addProgressListener(ProgressListener listener) {
         listeners.add(listener);
     }
 
-    public void removeProgressListener(ProgressListener listener) {
+    @Override
+	public void removeProgressListener(ProgressListener listener) {
         listeners.remove(listener);
     }
 
@@ -71,8 +74,8 @@ public abstract class ClusteringTreeBuilder<T extends Tree> implements TreeBuild
      * @param distances Pre computed pairwise distances.
      * @return A tree builder using method and distance matrix
      */
-    static public ClusteringTreeBuilder getBuilder(TreeBuilderFactory.Method method, DistanceMatrix distances) {
-        ClusteringTreeBuilder builder;
+    static public ClusteringTreeBuilder<Tree> getBuilder(TreeBuilderFactory.Method method, DistanceMatrix distances) {
+        ClusteringTreeBuilder<Tree> builder;
         switch( method ) {
             case UPGMA:
             {

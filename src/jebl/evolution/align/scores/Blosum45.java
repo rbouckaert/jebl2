@@ -28,5 +28,6 @@ public class Blosum45 extends AminoAcidScores {
 
     public Blosum45() { buildScores(residueScores); }
 
-    public String getName() { return "Blosum45"; }
+    @Override
+	public String getName() { return "Blosum45"; }
 }

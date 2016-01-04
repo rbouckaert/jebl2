@@ -176,7 +176,8 @@ public class ProfileCharacter {
         return numberOfUniqueCharacters;
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         if(numberOfUniqueCharacters==1) {
             return "" +characters[0];
         }

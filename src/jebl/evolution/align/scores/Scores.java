@@ -54,11 +54,13 @@ public abstract class Scores implements ScoreMatrix {
         buildScores(scores);
     }
 
-    public final float getScore(char x, char y) {
+    @Override
+	public final float getScore(char x, char y) {
         return score[x][y];
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         String name = getClass().getName();
         return name.substring(name.lastIndexOf(".")+1);
     }
@@ -79,11 +81,13 @@ public abstract class Scores implements ScoreMatrix {
             }
         }
         Scores result = new Scores() {
-            public String getAlphabet() {
+            @Override
+			public String getAlphabet() {
                 return alphabet;
             }
 
-            public String getName() {
+            @Override
+			public String getName() {
                 return name;
             }
         };
@@ -103,10 +107,12 @@ public abstract class Scores implements ScoreMatrix {
             final String alphabet = scores.getAlphabet();
             final String name = scores.getName();
             result = new Scores() {
-                public String getAlphabet() {
+                @Override
+				public String getAlphabet() {
                     return alphabet + getExtraResidues();
                 }
-                public String getName() {
+                @Override
+				public String getName() {
                     return name;
                 }
             };

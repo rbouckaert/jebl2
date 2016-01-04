@@ -50,14 +50,15 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
      * Besides, it is pretty dirty that this method's side effect is
      * to set fields rather than return a value.
      */
-    protected void findNextPair() {
+    @Override
+	protected void findNextPair() {
         for (int i = 0; i < numClusters; i++) {
             r[i] = 0;
             for (int j = 0; j < numClusters; j++) {
                 double dist = getDist(i, j);
                 r[i] += dist;
             }
-            r[i] /= ((double) numClusters-2.0);
+            r[i] /= (numClusters-2.0);
         }
 
         besti = 0;
@@ -75,11 +76,13 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
         }
     }
 
-    protected Tree getTree() {
+    @Override
+	protected Tree getTree() {
         return tree;
     }
 
-    protected Node createExternalNode(Taxon taxon) {
+    @Override
+	protected Node createExternalNode(Taxon taxon) {
         return tree.createExternalNode(taxon);
     }
 
@@ -90,7 +93,8 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
      *        must hold.
      * @return the new node
      */
-    protected Node createInternalNode(Node[] nodes, double[] distances) {
+    @Override
+	protected Node createInternalNode(Node[] nodes, double[] distances) {
         assert nodes.length == distances.length;
 
         // create node with the specified children, but unspecified arc lengths
@@ -101,7 +105,8 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
         return node;
     }
 
-    protected void finish() {
+    @Override
+	protected void finish() {
         // Connect up the final two clusters
         int abi = alias[0];
         int abj = alias[1];
@@ -113,7 +118,8 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
         super.finish();
     }
 
-    protected double[] joinClusters() {
+    @Override
+	protected double[] joinClusters() {
         double dij = getDist(besti, bestj);
         double li = (dij + (r[besti] - r[bestj])) * 0.5;
         double lj = dij - li;
@@ -123,7 +129,8 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
         return new double[]{li, lj};
     }
 
-    protected double updatedDistance(int k) {
+    @Override
+	protected double updatedDistance(int k) {
         final int i = besti;
         final int j = bestj;
 

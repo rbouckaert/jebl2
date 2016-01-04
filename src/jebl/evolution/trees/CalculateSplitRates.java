@@ -21,15 +21,15 @@ public class CalculateSplitRates {
 
 	public final String INDICATOR = "changed";
 	public final String RATE = "rate";
-	private List<Clade> cladeList;
+//	private List<Clade> cladeList;
 	private List<List<TimeInterval>> intervalList;
 	private DensityMap densityMap;
 
 	public CalculateSplitRates(NexusImporter importer) {
 		this.importer = importer;
-		treeList = new ArrayList<RootedTree>(100);
-		cladeList = new ArrayList<Clade>(100);
-		intervalList = new ArrayList<List<TimeInterval>>(100);
+		treeList = new ArrayList<>(100);
+		//cladeList = new ArrayList<Clade>(100);
+		intervalList = new ArrayList<>(100);
 		densityMap = new DensityMap(70, 20, 0, 0, 70, 0.01);
 	}
 
@@ -102,14 +102,14 @@ public class CalculateSplitRates {
 		return densityMap;
 	}
 
-	private void displayLongestDwellTimeInfo() {
-		for (RootedTree tree : treeList) {
-			double longestDwell = getLongestClockDwellTime(
-					getClockDwellTimes(tree));
-			double treeLenght = getTreeLength(tree);
-			System.out.printf("%5.4f\n", (longestDwell / treeLenght));
-		}
-	}
+//	private void displayLongestDwellTimeInfo() {
+//		for (RootedTree tree : treeList) {
+//			double longestDwell = getLongestClockDwellTime(
+//					getClockDwellTimes(tree));
+//			double treeLenght = getTreeLength(tree);
+//			System.out.printf("%5.4f\n", (longestDwell / treeLenght));
+//		}
+//	}
 
 	public void displayStatistics() {
 //		if( treeList.size() == 0 ) {
@@ -169,16 +169,16 @@ public class CalculateSplitRates {
 		return rateDouble.doubleValue();
 	}
 
-	private boolean rateChanged(Node node) {
-		Integer changedInt = (Integer) node.getAttribute(INDICATOR);
-		return changedInt.intValue() == 1 ? true : false;
-	}
+//	private boolean rateChanged(Node node) {
+//		Integer changedInt = (Integer) node.getAttribute(INDICATOR);
+//		return changedInt.intValue() == 1 ? true : false;
+//	}
 
-	private List<TimeInterval> getTimeIntervals(RootedTree tree) {
-		return getTimeIntervals(tree, tree.getRootNode(),
-				tree.getHeight(tree.getRootNode()), new ArrayList<TimeInterval>());
-
-	}
+//	private List<TimeInterval> getTimeIntervals(RootedTree tree) {
+//		return getTimeIntervals(tree, tree.getRootNode(),
+//				tree.getHeight(tree.getRootNode()), new ArrayList<TimeInterval>());
+//
+//	}
 
 
 	private double getLongestClockDwellTime(Map<Double, Double> dwellTimes) {
@@ -259,36 +259,36 @@ public class CalculateSplitRates {
 		return dwellTimes;
 	}*/
 
-	private List<TimeInterval> getTimeIntervals(RootedTree tree, Node node, double startTime, List<TimeInterval> intervals) {
-		if (tree.isExternal(node)) {
-			TimeInterval timeInterval = new TimeInterval(
-					startTime, tree.getHeight(node), getRate(node));
-			intervals.add(timeInterval);
-			return null;
-		}
-		List<Node> children = tree.getChildren(node);
-		for (Node child : children) {
-			if (rateChanged(child)) { // end interval
-				TimeInterval timeInterval = new TimeInterval(
-						startTime, tree.getHeight(node), getRate(node));
-				intervals.add(timeInterval);
-				getTimeIntervals(tree, child, tree.getHeight(node), intervals);
-			} else {
-				getTimeIntervals(tree, child, startTime, intervals);
-			}
-		}
-		return intervals;
-	}
+//	private List<TimeInterval> getTimeIntervals(RootedTree tree, Node node, double startTime, List<TimeInterval> intervals) {
+//		if (tree.isExternal(node)) {
+//			TimeInterval timeInterval = new TimeInterval(
+//					startTime, tree.getHeight(node), getRate(node));
+//			intervals.add(timeInterval);
+//			return null;
+//		}
+//		List<Node> children = tree.getChildren(node);
+//		for (Node child : children) {
+//			if (rateChanged(child)) { // end interval
+//				TimeInterval timeInterval = new TimeInterval(
+//						startTime, tree.getHeight(node), getRate(node));
+//				intervals.add(timeInterval);
+//				getTimeIntervals(tree, child, tree.getHeight(node), intervals);
+//			} else {
+//				getTimeIntervals(tree, child, startTime, intervals);
+//			}
+//		}
+//		return intervals;
+//	}
 
 
-	private void addCladeRateInforamtion(RootedTree tree) {
-		for (Node node : tree.getInternalNodes()) {
-			addCladeRateInformation(tree, node);
-		}
-		for (Node node : tree.getExternalNodes()) {
-			addCladeRateInformation(tree, node);
-		}
-	}
+//	private void addCladeRateInforamtion(RootedTree tree) {
+//		for (Node node : tree.getInternalNodes()) {
+//			addCladeRateInformation(tree, node);
+//		}
+//		for (Node node : tree.getExternalNodes()) {
+//			addCladeRateInformation(tree, node);
+//		}
+//	}
 
 //	private void addCladeRateInformationTest(RootedTree tree, Node node) {
 //		Set<String> attributeNames = node.getAttributeNames();
@@ -301,23 +301,23 @@ public class CalculateSplitRates {
 		return (intervals.get(intervals.size() - 1).getLength());
 	}
 
-	private void addCladeRateInformation(RootedTree tree, Node node) {
-		if (tree.getRootNode() != node) {
-			Integer changedInt = (Integer) node.getAttribute(INDICATOR);
-			Double rateDouble = (Double) node.getAttribute(RATE);
-			String name = constructUniqueName(tree, node);
-//			System.out.println(name + ": "+changedInt.toString() + " " + rateDouble.toString());
-			//if( cladeList == null )
-			Clade newClade = new Clade(name);
-			int index = cladeList.indexOf(newClade);
-			if (index == -1) {
-				index = cladeList.size();
-				cladeList.add(newClade);
-			}
-			cladeList.get(index).addValues(changedInt, rateDouble);
-		}
-
-	}
+//	private void addCladeRateInformation(RootedTree tree, Node node) {
+//		if (tree.getRootNode() != node) {
+//			Integer changedInt = (Integer) node.getAttribute(INDICATOR);
+//			Double rateDouble = (Double) node.getAttribute(RATE);
+//			String name = constructUniqueName(tree, node);
+////			System.out.println(name + ": "+changedInt.toString() + " " + rateDouble.toString());
+//			//if( cladeList == null )
+//			Clade newClade = new Clade(name);
+//			int index = cladeList.indexOf(newClade);
+//			if (index == -1) {
+//				index = cladeList.size();
+//				cladeList.add(newClade);
+//			}
+//			cladeList.get(index).addValues(changedInt, rateDouble);
+//		}
+//
+//	}
 
 //	private BitSet constructUniqueID(RootedTree tree, Node node) {
 //		Set<Node> taxa = RootedTreeUtils.getDescendantTips(tree,node);
@@ -328,81 +328,83 @@ public class CalculateSplitRates {
 //
 //	}
 
-	private String constructUniqueName(RootedTree tree, Node node) {
-		if (tree.isExternal(node))
-			return tree.getTaxon(node).getName();
-		Set<Node> taxa = RootedTreeUtils.getDescendantTips(tree, node);
-		List<String> nameList = new ArrayList<String>(taxa.size());
-		for (Node tip : taxa)
-			nameList.add(tree.getTaxon(tip).getName());
-		Collections.sort(nameList);
-		StringBuffer sb = new StringBuffer();
-		int cnt = 0;
-		for (String name : nameList) {
-			if (cnt != 0)
-				sb.append(",");
-			sb.append(name);
-			cnt++;
-		}
-		return sb.toString();
-	}
+//	private String constructUniqueName(RootedTree tree, Node node) {
+//		if (tree.isExternal(node))
+//			return tree.getTaxon(node).getName();
+//		Set<Node> taxa = RootedTreeUtils.getDescendantTips(tree, node);
+//		List<String> nameList = new ArrayList<String>(taxa.size());
+//		for (Node tip : taxa)
+//			nameList.add(tree.getTaxon(tip).getName());
+//		Collections.sort(nameList);
+//		StringBuffer sb = new StringBuffer();
+//		int cnt = 0;
+//		for (String name : nameList) {
+//			if (cnt != 0)
+//				sb.append(",");
+//			sb.append(name);
+//			cnt++;
+//		}
+//		return sb.toString();
+//	}
 
 
-	private class DoubleStatistic {
+//	private class DoubleStatistic {
+//
+//		private List<Double> data;
+//		private double total;
+//
+//		public DoubleStatistic() {
+//			data = new ArrayList<Double>(1000);
+//			total = 0;
+//		}
+//
+//		public void add(double d) {
+//			data.add(d);
+//			total += d;
+//
+//		}
+//
+//		public double getMean() {
+//			return total / data.size();
+//		}
+//	}
 
-		private List<Double> data;
-		private double total;
-
-		public DoubleStatistic() {
-			data = new ArrayList<Double>(1000);
-			total = 0;
-		}
-
-		public void add(double d) {
-			data.add(d);
-			total += d;
-
-		}
-
-		public double getMean() {
-			return total / data.size();
-		}
-	}
-
-	private class DwellTime implements Comparable<DwellTime> {
-
-		private double start;
-		private double rate;
-		private double length;
-
-		public DwellTime(double start, double length, double rate) {
-			this.start = start;
-			this.length = length;
-			this.rate = rate;
-		}
-
-		public int compareTo(DwellTime dwellTime) {
-			return (int) (getLength() - dwellTime.getLength());
-		}
-
-		public double getLength() {
-			return length;
-		}
-	}
+//	private class DwellTime implements Comparable<DwellTime> {
+//
+//		private double start;
+//		private double rate;
+//		private double length;
+//
+//		public DwellTime(double start, double length, double rate) {
+//			this.start = start;
+//			this.length = length;
+//			this.rate = rate;
+//		}
+//
+//		@Override
+//		public int compareTo(DwellTime dwellTime) {
+//			return (int) (getLength() - dwellTime.getLength());
+//		}
+//
+//		public double getLength() {
+//			return length;
+//		}
+//	}
 
 	private class TimeInterval implements Comparable<TimeInterval> {
 
 		private double start;
 		private double end;
-		private double rate;
+//		private double rate;
 
-		public TimeInterval(double start, double end, double rate) {
-			this.start = start;
-			this.end = end;
-			this.rate = rate;
-		}
+//		public TimeInterval(double start, double end, double rate) {
+//			this.start = start;
+//			this.end = end;
+////			this.rate = rate;
+//		}
 
 
+		@Override
 		public int compareTo(TimeInterval timeInterval) {
 			//return (int) (rate - timeInterval.getRate());
 			return (int) (getLength() - timeInterval.getLength());
@@ -412,17 +414,17 @@ public class CalculateSplitRates {
 			return start - end;
 		}
 
-		public double getStart() {
-			return start;
-		}
-
-		public double getEnd() {
-			return end;
-		}
-
-		public double getRate() {
-			return rate;
-		}
+//		public double getStart() {
+//			return start;
+//		}
+//
+//		public double getEnd() {
+//			return end;
+//		}
+//
+//		public double getRate() {
+//			return rate;
+//		}
 
 	}
 
@@ -440,7 +442,7 @@ public class CalculateSplitRates {
 		private double startY;
 		private double scaleX;
 		private double scaleY;
-		private int total = 0;
+		//private int total = 0;
 
 
 		public DensityMap(int binX, int binY,
@@ -452,8 +454,8 @@ public class CalculateSplitRates {
 			counts = new int[binX];
 			this.startX = startX;
 			this.startY = startY;
-			scaleX = (endX - startX) / (double) binX;
-			scaleY = (endY - startY) / (double) binY;
+			scaleX = (endX - startX) / binX;
+			scaleY = (endY - startY) / binY;
 		}
 
 		public void addTreeBranch(double start, double end, double y) {
@@ -466,10 +468,11 @@ public class CalculateSplitRates {
 			for (int i = START; i <= END; i++) {
 				data[i][Y] += 1;
 				counts[i] += 1;
-				total += 1;
+				//total += 1;
 			}
 		}
 
+		@Override
 		public String toString() {
 //			double dblTotal = (double) total;
 			StringBuilder sb = new StringBuilder();
@@ -484,7 +487,7 @@ public class CalculateSplitRates {
 				//double dblCounts = (double)counts[i];
 				for (int j = 0; j < binX; j++) {
 					sb.append(SEP);
-					double dblCounts = (double) counts[j];
+					double dblCounts = counts[j];
 					if (dblCounts > 0)
 						sb.append(String.format(DBL,
 								(double) data[j][i] / (double) counts[j]
@@ -501,61 +504,64 @@ public class CalculateSplitRates {
 	}
 
 
-	private class Clade implements Comparable<Clade> {
+//	private class Clade implements Comparable<Clade> {
+//
+//		private String name;
+////		private List<Integer> indicatorValues;
+////		private List<Double> rateValues;
+////		private int count = 0;
+//
+////		public Clade(String name) {
+////			this.name = name;
+////			indicatorValues = new ArrayList<Integer>(1000);
+////			rateValues = new ArrayList<Double>(1000);
+////		}
+//
+//		@Override
+//		public int compareTo(Clade clade) {
+//			System.out.println("co");
+//			return name.compareTo(clade.getName());
+//		}
+//
+////		public void addValues(Integer inInt, Double inDouble) {
+////			indicatorValues.add(inInt);
+////			rateValues.add(inDouble);
+////			count++;
+////		}
+//
+//		@Override
+//		public boolean equals(Object obj) {
+//			Clade c = (Clade) obj;
+//			return (name.compareTo(c.getName()) == 0);
+//		}
+//
+//		public String getName() {
+//			return name;
+//		}
+//
+////		public int getCount() {
+////			return count;
+////		}
+////
+////		public double getIndicatorProbability() {
+////			int sum = 0;
+////			for (Integer i : indicatorValues)
+////				sum += i;
+////			return (double) sum / (double) count;
+////		}
+//	}
 
-		private String name;
-		private List<Integer> indicatorValues;
-		private List<Double> rateValues;
-		private int count = 0;
-
-		public Clade(String name) {
-			this.name = name;
-			indicatorValues = new ArrayList<Integer>(1000);
-			rateValues = new ArrayList<Double>(1000);
-		}
-
-		public int compareTo(Clade clade) {
-			System.out.println("co");
-			return name.compareTo(clade.getName());
-		}
-
-		public void addValues(Integer inInt, Double inDouble) {
-			indicatorValues.add(inInt);
-			rateValues.add(inDouble);
-			count++;
-		}
-
-		public boolean equals(Object obj) {
-			Clade c = (Clade) obj;
-			return (name.compareTo(c.getName()) == 0);
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public int getCount() {
-			return count;
-		}
-
-		public double getIndicatorProbability() {
-			int sum = 0;
-			for (Integer i : indicatorValues)
-				sum += i;
-			return (double) sum / (double) count;
-		}
-	}
-
-	private class CladeFrequencyComparator implements Comparator<Clade> {
-
-		public int compare(Clade cladeA, Clade cladeB) {
-			if (cladeA.getCount() > cladeB.getCount())
-				return -1;
-			if (cladeA.getCount() < cladeB.getCount())
-				return 1;
-			return cladeA.getName().compareTo(cladeB.getName());
-		}
-	}
+//	private class CladeFrequencyComparator implements Comparator<Clade> {
+//
+//		@Override
+//		public int compare(Clade cladeA, Clade cladeB) {
+//			if (cladeA.getCount() > cladeB.getCount())
+//				return -1;
+//			if (cladeA.getCount() < cladeB.getCount())
+//				return 1;
+//			return cladeA.getName().compareTo(cladeB.getName());
+//		}
+//	}
 
 	/**
 	 * @param args args[0] = Beast tree log,

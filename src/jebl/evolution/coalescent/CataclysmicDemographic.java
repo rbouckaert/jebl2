@@ -71,6 +71,7 @@ public class CataclysmicDemographic extends ExponentialGrowth {
 
 	// Implementation of abstract methods
 
+	@Override
 	public double getDemographic(double t) {
 
 		double d = getDeclineRate();
@@ -91,6 +92,7 @@ public class CataclysmicDemographic extends ExponentialGrowth {
 		}
 	}
 
+	@Override
 	public double getIntensity(double t) {
 
 		double d = getDeclineRate();
@@ -113,12 +115,14 @@ public class CataclysmicDemographic extends ExponentialGrowth {
 		}
 	}
 
+	@Override
 	public double getInverseIntensity(double x) {
 
 		throw new UnsupportedOperationException();
 	}
 
-    public boolean hasIntegral() {
+    @Override
+	public boolean hasIntegral() {
         return false;
     }
 

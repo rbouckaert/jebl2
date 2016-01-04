@@ -17,7 +17,8 @@ import java.util.List;
  * @version $Id$
  */
 public class BilleraMetric implements RootedTreeMetric {
-    public double getMetric(RootedTree tree1, RootedTree tree2) {
+    @Override
+	public double getMetric(RootedTree tree1, RootedTree tree2) {
         List<Taxon> taxa = new ArrayList<Taxon>(tree1.getTaxa());
         TreeBiPartitionInfo p1 = new TreeBiPartitionInfo(tree1, taxa);
         TreeBiPartitionInfo p2 = new TreeBiPartitionInfo(tree2, taxa);

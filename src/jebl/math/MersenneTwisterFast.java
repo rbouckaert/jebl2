@@ -56,7 +56,11 @@ import java.io.Serializable;
  * This is now package private - it should be accessed using the instance in Random
  */
 class MersenneTwisterFast implements Serializable {
-    // Period parameters
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// Period parameters
     private static final int N = 624;
     private static final int M = 397;
     private static final int MATRIX_A = 0x9908b0df;   //  private static final * constant vector a
@@ -85,10 +89,11 @@ class MersenneTwisterFast implements Serializable {
     private boolean haveNextNextGaussian;
 
     // The following can be accessed externally by the static accessor methods which
-    // inforce synchronization
-    private static final MersenneTwisterFast DEFAULT_INSTANCE = new MersenneTwisterFast();
+    // enforce synchronization
+    @SuppressWarnings("unused")
+	private static final MersenneTwisterFast DEFAULT_INSTANCE = new MersenneTwisterFast();
 
-    // Added to curernt time in default constructor, and then adjust to allow for programs that construct
+    // Added to current time in default constructor, and then adjust to allow for programs that construct
     // multiple MersenneTwisterFast in a short amount of time.
     private static long seedAdditive_ = 0;
 
@@ -287,7 +292,7 @@ class MersenneTwisterFast implements Serializable {
         y ^= (y << 15) & TEMPERING_MASK_C;      // TEMPERING_SHIFT_T(y)
         y ^= (y >>> 18);                        // TEMPERING_SHIFT_L(y)
 
-        return (boolean)((y >>> 31) != 0);
+        return (y >>> 31) != 0;
     }
 
 
@@ -419,7 +424,7 @@ class MersenneTwisterFast implements Serializable {
         z ^= (z << 15) & TEMPERING_MASK_C;      // TEMPERING_SHIFT_T(z)
         z ^= (z >>> 18);                        // TEMPERING_SHIFT_L(z)
 
-        return (((long)y) << 32) + (long)z;
+        return (((long)y) << 32) + z;
     }
 
 

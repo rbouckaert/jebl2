@@ -553,13 +553,14 @@ public final class Utils {
 
 		return new Comparator<Node>() {
 
+			@Override
 			public int compare(Node node1, Node node2) {
 				return getExternalNodeCount(tree, node2) - getExternalNodeCount(tree, node1);
 			}
 
-			public boolean equals(Node node1, Node node2) {
-				return compare(node1, node2) == 0;
-			}
+			//public boolean equals(Node node1, Node node2) {
+			//	return compare(node1, node2) == 0;
+			//}
 		};
 	}
 
@@ -567,6 +568,7 @@ public final class Utils {
 
 		return new Comparator<Node>() {
 
+			@Override
 			public int compare(Node node1, Node node2) {
 				int larger = getExternalNodeCount(tree, node1) - getExternalNodeCount(tree, node2);
 
@@ -578,9 +580,9 @@ public final class Utils {
 				return 0;
 			}
 
-			public boolean equals(Node node1, Node node2) {
-				return compare(node1, node2) == 0;
-			}
+			//public boolean equals(Node node1, Node node2) {
+			//	return compare(node1, node2) == 0;
+			//}
 		};
 	}
 
@@ -596,6 +598,7 @@ public final class Utils {
 		return Collections.unmodifiableSet(diff);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static<T extends Comparable> List<T> sort(Collection<T> c) {
 		List<T> result = new ArrayList<T>(c);
 		Collections.sort(result);
@@ -682,6 +685,7 @@ public final class Utils {
 			}
 			Collections.sort(childStrings,
 					new Comparator<String>() {
+						@Override
 						public int compare(String arg0, String arg1) {
 							return arg1.compareTo(arg0);
 						}

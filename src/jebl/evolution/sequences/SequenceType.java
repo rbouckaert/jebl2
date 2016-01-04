@@ -131,212 +131,263 @@ public interface SequenceType {
     State[] toStateArray(byte[] indexArray);
 
     public static final SequenceType NUCLEOTIDE = new SequenceType() {
-        public int getStateCount() {
+        @Override
+		public int getStateCount() {
             return Nucleotides.getStateCount();
         }
 
-        public List<State> getStates() {
+        @Override
+		public List<State> getStates() {
             return Nucleotides.getStates();
         }
 
-        public int getCanonicalStateCount() {
+        @Override
+		public int getCanonicalStateCount() {
             return Nucleotides.getCanonicalStateCount();
         }
 
-        public List<NucleotideState> getCanonicalStates() {
+        @Override
+		public List<NucleotideState> getCanonicalStates() {
             return Nucleotides.getCanonicalStates();
         }
 
-        public State getState(String code) {
+        @Override
+		public State getState(String code) {
             return Nucleotides.getState(code);
         }
 
-        public State getState(char code) {
+        @Override
+		public State getState(char code) {
             return Nucleotides.getState(code);
         }
 
-        public int getCodeLength() {
+        @Override
+		public int getCodeLength() {
             return 1;
         }
 
-        public State getState(int index) {
+        @Override
+		public State getState(int index) {
             return Nucleotides.getState(index);
         }
 
-        public State getUnknownState() {
+        @Override
+		public State getUnknownState() {
             return Nucleotides.getUnknownState();
         }
 
-        public State getGapState() {
+        @Override
+		public State getGapState() {
             return Nucleotides.getGapState();
         }
 
-        public boolean isUnknown(State state) {
+        @Override
+		public boolean isUnknown(State state) {
             return Nucleotides.isUnknown((NucleotideState) state);
         }
 
-        public boolean isGap(State state) {
+        @Override
+		public boolean isGap(State state) {
             return Nucleotides.isGap((NucleotideState) state);
         }
 
-        public String getName() {
+        @Override
+		public String getName() {
             return Nucleotides.NAME;
         }
 
-        public String getNexusDataType() {
+        @Override
+		public String getNexusDataType() {
             return "dna";
         }
 
-        public State[] toStateArray(String sequenceString) {
+        @Override
+		public State[] toStateArray(String sequenceString) {
             return Nucleotides.toStateArray(sequenceString);
         }
 
-        public State[] toStateArray(byte[] indexArray) {
+        @Override
+		public State[] toStateArray(byte[] indexArray) {
             return Nucleotides.toStateArray(indexArray);
         }
 
-        public String toString() {
+        @Override
+		public String toString() {
             return getName();
         }
     };
 
     public static final SequenceType AMINO_ACID = new SequenceType() {
-        public int getStateCount() {
+        @Override
+		public int getStateCount() {
             return AminoAcids.getStateCount();
         }
 
-        public List<AminoAcidState> getStates() {
+        @Override
+		public List<AminoAcidState> getStates() {
             return AminoAcids.getStates();
         }
 
-        public int getCanonicalStateCount() {
+        @Override
+		public int getCanonicalStateCount() {
             return AminoAcids.getCanonicalStateCount();
         }
 
-        public List<State> getCanonicalStates() {
+        @Override
+		public List<State> getCanonicalStates() {
             return AminoAcids.getCanonicalStates();
         }
 
-        public State getState(String code) {
+        @Override
+		public State getState(String code) {
             return AminoAcids.getState(code);
         }
 
-        public State getState(char code) {
+        @Override
+		public State getState(char code) {
             return AminoAcids.getState(code);
         }
 
-        public int getCodeLength() {
+        @Override
+		public int getCodeLength() {
             return 1;
         }
 
-        public State getState(int index) {
+        @Override
+		public State getState(int index) {
             return AminoAcids.getState(index);
         }
 
-        public State getUnknownState() {
+        @Override
+		public State getUnknownState() {
             return AminoAcids.getUnknownState();
         }
 
-        public State getGapState() {
+        @Override
+		public State getGapState() {
             return AminoAcids.getGapState();
         }
 
-        public boolean isUnknown(State state) {
+        @Override
+		public boolean isUnknown(State state) {
             return AminoAcids.isUnknown((AminoAcidState) state);
         }
 
-        public boolean isGap(State state) {
+        @Override
+		public boolean isGap(State state) {
             return AminoAcids.isGap((AminoAcidState) state);
         }
 
-        public String getName() {
+        @Override
+		public String getName() {
             return AminoAcids.NAME;
         }
 
-        public String getNexusDataType() {
+        @Override
+		public String getNexusDataType() {
             return "protein";
         }
 
-        public State[] toStateArray(String sequenceString) {
+        @Override
+		public State[] toStateArray(String sequenceString) {
             return AminoAcids.toStateArray(sequenceString);
         }
 
-        public State[] toStateArray(byte[] indexArray) {
+        @Override
+		public State[] toStateArray(byte[] indexArray) {
             return AminoAcids.toStateArray(indexArray);
         }
 
-        public String toString() {
+        @Override
+		public String toString() {
             return getName();
         }
     };
 
     public static final SequenceType CODON = new SequenceType() {
-        public int getStateCount() {
+        @Override
+		public int getStateCount() {
             return Codons.getStateCount();
         }
 
-        public List<State> getStates() {
+        @Override
+		public List<State> getStates() {
             return Codons.getStates();
         }
 
-        public int getCanonicalStateCount() {
+        @Override
+		public int getCanonicalStateCount() {
             return Codons.getCanonicalStateCount();
         }
 
-        public List<State> getCanonicalStates() {
+        @Override
+		public List<State> getCanonicalStates() {
             return Codons.getCanonicalStates();
         }
 
-        public State getState(String code) {
+        @Override
+		public State getState(String code) {
             return Codons.getState(code);
         }
 
-        public State getState(char code) {
+        @Override
+		public State getState(char code) {
             // if anybody searches for a string of length one he should get a null from getState(String) anyway
             return null;
         }
 
-        public int getCodeLength() {
+        @Override
+		public int getCodeLength() {
             return 3;
         }
 
-        public State getState(int index) {
+        @Override
+		public State getState(int index) {
             return Codons.getState(index);
         }
 
-        public State getUnknownState() {
+        @Override
+		public State getUnknownState() {
             return Codons.getUnknownState();
         }
 
-        public State getGapState() {
+        @Override
+		public State getGapState() {
             return Codons.getGapState();
         }
 
-        public boolean isUnknown(State state) {
+        @Override
+		public boolean isUnknown(State state) {
             return Codons.isUnknown((CodonState) state);
         }
 
-        public boolean isGap(State state) {
+        @Override
+		public boolean isGap(State state) {
             return Codons.isGap((CodonState) state);
         }
 
-        public String getName() {
+        @Override
+		public String getName() {
             return Codons.NAME;
         }
 
-        public String getNexusDataType() {
+        @Override
+		public String getNexusDataType() {
             return "dna";
         } // Guessing here (JH)
 
-        public State[] toStateArray(String sequenceString) {
+        @Override
+		public State[] toStateArray(String sequenceString) {
             return Codons.toStateArray(sequenceString);
         }
 
-        public State[] toStateArray(byte[] indexArray) {
+        @Override
+		public State[] toStateArray(byte[] indexArray) {
             return Codons.toStateArray(indexArray);
         }
 
-        public String toString() {
+        @Override
+		public String toString() {
             return getName();
         }
     };
