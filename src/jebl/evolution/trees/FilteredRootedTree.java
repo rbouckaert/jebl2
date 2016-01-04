@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
  * @version $Id: FilteredRootedTree.java 936 2008-08-06 14:12:07Z rambaut $
  */
-public abstract class FilteredRootedTree implements RootedTree {
+public abstract class FilteredRootedTree extends BEASTObject implements RootedTree {
 
     public FilteredRootedTree(final RootedTree source) {
         this.source = source;
@@ -183,4 +185,9 @@ public abstract class FilteredRootedTree implements RootedTree {
 	// PRIVATE members
 
 	protected final RootedTree source;
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

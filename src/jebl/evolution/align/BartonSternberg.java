@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Matt Kearse
  * @version $Id: BartonSternberg.java 1025 2009-10-23 01:29:48Z matt_kearse $
@@ -36,7 +38,7 @@ import java.util.List;
  * Also, after creating the profile, it just removes and adds each sequence back into
  * the profile a fixed number of times(currently two).
  */
-public class BartonSternberg implements MultipleAligner {
+public class BartonSternberg extends BEASTObject implements MultipleAligner {
 
     Scores scores;
     NeedlemanWunschLinearSpaceAffine aligner;
@@ -370,4 +372,9 @@ public class BartonSternberg implements MultipleAligner {
     public double getScore() {
         return aligner.getScore();
     }
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

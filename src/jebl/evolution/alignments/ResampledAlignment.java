@@ -9,6 +9,8 @@ import jebl.evolution.taxa.Taxon;
 import java.util.List;
 import java.util.Set;
 
+import beast.core.BEASTObject;
+
 /**
  * Date: 17/01/2006
  * Time: 08:08:44
@@ -23,7 +25,7 @@ import java.util.Set;
  * Due to Java restrictions on constructors, class is implemented using delegation.
  */
 
-public class ResampledAlignment implements Alignment {
+public class ResampledAlignment extends BEASTObject implements Alignment {
     protected BasicAlignment alignment;
 
     /**
@@ -103,4 +105,9 @@ public class ResampledAlignment implements Alignment {
 	public Sequence getSequence(Taxon taxon) {
         return alignment.getSequence(taxon);
     }
+
+    @Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

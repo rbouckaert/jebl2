@@ -10,12 +10,14 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
  * @version $Id: TabDelimitedImporter.java 185 2006-01-23 23:03:18Z rambaut $
  */
-public class TabDelimitedImporter implements DistanceMatrixImporter {
+public class TabDelimitedImporter extends BEASTObject implements DistanceMatrixImporter {
 
     /**
      * Constructor
@@ -162,4 +164,9 @@ public class TabDelimitedImporter implements DistanceMatrixImporter {
     private final boolean diagonal;
     private final boolean rowLabels;
     private final boolean columnLabels;
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

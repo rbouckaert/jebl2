@@ -18,6 +18,8 @@ import jebl.math.Random;
 import java.io.*;
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * This class provides the framework for (backwards-through-time) tree simulation. Basically,
  * this takes a set of tips (optionally at different dates) and repeatedly coalesces them together
@@ -27,7 +29,7 @@ import java.util.*;
  * @author Andrew Rambaut
  * @version $Id: TreeSimulator.java 1053 2010-05-10 13:00:31Z rambaut $
  */
-public class TreeSimulator {
+public class TreeSimulator  extends BEASTObject {
 
 	/**
 	 * A constructor for a given number of taxa, all sampled at the same time
@@ -261,4 +263,8 @@ public class TreeSimulator {
 		}
 	}
 
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

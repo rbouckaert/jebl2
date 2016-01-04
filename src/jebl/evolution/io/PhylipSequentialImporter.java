@@ -11,6 +11,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * Class for importing PHYLIP sequential file format
  *
@@ -18,7 +20,7 @@ import java.util.List;
  * @author Alexei Drummond
  * @version $Id: PhylipSequentialImporter.java 840 2007-11-09 04:52:39Z twobeers $
  */
-public class PhylipSequentialImporter implements SequenceImporter {
+public class PhylipSequentialImporter extends BEASTObject implements SequenceImporter {
 
     /**
      * Constructor
@@ -73,4 +75,10 @@ public class PhylipSequentialImporter implements SequenceImporter {
     private final ImportHelper helper;
     private final SequenceType sequenceType;
     private int maxNameLength = 10;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

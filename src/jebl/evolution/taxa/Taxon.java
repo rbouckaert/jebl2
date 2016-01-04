@@ -16,13 +16,15 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
  *
  * @version $Id: Taxon.java 1008 2009-07-19 23:08:37Z matt_kearse $
  */
-public final class Taxon implements Attributable, Comparable<Taxon> {
+public final class Taxon extends BEASTObject implements Attributable, Comparable<Taxon> {
 
     /**
      * A private constructor. Taxon objects can only be created by the static Taxon.getTaxon()
@@ -214,4 +216,10 @@ public final class Taxon implements Attributable, Comparable<Taxon> {
 	public int hashCode() {
         return name.hashCode();
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

@@ -8,6 +8,7 @@
  */
 package jebl.evolution.treesimulation;
 
+import beast.core.BEASTObject;
 import jebl.evolution.coalescent.DemographicFunction;
 
 /**
@@ -23,7 +24,7 @@ import jebl.evolution.coalescent.DemographicFunction;
  * @author Oliver Pybus
  * @version $Id: CoalescentIntervalGenerator.java 1053 2010-05-10 13:00:31Z rambaut $
  */
-public class CoalescentIntervalGenerator implements IntervalGenerator {
+public class CoalescentIntervalGenerator extends BEASTObject implements IntervalGenerator {
 
     public CoalescentIntervalGenerator(DemographicFunction demographicFunction) {
         this.demographicFunction = demographicFunction;
@@ -213,4 +214,9 @@ public class CoalescentIntervalGenerator implements IntervalGenerator {
 
         return s;
     }
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

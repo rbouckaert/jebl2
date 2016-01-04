@@ -8,6 +8,8 @@ import jebl.util.HashPair;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * A basic implementation on an unrooted tree.
  *
@@ -16,7 +18,7 @@ import java.util.*;
  *
  */
 
-public final class SimpleTree implements Tree {
+public final class SimpleTree extends BEASTObject implements Tree {
 
     /**
      * Tree (to be constructed by subsequent calls).
@@ -475,4 +477,10 @@ public final class SimpleTree implements Tree {
 		private double length;
 		Node node1, node2;
 	}
+	
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

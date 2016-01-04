@@ -7,6 +7,8 @@ import jebl.evolution.trees.TreeBiPartitionInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * Billera tree distance - sum of change in branch lengths required to transform one tree to the second
  *
@@ -16,7 +18,7 @@ import java.util.List;
  * @author Joseph Heled
  * @version $Id$
  */
-public class BilleraMetric implements RootedTreeMetric {
+public class BilleraMetric extends BEASTObject implements RootedTreeMetric {
     @Override
 	public double getMetric(RootedTree tree1, RootedTree tree2) {
         List<Taxon> taxa = new ArrayList<>(tree1.getTaxa());
@@ -24,4 +26,10 @@ public class BilleraMetric implements RootedTreeMetric {
         TreeBiPartitionInfo p2 = new TreeBiPartitionInfo(tree2, taxa);
         return TreeBiPartitionInfo.distance(p1, p2, TreeBiPartitionInfo.DistanceNorm.NORM1);
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

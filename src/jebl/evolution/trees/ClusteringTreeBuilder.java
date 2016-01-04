@@ -8,6 +8,8 @@ import jebl.util.ProgressListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * An abstract base class for clustering algorithms from pairwise distances
  *
@@ -20,7 +22,7 @@ import java.util.List;
  * Adapted from Alexei Drummond BEAST code.
  */
 
-public abstract class ClusteringTreeBuilder<T extends Tree> implements TreeBuilder<T> {
+public abstract class ClusteringTreeBuilder<T extends Tree> extends BEASTObject implements TreeBuilder<T> {
 
     @Override
 	public T build() {
@@ -240,4 +242,10 @@ public abstract class ClusteringTreeBuilder<T extends Tree> implements TreeBuild
     protected double[][] distance;
 
     protected int numberOfRootSubtrees;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

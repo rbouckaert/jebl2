@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * Export alignment to Phylip format.
  *
@@ -21,7 +23,7 @@ import java.util.*;
  * @author Joseph Heled
  * @version $Id: PHYLIPExporter.java 841 2007-11-11 21:36:42Z twobeers $
  */
-public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
+public class PHYLIPExporter extends BEASTObject implements AlignmentExporter, TreeExporter {
     private PrintWriter writer;
 
     /**
@@ -118,4 +120,9 @@ public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
            exportTree(t);
        }
     }
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

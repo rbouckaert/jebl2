@@ -5,12 +5,14 @@ import jebl.evolution.taxa.Taxon;
 import java.util.Map;
 import java.util.Set;
 
+import beast.core.BEASTObject;
+
 /**
  * @author rambaut
  * @author Alexei Drummond
  * @version $Id: FilteredSequence.java 641 2007-02-16 11:56:21Z rambaut $
  */
-public abstract class FilteredSequence implements Sequence {
+public abstract class FilteredSequence extends BEASTObject implements Sequence {
     /**
      * Creates a FilteredSequence wrapper to the given source sequence.
      *
@@ -145,4 +147,10 @@ public abstract class FilteredSequence implements Sequence {
 
     private final Sequence source;
     private State[] sequence = null;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

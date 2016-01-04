@@ -7,6 +7,8 @@ import jebl.util.AttributableHelper;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * A simple rooted tree providing some ability to manipulate the tree.
  *
@@ -20,7 +22,7 @@ import java.util.*;
  *
  */
 
-public class MutableRootedTree implements RootedTree {
+public class MutableRootedTree extends BEASTObject implements RootedTree {
     MutableRootedTree() {  super(); }
 
     /**
@@ -869,4 +871,9 @@ public class MutableRootedTree implements RootedTree {
         private Edge edge = null;
 
     }
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

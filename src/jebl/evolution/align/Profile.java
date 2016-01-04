@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Matt Kearse
  * @version $Id: Profile.java 1025 2009-10-23 01:29:48Z matt_kearse $
@@ -14,7 +16,7 @@ import java.util.Map;
  * Represents a profile of a number of sequences to be used in a
  * multiple sequence alignment.
  */
-class Profile {
+class Profile extends BEASTObject {
     ProfileCharacter[] profile;
     private final int alphabetSize;
 //    int length;
@@ -364,4 +366,9 @@ class Profile {
         }
         return result;
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

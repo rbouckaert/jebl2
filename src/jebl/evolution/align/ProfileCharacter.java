@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.BEASTObject;
 import jebl.evolution.align.scores.Scores;
 
 /**
@@ -10,7 +11,7 @@ import jebl.evolution.align.scores.Scores;
  * It can represent character frequencies inside an alignment column
  * as a fraction of the total number of characters in that column.
  */
-public class ProfileCharacter {
+public class ProfileCharacter extends BEASTObject {
     /*
     'characters' contains the actual residue character, and a parallel array called
     'count' contains the number of times that character occurs. NumberOfUniqueCharacters
@@ -222,4 +223,9 @@ public class ProfileCharacter {
         assert gapFraction >= 0;
         return gapFraction;
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

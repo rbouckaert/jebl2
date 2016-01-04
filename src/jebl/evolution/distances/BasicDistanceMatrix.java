@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
  * @version $Id: BasicDistanceMatrix.java 842 2007-11-12 22:33:48Z twobeers $
  */
-public class BasicDistanceMatrix implements DistanceMatrix {
+public class BasicDistanceMatrix extends BEASTObject implements DistanceMatrix {
 
     public BasicDistanceMatrix(Collection<Taxon> taxa, double[][] distances) {
 
@@ -174,4 +176,9 @@ public class BasicDistanceMatrix implements DistanceMatrix {
         }
         return distances;
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

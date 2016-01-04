@@ -1,8 +1,9 @@
 package jebl.evolution.align;
 
+import beast.core.BEASTObject;
 import jebl.evolution.align.scores.Scores;
 
-public abstract class Align {
+public abstract class Align extends BEASTObject {
 
     Scores sub;                     // scores matrix
     Scores freeGapsSub;                     // scores matrix when free end gaps
@@ -257,4 +258,10 @@ public abstract class Align {
 
         return res.toString();
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

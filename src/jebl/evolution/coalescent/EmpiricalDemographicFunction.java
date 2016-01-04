@@ -8,6 +8,7 @@
  */
 package jebl.evolution.coalescent;
 
+import beast.core.BEASTObject;
 import jebl.evolution.coalescent.DemographicFunction;
 
 /**
@@ -15,7 +16,7 @@ import jebl.evolution.coalescent.DemographicFunction;
  * @author Andrew Rambaut
  * @version $Id$
  */
-public class EmpiricalDemographicFunction implements DemographicFunction {
+public class EmpiricalDemographicFunction extends BEASTObject implements DemographicFunction {
 
     public EmpiricalDemographicFunction(double[] populationSizes, double[] times, boolean stepwise) {
         this.populationSizes = populationSizes;
@@ -138,4 +139,10 @@ public class EmpiricalDemographicFunction implements DemographicFunction {
     private final double[] populationSizes;
     private final double[] times;
     private final boolean stepwise;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

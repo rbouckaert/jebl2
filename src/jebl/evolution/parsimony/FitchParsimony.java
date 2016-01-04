@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import beast.core.BEASTObject;
+
 /**
  * Class for reconstructing characters using Fitch parsimony. This is intended to be much faster
  * than the static methods in the utility "Parsimony" class.
@@ -31,7 +33,7 @@ import java.util.Map;
  * @author Alexei Drummond
  * @version $Id: FitchParsimony.java 604 2007-01-04 20:22:42Z msuchard $
  */
-public class FitchParsimony implements ParsimonyCriterion {
+public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 
 	private final SequenceType sequenceType;
 	private final int stateCount;
@@ -336,6 +338,11 @@ public class FitchParsimony implements ParsimonyCriterion {
 			if (s1[i]) count += 1;
 		}
 		return count;
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
 	}
 
 }

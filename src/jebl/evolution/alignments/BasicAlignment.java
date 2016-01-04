@@ -15,6 +15,8 @@ import jebl.evolution.taxa.Taxon;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * A basic implementation of the Alignment interface.
  *
@@ -23,7 +25,7 @@ import java.util.*;
  *
  * @version $Id: BasicAlignment.java 1007 2009-07-17 16:01:47Z rambaut $
  */
-public class BasicAlignment implements Alignment {
+public class BasicAlignment extends BEASTObject implements Alignment {
 
     /**
      * Constructs a basic alignment with no sequences.
@@ -274,4 +276,8 @@ public class BasicAlignment implements Alignment {
         private final List<State> states;
     }
 
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

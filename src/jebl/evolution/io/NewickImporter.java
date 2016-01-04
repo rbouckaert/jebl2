@@ -14,12 +14,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
  * @version $Id: NewickImporter.java 967 2009-01-07 19:37:06Z matt_kearse $
  */
-public class NewickImporter implements TreeImporter {
+public class NewickImporter extends BEASTObject implements TreeImporter {
     private final ImportHelper helper;
     private boolean unquotedLabels;
 
@@ -225,4 +227,9 @@ public class NewickImporter implements TreeImporter {
            throw new ImportException.DuplicateTaxaException(e.getMessage());
         }
     }
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

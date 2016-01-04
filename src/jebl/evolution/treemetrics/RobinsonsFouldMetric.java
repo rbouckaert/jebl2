@@ -7,11 +7,13 @@ import jebl.evolution.treemetrics.RootedTreeMetric;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @version $Id$
  */
-public class RobinsonsFouldMetric implements RootedTreeMetric {
+public class RobinsonsFouldMetric extends BEASTObject implements RootedTreeMetric {
 
 	public RobinsonsFouldMetric() {
 		taxonMap = null;
@@ -89,4 +91,9 @@ public class RobinsonsFouldMetric implements RootedTreeMetric {
 	}
 
 	private final Map<Taxon, Integer> taxonMap;
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

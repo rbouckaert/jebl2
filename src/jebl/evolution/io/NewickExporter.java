@@ -6,12 +6,14 @@ import java.io.Writer;
 import java.io.IOException;
 import java.util.Collection;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
  * @version $Id: NewickExporter.java 429 2006-08-26 18:17:39Z rambaut $
  */
-public class NewickExporter implements TreeExporter {
+public class NewickExporter extends BEASTObject implements TreeExporter {
     public NewickExporter(Writer writer) {
         this.writer = writer;
     }
@@ -45,4 +47,10 @@ public class NewickExporter implements TreeExporter {
     }
 
     private final Writer writer;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

@@ -9,13 +9,15 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * * Export to MEGA.
  *
  * @author Joseph Heled
  * @version $Id: MEGAExporter.java 530 2006-11-15 04:01:44Z stevensh $
  */
-public class MEGAExporter implements AlignmentExporter {
+public class MEGAExporter extends BEASTObject implements AlignmentExporter {
     private PrintWriter writer;
 
     /**
@@ -65,4 +67,10 @@ public class MEGAExporter implements AlignmentExporter {
             writer.println(seq.getString());
         }
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

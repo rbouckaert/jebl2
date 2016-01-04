@@ -2,13 +2,14 @@ package jebl.evolution.characters;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
 import jebl.evolution.taxa.*;
 
 /**
  * @author Stephen A. Smith
  *
  */
-public class DiscreteCharacter implements Character{
+public class DiscreteCharacter extends BEASTObject implements Character{
 
 	/**
 	 * Constructs a basic DiscreteCharacter object with no taxa added yet
@@ -130,4 +131,9 @@ public class DiscreteCharacter implements Character{
 	private Set<Taxon> taxa;
 	private Map<Integer, String> stateDesc;
 	private int numOfStates;
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

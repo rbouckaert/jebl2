@@ -10,6 +10,8 @@ import jebl.util.AttributableHelper;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * A simple, immutable rooted tree implementation that is a subtree of an existing tree
  * subtending a specified set of taxa..
@@ -18,7 +20,7 @@ import java.util.*;
  * @author Alexei Drummond
  * @version $Id: SimpleRootedTree.java 935 2008-07-22 16:52:04Z rambaut $
  */
-final public class RootedSubtree implements RootedTree {
+final public class RootedSubtree extends BEASTObject implements RootedTree {
 
     /**
      * Make a copy of the given rooted tree
@@ -746,4 +748,10 @@ final public class RootedSubtree implements RootedTree {
 
         private Edge edge = null;
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

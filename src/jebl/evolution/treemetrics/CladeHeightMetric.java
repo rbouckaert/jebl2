@@ -7,6 +7,8 @@ import jebl.evolution.treemetrics.RootedTreeMetric;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * For each clade_j in treeB, find the MRCA_j of the taxa in clade_j in treeA.
  *
@@ -67,7 +69,7 @@ import java.util.*;
  * @author Andrew Rambaut
  * @version $Id$
  */
-public class CladeHeightMetric implements RootedTreeMetric {
+public class CladeHeightMetric extends BEASTObject implements RootedTreeMetric {
 
 	public CladeHeightMetric() {
 		taxonMap = null;
@@ -217,4 +219,10 @@ public class CladeHeightMetric implements RootedTreeMetric {
 	}
 
 	private final Map<Taxon, Integer> taxonMap;
+	
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

@@ -7,6 +7,8 @@ import jebl.util.AttributableHelper;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * A simple, and initially immutable rooted tree implementation. All returned collections
  * are defensively copied. The implementation of Node is private. A number of methods are
@@ -16,7 +18,7 @@ import java.util.*;
  * @author Alexei Drummond
  * @version $Id: SimpleRootedTree.java 1045 2010-01-13 03:09:14Z stevensh $
  */
-final public class SimpleRootedTree implements RootedTree {
+final public class SimpleRootedTree extends BEASTObject implements RootedTree {
 
     public SimpleRootedTree() {
     }
@@ -917,4 +919,10 @@ final public class SimpleRootedTree implements RootedTree {
 
         private Edge edge = null;
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

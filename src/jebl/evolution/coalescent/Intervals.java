@@ -15,6 +15,8 @@ import jebl.evolution.graphs.Node;
 
 import java.util.Arrays;
 
+import beast.core.BEASTObject;
+
 /**
  * A concrete class for a set of coalescent intevals.
  *
@@ -23,7 +25,7 @@ import java.util.Arrays;
  * @author Andrew Rambaut
  * @author Alexei Drummond
  */
-public class Intervals implements IntervalList {
+public class Intervals extends BEASTObject implements IntervalList {
 
 	public Intervals(RootedTree tree) {
 		this(tree.getNodes().size());
@@ -235,4 +237,10 @@ public class Intervals implements IntervalList {
 	private IntervalType[] intervalTypes;
 	//private int[] destinations;
 	private int intervalCount = 0;
+	
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 };

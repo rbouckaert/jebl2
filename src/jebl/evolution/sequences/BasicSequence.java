@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
+import beast.core.BEASTObject;
+
 /**
  * A default implementation of the Sequence interface.
  *
@@ -23,7 +25,7 @@ import java.util.Set;
  * @author Alexei Drummond
  * @version $Id: BasicSequence.java 1042 2009-12-08 00:14:20Z amyzeta $
  */
-public class BasicSequence implements Sequence {
+public class BasicSequence extends BEASTObject implements Sequence {
 
     /**
      * Creates a sequence with a name corresponding to the taxon name.
@@ -251,4 +253,9 @@ public class BasicSequence implements Sequence {
         result = 31 * result + (sequenceCharacters != null ? Arrays.hashCode(sequenceCharacters) : 0);
         return result;
     }
+
+    @Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

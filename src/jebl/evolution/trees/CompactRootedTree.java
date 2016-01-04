@@ -7,6 +7,8 @@ import jebl.util.Attributable;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * A memory efficient rooted tree.
  *
@@ -569,7 +571,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
  *
  * The object provides the map via the abstract methods.
  */
-abstract class AttributableImp implements Attributable {
+abstract class AttributableImp extends BEASTObject implements Attributable {
     /**
      * Get attribute map for object.
      * @return the map
@@ -616,4 +618,9 @@ abstract class AttributableImp implements Attributable {
         }
         return Collections.emptyMap();
     }
+
+    @Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

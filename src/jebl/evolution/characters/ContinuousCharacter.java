@@ -2,6 +2,7 @@ package jebl.evolution.characters;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
 import jebl.evolution.taxa.*;
 
 /**
@@ -9,7 +10,7 @@ import jebl.evolution.taxa.*;
  *
  */
 
-public class ContinuousCharacter implements Character{
+public class ContinuousCharacter extends BEASTObject implements Character{
 	/**
 	 * Constructs a basic ContinuousCharacter object with no taxa added yet
 	 * @param name the name of the character
@@ -94,4 +95,10 @@ public class ContinuousCharacter implements Character{
 	private String name;
 	private CharacterType charType;
 	private Set<Taxon> taxa;
+	
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

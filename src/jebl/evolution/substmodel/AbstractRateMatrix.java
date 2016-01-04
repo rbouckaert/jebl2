@@ -7,6 +7,7 @@
 
 package jebl.evolution.substmodel;
 
+import beast.core.BEASTObject;
 import jebl.evolution.sequences.SequenceType;
 
 /**
@@ -17,7 +18,7 @@ import jebl.evolution.sequences.SequenceType;
  * @author Korbinian Strimmer
  * @author Alexei Drummond
  */
-abstract public class AbstractRateMatrix implements RateMatrix
+abstract public class AbstractRateMatrix extends BEASTObject implements RateMatrix
 {
 
     //
@@ -307,4 +308,9 @@ abstract public class AbstractRateMatrix implements RateMatrix
 // ============================================================================
 // ==== Protected Stuff ==========
     protected final double[] getFrequencies() {  return frequency; }
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

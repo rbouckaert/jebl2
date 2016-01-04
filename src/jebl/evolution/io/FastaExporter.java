@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Collection;
 
+import beast.core.BEASTObject;
+
 /**
  * Class for exporting a fasta file format.
  *
@@ -19,7 +21,7 @@ import java.util.Collection;
  * @author Alexei Drummond
  * @version $Id: FastaExporter.java 442 2006-09-05 21:59:20Z matt_kearse $
  */
-public class FastaExporter implements SequenceExporter {
+public class FastaExporter extends BEASTObject implements SequenceExporter {
 
     /**
      * Constructor
@@ -43,4 +45,10 @@ public class FastaExporter implements SequenceExporter {
     }
 
     private final PrintWriter writer;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

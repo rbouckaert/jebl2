@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import beast.core.BEASTObject;
+
 /**
  * Class for importing NEXUS file format.
  *
@@ -50,7 +52,7 @@ import java.util.regex.Pattern;
  * @author Andrew Rambaut
  * @author Alexei Drummond
  */
-public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeImporter, DistanceMatrixImporter {
+public class NexusImporter extends BEASTObject implements AlignmentImporter, SequenceImporter, TreeImporter, DistanceMatrixImporter {
 
     /**
      * Represents the block types used in the nexus format
@@ -1476,4 +1478,9 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
     private boolean isInterleaved = false;
 
     protected final ImportHelper helper;
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

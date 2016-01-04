@@ -4,6 +4,9 @@ import jebl.evolution.taxa.Taxon;
 import jebl.util.AttributableHelper;
 
 import java.util.Set;
+
+import beast.core.BEASTObject;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -17,7 +20,7 @@ import java.util.Map;
  * @author Alexei Drummond
  * @version $Id: BasicSequence.java 641 2007-02-16 11:56:21Z rambaut $
  */
-public class CanonicalSequence implements Sequence {
+public class CanonicalSequence extends BEASTObject implements Sequence {
 
     /**
      * Creates a sequence with a name corresponding to the taxon name.
@@ -205,4 +208,10 @@ public class CanonicalSequence implements Sequence {
     private final byte[] sequence;
 
    // private Map<String, Object> attributeMap = null;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

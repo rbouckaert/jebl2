@@ -13,13 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import beast.core.BEASTObject;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
  *
  * @version $Id: TaxonomicLevel.java 185 2006-01-23 23:03:18Z rambaut $
  */
-public class TaxonomicLevel {
+public class TaxonomicLevel extends BEASTObject {
 
     /**
      * A private constructor. TaxonomicLevel objects can only be created by the static TaxonomicLevel.getTaxonomicLevel()
@@ -74,4 +76,10 @@ public class TaxonomicLevel {
      * A hash map containing name, object pairs.
      */
     private static Map<String, TaxonomicLevel> taxonomicLevels = new HashMap<>();
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

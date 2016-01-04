@@ -1,6 +1,8 @@
 package jebl.evolution.align;
 
-public abstract class Traceback {
+import beast.core.BEASTObject;
+
+public abstract class Traceback extends BEASTObject {
 
     int i, j;                     // absolute coordinates
     
@@ -10,4 +12,9 @@ public abstract class Traceback {
 
     @Override
 	public String toString() { return "("+getX() + ", " + getY()+")";};
+	
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

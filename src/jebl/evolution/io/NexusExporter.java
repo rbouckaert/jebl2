@@ -18,6 +18,8 @@ import java.io.Writer;
 import java.util.*;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  * Export sequences and trees to Nexus format.
  *
@@ -28,7 +30,7 @@ import java.util.List;
  * @version $Id: NexusExporter.java 1060 2010-06-01 08:52:55Z rambaut $
  */
 
-public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeExporter {
+public class NexusExporter extends BEASTObject implements AlignmentExporter, SequenceExporter, TreeExporter {
 
 	public NexusExporter(Writer writer) {
 		this(writer, true);
@@ -443,4 +445,10 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
 	private boolean writeMetaComments;
     private boolean interleave;
     public static final int MAX_ROW_LENGTH = 60;
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

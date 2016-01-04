@@ -8,6 +8,9 @@ import jebl.evolution.taxa.Taxon;
 import jebl.util.ProgressListener;
 
 import javax.swing.*;
+
+import beast.core.BEASTObject;
+
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author Joseph Heled
  * @version $Id: FastaImporter.java 857 2007-12-14 02:49:27Z twobeers $
  */
-public class FastaImporter implements SequenceImporter, ImmediateSequenceImporter {
+public class FastaImporter extends BEASTObject implements SequenceImporter, ImmediateSequenceImporter {
 
     /**
      * Name of Jebl sequence property which stores sequence description (i.e. anything after sequence name in fasta
@@ -259,4 +262,10 @@ public class FastaImporter implements SequenceImporter, ImmediateSequenceImporte
 	public void importSequences(Callback callback, ProgressListener progressListener) throws IOException, ImportException {
         read(callback, progressListener);
     }
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

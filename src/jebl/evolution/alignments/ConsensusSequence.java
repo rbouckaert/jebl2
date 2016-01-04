@@ -9,12 +9,14 @@ import jebl.util.AttributableHelper;
 import java.util.Map;
 import java.util.Set;
 
+import beast.core.BEASTObject;
+
 /**
  * @author rambaut
  * @author Alexei Drummond
  * @version $Id: ConsensusSequence.java 365 2006-06-28 07:34:56Z pepster $
  */
-public class ConsensusSequence implements Sequence {
+public class ConsensusSequence extends BEASTObject implements Sequence {
     /**
      * Creates a FilteredSequence wrapper to the given source sequence.
      *
@@ -173,4 +175,9 @@ public class ConsensusSequence implements Sequence {
     private final boolean includeAmbiguities;
 
     private final AttributableHelper attributableHelper = new AttributableHelper();
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
 }

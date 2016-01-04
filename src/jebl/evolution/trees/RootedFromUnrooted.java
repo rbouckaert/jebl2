@@ -6,6 +6,8 @@ import jebl.evolution.taxa.Taxon;
 
 import java.util.*;
 
+import beast.core.BEASTObject;
+
 /**
  * Root an unrooted tree. This class works as a wrapper over any tree to root it. There are two
  * constructors, one which roots the tree at any internal node, the other roots the tree between any two
@@ -17,7 +19,7 @@ import java.util.*;
  *
  */
 
-public class RootedFromUnrooted implements RootedTree {
+public class RootedFromUnrooted extends BEASTObject implements RootedTree {
 	/**
 	 * The unrooted tree
 	 */
@@ -350,4 +352,10 @@ public class RootedFromUnrooted implements RootedTree {
 	public Map<String, Object> getAttributeMap() {
 		return source.getAttributeMap();
 	}
+	
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

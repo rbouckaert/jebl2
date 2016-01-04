@@ -9,6 +9,8 @@
 
 package jebl.evolution.coalescent;
 
+import beast.core.BEASTObject;
+
 /**
  * This class models coalescent intervals for a constant population
  * (parameter: N0=present-day population size). <BR>
@@ -23,7 +25,7 @@ package jebl.evolution.coalescent;
  * @version $Id: ConstantPopulation.java 390 2006-07-20 14:33:51Z rambaut $
  *
  */
-public class ConstantPopulation implements DemographicFunction
+public class ConstantPopulation extends BEASTObject implements DemographicFunction
 {
 	//
 	// Public stuff
@@ -112,4 +114,10 @@ public class ConstantPopulation implements DemographicFunction
 	//
 
 	private double N0;
+	
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }

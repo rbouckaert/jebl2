@@ -1,5 +1,7 @@
 package jebl.evolution.align.scores;
 
+import beast.core.BEASTObject;
+
 /**
  * Base class for all score matrices in the package.
  *
@@ -9,7 +11,7 @@ package jebl.evolution.align.scores;
  *
  * Based on code originally by Peter Setsoft. See package.html.
  */
-public abstract class Scores implements ScoreMatrix {
+public abstract class Scores extends BEASTObject implements ScoreMatrix {
 
     public float[][] score;
     private String extraResidues = "";
@@ -231,4 +233,10 @@ public abstract class Scores implements ScoreMatrix {
         }
         return includeGaps(scores, totalMismatch/mismatchCount-0.1f, totalMatch/matchCount);
     }*/
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// TODO nothing to do
+	}
+
 }

@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import beast.core.BEASTObject;
+
 /**
  *
  * A {@link TreeBuilder} that builds a consensus tree for a set of trees on identical leaf sets.
@@ -17,7 +19,7 @@ import java.util.List;
  * @version $Id: ConsensusTreeBuilder.java 850 2007-12-06 04:51:28Z twobeers $
  */
 
-public abstract class ConsensusTreeBuilder<T extends Tree> implements TreeBuilder<T> {
+public abstract class ConsensusTreeBuilder<T extends Tree> extends BEASTObject implements TreeBuilder<T> {
 
     /** Name of attribute specifing amount of support for branch */
     final static public String DEFAULT_SUPPORT_ATTRIBUTE_NAME = "Consensus support(%)";
@@ -145,4 +147,10 @@ public abstract class ConsensusTreeBuilder<T extends Tree> implements TreeBuilde
     }
 
     private final List<ProgressListener> listeners = new ArrayList<>();
+    
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+	}
+
 }
