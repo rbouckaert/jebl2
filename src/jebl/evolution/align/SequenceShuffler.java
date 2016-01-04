@@ -1,7 +1,8 @@
 package jebl.evolution.align;
 
 import javax.swing.*;
-import java.util.Random;
+
+import beast.util.Randomizer;
 
 /**
  * Shuffles a sequence and aligns it again multiple times to give mean and variance of
@@ -73,7 +74,7 @@ public class SequenceShuffler {
         char[] a = s.toCharArray();
         char swap;
         for (int i = 0; i < a.length-1; i++) {
-            int r = random.nextInt(a.length-i-1) + 1;
+            int r = Randomizer.nextInt(a.length-i-1) + 1;
             swap = a[r];
             a[r] = a[i];
             a[i] = swap;
@@ -109,5 +110,4 @@ public class SequenceShuffler {
         this.monitor = monitor;
     }
 
-    private static Random random = new Random();
 }

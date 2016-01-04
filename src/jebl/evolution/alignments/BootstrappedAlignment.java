@@ -1,7 +1,6 @@
 package jebl.evolution.alignments;
 
-import java.util.Random;
-
+import beast.util.Randomizer;
 
 /**
  * Date: 15/01/2006
@@ -14,21 +13,19 @@ import java.util.Random;
 public class BootstrappedAlignment extends ResampledAlignment {
 
     public BootstrappedAlignment(Alignment srcAlignment, long seed) {
-        this(srcAlignment, new Random(seed));
-    }
-    
-    public  BootstrappedAlignment(Alignment srcAlignment, Random r) {
+    	Randomizer.setSeed(seed);
         final int nSites = srcAlignment.getSiteCount();
         int[] sites = new int[nSites];
 
         for(int n = 0; n < nSites; ++n) {
-            sites[n] = r.nextInt(nSites);
+            sites[n] = Randomizer.nextInt(nSites);
         }
 
         init(srcAlignment, sites);
     }
+    
 
     public BootstrappedAlignment(Alignment srcAlignment) {
-        this(srcAlignment, new Random());
+        this(srcAlignment, Randomizer.getSeed());
     }
 }
