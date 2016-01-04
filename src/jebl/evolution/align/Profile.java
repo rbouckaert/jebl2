@@ -20,7 +20,7 @@ class Profile {
 //    int length;
     int sequenceCount;
     private boolean automaticallyCalculatedAlphabetSize = false;
-    private Map<Integer, String> paddedSequences = new HashMap<Integer, String>();
+    private Map<Integer, String> paddedSequences = new HashMap<>();
     private boolean supportsFreeEndGaps=false;
     private boolean isImmutable = false;
 

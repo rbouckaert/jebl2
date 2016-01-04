@@ -39,7 +39,7 @@ public class SequenceAlignmentsDistanceMatrix extends BasicDistanceMatrix {
     }
 
     static List<Taxon> getTaxa(List<Sequence> seqs) {
-        List<Taxon> t = new ArrayList<Taxon>();
+        List<Taxon> t = new ArrayList<>();
         for( Sequence s : seqs ) {
             t.add(s.getTaxon());
         }

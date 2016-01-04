@@ -105,7 +105,7 @@ public final class Taxon implements Attributable, Comparable<Taxon> {
 
     private static void purgeGarbageCollectedTaxa() {
         synchronized(taxa) {
-            List<String> taxonNamesToPurge = new ArrayList<String>();
+            List<String> taxonNamesToPurge = new ArrayList<>();
             for (Map.Entry<String,WeakReference<Taxon>> entry : taxa.entrySet()) {
                 Taxon taxon = entry.getValue().get();
                 if (taxon == null) {
@@ -126,7 +126,7 @@ public final class Taxon implements Attributable, Comparable<Taxon> {
      * @return a Set containing all the currently created Taxon objects.
      */
     public static Set<Taxon> getAllTaxa() {
-        Set<Taxon> result = new HashSet<Taxon>();
+        Set<Taxon> result = new HashSet<>();
         synchronized (taxa) {
             purgeGarbageCollectedTaxa();
             for (Map.Entry<String,WeakReference<Taxon>> entry : taxa.entrySet()) {
@@ -170,7 +170,7 @@ public final class Taxon implements Attributable, Comparable<Taxon> {
             if (taxon == null) {
                 taxaCreatedSinceLastPurge.incrementAndGet();
                 taxon = new Taxon(name);
-                taxa.put(taxon.getName(), new WeakReference<Taxon>(taxon));
+                taxa.put(taxon.getName(), new WeakReference<>(taxon));
             }
         }
         return taxon;
@@ -188,7 +188,7 @@ public final class Taxon implements Attributable, Comparable<Taxon> {
      * Maps taxon name to the taxon of that name. We use WeakReferences so that if no other references
      * to a taxon exist, it no longer wastes memoryt.
      */
-    private static final Map<String, WeakReference<Taxon>> taxa = new HashMap<String, WeakReference<Taxon>>();
+    private static final Map<String, WeakReference<Taxon>> taxa = new HashMap<>();
 
     /**
      * the taxonomic level of this taxon.

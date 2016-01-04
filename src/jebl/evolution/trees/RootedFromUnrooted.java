@@ -70,7 +70,7 @@ public class RootedFromUnrooted implements RootedTree {
 		this.intentUnrooted = intentUnrooted;
 		topLeft = topRight  = null;
 		rootToLeft = rootToRight = 0.0;
-		parents = new LinkedHashMap<Node, Node>();
+		parents = new LinkedHashMap<>();
 		for( Node adj : source.getAdjacencies(root) ) {
             setParent(adj, root);
 			}
@@ -94,7 +94,7 @@ public class RootedFromUnrooted implements RootedTree {
 		} catch (NoEdgeException e) {
 			// bug
 		}
-		parents = new LinkedHashMap<Node, Node>();
+		parents = new LinkedHashMap<>();
 
 		// This is just a handle used to refer to the root so create the simplest possible implementation...
         root = new BaseNode() { @Override
@@ -107,7 +107,7 @@ public class RootedFromUnrooted implements RootedTree {
 
 	@Override
 	public List<Node> getChildren(Node node) {
-		ArrayList<Node> s = new ArrayList<Node>(getAdjacencies(node));
+		ArrayList<Node> s = new ArrayList<>(getAdjacencies(node));
 		if( node != root ) {
 			s.remove(getParent(node));
 		}
@@ -185,7 +185,7 @@ public class RootedFromUnrooted implements RootedTree {
 
 	@Override
 	public Set<Node> getInternalNodes() {
-		HashSet<Node> s = new LinkedHashSet<Node>(source.getInternalNodes());
+		HashSet<Node> s = new LinkedHashSet<>(source.getInternalNodes());
 		s.add(root);
 		return s;
 	}
@@ -241,7 +241,7 @@ public class RootedFromUnrooted implements RootedTree {
 				return Arrays.asList(d);
 			}
 			if( node == topLeft || node == topRight ) {
-				List<Node> s = new ArrayList<Node>(source.getAdjacencies(node));
+				List<Node> s = new ArrayList<>(source.getAdjacencies(node));
 				s.remove(node == topLeft ? topRight : topLeft);
 				s.add(root);
 				return s;
@@ -276,7 +276,7 @@ public class RootedFromUnrooted implements RootedTree {
 
 	@Override
 	public Set<Node> getNodes() {
-		Set<Node> nodes = new LinkedHashSet<Node>(getInternalNodes());
+		Set<Node> nodes = new LinkedHashSet<>(getInternalNodes());
 		nodes.addAll(getExternalNodes());
 		if( topLeft != null ) {
 			nodes.add(root);

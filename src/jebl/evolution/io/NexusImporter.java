@@ -264,7 +264,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
         boolean done = false;
 
         List<Taxon> taxonList = null;
-        List<Alignment> alignments = new ArrayList<Alignment>();
+        List<Alignment> alignments = new ArrayList<>();
 
         while (!done) {
             try {
@@ -418,7 +418,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
         // then this importer will already have read into the trees block. However
         // is hasTree() was called then the following is still guaranteed to work as
         // per the TreeImporter.hasTree() javadoc.
-        List<Tree> result = new ArrayList<Tree>();
+        List<Tree> result = new ArrayList<>();
         while (hasTree()) {
             result.add(importNextTree());
         }
@@ -464,7 +464,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
 	public List<DistanceMatrix> importDistanceMatrices() throws IOException, ImportException {
         boolean done = false;
         List<Taxon> taxonList = null;
-        List<DistanceMatrix> distanceMatrices = new ArrayList<DistanceMatrix>();
+        List<DistanceMatrix> distanceMatrices = new ArrayList<>();
         while (!done) {
             try {
                 NexusBlock block = findNextBlock();
@@ -678,11 +678,11 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
     {
         boolean sequencherStyle = false;
         String firstSequence = null;
-        List<Sequence> sequences = new ArrayList<Sequence>();
+        List<Sequence> sequences = new ArrayList<>();
 
         if (isInterleaved) {
-            List<StringBuilder> sequencesData = new ArrayList<StringBuilder>(taxonCount);
-            List<Taxon> taxons =  new ArrayList<Taxon>();
+            List<StringBuilder> sequencesData = new ArrayList<>(taxonCount);
+            List<Taxon> taxons =  new ArrayList<>();
             List<Taxon> taxList =  (taxonList != null) ? taxonList : taxons;
 
             int[] charsRead = new int[taxonCount];
@@ -836,7 +836,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
             throw new ImportException.MissingFieldException("NTAXA");
         }
 
-        List<Taxon> taxa = new ArrayList<Taxon>();
+        List<Taxon> taxa = new ArrayList<>();
 
         do {
             String name = helper.readToken(";");
@@ -1067,7 +1067,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
      * Reads a 'TREES' block.
      */
     private List<Tree> readTreesBlock(List<Taxon> taxonList) throws ImportException, IOException {
-        List<Tree> trees = new ArrayList<Tree>();
+        List<Tree> trees = new ArrayList<>();
         String[] lastToken = new String[1];
         translationMap = readTreesBlockHeader(taxonList, lastToken);
         while( true ) {
@@ -1087,7 +1087,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
     }
 
     private Map<String, Taxon> readTreesBlockHeader(List<Taxon> taxonList, String[] lastToken) throws ImportException, IOException {
-        Map<String, Taxon> translationList = new HashMap<String, Taxon>();
+        Map<String, Taxon> translationList = new HashMap<>();
         String token;
 
         do {
@@ -1285,7 +1285,7 @@ public class NexusImporter implements AlignmentImporter, SequenceImporter, TreeI
      */
     private Node readInternalNode(SimpleRootedTree tree) throws IOException, ImportException
     {
-        List<Node> children = new ArrayList<Node>();
+        List<Node> children = new ArrayList<>();
 
         // read the opening '('
         helper.readCharacter();

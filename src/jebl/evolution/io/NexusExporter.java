@@ -123,7 +123,7 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
      */
     @Override
 	public void exportTree(Tree tree) throws IOException {
-        List<Tree> trees = new ArrayList<Tree>();
+        List<Tree> trees = new ArrayList<>();
         trees.add(tree);
         exportTrees(trees);
     }
@@ -170,7 +170,7 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
 
     public void exportTrees(Collection<? extends Tree> trees, boolean writeTaxa) throws IOException {
         if (writeTaxa) {
-            TreeSet<Taxon> taxa = new TreeSet<Taxon>();
+            TreeSet<Taxon> taxa = new TreeSet<>();
             for (Tree tree : trees) {
                 taxa.addAll(tree.getTaxa());
             }
@@ -223,7 +223,7 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
      * @param taxonArray
      */
     private void setTaxa(Taxon[] taxonArray) {
-        this.taxa = new HashSet<Taxon>();
+        this.taxa = new HashSet<>();
 
         writer.println("begin taxa;");
         writer.println("\tdimensions ntax=" + taxonArray.length + ";");
@@ -293,7 +293,7 @@ public class NexusExporter implements AlignmentExporter, SequenceExporter, TreeE
             }
         }
 
-        List<Taxon> t = new ArrayList<Taxon>(sequences.size());
+        List<Taxon> t = new ArrayList<>(sequences.size());
         for (Sequence sequence : sequences) {
             t.add(sequence.getTaxon());
         }

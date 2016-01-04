@@ -45,7 +45,7 @@ final public class RootedSubtree implements RootedTree {
             newNode = createExternalNode(tree.getTaxon(node), includedTaxa);
 
         } else {
-            List<RootedSubtreeNode> children = new ArrayList<RootedSubtreeNode>();
+            List<RootedSubtreeNode> children = new ArrayList<>();
             for (Node child : tree.getChildren(node)) {
                 RootedSubtreeNode newChild = createNodes(tree, child, includedTaxa);
                 if (newChild != null) {
@@ -164,7 +164,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public List<Node> getChildren(Node node) {
-        return new ArrayList<Node>(((RootedSubtreeNode)node).getChildren());
+        return new ArrayList<>(((RootedSubtreeNode)node).getChildren());
     }
 
     /**
@@ -244,7 +244,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Node> getExternalNodes() {
-        return new LinkedHashSet<Node>(externalNodes.values());
+        return new LinkedHashSet<>(externalNodes.values());
     }
 
     /**
@@ -253,7 +253,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Node> getInternalNodes() {
-        return new LinkedHashSet<Node>(internalNodes);
+        return new LinkedHashSet<>(internalNodes);
     }
 
     /**
@@ -263,7 +263,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Taxon> getTaxa() {
-        return new LinkedHashSet<Taxon>(externalNodes.keySet());
+        return new LinkedHashSet<>(externalNodes.keySet());
     }
 
     /**
@@ -327,7 +327,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public List<Edge> getEdges(Node node) {
-        List<Edge> edges = new ArrayList<Edge>();
+        List<Edge> edges = new ArrayList<>();
         for (Node adjNode : getAdjacencies(node)) {
             edges.add(((RootedSubtreeNode)adjNode).getEdge());
 
@@ -411,7 +411,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Node> getNodes() {
-        Set<Node> nodes = new LinkedHashSet<Node>(internalNodes);
+        Set<Node> nodes = new LinkedHashSet<>(internalNodes);
         nodes.addAll(externalNodes.values());
         return nodes;
     }
@@ -421,7 +421,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Edge> getEdges() {
-        Set<Edge> edges = new LinkedHashSet<Edge>();
+        Set<Edge> edges = new LinkedHashSet<>();
         for (Node node : getNodes()) {
             if (node != getRootNode()) {
                 edges.add(((RootedSubtreeNode)node).getEdge());
@@ -438,7 +438,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Edge> getExternalEdges() {
-        Set<Edge> edges = new LinkedHashSet<Edge>();
+        Set<Edge> edges = new LinkedHashSet<>();
         for (Node node : getExternalNodes()) {
             edges.add(((RootedSubtreeNode)node).getEdge());
         }
@@ -452,7 +452,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Edge> getInternalEdges() {
-        Set<Edge> edges = new LinkedHashSet<Edge>();
+        Set<Edge> edges = new LinkedHashSet<>();
         for (Node node : getInternalNodes()) {
             if (node != getRootNode()) {
                 edges.add(((RootedSubtreeNode)node).getEdge());
@@ -467,7 +467,7 @@ final public class RootedSubtree implements RootedTree {
      */
     @Override
 	public Set<Node> getNodes(int degree) {
-        Set<Node> nodes = new LinkedHashSet<Node>();
+        Set<Node> nodes = new LinkedHashSet<>();
         for (Node node : getNodes()) {
             // Account for no anncesstor of root, assumed by default in getDegree
             final int deg = node.getDegree() ;
@@ -607,8 +607,8 @@ final public class RootedSubtree implements RootedTree {
     private AttributableHelper helper = null;
 
     protected RootedSubtreeNode rootNode = null;
-    protected final Set<Node> internalNodes = new LinkedHashSet<Node>();
-    private final Map<Taxon, Node> externalNodes = new LinkedHashMap<Taxon, Node>();
+    protected final Set<Node> internalNodes = new LinkedHashSet<>();
+    private final Map<Taxon, Node> externalNodes = new LinkedHashMap<>();
 
     private boolean heightsKnown = false;
     private boolean lengthsKnown = false;
@@ -620,25 +620,25 @@ final public class RootedSubtree implements RootedTree {
 
     private class RootedSubtreeNode extends BaseNode {
         public RootedSubtreeNode(Taxon taxon) {
-            this.children = Collections.unmodifiableList(new ArrayList<Node>());
+            this.children = Collections.unmodifiableList(new ArrayList<>());
             this.taxon = taxon;
         }
 
         public RootedSubtreeNode(List<? extends Node> children) {
-            this.children = Collections.unmodifiableList(new ArrayList<Node>(children));
+            this.children = Collections.unmodifiableList(new ArrayList<>(children));
             this.taxon = null;
         }
 
         @SuppressWarnings("unused")
 		public void removeChild(Node node) {
-            List<Node> c = new ArrayList<Node>(children);
+            List<Node> c = new ArrayList<>(children);
             c.remove(node);
             children = Collections.unmodifiableList(c);
         }
 
         @SuppressWarnings("unused")
         public void addChild(RootedSubtreeNode node) {
-            List<Node> c = new ArrayList<Node>(children);
+            List<Node> c = new ArrayList<>(children);
             c.add(node);
             node.setParent(this);
             children = Collections.unmodifiableList(c);
@@ -649,12 +649,12 @@ final public class RootedSubtree implements RootedTree {
             for( RootedSubtreeNode n : nodes ) {
                 n.setParent(this);
             }
-            children = Collections.unmodifiableList(new ArrayList<Node>(nodes));
+            children = Collections.unmodifiableList(new ArrayList<>(nodes));
         }
 
         @SuppressWarnings("unused")
         void swapChildren(int i0, int i1) {
-            ArrayList<Node> nc = new ArrayList<Node>(children);
+            ArrayList<Node> nc = new ArrayList<>(children);
             //there was a user reported crash where i0 was > size of the array of children nodes
             if (i0 < 0 || i0 >= nc.size() || i1 < 0 || i1 >= nc.size()) {
                 throw new IllegalArgumentException("Tried to swap children ("+i0+","+i1+") on node with " + nc.size() + " children");
@@ -727,7 +727,7 @@ final public class RootedSubtree implements RootedTree {
          * @return the adjacaencies
          */
         public List<Node> getAdjacencies() {
-            List<Node> adjacencies = new ArrayList<Node>();
+            List<Node> adjacencies = new ArrayList<>();
             if (children != null) adjacencies.addAll(children);
             if (parent != null) adjacencies.add(parent);
             return adjacencies;

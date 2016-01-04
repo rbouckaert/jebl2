@@ -25,7 +25,7 @@ public class SplitSystem
 	 */
 	public SplitSystem(final Collection<Taxon> taxa, int size)
 	{
-		this.taxa = Collections.unmodifiableList(new ArrayList<Taxon>(taxa));
+		this.taxa = Collections.unmodifiableList(new ArrayList<>(taxa));
 
 		labelCount = taxa.size();
 		splitCount = size;

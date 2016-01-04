@@ -28,7 +28,7 @@ public class CalculateSplitRates {
 	public CalculateSplitRates(NexusImporter importer) {
 		this.importer = importer;
 		treeList = new ArrayList<>(100);
-		//cladeList = new ArrayList<Clade>(100);
+		//cladeList = new ArrayList<>(100);
 		intervalList = new ArrayList<>(100);
 		densityMap = new DensityMap(70, 20, 0, 0, 70, 0.01);
 	}
@@ -176,7 +176,7 @@ public class CalculateSplitRates {
 
 //	private List<TimeInterval> getTimeIntervals(RootedTree tree) {
 //		return getTimeIntervals(tree, tree.getRootNode(),
-//				tree.getHeight(tree.getRootNode()), new ArrayList<TimeInterval>());
+//				tree.getHeight(tree.getRootNode()), new ArrayList<>());
 //
 //	}
 
@@ -193,7 +193,7 @@ public class CalculateSplitRates {
 	}
 
 	private Map<Double, Double> getClockDwellTimes(RootedTree tree) {
-		Map<Double, Double> rateDwellTimes = new LinkedHashMap<Double, Double>();
+		Map<Double, Double> rateDwellTimes = new LinkedHashMap<>();
 		Set<Node> nodes = tree.getNodes();
 		for (Node node : nodes) {
 			if (node != tree.getRootNode()) {
@@ -232,7 +232,7 @@ public class CalculateSplitRates {
 
 	/*private List<DwellTime> getDwellTimes(RootedTree tree) {
 		return getDwellTimes(tree, tree.getRootNode(),
-				tree.getHeight(tree.getRootNode()), 0.0, new ArrayList<DwellTime>());
+				tree.getHeight(tree.getRootNode()), 0.0, new ArrayList<>());
 	}
 
 	private List<DwellTime> getDwellTimes(RootedTree tree, Node node, double startTime, double currentLenght, List<DwellTime> dwellTimes) {
@@ -332,7 +332,7 @@ public class CalculateSplitRates {
 //		if (tree.isExternal(node))
 //			return tree.getTaxon(node).getName();
 //		Set<Node> taxa = RootedTreeUtils.getDescendantTips(tree, node);
-//		List<String> nameList = new ArrayList<String>(taxa.size());
+//		List<String> nameList = new ArrayList<>(taxa.size());
 //		for (Node tip : taxa)
 //			nameList.add(tree.getTaxon(tip).getName());
 //		Collections.sort(nameList);
@@ -354,7 +354,7 @@ public class CalculateSplitRates {
 //		private double total;
 //
 //		public DoubleStatistic() {
-//			data = new ArrayList<Double>(1000);
+//			data = new ArrayList<>(1000);
 //			total = 0;
 //		}
 //
@@ -513,8 +513,8 @@ public class CalculateSplitRates {
 //
 ////		public Clade(String name) {
 ////			this.name = name;
-////			indicatorValues = new ArrayList<Integer>(1000);
-////			rateValues = new ArrayList<Double>(1000);
+////			indicatorValues = new ArrayList<>(1000);
+////			rateValues = new ArrayList<>(1000);
 ////		}
 //
 //		@Override

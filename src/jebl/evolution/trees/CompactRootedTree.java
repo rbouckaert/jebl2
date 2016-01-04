@@ -121,12 +121,12 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
      */
     private Map<String, Object> aMap(short index) {
         if( all == null ) {
-            all = new LinkedHashMap<Short, Map<String, Object>>();
+            all = new LinkedHashMap<>();
         }
 
         Map<String, Object> map = all.get(index);
         if( map == null ) {
-            map = new LinkedHashMap<String, Object>();
+            map = new LinkedHashMap<>();
             all.put(index, map);
         }
         return map;
@@ -225,10 +225,10 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 
         final Node rootNode = t.getRootNode();
         // nodes to be inserted to the tree, all the same distance from root.
-        List<Node> level = new ArrayList<Node>();
+        List<Node> level = new ArrayList<>();
 
         // nodes to be inserted in next iteration (decendents of nodes in 'level')
-        List<Node> nlevel = new ArrayList<Node>();
+        List<Node> nlevel = new ArrayList<>();
 
         // start with roo node
         level.add(rootNode);
@@ -296,7 +296,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 	public List<Node> getChildren(Node node) {
         final int index = ((SimpleRootedNode) node).index;
         final int nSon = nSons(index);
-        final ArrayList<Node> clist = new ArrayList<Node>(nSon);
+        final ArrayList<Node> clist = new ArrayList<>(nSon);
         for(int k = sons[index]; k < sons[index] + nSon; ++k) {
           clist.add(nodes[k]);
         }
@@ -364,7 +364,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
     // O(number of nodes)
     @Override
 	public Set<Node> getExternalNodes() {
-        Set<Node> n = new LinkedHashSet<Node>();
+        Set<Node> n = new LinkedHashSet<>();
         for(int i = 0; i < nodes.length; ++i) {
             if( (noSons[i] & 0x8000) != 0 ) {
                 n.add(nodes[i]);
@@ -376,7 +376,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
     // O(number of nodes)
     @Override
 	public Set<Node> getInternalNodes() {
-        Set<Node> n = new LinkedHashSet<Node>();
+        Set<Node> n = new LinkedHashSet<>();
         for(int i = 0; i < nodes.length; ++i) {
             if( (noSons[i] & 0x8000) == 0 ) {
                 n.add(nodes[i]);
@@ -387,7 +387,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 
     @Override
 	public Set<Edge> getExternalEdges() {
-        Set<Edge> edges = new LinkedHashSet<Edge>();
+        Set<Edge> edges = new LinkedHashSet<>();
         for (Node node : getExternalNodes()) {
             edges.add( establishEdge( ((SimpleRootedNode)node).index) ) ;
         }
@@ -396,7 +396,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 
     @Override
 	public Set<Edge> getInternalEdges() {
-        Set<Edge> edges = new LinkedHashSet<Edge>();
+        Set<Edge> edges = new LinkedHashSet<>();
         for (Node node : getInternalNodes()) {
             if (node != getRootNode()) {
                 edges.add( establishEdge( ((SimpleRootedNode)node).index) );
@@ -407,7 +407,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 
     @Override
 	public Set<Taxon> getTaxa() {
-        return new LinkedHashSet<Taxon>(Arrays.asList(taxa));
+        return new LinkedHashSet<>(Arrays.asList(taxa));
     }
 
     @Override
@@ -448,7 +448,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 
     @Override
 	public List<Edge> getEdges(Node node) {
-        List<Edge> e = new ArrayList<Edge>();
+        List<Edge> e = new ArrayList<>();
         final short index = ((SimpleRootedNode) node).index;
         if( index != 0 ) {
             e.add(establishEdge(index));
@@ -462,7 +462,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 
     @Override
 	public List<Node> getAdjacencies(Node node) {
-        List<Node> adjacencies = new ArrayList<Node>();
+        List<Node> adjacencies = new ArrayList<>();
         final short index = ((SimpleRootedNode) node).index;
         final int nSon = nSons(index);
         final short sonStart = sons[index];
@@ -522,7 +522,7 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
 
     @Override
 	public Set<Node> getNodes() {
-        return new LinkedHashSet<Node>(Arrays.asList(nodes));
+        return new LinkedHashSet<>(Arrays.asList(nodes));
     }
 
     @Override
@@ -530,12 +530,12 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
         for(int k = 1; k < nodes.length; ++k) {
             establishEdge((short)k);
         }
-        return new LinkedHashSet<Edge>( Arrays.asList(edges));
+        return new LinkedHashSet<>( Arrays.asList(edges));
     }
 
     @Override
 	public Set<Node> getNodes(int degree) {
-        Set<Node> ns = new LinkedHashSet<Node>();
+        Set<Node> ns = new LinkedHashSet<>();
         // check non root nodes
         for(int k = 1; k < nodes.length; ++k) {
             if( degree == nSons(k) + 1 )

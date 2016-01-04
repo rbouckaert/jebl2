@@ -28,7 +28,7 @@ public class BasicDistanceMatrix implements DistanceMatrix {
             throw new IllegalArgumentException("Source distance matrix dimensions do not match the number of taxa");
         }
 
-        this.taxa = new ArrayList<Taxon>(taxa);
+        this.taxa = new ArrayList<>(taxa);
         this.distances = distances;
     }
 

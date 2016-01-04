@@ -42,7 +42,7 @@ public class ImportHelper {
     private char metaComment = (char)-1;
 
     private String lastMetaComment = null;
-    private final List<String> lastMetaComments = new ArrayList<String>();
+    private final List<String> lastMetaComments = new ArrayList<>();
     private long totalCharactersRead = 0;
 
     // Expected length of input in bytes, or 0 if unknown
@@ -737,7 +737,7 @@ public class ImportHelper {
      * @see #clearLastMetaComment()
      */
     public List<String> getMetaComments() {
-        return new ArrayList<String>(lastMetaComments);
+        return new ArrayList<>(lastMetaComments);
     }
 
     /**

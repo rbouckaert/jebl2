@@ -717,7 +717,7 @@ public class NeedlemanWunschLinearSpaceAffine extends AlignLinearSpaceAffine imp
 	public Result doAlignment(Sequence seq1, Sequence seq2, ProgressListener progress) {
         doAlignment(seq1.getString(), seq2.getString(), progress);
         if (progress.setProgress(1)) return null;
-        List<Sequence> seqs = new ArrayList<Sequence>(2);
+        List<Sequence> seqs = new ArrayList<>(2);
         String[] results = getMatch();
         seqs.add(new BasicSequence(seq1.getSequenceType(), seq1.getTaxon(), results[0]));
         seqs.add(new BasicSequence(seq2.getSequenceType(), seq2.getTaxon(), results[1]));

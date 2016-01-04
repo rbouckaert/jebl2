@@ -153,7 +153,7 @@ public class BartonSternberg implements MultipleAligner {
                 profile.addSequence(i, sequencesWithGaps[i]);
             }
         } else {
-            List<Sequence> sequencesForGuideTree = new ArrayList<Sequence>(sourceSequences.size());
+            List<Sequence> sequencesForGuideTree = new ArrayList<>(sourceSequences.size());
             for (int i = 0; i < numSequences; i++) {
                 Sequence s = sourceSequences.get(i);
                 sequencesForGuideTree.add(new BasicSequence(s.getSequenceType(), Taxon.getTaxon("" + i), sequencesWithoutGaps[i]));
@@ -254,7 +254,7 @@ public class BartonSternberg implements MultipleAligner {
 
         FastaImporter importer = new FastaImporter(file, sequenceType);
         List<Sequence> xsequences = importer.importSequences();
-        List<String> sequenceStrings = new ArrayList<String>();
+        List<String> sequenceStrings = new ArrayList<>();
         int count = 0;
         int maximum = 10;
         for (Sequence sequence : xsequences) {
@@ -297,7 +297,7 @@ public class BartonSternberg implements MultipleAligner {
             return null;
         }
 
-        List<Sequence> aSeqs = new ArrayList<Sequence>(count);
+        List<Sequence> aSeqs = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
             String seq = profile.getSequence(i);
             final Sequence s = seqs.get(i);
@@ -325,7 +325,7 @@ public class BartonSternberg implements MultipleAligner {
         Profile profile = Profile.combine(profile1, profile2, results[0], results[1]);
 
         final int count = size1 + size2;
-        List<Sequence> aSeqs = new ArrayList<Sequence>(count);
+        List<Sequence> aSeqs = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
             final String seq = profile.getSequence(i);
             final Sequence s = (i < size1) ? seqs1.get(i) : seqs2.get(i - size1);
@@ -352,13 +352,13 @@ public class BartonSternberg implements MultipleAligner {
         Profile profile = Profile.combine(aprofile, sprofile, results[0], results[1]);
 
         List<Sequence> seqs1 = alignment.getSequenceList();
-        List<Sequence> seqs2 = new ArrayList<Sequence>(); seqs2.add(sequence);
+        List<Sequence> seqs2 = new ArrayList<>(); seqs2.add(sequence);
 
         final int size1 = seqs1.size();
         final int size2 = seqs2.size();
 
         final int count = size1 + size2;
-        List<Sequence> aSeqs = new ArrayList<Sequence>(count);
+        List<Sequence> aSeqs = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
             final String seq = profile.getSequence(i);
             final Sequence s = (i < count-1) ? seqs1.get(i) : seqs2.get(0);

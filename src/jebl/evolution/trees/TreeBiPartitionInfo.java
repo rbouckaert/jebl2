@@ -33,7 +33,7 @@ public class TreeBiPartitionInfo {
         this.t = t;
         this.taxa = taxa;
         nTips = t.getExternalNodes().size();
-        all = new LinkedHashMap<FixedBitSet, BiPartiotionInfo>();
+        all = new LinkedHashMap<>();
         forNode(t.getRootNode());
     }
 

@@ -99,7 +99,7 @@ public class NucleotideScores extends Scores {
         //this.includeAmbiguities = includeAmbiguities;
 
 //        final int states = includeAmbiguities? Nucleotides.getStateCount():Nucleotides.getCanonicalStateCount();
-        List<NucleotideState> states = new ArrayList<NucleotideState>();
+        List<NucleotideState> states = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         for (State state : Nucleotides.getStates()) {
             if (state.isGap()) continue;

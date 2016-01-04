@@ -43,7 +43,7 @@ public class MutableRootedTree implements RootedTree {
             MutableRootedNode out = (MutableRootedNode)createExternalNode( tree.getTaxon(outGroup) );
             setLength(out, tree.getEdgeLength(outGroup, root));
             // Create new root
-            ArrayList<MutableRootedNode> rootChildren = new ArrayList<MutableRootedNode>();
+            ArrayList<MutableRootedNode> rootChildren = new ArrayList<>();
             rootChildren.add(out);
             rootChildren.add(newSubtreeRoot);
             //MutableRootedNode newRoot =
@@ -116,8 +116,8 @@ public class MutableRootedTree implements RootedTree {
     public void refineNode(Node node, int[] leftSet) {
         List<Node> allChildren = getChildren(node);
 
-        List<Node> left = new ArrayList<Node>();
-        List<Node> right = new ArrayList<Node>();
+        List<Node> left = new ArrayList<>();
+        List<Node> right = new ArrayList<>();
 
         for( int n : leftSet ) {
             left.add(allChildren.get(n));
@@ -133,7 +133,7 @@ public class MutableRootedTree implements RootedTree {
         MutableRootedNode lnode = (left.size() > 1) ? createInternalNode(left) : (MutableRootedNode)left.get(0);
         MutableRootedNode rnode = (right.size() > 1) ? createInternalNode(right) : (MutableRootedNode)right.get(0);
 
-        List<MutableRootedNode> nodes = new ArrayList<MutableRootedNode>(2);
+        List<MutableRootedNode> nodes = new ArrayList<>(2);
         nodes.add(lnode);
         nodes.add(rnode);
         ((MutableRootedNode)node).replaceChildren(nodes);
@@ -168,7 +168,7 @@ public class MutableRootedTree implements RootedTree {
             return (MutableRootedNode)createExternalNode( tree.getTaxon(node) );
         }
 
-        List<Node> children = new ArrayList<Node>();
+        List<Node> children = new ArrayList<>();
         for( Node adj : tree.getAdjacencies(node) ) {
             if( adj == parent ) continue;
             MutableRootedNode rootedAdj = rootAdjacenciesWith(tree, adj, node);
@@ -220,7 +220,7 @@ public class MutableRootedTree implements RootedTree {
 
         List<Node> allChildren = getChildren(node);
 
-        List<Node> detached = new ArrayList<Node>();
+        List<Node> detached = new ArrayList<>();
 
         for( int n : split ) {
             detached.add(allChildren.get(n));
@@ -322,7 +322,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public List<Node> getChildren(Node node) {
-        return new ArrayList<Node>(((MutableRootedNode)node).getChildren());
+        return new ArrayList<>(((MutableRootedNode)node).getChildren());
     }
 
     /**
@@ -399,7 +399,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public Set<Node> getExternalNodes() {
-        return new LinkedHashSet<Node>(externalNodes.values());
+        return new LinkedHashSet<>(externalNodes.values());
     }
 
     /**
@@ -408,7 +408,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public Set<Node> getInternalNodes() {
-        return new LinkedHashSet<Node>(internalNodes);
+        return new LinkedHashSet<>(internalNodes);
     }
 
     /**
@@ -418,7 +418,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public Set<Taxon> getTaxa() {
-        return new LinkedHashSet<Taxon>(externalNodes.keySet());
+        return new LinkedHashSet<>(externalNodes.keySet());
     }
 
     /**
@@ -467,7 +467,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public List<Edge> getEdges(Node node) {
-        List<Edge> edges = new ArrayList<Edge>();
+        List<Edge> edges = new ArrayList<>();
         for (Node adjNode : getAdjacencies(node)) {
             edges.add(((MutableRootedNode)adjNode).getEdge());
 
@@ -552,7 +552,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public Set<Node> getNodes() {
-        Set<Node> nodes = new LinkedHashSet<Node>(internalNodes);
+        Set<Node> nodes = new LinkedHashSet<>(internalNodes);
         nodes.addAll(externalNodes.values());
         return nodes;
     }
@@ -562,7 +562,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public Set<Edge> getEdges() {
-        Set<Edge> edges = new LinkedHashSet<Edge>();
+        Set<Edge> edges = new LinkedHashSet<>();
         for (Node node : getNodes()) {
             if (node != getRootNode()) {
                 edges.add(((MutableRootedNode)node).getEdge());
@@ -579,7 +579,7 @@ public class MutableRootedTree implements RootedTree {
 	 */
 	@Override
 	public Set<Edge> getExternalEdges() {
-		Set<Edge> edges = new LinkedHashSet<Edge>();
+		Set<Edge> edges = new LinkedHashSet<>();
 		for (Node node : getExternalNodes()) {
 			edges.add(((MutableRootedNode)node).getEdge());
 		}
@@ -593,7 +593,7 @@ public class MutableRootedTree implements RootedTree {
 	 */
 	@Override
 	public Set<Edge> getInternalEdges() {
-		Set<Edge> edges = new LinkedHashSet<Edge>();
+		Set<Edge> edges = new LinkedHashSet<>();
 		for (Node node : getInternalNodes()) {
 			if (node != getRootNode()) {
 			    edges.add(((MutableRootedNode)node).getEdge());
@@ -608,7 +608,7 @@ public class MutableRootedTree implements RootedTree {
      */
     @Override
 	public Set<Node> getNodes(int degree) {
-        Set<Node> nodes = new LinkedHashSet<Node>();
+        Set<Node> nodes = new LinkedHashSet<>();
         for (Node node : getNodes()) {
             // Account for no anncesstor of root, assumed by default in getDegree
             final int deg = node.getDegree();
@@ -743,8 +743,8 @@ public class MutableRootedTree implements RootedTree {
     private AttributableHelper helper = null;
 
     protected MutableRootedNode rootNode = null;
-    protected final Set<Node> internalNodes = new LinkedHashSet<Node>();
-    private final Map<Taxon, Node> externalNodes = new LinkedHashMap<Taxon, Node>();
+    protected final Set<Node> internalNodes = new LinkedHashSet<>();
+    private final Map<Taxon, Node> externalNodes = new LinkedHashMap<>();
 
     private boolean heightsKnown = false;
     private boolean lengthsKnown = false;
@@ -756,24 +756,24 @@ public class MutableRootedTree implements RootedTree {
 
     private class MutableRootedNode extends BaseNode {
         public MutableRootedNode(Taxon taxon) {
-            this.children = Collections.unmodifiableList(new ArrayList<Node>());
+            this.children = Collections.unmodifiableList(new ArrayList<>());
             this.taxon = taxon;
         }
 
         public MutableRootedNode(List<? extends Node> children) {
-            this.children = Collections.unmodifiableList(new ArrayList<Node>(children));
+            this.children = Collections.unmodifiableList(new ArrayList<>(children));
             this.taxon = null;
         }
 
 
         public void removeChild(Node node) {
-            List<Node> c = new ArrayList<Node>(children);
+            List<Node> c = new ArrayList<>(children);
             c.remove(node);
             children = Collections.unmodifiableList(c);
         }
 
         public void addChild(MutableRootedNode node) {
-            List<Node> c = new ArrayList<Node>(children);
+            List<Node> c = new ArrayList<>(children);
             c.add(node);
             node.setParent(this);
             children = Collections.unmodifiableList(c);
@@ -783,7 +783,7 @@ public class MutableRootedTree implements RootedTree {
             for( MutableRootedNode n : nodes ) {
                 n.setParent(this);
             }
-            children = Collections.unmodifiableList(new ArrayList<Node>(nodes));
+            children = Collections.unmodifiableList(new ArrayList<>(nodes));
         }
 
 
@@ -845,7 +845,7 @@ public class MutableRootedTree implements RootedTree {
          * @return the adjacaencies
          */
         public List<Node> getAdjacencies() {
-            List<Node> adjacencies = new ArrayList<Node>();
+            List<Node> adjacencies = new ArrayList<>();
             if (children != null) adjacencies.addAll(children);
             if (parent != null) adjacencies.add(parent);
             return adjacencies;

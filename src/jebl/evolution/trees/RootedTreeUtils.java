@@ -93,7 +93,7 @@ public class RootedTreeUtils {
 	 */
 	public static Set<Node> getTipsForTaxa(RootedTree tree, Collection<Taxon> taxa) throws MissingTaxonException {
 
-		Set<Node> tipNodes = new LinkedHashSet<Node>();
+		Set<Node> tipNodes = new LinkedHashSet<>();
 
 		for (Taxon taxon : taxa) {
 
@@ -114,7 +114,7 @@ public class RootedTreeUtils {
 	 */
 	public static Set<Node> getDescendantTips(RootedTree tree, Node node) {
 
-		Set<Node> tipNodes = new LinkedHashSet<Node>();
+		Set<Node> tipNodes = new LinkedHashSet<>();
 		getDescendantTips(tree, node, tipNodes);
 		return tipNodes;
 	}
@@ -277,7 +277,7 @@ public class RootedTreeUtils {
 		} else {
 			StringBuffer buffer = new StringBuffer("(");
 
-			List<String> subtrees = new ArrayList<String>();
+			List<String> subtrees = new ArrayList<>();
 
 			for (Node child : tree.getChildren(node)) {
 				subtrees.add(uniqueNewick(tree, child));

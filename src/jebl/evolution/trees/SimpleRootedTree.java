@@ -48,7 +48,7 @@ final public class SimpleRootedTree implements RootedTree {
      * @throws jebl.evolution.graphs.Graph.NoEdgeException
      */
     public SimpleRootedTree(Tree tree, Node ingroupNode, Node outgroupNode, double ingroupBranchLength) throws NoEdgeException {
-        List<Node> children = new ArrayList<Node>();
+        List<Node> children = new ArrayList<>();
 
         Node node1 = createNodes(tree, outgroupNode, ingroupNode);
         setLength(node1, ingroupBranchLength);
@@ -85,7 +85,7 @@ final public class SimpleRootedTree implements RootedTree {
             newNode = createExternalNode(tree.getTaxon(node));
 
         } else {
-            List<Node> children = new ArrayList<Node>();
+            List<Node> children = new ArrayList<>();
             for (Node child : tree.getChildren(node)) {
                 children.add(createNodes(tree, child, nodeMapping));
             }
@@ -118,7 +118,7 @@ final public class SimpleRootedTree implements RootedTree {
             newNode = createExternalNode(tree.getTaxon(child));
         } else {
             List<Node> adjacencies = tree.getAdjacencies(child);
-            List<Node> children = new ArrayList<Node>();
+            List<Node> children = new ArrayList<>();
 
             for (Node child2 : adjacencies) {
                 if (child2 != parent) {
@@ -302,7 +302,7 @@ final public class SimpleRootedTree implements RootedTree {
      */
     @Override
 	public List<Node> getChildren(Node node) {
-        return new ArrayList<Node>(((SimpleRootedNode)node).getChildren());
+        return new ArrayList<>(((SimpleRootedNode)node).getChildren());
     }
 
     /**
@@ -383,7 +383,7 @@ final public class SimpleRootedTree implements RootedTree {
     @Override
 	public Set<Node> getExternalNodes() {
         return externalNodes;
-//        return new LinkedHashSet<Node>(externalNodes.values());
+//        return new LinkedHashSet<>(externalNodes.values());
     }
 
     /**
@@ -392,7 +392,7 @@ final public class SimpleRootedTree implements RootedTree {
      */
     @Override
 	public Set<Node> getInternalNodes() {
-        return new LinkedHashSet<Node>(internalNodes);
+        return new LinkedHashSet<>(internalNodes);
     }
 
     /**
@@ -403,7 +403,7 @@ final public class SimpleRootedTree implements RootedTree {
     @Override
 	public Set<Taxon> getTaxa() {
         return taxa;
-//        return new LinkedHashSet<Taxon>(externalNodes.keySet());
+//        return new LinkedHashSet<>(externalNodes.keySet());
     }
 
     /**
@@ -439,7 +439,7 @@ final public class SimpleRootedTree implements RootedTree {
     @Override
 	public Node getNode(Taxon taxon) {
         if (externalNodeMap == null) {
-            externalNodeMap = new LinkedHashMap<Taxon, Node>();
+            externalNodeMap = new LinkedHashMap<>();
             for (Node node : getExternalNodes()) {
                 externalNodeMap.put(((SimpleRootedNode)node).getTaxon(), node);
             }
@@ -472,7 +472,7 @@ final public class SimpleRootedTree implements RootedTree {
      */
     @Override
 	public List<Edge> getEdges(Node node) {
-        List<Edge> edges = new ArrayList<Edge>();
+        List<Edge> edges = new ArrayList<>();
         for (Node adjNode : getAdjacencies(node)) {
             edges.add(((SimpleRootedNode)adjNode).getEdge());
 
@@ -556,7 +556,7 @@ final public class SimpleRootedTree implements RootedTree {
 	 */
 	@Override
 	public Set<Node> getNodes() {
-	    Set<Node> nodes = new LinkedHashSet<Node>(internalNodes);
+	    Set<Node> nodes = new LinkedHashSet<>(internalNodes);
 	    nodes.addAll(getExternalNodes());
 	    return nodes;
 	}
@@ -566,7 +566,7 @@ final public class SimpleRootedTree implements RootedTree {
      */
     @Override
 	public Set<Edge> getEdges() {
-        Set<Edge> edges = new LinkedHashSet<Edge>();
+        Set<Edge> edges = new LinkedHashSet<>();
         for (Node node : getNodes()) {
             if (node != getRootNode()) {
                 edges.add(((SimpleRootedNode)node).getEdge());
@@ -583,7 +583,7 @@ final public class SimpleRootedTree implements RootedTree {
 	 */
 	@Override
 	public Set<Edge> getExternalEdges() {
-		Set<Edge> edges = new LinkedHashSet<Edge>();
+		Set<Edge> edges = new LinkedHashSet<>();
 		for (Node node : getExternalNodes()) {
 			edges.add(((SimpleRootedNode)node).getEdge());
 		}
@@ -597,7 +597,7 @@ final public class SimpleRootedTree implements RootedTree {
 	 */
 	@Override
 	public Set<Edge> getInternalEdges() {
-		Set<Edge> edges = new LinkedHashSet<Edge>();
+		Set<Edge> edges = new LinkedHashSet<>();
 		for (Node node : getInternalNodes()) {
 			if (node != getRootNode()) {
 			    edges.add(((SimpleRootedNode)node).getEdge());
@@ -612,7 +612,7 @@ final public class SimpleRootedTree implements RootedTree {
      */
     @Override
 	public Set<Node> getNodes(int degree) {
-        Set<Node> nodes = new LinkedHashSet<Node>();
+        Set<Node> nodes = new LinkedHashSet<>();
         for (Node node : getNodes()) {
             // Account for no anncesstor of root, assumed by default in getDegree
             final int deg = node.getDegree() ;
@@ -752,9 +752,9 @@ final public class SimpleRootedTree implements RootedTree {
     private AttributableHelper helper = null;
 
     protected SimpleRootedNode rootNode = null;
-    protected final Set<Node> internalNodes = new LinkedHashSet<Node>();
-    private final Set<Node> externalNodes = new LinkedHashSet<Node>();
-    private final Set<Taxon> taxa = new LinkedHashSet<Taxon>();
+    protected final Set<Node> internalNodes = new LinkedHashSet<>();
+    private final Set<Node> externalNodes = new LinkedHashSet<>();
+    private final Set<Taxon> taxa = new LinkedHashSet<>();
 
     // Not created initially for efficiency reasons. Will be created lazily as needed.
     private Map<Taxon, Node> externalNodeMap = null;
@@ -769,23 +769,23 @@ final public class SimpleRootedTree implements RootedTree {
 
     private class SimpleRootedNode extends BaseNode {
         public SimpleRootedNode(Taxon taxon) {
-            this.children = Collections.unmodifiableList(new ArrayList<Node>());
+            this.children = Collections.unmodifiableList(new ArrayList<>());
             this.taxon = taxon;
         }
 
         public SimpleRootedNode(List<? extends Node> children) {
-            this.children = Collections.unmodifiableList(new ArrayList<Node>(children));
+            this.children = Collections.unmodifiableList(new ArrayList<>(children));
             this.taxon = null;
         }
 
         public void removeChild(Node node) {
-            List<Node> c = new ArrayList<Node>(children);
+            List<Node> c = new ArrayList<>(children);
             c.remove(node);
             children = Collections.unmodifiableList(c);
         }
 
         public void addChild(SimpleRootedNode node) {
-            List<Node> c = new ArrayList<Node>(children);
+            List<Node> c = new ArrayList<>(children);
             c.add(node);
             node.setParent(this);
             children = Collections.unmodifiableList(c);
@@ -796,11 +796,11 @@ final public class SimpleRootedTree implements RootedTree {
             for( SimpleRootedNode n : nodes ) {
                 n.setParent(this);
             }
-            children = Collections.unmodifiableList(new ArrayList<Node>(nodes));
+            children = Collections.unmodifiableList(new ArrayList<>(nodes));
         }
 
         void swapChildren(int i0, int i1) {
-            ArrayList<Node> nc = new ArrayList<Node>(children);
+            ArrayList<Node> nc = new ArrayList<>(children);
             //there was a user reported crash where i0 was > size of the array of children nodes
             if (i0 < 0 || i0 >= nc.size() || i1 < 0 || i1 >= nc.size()) {
                 throw new IllegalArgumentException("Tried to swap children ("+i0+","+i1+") on node with " + nc.size() + " children");
@@ -898,7 +898,7 @@ final public class SimpleRootedTree implements RootedTree {
          * @return the adjacaencies
          */
         public List<Node> getAdjacencies() {
-            List<Node> adjacencies = new ArrayList<Node>();
+            List<Node> adjacencies = new ArrayList<>();
             if (children != null) adjacencies.addAll(children);
             if (parent != null) adjacencies.add(parent);
             return adjacencies;

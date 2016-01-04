@@ -127,7 +127,7 @@ public final class Codons {
         STATES[64] = UNKNOWN_STATE;
         STATES[65] = GAP_STATE;
 
-        statesByCode = new HashMap<String, CodonState>();
+        statesByCode = new HashMap<>();
         for (int i = 0; i < STATES.length; i++) {
             statesByCode.put(STATES[i].getCode(), STATES[i]);
         }

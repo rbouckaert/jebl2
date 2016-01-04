@@ -76,7 +76,7 @@ public abstract class ConsensusTreeBuilder<T extends Tree> implements TreeBuilde
         this.supportAttributeName = supportAttributeName;
 	    this.supportAsPercent = supportInPercent;
         this.nExternalNodes = trees[0].getExternalNodes().size();
-        this.taxons = Collections.unmodifiableList(new ArrayList<Taxon>(trees[0].getTaxa()));
+        this.taxons = Collections.unmodifiableList(new ArrayList<>(trees[0].getTaxa()));
         Utils.assertAllTreesHaveTheSameTaxa(Arrays.asList(trees));
     }
 
@@ -134,7 +134,7 @@ public abstract class ConsensusTreeBuilder<T extends Tree> implements TreeBuilde
 	    boolean canceled = false;
         List<ProgressListener> listenersCopy;
         synchronized(listeners) { // create a copy because we don't want to hold the lock while calling the listeners
-            listenersCopy = new ArrayList<ProgressListener>(listeners);
+            listenersCopy = new ArrayList<>(listeners);
         }
         for (ProgressListener listener : listenersCopy) {
             if (listener.setProgress(fractionCompleted)) {
@@ -144,5 +144,5 @@ public abstract class ConsensusTreeBuilder<T extends Tree> implements TreeBuilde
         return canceled;
     }
 
-    private final List<ProgressListener> listeners = new ArrayList<ProgressListener>();
+    private final List<ProgressListener> listeners = new ArrayList<>();
 }

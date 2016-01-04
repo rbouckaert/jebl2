@@ -104,7 +104,7 @@ public class NewickImporter implements TreeImporter {
 
     @Override
 	public List<Tree> importTrees() throws IOException, ImportException {
-        List<Tree> trees = new ArrayList<Tree>();
+        List<Tree> trees = new ArrayList<>();
 
         while (hasTree()) {
             final Tree t = importNextTree();
@@ -161,7 +161,7 @@ public class NewickImporter implements TreeImporter {
      */
     private Node readInternalNode(SimpleRootedTree tree) throws IOException, ImportException
     {
-        List<Node> children = new ArrayList<Node>();
+        List<Node> children = new ArrayList<>();
 
         // read the opening '('
         helper.readCharacter();

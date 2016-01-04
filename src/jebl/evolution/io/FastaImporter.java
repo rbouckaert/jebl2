@@ -100,12 +100,12 @@ public class FastaImporter implements SequenceImporter, ImmediateSequenceImporte
                                 ProgressListener progressListener)
             throws IOException, ImportException
     {
-        final List<Sequence> sequences = (callback == null) ? new ArrayList<Sequence>() : null;
+        final List<Sequence> sequences = (callback == null) ? new ArrayList<>() : null;
         final char fastaFirstChar = '>';
         final String fasta1stCharAsString = new String(new char[]{fastaFirstChar});
         final SequenceType seqtypeForGapsAndMissing = sequenceType != null ? sequenceType : SequenceType.NUCLEOTIDE;
         final AtomicReference<IllegalCharacterPolicy> illegalCharacterPolicyForThisImport
-                = new AtomicReference<IllegalCharacterPolicy>(illegalCharacterPolicy);
+                = new AtomicReference<>(illegalCharacterPolicy);
         try {
             // find fasta line start
             while (helper.read() != fastaFirstChar) {

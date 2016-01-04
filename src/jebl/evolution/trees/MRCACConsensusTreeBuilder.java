@@ -213,7 +213,7 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
     private RootedTree earliestCommonAncestorClustering(double supportThreshold) {
 
         MutableRootedTree consensus = new MutableRootedTree();
-        List<Node> subTrees = new ArrayList<Node>(nExternalNodes);
+        List<Node> subTrees = new ArrayList<>(nExternalNodes);
 
         // compute average length of branch from tip over all trees
         double[] tipHeights = new double[taxons.size()];
@@ -225,7 +225,7 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
         }
 
         // Start with each tip in it's own cluster
-        tipsInCluster = new ArrayList<FixedBitSet>(nExternalNodes);
+        tipsInCluster = new ArrayList<>(nExternalNodes);
         for(int k = 0; k < nExternalNodes; ++k) {
             FixedBitSet b = new FixedBitSet(nExternalNodes);
             b.set(k);

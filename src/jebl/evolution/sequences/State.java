@@ -29,7 +29,7 @@ public abstract class State implements Comparable<State> {
     State(String name, String stateCode, int index, State[] ambiguities) {
         this.name = name;
         this.stateCode = stateCode;
-        this.ambiguities = Collections.unmodifiableSortedSet(new TreeSet<State>(Arrays.asList(ambiguities)));
+        this.ambiguities = Collections.unmodifiableSortedSet(new TreeSet<>(Arrays.asList(ambiguities)));
         this.index = index;
     }
 

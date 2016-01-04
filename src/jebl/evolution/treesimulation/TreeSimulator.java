@@ -40,7 +40,7 @@ public class TreeSimulator {
 	public TreeSimulator(String taxonPrefix, double[] samplingTimes) {
 //		this.intervalGenerator = intervalGenerator;
 
-		List<Taxon> taxonList = new ArrayList<Taxon>();
+		List<Taxon> taxonList = new ArrayList<>();
 		for (int i = 0; i < samplingTimes.length; i++) {
 			Taxon taxon = Taxon.getTaxon(taxonPrefix + Integer.toString(i + 1) + "_" + Double.toString(samplingTimes[i]));
 			taxon.setAttribute("height", samplingTimes[i]);
@@ -51,7 +51,7 @@ public class TreeSimulator {
 	}
 
 	public TreeSimulator(String taxonPrefix, int[] samplingCounts, double[] samplingTimes) {
-		List<Taxon> taxonList = new ArrayList<Taxon>();
+		List<Taxon> taxonList = new ArrayList<>();
 		int k =0;
 		for (int i = 0; i < samplingCounts.length; i++) {
 			for (int j = 0; j < samplingCounts[i]; j++) {
@@ -71,7 +71,7 @@ public class TreeSimulator {
 	 * @param taxa
 	 */
 	public TreeSimulator(final Collection<Taxon> taxa, final String heightAttributeName) {
-		List<Taxon> taxonList = new ArrayList<Taxon>();
+		List<Taxon> taxonList = new ArrayList<>();
 		for (Taxon taxon : taxa) {
 			taxonList.add(taxon);
 		}
@@ -81,9 +81,7 @@ public class TreeSimulator {
 	private void setTaxa(List<Taxon> taxa, final String heightAttributeName) {
 		this.taxa = taxa;
 		this.heightAttributeName = heightAttributeName;
-		Collections.sort(this.taxa, new Comparator<Taxon>() {
-			@Override
-			public int compare(Taxon taxon1, Taxon taxon2) {
+		Collections.sort(this.taxa, (taxon1, taxon2) -> {
 				double height1 = 0.0;
 				double height2 = 0.0;
 
@@ -96,8 +94,7 @@ public class TreeSimulator {
 					height2 = attr.doubleValue();
 				}
 				return Double.compare(height1, height2);
-			}
-		});
+			});
 	}
 
 	public RootedTree simulate(IntervalGenerator intervalGenerator) {
@@ -119,7 +116,7 @@ public class TreeSimulator {
 			i++;
 		}
 
-		List<Node> activeNodes = new ArrayList<Node>();
+		List<Node> activeNodes = new ArrayList<>();
 
 		double currentHeight = 0.0;
 		double nextHeight = 0.0;
@@ -218,12 +215,12 @@ public class TreeSimulator {
 //		RootedTree tree1 = sim.simulate(true);
 //		RootedTree tree2 = sim.oldSimulate(true);
 //
-//		List<Double> heights1 = new ArrayList<Double>();
+//		List<Double> heights1 = new ArrayList<>();
 //		for (Node node : tree1.getInternalNodes()) {
 //			heights1.add(tree1.getHeight(node));
 //		}
 //
-//		List<Double> heights2 = new ArrayList<Double>();
+//		List<Double> heights2 = new ArrayList<>();
 //		for (Node node : tree2.getInternalNodes()) {
 //			heights2.add(tree2.getHeight(node));
 //		}

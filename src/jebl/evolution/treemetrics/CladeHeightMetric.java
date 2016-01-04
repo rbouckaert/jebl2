@@ -74,7 +74,7 @@ public class CladeHeightMetric implements RootedTreeMetric {
 	}
 
 	public CladeHeightMetric(List<Taxon> taxa) {
-		taxonMap = new HashMap<Taxon, Integer>();
+		taxonMap = new HashMap<>();
 		for (int i = 0; i < taxa.size(); i++) {
 			taxonMap.put(taxa.get(i), i);
 		}
@@ -90,20 +90,20 @@ public class CladeHeightMetric implements RootedTreeMetric {
 		Map<Taxon, Integer> tm = taxonMap;
 
 		if (tm == null) {
-			List<Taxon> taxa = new ArrayList<Taxon>(tree1.getTaxa());
+			List<Taxon> taxa = new ArrayList<>(tree1.getTaxa());
 
 			if (!tree2.getTaxa().equals(taxa))
-			tm = new HashMap<Taxon, Integer>();
+			tm = new HashMap<>();
 			for (int i = 0; i < taxa.size(); i++) {
 				tm.put(taxa.get(i), i);
 			}
 		}
 
-		List<Clade> clades1 = new ArrayList<Clade>();
+		List<Clade> clades1 = new ArrayList<>();
 		getClades(tm, tree1, tree1.getRootNode(), clades1, null);
 		Collections.sort(clades1);
 
-		List<Clade> clades2 = new ArrayList<Clade>();
+		List<Clade> clades2 = new ArrayList<>();
 		getClades(tm, tree2, tree2.getRootNode(), clades2, null);
 		Collections.sort(clades2);
 

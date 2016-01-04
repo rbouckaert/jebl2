@@ -37,7 +37,7 @@ public class AttributedCladeSystem extends CladeSystem {
 //			cladeTaxa.add(tree.getTaxon(node));
 //		} else {
 //
-//			Set<Taxon> childCladeTaxa = new LinkedHashSet<Taxon>();
+//			Set<Taxon> childCladeTaxa = new LinkedHashSet<>();
 //			for (Node child : tree.getChildren(node)) {
 //
 //				addClades(tree, child, childCladeTaxa);
@@ -52,7 +52,7 @@ public class AttributedCladeSystem extends CladeSystem {
 //	private class AttributedClade {
 //
 //		private String attributeName;
-//		private final List<Double> values = new ArrayList<Double>();
+//		private final List<Double> values = new ArrayList<>();
 //
 //		public AttributedClade(String name, Set<Taxon> taxa) {
 //			this.attributeName = name;
@@ -98,7 +98,7 @@ public class AttributedCladeSystem extends CladeSystem {
 //	//
 //	// Private stuff
 //	//
-//	private final List<AttributedClade> clades = new ArrayList<AttributedClade>();
+//	private final List<AttributedClade> clades = new ArrayList<>();
 //	//private String attributeName;
 }
 

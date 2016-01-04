@@ -56,7 +56,7 @@ public interface Attributable {
         private Utils() { }  // make class uninstantiable
 
         Set<String> getAttributeNames(Collection<Attributable> attributables) {
-            Set<String> names = new HashSet<String>();
+            Set<String> names = new HashSet<>();
 
             for (Attributable attributable : attributables) {
                 names.addAll(attributable.getAttributeNames());

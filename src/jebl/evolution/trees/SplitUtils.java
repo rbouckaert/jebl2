@@ -27,7 +27,7 @@ public class SplitUtils {
 	 * @param tree
 	 */
 	public static SplitSystem getSplits(Tree tree) {
-		return getSplits(new ArrayList<Taxon>(tree.getTaxa()), tree);
+		return getSplits(new ArrayList<>(tree.getTaxa()), tree);
 	}
 
 	/**

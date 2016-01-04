@@ -136,7 +136,7 @@ public final class Utils {
 		}
 
 		final List<Node> children = tree.getChildren(node);
-		List<String[]> a = new ArrayList<String[]>(children.size());
+		List<String[]> a = new ArrayList<>(children.size());
 		int[] branches = new int[children.size()];
 		int tot = 0;
 		int maxHeight = -1;
@@ -157,7 +157,7 @@ public final class Utils {
 		// one empty line between sub trees
 		tot += children.size() - 1;
 
-		ArrayList<String> x = new ArrayList<String>(tot);
+		ArrayList<String> x = new ArrayList<>(tot);
 		for (int i = 0; i < a.size(); ++i) {
 			String[] s = a.get(i);
 			int branchIndex = s.length / 2;
@@ -256,7 +256,7 @@ public final class Utils {
 	}
 
 	private static double dist(Tree tree, Node root, Node node, Map<HashPair<Node>, Double> dists) throws Graph.NoEdgeException {
-		HashPair<Node> p = new HashPair<Node>(root, node);
+		HashPair<Node> p = new HashPair<>(root, node);
 		if (dists.containsKey(p)) {
 			return dists.get(p);
 		}
@@ -331,7 +331,7 @@ public final class Utils {
 		// Method - find the pair of tips with the longest distance. It is easy to see that the center
 		// is at the midpoint of the path between them.
 
-		HashMap<HashPair<Node>, Double> dists = new LinkedHashMap<HashPair<Node>, Double>();
+		HashMap<HashPair<Node>, Double> dists = new LinkedHashMap<>();
 		try {
 			double maxDistance = -Double.MAX_VALUE;
 			// node on maximal path
@@ -388,7 +388,7 @@ public final class Utils {
 	 */
 	public static double getPathLength(Tree tree, Node node1, Node node2) {
 		try {
-			HashMap<HashPair<Node>, Double> dists = new LinkedHashMap<HashPair<Node>, Double>();
+			HashMap<HashPair<Node>, Double> dists = new LinkedHashMap<>();
 			return dist(tree, node1, node2, dists);
 		} catch (Graph.NoEdgeException e1) {
 			return -1.0;
@@ -449,7 +449,7 @@ public final class Utils {
 	 * @return nodes in pre-order
 	 */
 	public static List<Node> getNodes(RootedTree tree, Node node) {
-		final List<Node> nodes = new ArrayList<Node>();
+		final List<Node> nodes = new ArrayList<>();
 		nodes.add(node);
 
 		for (Node child : tree.getChildren(node)) {
@@ -593,14 +593,14 @@ public final class Utils {
 	 * @return An unmodifiable set which contains all of the elements of a except for those which are also in b.
 	 */
 	private static<T> Set<T> setMinus(Set<T> a, Collection<T> b) {
-		Set<T> diff = new LinkedHashSet<T>(a);
+		Set<T> diff = new LinkedHashSet<>(a);
 		diff.removeAll(b);
 		return Collections.unmodifiableSet(diff);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static<T extends Comparable> List<T> sort(Collection<T> c) {
-		List<T> result = new ArrayList<T>(c);
+		List<T> result = new ArrayList<>(c);
 		Collections.sort(result);
 		return result;
 	}
@@ -679,17 +679,11 @@ public final class Utils {
 
 			final int last = children.size() - 1;
 			// Generate a uniquely sorted list of children
-			List<String> childStrings = new ArrayList<String>();
+			List<String> childStrings = new ArrayList<>();
 			for (Node aChildren : children) {
 				childStrings.add(toUniqueNewickByAttribute(tree, aChildren, attribute));
 			}
-			Collections.sort(childStrings,
-					new Comparator<String>() {
-						@Override
-						public int compare(String arg0, String arg1) {
-							return arg1.compareTo(arg0);
-						}
-					});
+			Collections.sort(childStrings,(arg0, arg1) -> arg1.compareTo(arg0));
 			for (int i = 0; i <= last; i++) {
 				buffer.append(childStrings.get(i));
 				buffer.append(i == last ? ')' : ',');

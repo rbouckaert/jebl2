@@ -156,7 +156,7 @@ public class AlignmentTreeBuilderFactory {
        // needDistances = false;
 
         SimpleRootedTree gtree = new SimpleRootedTree();
-        List<Node> nodes = new ArrayList<Node>();
+        List<Node> nodes = new ArrayList<>();
         for(Sequence s : seqs) {
             Node tip = gtree.createExternalNode(s.getTaxon());
             nodes.add(tip);
@@ -164,7 +164,7 @@ public class AlignmentTreeBuilderFactory {
 
         int nnodes = nodes.size();
         while( nnodes > 1 ) {
-           List<Node> upnodes = new ArrayList<Node>();
+           List<Node> upnodes = new ArrayList<>();
             for(int k = 0; k < nnodes/2; ++k) {
                 upnodes.add(gtree.createInternalNode(nodes.subList(2*k,2*k+2)));
             }

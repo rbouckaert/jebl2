@@ -81,8 +81,8 @@ public final class SimpleTree implements Tree {
 
         final Edge edge = new SimpleEdge(node1, node2, length);
 
-        edges.put(new HashPair<Node>(node1, node2), edge);
-        edges.put(new HashPair<Node>(node2, node1), edge);
+        edges.put(new HashPair<>(node1, node2), edge);
+        edges.put(new HashPair<>(node2, node1), edge);
     }
 
     /**
@@ -122,7 +122,7 @@ public final class SimpleTree implements Tree {
         if( source.isExternal(node) ) {
             h = createExternalNode(source.getTaxon(node));
         } else {
-            h = createInternalNode(new ArrayList<Node>() );
+            h = createInternalNode(new ArrayList<>() );
         }
 
         final List<Node> adjacencies = source.getAdjacencies(node);
@@ -147,7 +147,7 @@ public final class SimpleTree implements Tree {
 	public List<Edge> getEdges(Node node) {
         //return null;
         List<Node> adjacencies = getAdjacencies(node);
-        List<Edge> edges = new ArrayList<Edge>();
+        List<Edge> edges = new ArrayList<>();
         for(Node adjNode : adjacencies){
             try{
                 edges.add(getEdge(node,adjNode));
@@ -177,7 +177,7 @@ public final class SimpleTree implements Tree {
      */
     @Override
 	public Edge getEdge(Node node1, Node node2) throws NoEdgeException {
-        Edge edge = edges.get(new HashPair<Node>(node1, node2));
+        Edge edge = edges.get(new HashPair<>(node1, node2));
         if( edge == null ) {
             // not connected
             throw new NoEdgeException();
@@ -191,7 +191,7 @@ public final class SimpleTree implements Tree {
      */
     @Override
 	public Set<Node> getExternalNodes() {
-        return new LinkedHashSet<Node>(externalNodes.values());
+        return new LinkedHashSet<>(externalNodes.values());
     }
 
     /**
@@ -200,7 +200,7 @@ public final class SimpleTree implements Tree {
      */
     @Override
 	public Set<Node> getInternalNodes() {
-        return new LinkedHashSet<Node>(internalNodes);
+        return new LinkedHashSet<>(internalNodes);
     }
 
 	/**
@@ -210,7 +210,7 @@ public final class SimpleTree implements Tree {
 	 */
 	@Override
 	public Set<Taxon> getTaxa() {
-	    return new LinkedHashSet<Taxon>(externalNodes.keySet());
+	    return new LinkedHashSet<>(externalNodes.keySet());
 	}
     /**
      * @param node the node whose associated taxon is being requested.
@@ -285,7 +285,7 @@ public final class SimpleTree implements Tree {
 	 */
 	@Override
 	public Set<Node> getNodes() {
-	    Set<Node> nodes = new LinkedHashSet<Node>(internalNodes);
+	    Set<Node> nodes = new LinkedHashSet<>(internalNodes);
 	    nodes.addAll(externalNodes.values());
 	    return nodes;
 	}
@@ -295,7 +295,7 @@ public final class SimpleTree implements Tree {
      */
     @Override
 	public Set<Edge> getEdges() {
-        return new LinkedHashSet<Edge>(edges.values());
+        return new LinkedHashSet<>(edges.values());
     }
 
     /**
@@ -304,7 +304,7 @@ public final class SimpleTree implements Tree {
      */
     @Override
 	public Set<Node> getNodes(int degree) {
-        Set<Node> nodes = new LinkedHashSet<Node>();
+        Set<Node> nodes = new LinkedHashSet<>();
         for (Node node : getNodes()) {
             if (((SimpleNode)node).getDegree() == degree) nodes.add(node);
         }
@@ -318,7 +318,7 @@ public final class SimpleTree implements Tree {
 	 */
 	@Override
 	public Set<Edge> getExternalEdges() {
-		Set<Edge> externalEdges = new LinkedHashSet<Edge>();
+		Set<Edge> externalEdges = new LinkedHashSet<>();
 		for (Edge edge : getEdges()) {
 			if (((SimpleEdge)edge).isExternal()) {
  				externalEdges.add(edge);
@@ -334,7 +334,7 @@ public final class SimpleTree implements Tree {
 	 */
 	@Override
 	public Set<Edge> getInternalEdges() {
-		Set<Edge> internalEdges = new LinkedHashSet<Edge>();
+		Set<Edge> internalEdges = new LinkedHashSet<>();
 		for (Edge edge : getEdges()) {
 			if (!((SimpleEdge)edge).isExternal()) {
  				internalEdges.add(edge);
@@ -387,8 +387,8 @@ public final class SimpleTree implements Tree {
     // PRIVATE members
 
     private AttributableHelper helper = null;
-    private final Set<Node> internalNodes = new LinkedHashSet<Node>();
-    private final Map<Taxon, Node> externalNodes = new LinkedHashMap<Taxon, Node>();
+    private final Set<Node> internalNodes = new LinkedHashSet<>();
+    private final Map<Taxon, Node> externalNodes = new LinkedHashMap<>();
     /**
      * A mapping between edges and edge length.
      */
@@ -401,7 +401,7 @@ public final class SimpleTree implements Tree {
          * @param taxon
          */
         private SimpleNode(Taxon taxon) {
-            this.adjacencies = Collections.unmodifiableList(new ArrayList<Node>());
+            this.adjacencies = Collections.unmodifiableList(new ArrayList<>());
             this.taxon = taxon;
         }
 
@@ -419,7 +419,7 @@ public final class SimpleTree implements Tree {
          * @param node
          */
         public void addAdjacency(Node node) {
-            List<Node> a = new ArrayList<Node>(adjacencies);
+            List<Node> a = new ArrayList<>(adjacencies);
             a.add(node);
             adjacencies = Collections.unmodifiableList(a);
         }

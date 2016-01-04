@@ -126,7 +126,7 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
 	public final RootedTree build() {
 
         // establish support
-        Map<FixedBitSet, Support> support = new LinkedHashMap<FixedBitSet, Support>();
+        Map<FixedBitSet, Support> support = new LinkedHashMap<>();
         int k = 0;
         for (RootedTree tree : rtrees) {
             if (debug) {
@@ -146,10 +146,10 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
 
         // Contains all internal nodes in the tree so far, ordered so descendants
         // appear later than ancestors
-        List<Node> internalNodes = new ArrayList<Node>(nExternalNodes);
+        List<Node> internalNodes = new ArrayList<>(nExternalNodes);
 
         // For each internal node, a bit-set with the complete set of tips for it's clade
-        List<FixedBitSet> internalNodesTips = new ArrayList<FixedBitSet>(nExternalNodes);
+        List<FixedBitSet> internalNodesTips = new ArrayList<>(nExternalNodes);
         assert taxons.size() == nExternalNodes;
 
         // establish a tree with one root having all tips as descendants
@@ -173,7 +173,7 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
 
         // add everything to queue
         PriorityQueue<Map.Entry<FixedBitSet, Support>> queue =
-                new PriorityQueue<Map.Entry<FixedBitSet, Support>>(support.size(), comparator);
+                new PriorityQueue<>(support.size(), comparator);
 
         for (Map.Entry<FixedBitSet, Support> se : support.entrySet()) {
             Support s = se.getValue();
@@ -229,7 +229,7 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
 
                     // Locate node descendants containing the split
                     found = true;
-                    List<Integer> split = new ArrayList<Integer>();
+                    List<Integer> split = new ArrayList<>();
 
                     Node n = internalNodes.get(nsub);
                     int l = 0;

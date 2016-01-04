@@ -37,8 +37,8 @@ public class FitchParsimony implements ParsimonyCriterion {
 	private final int stateCount;
 	private final boolean gapsAreStates;
 
-	private Map<Node, boolean[][]> stateSets = new HashMap<Node, boolean[][]>();
-	private Map<Node, State[]> states = new HashMap<Node, State[]>();
+	private Map<Node, boolean[][]> stateSets = new HashMap<>();
+	private Map<Node, State[]> states = new HashMap<>();
 
 //    private boolean[][] union;         // Must now be local to recursive function
 //    private boolean[][] intersection;  // as nodes are not guaranteed to be called in post-order

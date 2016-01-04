@@ -18,7 +18,7 @@ public class RobinsonsFouldMetric implements RootedTreeMetric {
 	}
 
 	public RobinsonsFouldMetric(List<Taxon> taxa) {
-		taxonMap = new HashMap<Taxon, Integer>();
+		taxonMap = new HashMap<>();
 		for (int i = 0; i < taxa.size(); i++) {
 			taxonMap.put(taxa.get(i), i);
 		}
@@ -30,9 +30,9 @@ public class RobinsonsFouldMetric implements RootedTreeMetric {
 		Map<Taxon, Integer> tm = taxonMap;
 
 		if (tm == null) {
-			List<Taxon> taxa = new ArrayList<Taxon>(tree1.getTaxa());
+			List<Taxon> taxa = new ArrayList<>(tree1.getTaxa());
 
-			tm = new HashMap<Taxon, Integer>();
+			tm = new HashMap<>();
 			for (int i = 0; i < taxa.size(); i++) {
 				tm.put(taxa.get(i), i);
 			}
@@ -48,7 +48,7 @@ public class RobinsonsFouldMetric implements RootedTreeMetric {
 
 	private Set<String> getClades(Map<Taxon, Integer> taxa, RootedTree tree) {
 
-		Set<String> clades = new HashSet<String>();
+		Set<String> clades = new HashSet<>();
 
 		getTips(taxa, tree, tree.getRootNode(), clades);
 
@@ -57,7 +57,7 @@ public class RobinsonsFouldMetric implements RootedTreeMetric {
 
 	private Set<Integer> getTips(Map<Taxon, Integer> taxa, RootedTree tree, Node node, Set<String> clades) {
 
-		Set<Integer> tips = new TreeSet<Integer>();
+		Set<Integer> tips = new TreeSet<>();
 
 		if (tree.isExternal(node)) {
 			tips.add(taxa.get(tree.getTaxon(node)));

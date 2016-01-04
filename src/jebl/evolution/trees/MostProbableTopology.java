@@ -40,10 +40,10 @@ public class MostProbableTopology {
      * @param trees
      */
     public MostProbableTopology(Collection<? extends Tree> trees) {
-        this.trees = new ArrayList<Tree>(trees);
+        this.trees = new ArrayList<>(trees);
         Tree tree0 = this.trees.get(0);
         rootedSet = tree0 instanceof RootedTree && !((RootedTree)tree0).conceptuallyUnrooted();
-        taxa = new ArrayList<Taxon>(trees.iterator().next().getTaxa());
+        taxa = new ArrayList<>(trees.iterator().next().getTaxa());
     }
 
     /**
@@ -214,7 +214,7 @@ public class MostProbableTopology {
 
         public UnrootedTreeInfo(SimpleTree t) {
             super(t);
-            m = new LinkedHashMap<FixedBitSet, EdgeInfo>();
+            m = new LinkedHashMap<>();
             traverse(new EdgeCallback() {
                 @Override
 				public void visit(Edge e, FixedBitSet tipSet) {
@@ -290,7 +290,7 @@ public class MostProbableTopology {
 
         TreeInfo(SimpleRootedTree t) {
             super(t);
-            m = new LinkedHashMap<FixedBitSet, NodeInfo>();
+            m = new LinkedHashMap<>();
             traverse(new NodeCallback() {
                 @Override
 				public void visit(Node n, FixedBitSet tipSet) {
@@ -340,7 +340,7 @@ public class MostProbableTopology {
         // Unrooted trees are rooted at the internal node connected to the first tip (taxa[0]) and the rooted
         // method is applied to that.
 
-        Map<String, TopologyEntry> m = new LinkedHashMap<String, TopologyEntry>(nTrees);
+        Map<String, TopologyEntry> m = new LinkedHashMap<>(nTrees);
         for(int nTree = 0; nTree < nTrees; ++ nTree) {
             final Tree t = trees.get(nTree);
             final String rep = standardTopologyRepresentation(t);
@@ -363,14 +363,14 @@ public class MostProbableTopology {
 
         // add everything to queue
         PriorityQueue<Map.Entry<String, TopologyEntry>> queue =
-                new PriorityQueue<Map.Entry<String, TopologyEntry>>(m.size(), comparator);
+                new PriorityQueue<>(m.size(), comparator);
 
         for (Map.Entry<String, TopologyEntry> s : m.entrySet()) {
             queue.add(s);
         }
 
         // collect candidates
-        final List<Info> candidates = new ArrayList<Info>();
+        final List<Info> candidates = new ArrayList<>();
 
         //final int th = threshold > 0 ? (int)(threshold * nTrees) : 1;
         final int th = (int)(threshold * nTrees);
@@ -436,7 +436,7 @@ public class MostProbableTopology {
         }
 
         // Set heights/lengths from accumulated information
-        List<Tree> results = new ArrayList<Tree>();
+        List<Tree> results = new ArrayList<>();
         for (final Info info : candidates) {
             info.setBranches();
 

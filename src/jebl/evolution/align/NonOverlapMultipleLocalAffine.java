@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class NonOverlapMultipleLocalAffine extends AlignRepeatAffine {
 
-	private ArrayList<LocalAlignment> localAligns = new ArrayList<LocalAlignment>();
+	private ArrayList<LocalAlignment> localAligns = new ArrayList<>();
 	private SmithWatermanLinearSpaceAffine swlsa;
 
 	public NonOverlapMultipleLocalAffine(Scores sub, float d, float e, int T) {

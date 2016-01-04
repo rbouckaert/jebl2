@@ -34,6 +34,6 @@ public class AttributableHelper implements Attributable {
 		return Collections.unmodifiableMap(attributeMap);
 	}
 
-	Map<String, Object> attributeMap = new LinkedHashMap<String, Object>();
+	Map<String, Object> attributeMap = new LinkedHashMap<>();
 }
 

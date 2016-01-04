@@ -36,7 +36,7 @@ public class PhylipSequentialImporter implements SequenceImporter {
     @Override
 	public List<Sequence> importSequences() throws IOException, ImportException {
 
-        List<Sequence> sequences = new ArrayList<Sequence>();
+        List<Sequence> sequences = new ArrayList<>();
 
         try {
 

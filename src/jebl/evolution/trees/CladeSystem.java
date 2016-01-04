@@ -18,7 +18,7 @@ public class CladeSystem {
     //
     private Set<Taxon> taxa = null;
 
-    private final List<Clade> clades = new ArrayList<Clade>();
+    private final List<Clade> clades = new ArrayList<>();
 
 	//
 	// Public stuff
@@ -32,7 +32,7 @@ public class CladeSystem {
 	 */
 	public CladeSystem(RootedTree tree)
 	{
-		this.taxa = new TreeSet<Taxon>(tree.getTaxa());
+		this.taxa = new TreeSet<>(tree.getTaxa());
 		add(tree);
 	}
 
@@ -73,12 +73,12 @@ public class CladeSystem {
 	public void add(RootedTree tree)
 	{
 		if (taxa == null) {
-			taxa = new TreeSet<Taxon>(tree.getTaxa());
+			taxa = new TreeSet<>(tree.getTaxa());
 		}
 
 		// Recurse over the tree and add all the clades (or increment their
 		// frequency if already present). The root clade is not added.
-		addClades(tree, tree.getRootNode(), new LinkedHashSet<Taxon>());
+		addClades(tree, tree.getRootNode(), new LinkedHashSet<>());
 	}
 
 	private void addClades(RootedTree tree, Node node, Set<Taxon> cladeTaxa) {
@@ -86,7 +86,7 @@ public class CladeSystem {
 			cladeTaxa.add(tree.getTaxon(node));
 		} else {
 
-			Set<Taxon> childCladeTaxa= new LinkedHashSet<Taxon>();
+			Set<Taxon> childCladeTaxa= new LinkedHashSet<>();
 			for (Node child : tree.getChildren(node)) {
 
 				addClades(tree, child, childCladeTaxa);

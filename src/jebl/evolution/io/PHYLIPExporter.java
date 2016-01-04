@@ -33,7 +33,7 @@ public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
     }
 
     private boolean namesUnique(List<String> names) {
-        Set<String> all = new HashSet<String>();
+        Set<String> all = new HashSet<>();
         for( String name : names ) {
             if( all.contains(name) ) {
                 return false;
@@ -44,7 +44,7 @@ public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
     }
 
     private List<String> tryNames(List<String> names, int fromBegining, int fromEnd) {
-        List<String> pnames = new ArrayList<String>(names.size());
+        List<String> pnames = new ArrayList<>(names.size());
         final int total = fromBegining + fromEnd;
         for( String name : names ) {
             final int len = name.length();
@@ -64,7 +64,7 @@ public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
     }
 
     private List<String> phylipNames(List<Sequence> seqs) {
-       List<String> names = new ArrayList<String>();
+       List<String> names = new ArrayList<>();
         for( Sequence s : seqs ) {
             // PHYML plugin does not like spaces in names. I guess this may mean Phylip does not allows them,
             // but not sure (JH)
@@ -81,7 +81,7 @@ public class PHYLIPExporter implements AlignmentExporter, TreeExporter {
 
         if( pnames == null ) {
             final int nDig = (int)Math.ceil(Math.log10(names.size()));
-            pnames = new ArrayList<String>(names.size());
+            pnames = new ArrayList<>(names.size());
             for(int i = 0; i < names.size(); ++i) {
                 String f = "%" + (9-nDig) + "." + (9-nDig) + "s%0" + nDig + "d";
                 pnames.add(String.format(f, names.get(i), i));

@@ -134,7 +134,7 @@ public final class GeneticCode {
         this.ncbiTranslationTableNumber = ncbiTranslationTableNumber;
         this.startCodons = startCodons;
 
-        Map<CodonState, AminoAcidState> translationMap = new TreeMap<CodonState, AminoAcidState>();
+        Map<CodonState, AminoAcidState> translationMap = new TreeMap<>();
 
         if (codeTable.length() != 64) {
             throw new IllegalArgumentException("Code Table length does not match number of codon states");
@@ -358,7 +358,7 @@ public final class GeneticCode {
 	 * @return all the possible codons for a given amino acid
 	 */
 	public Set<CodonState> getCodonsForAminoAcid(AminoAcidState aminoAcidState) {
-        Set<CodonState> aaSet = new HashSet<CodonState>();
+        Set<CodonState> aaSet = new HashSet<>();
         for (CodonState state : translationMap.keySet()) {
             if (translationMap.get(state) == aminoAcidState) {
                 aaSet.add(state);
@@ -378,7 +378,7 @@ public final class GeneticCode {
 	 * @return the codon states of stops.
 	 */
 	public Set<CodonState> getStopCodons() {
-        Set<CodonState> stopSet = new HashSet<CodonState>();
+        Set<CodonState> stopSet = new HashSet<>();
         for (CodonState state : translationMap.keySet()) {
             if (isStopCodonString(state.getCode()) == MaybeBoolean.True) {
                 stopSet.add(state);

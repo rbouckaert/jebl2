@@ -149,14 +149,14 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
 	public final Tree build() {
 
         try {
-            Map<FixedBitSet, Support> support = new LinkedHashMap<FixedBitSet, Support>();
+            Map<FixedBitSet, Support> support = new LinkedHashMap<>();
             double[] sumBranchesOfExternal = new double[taxons.size()];
 
             int nTree = 0;
             for (Tree tree : trees) {
                 int initialCapacity = tree.getNodes().size();
-                Set<Node> scanSet = new LinkedHashSet<Node>(initialCapacity);
-                Map<Node, FixedBitSet> doneSet = new LinkedHashMap<Node, FixedBitSet>(initialCapacity);
+                Set<Node> scanSet = new LinkedHashSet<>(initialCapacity);
+                Map<Node, FixedBitSet> doneSet = new LinkedHashMap<>(initialCapacity);
 
                 for (Node n : tree.getExternalNodes()) {
                     FixedBitSet b = new FixedBitSet(nExternalNodes);
@@ -175,12 +175,12 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
                 @SuppressWarnings("unused")
 				int nInternalEdges = nExternalNodes - 3;
 
-                List<Node> intr = new ArrayList<Node>(tree.getInternalNodes());
+                List<Node> intr = new ArrayList<>(tree.getInternalNodes());
 
                 if (debug) System.out.println("\ntree " + Utils.toNewick(Utils.rootTheTree(tree)));
 
                 while (scanSet.size() > 0) {
-                    Set<Node> nextScanSet = new LinkedHashSet<Node>(initialCapacity);
+                    Set<Node> nextScanSet = new LinkedHashSet<>(initialCapacity);
 
                     for (Node n : scanSet) {
                         if (debug) System.out.println("scan " + intr.indexOf(n));
@@ -270,7 +270,7 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
 
             // add everything to queue
             PriorityQueue<Map.Entry<FixedBitSet, Support>> queue =
-                    new PriorityQueue<Map.Entry<FixedBitSet, Support>>(support.size(), comparator);
+                    new PriorityQueue<>(support.size(), comparator);
 
             for (Map.Entry<FixedBitSet, Support> s : support.entrySet()) {
                 queue.add(s);
@@ -280,10 +280,10 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
 
             // Contains all internal nodes in the tree so far, ordered so descendants
             // appear later than ancestors
-            List<Node> internalNodes = new ArrayList<Node>(nExternalNodes);
+            List<Node> internalNodes = new ArrayList<>(nExternalNodes);
 
             // For each internal node, a bit set with the complete set of tips for it's clade
-            List<FixedBitSet> internalNodesTips = new ArrayList<FixedBitSet>(nExternalNodes);
+            List<FixedBitSet> internalNodesTips = new ArrayList<>(nExternalNodes);
             assert taxons.size() == nExternalNodes;
 
             // establish a tree with one root having all tips as descendants
@@ -335,7 +335,7 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
 
                         // Locate node descendants containing the split
                         found = true;
-                        List<Integer> split = new ArrayList<Integer>();
+                        List<Integer> split = new ArrayList<>();
 
                         Node n = internalNodes.get(nsub);
                         int l = 0;
@@ -404,7 +404,7 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
 
             if (outGroup != null) {
                 Node out = consTree.getNode(outGroup);
-                Set<String> a = new LinkedHashSet<String>();
+                Set<String> a = new LinkedHashSet<>();
                 a.add(getSupportAttributeName());
                 consTree.reRootWithOutgroup(out, a);
             }

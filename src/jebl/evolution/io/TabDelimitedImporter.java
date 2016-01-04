@@ -37,8 +37,8 @@ public class TabDelimitedImporter implements DistanceMatrixImporter {
      */
     @Override
 	public List<DistanceMatrix> importDistanceMatrices() throws IOException, ImportException {
-        List<Taxon> taxa = new ArrayList<Taxon>();
-        List<List<Double>> rows = new ArrayList<List<Double>>();
+        List<Taxon> taxa = new ArrayList<>();
+        List<List<Double>> rows = new ArrayList<>();
 
         boolean done = false;
 
@@ -82,7 +82,7 @@ public class TabDelimitedImporter implements DistanceMatrixImporter {
                     }
                 }
 
-                List<Double> row = new ArrayList<Double>();
+                List<Double> row = new ArrayList<>();
                 for (int j = i; j < tokens.length; j++) {
                     row.add(Double.parseDouble(tokens[j]));
                 }
@@ -152,7 +152,7 @@ public class TabDelimitedImporter implements DistanceMatrixImporter {
             i++;
         }
 
-        List<DistanceMatrix> matrices = new ArrayList<DistanceMatrix>();
+        List<DistanceMatrix> matrices = new ArrayList<>();
         matrices.add(new BasicDistanceMatrix(taxa, distances));
         return matrices;
     }

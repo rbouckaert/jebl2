@@ -23,7 +23,7 @@ public interface StateClassification {
             this.name = name;
             int i = 0;
             for (String setName : setNames) {
-                Set<State> stateSet = new HashSet<State>();
+                Set<State> stateSet = new HashSet<>();
                 for (State state : stateSets[i]) {
                     stateSet.add(state);
                 }
@@ -57,6 +57,6 @@ public interface StateClassification {
 
         private final String name;
 
-        private final Map<String, Set<State>> stateMap = new HashMap<String, Set<State>>();
+        private final Map<String, Set<State>> stateMap = new HashMap<>();
     }
 }

@@ -59,12 +59,12 @@ public class BasicAlignment implements Alignment {
      */
     @Override
 	public Set<Sequence> getSequences() {
-        return new HashSet<Sequence>(sequences.values());
+        return new HashSet<>(sequences.values());
     }
 
     @Override
 	public List<Sequence> getSequenceList() {
-        List<Sequence> seqs = new ArrayList<Sequence>();
+        List<Sequence> seqs = new ArrayList<>();
         for (Taxon taxon : taxonList) {
             seqs.add(sequences.get(taxon));
         }
@@ -153,7 +153,7 @@ public class BasicAlignment implements Alignment {
         }
 
         for (int j = 0; j < maxLen; j++) {
-            List<State> states = new ArrayList<State>();
+            List<State> states = new ArrayList<>();
             for (i = 0; i < seqs.length; i++) {
                 if (j < seqs[i].length) {
                     states.add(seqs[i][j]);
@@ -166,9 +166,9 @@ public class BasicAlignment implements Alignment {
     }
 
     private SequenceType sequenceType = null;
-    private List<Taxon> taxonList = new ArrayList<Taxon>();
-    private Map<Taxon, Sequence> sequences = new HashMap<Taxon, Sequence>();
-    private List<Pattern> patterns = new ArrayList<Pattern>();
+    private List<Taxon> taxonList = new ArrayList<>();
+    private Map<Taxon, Sequence> sequences = new HashMap<>();
+    private List<Pattern> patterns = new ArrayList<>();
 
     private class BasicPattern implements Pattern {
 
@@ -215,7 +215,7 @@ public class BasicAlignment implements Alignment {
 	     */
 	    @Override
 		public Set<State> getStateSet() {
-	        return new HashSet<State>(states);
+	        return new HashSet<>(states);
 	    }
 
 	    @Override
