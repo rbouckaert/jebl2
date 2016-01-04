@@ -52,7 +52,7 @@ public class TaxonomicLevel {
      * @return the taxonomic level object
      */
     public static TaxonomicLevel getTaxonomicLevel(String name) {
-        TaxonomicLevel taxonomicLevel = (TaxonomicLevel)taxonomicLevels.get(name);
+        TaxonomicLevel taxonomicLevel = taxonomicLevels.get(name);
 
         if (taxonomicLevel == null) {
             taxonomicLevel = new TaxonomicLevel(name);
@@ -66,12 +66,12 @@ public class TaxonomicLevel {
      * Returns a Set containing all the currently created taxonomic levels.
      * @return
      */
-    public static Set getTaxonomicLevels() {
+    public static Set<?> getTaxonomicLevels() {
         return Collections.unmodifiableSet(taxonomicLevels.entrySet());
     }
 
     /**
      * A hash map containing name, object pairs.
      */
-    private static Map taxonomicLevels = new HashMap<>();
+    private static Map<String, TaxonomicLevel> taxonomicLevels = new HashMap<>();
 }

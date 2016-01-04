@@ -413,7 +413,7 @@ public final class Utils {
 	 */
 	public static boolean isUltrametric(RootedTree rootedTree) {
 
-		Set externalNodes = rootedTree.getExternalNodes();
+		Set<Node> externalNodes = rootedTree.getExternalNodes();
 		for (Object externalNode : externalNodes) {
 			Node node = (Node) externalNode;
 			if (rootedTree.getHeight(node) != 0.0) return false;

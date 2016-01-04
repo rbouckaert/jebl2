@@ -392,7 +392,7 @@ public final class SimpleTree implements Tree {
     /**
      * A mapping between edges and edge length.
      */
-    Map<HashPair, Edge> edges = new LinkedHashMap<>();
+    Map<HashPair<Node>, Edge> edges = new LinkedHashMap<>();
 
     final class SimpleNode extends BaseNode {
 

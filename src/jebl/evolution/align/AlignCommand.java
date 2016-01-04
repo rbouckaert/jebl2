@@ -259,19 +259,19 @@ public class AlignCommand {
 				algoName = formatAlgoName((aa.getClass()).getName());
 				score = aa.getScore();
 			}
-			else if(ar != null) {	//repeated alignment
-				start = System.currentTimeMillis();
-				for(int i = 0; i < numRepeats; i++) {
-					ar.setGapOpen(gapOpen);
-					ar.setScores(sub);
-					ar.setThreshold(threshold);
-					ar.doAlignment(sq1, sq2);
-				}
-				fin = System.currentTimeMillis();
-				match = chopSequence(ar.getMatch());
-				algoName = formatAlgoName((ar.getClass()).getName());
-				score = ar.getScore();
-			}
+//			else if(ar != null) {	//repeated alignment
+//				start = System.currentTimeMillis();
+//				for(int i = 0; i < numRepeats; i++) {
+//					ar.setGapOpen(gapOpen);
+//					ar.setScores(sub);
+//					ar.setThreshold(threshold);
+//					ar.doAlignment(sq1, sq2);
+//				}
+//				fin = System.currentTimeMillis();
+//				match = chopSequence(ar.getMatch());
+//				algoName = formatAlgoName((ar.getClass()).getName());
+//				score = ar.getScore();
+//			}
 			else {					//repeated affine alignment
 				start = System.currentTimeMillis();
 				for(int i = 0; i < numRepeats; i++) {
@@ -323,18 +323,18 @@ public class AlignCommand {
 				algoName = formatAlgoName((aa.getClass()).getName());
 				score = aa.getScore();
 			}
-			else if(ar != null) {
-				start = System.currentTimeMillis();
-				ar.setGapOpen(gapOpen);
-				ar.setScores(sub);
-				ar.setThreshold(threshold);
-				shuff.shuffle(ar, sq1, sq2, numShuffles);
-				ar.doAlignment(sq1, sq2);
-				fin = System.currentTimeMillis();
-				match = chopSequence(ar.getMatch());
-				algoName = formatAlgoName((ar.getClass()).getName());
-				score = ar.getScore();
-			}
+//			else if(ar != null) {
+//				start = System.currentTimeMillis();
+//				ar.setGapOpen(gapOpen);
+//				ar.setScores(sub);
+//				ar.setThreshold(threshold);
+//				shuff.shuffle(ar, sq1, sq2, numShuffles);
+//				ar.doAlignment(sq1, sq2);
+//				fin = System.currentTimeMillis();
+//				match = chopSequence(ar.getMatch());
+//				algoName = formatAlgoName((ar.getClass()).getName());
+//				score = ar.getScore();
+//			}
 			else { //repeated affine alignment
 				start = System.currentTimeMillis();
 				ara.setGapExtend(gapExtend);
