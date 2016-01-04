@@ -419,4 +419,5 @@ final class GreedyUnrootedConsensusTreeBuilder extends ConsensusTreeBuilder<Tree
         }
         return null;
     }
+
 }

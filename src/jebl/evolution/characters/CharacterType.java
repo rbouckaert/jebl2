@@ -16,4 +16,5 @@ public interface CharacterType {
 		@Override
 		public String getName(){ return "CONTINUOUS"; }
 	};
+
 }

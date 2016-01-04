@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.sequences.Sequence;
 import jebl.evolution.sequences.SequenceType;
@@ -24,12 +25,15 @@ public class MEGAExporter extends BEASTObject implements AlignmentExporter {
      *
      * @param writer where export text goes
      */
-    public MEGAExporter(Writer writer, String comment) {
+    public MEGAExporter(
+		@Param(name="writer", description="auto converted jebl2 parameter") Writer writer,
+		@Param(name="comment", description="auto converted jebl2 parameter") String comment) {
         this.writer = new PrintWriter(writer);
         this.writer.println("#mega");
         if( comment != null ) {
             this.writer.println("!" + comment);
         }
+        this.comment = comment;
     }
 
     /**
@@ -73,4 +77,22 @@ public class MEGAExporter extends BEASTObject implements AlignmentExporter {
 		// nothing to do
 	}
 
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Writer getWriter() {
+		return writer;
+	}
+
+	public void setWriter(Writer writer) {
+		this.writer = new PrintWriter(writer);
+	}
+	
+	private String comment;
 }

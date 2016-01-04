@@ -8,6 +8,7 @@
  */
 package jebl.evolution.treesimulation;
 
+import beast.core.Param;
 import jebl.evolution.coalescent.*;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.io.NexusExporter;
@@ -35,11 +36,17 @@ public class TreeSimulator  extends BEASTObject {
 	 * A constructor for a given number of taxa, all sampled at the same time
 	 * @param taxonCount
 	 */
-	public TreeSimulator(String taxonPrefix, int taxonCount) {
+	public TreeSimulator(
+		@Param(name="taxonPrefix", description="auto converted jebl2 parameter") String taxonPrefix,
+		@Param(name="taxonCount", description="auto converted jebl2 parameter") Integer taxonCount) {
 		this(taxonPrefix, new int[] { taxonCount }, new double[] { 0.0 } );
+		this.taxonPrefix = taxonPrefix;
+		this.taxonCount = taxonCount;
 	}
 
-	public TreeSimulator(String taxonPrefix, double[] samplingTimes) {
+	public TreeSimulator(
+		@Param(name="taxonPrefix", description="auto converted jebl2 parameter") String taxonPrefix,
+		@Param(name="samplingTimes", description="auto converted jebl2 parameter") double[] samplingTimes) {
 //		this.intervalGenerator = intervalGenerator;
 
 		List<Taxon> taxonList = new ArrayList<>();
@@ -50,9 +57,15 @@ public class TreeSimulator  extends BEASTObject {
 		}
 
 		setTaxa(taxonList, "height");
+		
+		this.taxonPrefix = taxonPrefix;
+		this.samplingTimes = samplingTimes;
 	}
 
-	public TreeSimulator(String taxonPrefix, int[] samplingCounts, double[] samplingTimes) {
+	public TreeSimulator(
+		@Param(name="taxonPrefix", description="auto converted jebl2 parameter") String taxonPrefix,
+		@Param(name="samplingCounts", description="auto converted jebl2 parameter") int[] samplingCounts,
+		@Param(name="samplingTimes", description="auto converted jebl2 parameter") double[] samplingTimes) {
 		List<Taxon> taxonList = new ArrayList<>();
 		int k =0;
 		for (int i = 0; i < samplingCounts.length; i++) {
@@ -65,6 +78,10 @@ public class TreeSimulator  extends BEASTObject {
 		}
 
 		setTaxa(taxonList, "height");
+		
+		this.taxonPrefix = taxonPrefix;
+		this.samplingCounts = samplingCounts;
+		this.samplingTimes = samplingTimes;
 	}
 
 	/**
@@ -72,7 +89,9 @@ public class TreeSimulator  extends BEASTObject {
 	 * this will be used, otherwise a height of 0.0 will be assumed.
 	 * @param taxa
 	 */
-	public TreeSimulator(final Collection<Taxon> taxa, final String heightAttributeName) {
+	public TreeSimulator(
+		@Param(name="taxa", description="auto converted jebl2 parameter") final Collection<Taxon> taxa,
+		@Param(name="heightAttributeName", description="auto converted jebl2 parameter") final String heightAttributeName) {
 		List<Taxon> taxonList = new ArrayList<>();
 		for (Taxon taxon : taxa) {
 			taxonList.add(taxon);
@@ -267,4 +286,57 @@ public class TreeSimulator  extends BEASTObject {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public String getHeightAttributeName() {
+		return heightAttributeName;
+	}
+
+	public void setHeightAttributeName(String heightAttributeName) {
+		this.heightAttributeName = heightAttributeName;
+	}
+
+	public int[] getSamplingCounts() {
+		return samplingCounts;
+	}
+
+	public void setSamplingCounts(int[] samplingCounts) {
+		this.samplingCounts = samplingCounts;
+	}
+
+	public double[] getSamplingTimes() {
+		return samplingTimes;
+	}
+	public void setSamplingTimes(double[] samplingTimes) {
+		this.samplingTimes = samplingTimes;
+	}
+
+	public List<Taxon> getTaxa() {
+		return taxa;
+	}
+
+	public void setTaxa(Collection<Taxon> taxa) {
+		this.taxa.clear();
+		this.taxa.addAll(taxa);
+ 	}
+
+	public Integer getTaxonCount() {
+		return taxonCount;
+	}
+
+	public void setTaxonCount(Integer taxonCount) {
+		this.taxonCount = taxonCount;
+	}
+
+	public String getTaxonPrefix() {
+		return taxonPrefix;
+	}
+
+	public void setTaxonPrefix(String taxonPrefix) {
+		this.taxonPrefix = taxonPrefix;
+	}
+
+	String taxonPrefix;
+	Integer taxonCount;	
+	int[] samplingCounts;
+	double[] samplingTimes;
 }

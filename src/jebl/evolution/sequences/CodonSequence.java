@@ -8,6 +8,7 @@
  */
 package jebl.evolution.sequences;
 
+import beast.core.Param;
 import jebl.evolution.taxa.Taxon;
 import jebl.util.AttributableHelper;
 
@@ -33,7 +34,9 @@ public class CodonSequence extends BEASTObject implements Sequence {
      * @param taxon
      * @param states
      */
-    public CodonSequence(Taxon taxon, State[] states) {
+    public CodonSequence(
+		@Param(name="taxon", description="auto converted jebl2 parameter") Taxon taxon,
+		@Param(name="states", description="auto converted jebl2 parameter") State[] states) {
 
         this.sequenceType = SequenceType.CODON;
         this.taxon = taxon;
@@ -189,7 +192,7 @@ public class CodonSequence extends BEASTObject implements Sequence {
 
     // private members
 
-    private final Taxon taxon;
+    private Taxon taxon;
     private final SequenceType sequenceType;
     private final State[] sequenceStates;
 
@@ -219,6 +222,16 @@ public class CodonSequence extends BEASTObject implements Sequence {
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+//	public void setStates(State[] states) {
+//		this.states = states;
+//	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTaxon(Taxon taxon) {
+		this.taxon = taxon;
 	}
 
 }

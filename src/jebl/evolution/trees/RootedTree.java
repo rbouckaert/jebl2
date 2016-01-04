@@ -91,4 +91,5 @@ public interface RootedTree extends Tree {
 	 * @return true if the node is the root of this tree.
 	 */
 	boolean isRoot(Node node);
+
 }

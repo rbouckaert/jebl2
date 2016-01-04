@@ -15,4 +15,5 @@ public interface RootedTreeMetric {
 	 * @return the tree metric value
 	 */
 	double getMetric(RootedTree tree1, RootedTree tree2);
+
 }

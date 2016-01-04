@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 import jebl.util.FixedBitSet;
 
@@ -19,24 +20,31 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
     /**
      * Set of trees.
      */
-    private final RootedTree[] rtrees;
+    private RootedTree[] rtrees;
 
 
     /**
      * Consensus contains only clades having at least that amount of support in set. Traditionally 50%
      */
-    private final double supportThreshold;
+    private double supportThreshold;
 
-    public GreedyRootedConsensusTreeBuilder(RootedTree[] trees, double supportThreshold) {
+    public GreedyRootedConsensusTreeBuilder(
+		@Param(name="trees", description="auto converted jebl2 parameter") RootedTree[] trees,
+		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold) {
         super(trees);
         this.rtrees = trees;
         this.supportThreshold = supportThreshold;
     }
 
-	public GreedyRootedConsensusTreeBuilder(RootedTree[] trees, double supportThreshold, String supportAttributeName, boolean asPercent) {
+	public GreedyRootedConsensusTreeBuilder(
+		@Param(name="trees", description="auto converted jebl2 parameter") RootedTree[] trees,
+		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold,
+		@Param(name="supportAttributeName", description="auto converted jebl2 parameter") String supportAttributeName,
+		@Param(name="asPercent", description="auto converted jebl2 parameter") Boolean asPercent) {
 	    super(trees, supportAttributeName, asPercent);
 	    this.rtrees = trees;
 	    this.supportThreshold = supportThreshold;
+	    this.asPercent = asPercent;
 	}
 
     @Override
@@ -298,4 +306,43 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
         fireSetProgress(1.0);
         return consTree;
     }
+
+	public Boolean getAsPercent() {
+		return asPercent;
+	}
+
+	public void setAsPercent(Boolean asPercent) {
+		this.asPercent = asPercent;
+	}
+
+	@Override
+	public String getSupportAttributeName() {
+		return supportAttributeName;
+	}
+
+	public void setSupportAttributeName(String supportAttributeName) {
+		this.supportAttributeName = supportAttributeName;
+	}
+
+	public Double getSupportThreshold() {
+		return supportThreshold;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setSupportThreshold(Double supportThreshold) {
+		this.supportThreshold = supportThreshold;
+	}
+
+	public RootedTree[] getTrees() {
+		return rtrees;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTrees(RootedTree[] trees) {
+		this.rtrees = trees;
+	}
+
+	Boolean asPercent;
 }

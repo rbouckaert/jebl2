@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -66,7 +67,10 @@ public class RootedFromUnrooted extends BEASTObject implements RootedTree {
 	 * @param root  internal node to root at
 	 * @param intentUnrooted
 	 */
-	public RootedFromUnrooted(Tree source, Node root, boolean intentUnrooted) {
+	public RootedFromUnrooted(
+		@Param(name="source", description="auto converted jebl2 parameter") Tree source,
+		@Param(name="root", description="auto converted jebl2 parameter") Node root,
+		@Param(name="intentUnrooted", description="auto converted jebl2 parameter") Boolean intentUnrooted) {
 		this.source = source;
 		this.root = root;
 		this.intentUnrooted = intentUnrooted;
@@ -85,7 +89,11 @@ public class RootedFromUnrooted extends BEASTObject implements RootedTree {
 	 * @param right
 	 * @param fromLeft branch from new root to left node.
 	 */
-	public RootedFromUnrooted(Tree source, Node left, Node right, double fromLeft) {
+	public RootedFromUnrooted(
+		@Param(name="source", description="auto converted jebl2 parameter") Tree source,
+		@Param(name="left", description="auto converted jebl2 parameter") Node left,
+		@Param(name="right", description="auto converted jebl2 parameter") Node right,
+		@Param(name="fromLeft", description="auto converted jebl2 parameter") Double fromLeft) {
 		this.source = source;
 		intentUnrooted = false;
 		topLeft = left;
@@ -105,6 +113,9 @@ public class RootedFromUnrooted extends BEASTObject implements RootedTree {
 		parents.put(root, null);
         setParent(left, root);
         setParent(right, root);
+        this.left = left;
+        this.right = right;
+        this.fromLeft = fromLeft;
     }
 
 	@Override
@@ -357,5 +368,57 @@ public class RootedFromUnrooted extends BEASTObject implements RootedTree {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+
+	public Double getFromLeft() {
+		return fromLeft;
+	}
+
+	public void setFromLeft(Double fromLeft) {
+		this.fromLeft = fromLeft;
+	}
+
+	public Boolean getIntentUnrooted() {
+		return intentUnrooted;
+	}
+
+	public void setIntentUnrooted(Boolean intentUnrooted) {
+		this.intentUnrooted = intentUnrooted;
+	}
+
+	public Node getLeft() {
+		return left;
+	}
+
+	public void setLeft(Node left) {
+		this.left = left;
+	}
+
+	public Node getRight() {
+		return right;
+	}
+
+	public void setRight(Node right) {
+		this.right = right;
+	}
+
+	public Node getRoot() {
+		return root;
+	}
+
+	public void setRoot(Node root) {
+		this.root = root;
+	}
+
+	public Tree getSource() {
+		return source;
+	}
+
+	public void setSource(Tree source) {
+		this.source = source;
+	}
+	
+	Double fromLeft;
+	Node left, right;
 
 }

@@ -137,4 +137,5 @@ public class ExponentialGrowth extends ConstantPopulation {
 	//
 
 	private double r;
+
 }

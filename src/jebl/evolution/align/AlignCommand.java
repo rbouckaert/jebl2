@@ -95,34 +95,34 @@ public class AlignCommand {
 		
 		switch(input) {
 			case 1:
-				as = new NeedlemanWunsch(null, 0);
+				as = new NeedlemanWunsch(null, 0f);
 				break;
 			case 2:
-				aa = new NeedlemanWunschAffine(null, 0, 0);
+				aa = new NeedlemanWunschAffine(null, 0f, 0f);
 				break;
 			case 3:
-				as = new NeedlemanWunschLinearSpace(null, 0);
+				as = new NeedlemanWunschLinearSpace(null, 0f);
 				break;
 			case 4:
-				as = new OverlapAlign(null, 0);
+				as = new OverlapAlign(null, 0f);
 				break;
 			//case 5:
 			//	ar = new RepeatAlign(null, 0, 0);
 			//	break;
 			case 6:
-				as = new SmithWaterman(null, 0);
+				as = new SmithWaterman(null, 0f);
 				break;
 			case 7:
-				as = new SmithWatermanLinearSpace(null, 0);
+				as = new SmithWatermanLinearSpace(null, 0f);
 				break;
 			case 8:
-				aa = new SmithWatermanLinearSpaceAffine(null, 0, 0);
+				aa = new SmithWatermanLinearSpaceAffine(null, 0f, 0f);
 				break;
 			case 9:
-				ara = new NonOverlapMultipleLocalAffine(null, 0, 0, 0);
+				ara = new NonOverlapMultipleLocalAffine(null, 0f, 0f, 0);
 				break;
             case 10:
-                aa = new NeedlemanWunschLinearSpaceAffine(null, 0, 0);
+                aa = new NeedlemanWunschLinearSpaceAffine(null, 0f, 0f);
                 break;
         }
 		
@@ -451,4 +451,5 @@ public class AlignCommand {
 			new AlignCommand();
 		}
 	}
+
 }

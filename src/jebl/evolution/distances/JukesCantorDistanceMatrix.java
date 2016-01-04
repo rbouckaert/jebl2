@@ -1,5 +1,6 @@
 package jebl.evolution.distances;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.alignments.Pattern;
 import jebl.evolution.sequences.State;
@@ -18,14 +19,22 @@ import jebl.util.ProgressListener;
 
 public class JukesCantorDistanceMatrix extends BasicDistanceMatrix {
 
-    public JukesCantorDistanceMatrix(Alignment alignment, ProgressListener progress) throws CannotBuildDistanceMatrixException {
+    public JukesCantorDistanceMatrix(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment,
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress) throws CannotBuildDistanceMatrixException {
         this(alignment,progress,false);    
     }
     
-    public JukesCantorDistanceMatrix(Alignment alignment, ProgressListener progress, boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable)
+    public JukesCantorDistanceMatrix(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment,
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress,
+		@Param(name="useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable", description="auto converted jebl2 parameter") Boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable)
             throws CannotBuildDistanceMatrixException
     {
         super(alignment.getTaxa(), new Initializer().getDistances(alignment, progress,useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable));
+        this.alignment = alignment;
+        this.progress = progress;
+        this.useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable = useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
     }
 
     private static class Initializer implements PairwiseDistanceCalculator {
@@ -113,4 +122,33 @@ public class JukesCantorDistanceMatrix extends BasicDistanceMatrix {
             return alignment.getSequenceList().get(index).getTaxon().getName();
         }
     }
+
+	public Alignment getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(Alignment alignment) {
+		this.alignment = alignment;
+	}
+
+	public ProgressListener getProgress() {
+		return progress;
+	}
+
+	public void setProgress(ProgressListener progress) {
+		this.progress = progress;
+	}
+
+	public Boolean getUseTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable() {
+		return useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
+	}
+
+	public void setUseTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable(Boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable) {
+		this.useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable = useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
+	}
+
+	private Alignment alignment;
+	private ProgressListener progress;
+	private Boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
+
 }

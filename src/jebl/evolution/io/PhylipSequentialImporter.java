@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.sequences.BasicSequence;
 import jebl.evolution.sequences.Sequence;
 import jebl.evolution.sequences.SequenceType;
@@ -25,9 +26,13 @@ public class PhylipSequentialImporter extends BEASTObject implements SequenceImp
     /**
      * Constructor
      */
-    public PhylipSequentialImporter(Reader reader, SequenceType sequenceType, int maxNameLength) {
+    public PhylipSequentialImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="sequenceType", description="auto converted jebl2 parameter") SequenceType sequenceType,
+		@Param(name="maxNameLength", description="auto converted jebl2 parameter") Integer maxNameLength) {
         helper = new ImportHelper(reader);
 
+        this.reader = reader;
         this.sequenceType = sequenceType;
         this.maxNameLength = maxNameLength;
     }
@@ -73,12 +78,41 @@ public class PhylipSequentialImporter extends BEASTObject implements SequenceImp
     }
 
     private final ImportHelper helper;
-    private final SequenceType sequenceType;
+    private SequenceType sequenceType;
     private int maxNameLength = 10;
     
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+
+	public Integer getMaxNameLength() {
+		return maxNameLength;
+	}
+
+	public void setMaxNameLength(Integer maxNameLength) {
+		this.maxNameLength = maxNameLength;
+	}
+
+	public Reader getReader() {
+		return reader;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
+	public SequenceType getSequenceType() {
+		return sequenceType;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setSequenceType(SequenceType sequenceType) {
+		this.sequenceType = sequenceType;
+	}
+	
+	private Reader reader;
 
 }

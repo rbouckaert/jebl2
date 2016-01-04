@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.util.ProgressListener;
 
 /**
@@ -10,10 +11,12 @@ class CompoundAlignmentProgressListener  {
     //private boolean cancelled = false;
     private int sectionsCompleted = 0;
     private int totalSections;
-    private final ProgressListener progress;
+    private ProgressListener progress;
     private int sectionSize= 1;
 
-    public CompoundAlignmentProgressListener(ProgressListener progress, int totalSections) {
+    public CompoundAlignmentProgressListener(
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress,
+		@Param(name="totalSections", description="auto converted jebl2 parameter") Integer totalSections) {
         this.totalSections = totalSections;
         this.progress = progress;
     }
@@ -60,4 +63,23 @@ class CompoundAlignmentProgressListener  {
             return progress.isCanceled();
         }
     };
+
+	public ProgressListener getProgress() {
+		return progress;
+	}
+
+	/** should not be used other than in BEAST framework **/
+	@Deprecated
+	public void setProgress(ProgressListener progress) {
+		this.progress = progress;
+	}
+
+	public Integer getTotalSections() {
+		return totalSections;
+	}
+
+	public void setTotalSections(Integer totalSections) {
+		this.totalSections = totalSections;
+	}
+
 }

@@ -57,4 +57,5 @@ public interface Character{
 	 * @return a Set<Taxon> containing all of the taxa for this character
 	 */
 	public Set<Taxon> getTaxa();
+
 }

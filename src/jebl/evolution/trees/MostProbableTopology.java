@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Graph;
 import jebl.evolution.graphs.Node;
@@ -39,7 +40,8 @@ public class MostProbableTopology {
      *
      * @param trees
      */
-    public MostProbableTopology(Collection<? extends Tree> trees) {
+    public MostProbableTopology(
+		@Param(name="trees", description="auto converted jebl2 parameter") Collection<? extends Tree> trees) {
         this.trees = new ArrayList<>(trees);
         Tree tree0 = this.trees.get(0);
         rootedSet = tree0 instanceof RootedTree && !((RootedTree)tree0).conceptuallyUnrooted();
@@ -480,4 +482,14 @@ public class MostProbableTopology {
         sb.append(')');
         return sb.toString();
     }
+
+	public Collection<? extends Tree> getTrees() {
+		return trees;
+	}
+
+	public void setTrees(Collection<? extends Tree> trees) {
+		this.trees.clear();
+		this.trees.addAll(trees);
+	}
+
 }

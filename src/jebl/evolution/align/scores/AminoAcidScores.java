@@ -24,4 +24,5 @@ public class AminoAcidScores extends Scores {
     public AminoAcidScores(float m, float n) {
         buildScores(m, n);
     }
+
 }

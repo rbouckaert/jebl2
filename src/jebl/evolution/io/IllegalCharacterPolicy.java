@@ -1,7 +1,8 @@
 package jebl.evolution.io;
 
 /**
- * What to do when an imported document contains illegal characters
+ * What to do when an import beast.core.Param;
+imported document contains illegal characters
  *
  * @author Tobias Thierer
  * @version $Id: IllegalCharacterPolicy.java 551 2006-12-04 03:05:01Z twobeers $
@@ -31,4 +32,5 @@ public enum IllegalCharacterPolicy {
 	public String toString() {
         return description;
     }
+
 }

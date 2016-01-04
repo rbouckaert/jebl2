@@ -127,4 +127,5 @@ public class ModelBasedDistanceMatrix  {
     protected double[] getFrequencies(Alignment alignment) {
         return getFrequencies(alignment.getSequenceList());
     }
+
 }

@@ -96,4 +96,5 @@ public class RobinsonsFouldMetric extends BEASTObject implements RootedTreeMetri
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
 }

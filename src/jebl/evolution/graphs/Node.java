@@ -30,4 +30,5 @@ public interface Node extends Attributable {
      * @return the number of edges connected to this node
      */
     int getDegree();
+
 }

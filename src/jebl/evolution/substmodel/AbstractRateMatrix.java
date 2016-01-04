@@ -313,4 +313,5 @@ abstract public class AbstractRateMatrix extends BEASTObject implements RateMatr
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
 }

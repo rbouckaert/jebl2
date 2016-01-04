@@ -59,4 +59,5 @@ public interface StateClassification {
 
         private final Map<String, Set<State>> stateMap = new HashMap<>();
     }
+
 }

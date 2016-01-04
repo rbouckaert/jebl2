@@ -43,4 +43,5 @@ public class Utils {
     public final boolean isTree(Graph graph) {
         return isAcyclical(graph) && isConnected(graph);
     }
+
 }

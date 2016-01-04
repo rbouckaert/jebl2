@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.distances.DistanceMatrix;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -28,7 +29,8 @@ class UPGMATreeBuilder extends ClusteringTreeBuilder<Tree> {
      *
      * @param distanceMatrix distance matrix
      */
-    public UPGMATreeBuilder(DistanceMatrix distanceMatrix) {
+    public UPGMATreeBuilder(
+		@Param(name="distanceMatrix", description="auto converted jebl2 parameter") DistanceMatrix distanceMatrix) {
         super(distanceMatrix, 2);
         tree = new SimpleRootedTree();
     }
@@ -73,4 +75,15 @@ class UPGMATreeBuilder extends ClusteringTreeBuilder<Tree> {
         return 	((tipCount[ai]) / tipSum) * getDist(k, i) +
                 ((tipCount[aj]) / tipSum) * getDist(k, j);
     }
+
+	public DistanceMatrix getDistanceMatrix() {
+		return distanceMatrix;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setDistanceMatrix(DistanceMatrix distanceMatrix) {
+		this.distanceMatrix = distanceMatrix;
+	}
+
 }

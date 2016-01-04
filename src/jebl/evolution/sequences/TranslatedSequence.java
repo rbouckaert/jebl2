@@ -1,5 +1,7 @@
 package jebl.evolution.sequences;
 
+import beast.core.Param;
+
 /**
  * @author rambaut
  *         Date: Jul 27, 2005
@@ -7,7 +9,9 @@ package jebl.evolution.sequences;
  */
 public class TranslatedSequence extends FilteredSequence {
 
-	public TranslatedSequence(Sequence source, GeneticCode geneticCode) {
+	public TranslatedSequence(
+		@Param(name="source", description="auto converted jebl2 parameter") Sequence source,
+		@Param(name="geneticCode", description="auto converted jebl2 parameter") GeneticCode geneticCode) {
 		super(source);
 
 		this.geneticCode = geneticCode;
@@ -26,6 +30,27 @@ public class TranslatedSequence extends FilteredSequence {
         return SequenceType.AMINO_ACID;
     }
 
-	private final GeneticCode geneticCode;
+	private GeneticCode geneticCode;
+
+
+	public GeneticCode getGeneticCode() {
+		return geneticCode;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setGeneticCode(GeneticCode geneticCode) {
+		this.geneticCode = geneticCode;
+	}
+
+	@Override
+	public Sequence getSource() {
+		return source;
+	}
+
+	@Override
+	public void setSource(Sequence source) {
+		this.source = source;
+	}
 
 }

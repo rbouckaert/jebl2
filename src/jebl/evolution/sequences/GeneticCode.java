@@ -416,4 +416,5 @@ public final class GeneticCode {
 	public String toString() {
         return getDescription();
     }
+
 }

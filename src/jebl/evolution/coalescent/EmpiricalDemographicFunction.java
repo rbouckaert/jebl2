@@ -8,6 +8,7 @@
  */
 package jebl.evolution.coalescent;
 
+import beast.core.Param;
 import beast.core.BEASTObject;
 import jebl.evolution.coalescent.DemographicFunction;
 
@@ -18,7 +19,10 @@ import jebl.evolution.coalescent.DemographicFunction;
  */
 public class EmpiricalDemographicFunction extends BEASTObject implements DemographicFunction {
 
-    public EmpiricalDemographicFunction(double[] populationSizes, double[] times, boolean stepwise) {
+    public EmpiricalDemographicFunction(
+		@Param(name="populationSizes", description="auto converted jebl2 parameter") double[] populationSizes,
+		@Param(name="times", description="auto converted jebl2 parameter") double[] times,
+		@Param(name="stepwise", description="auto converted jebl2 parameter") Boolean stepwise) {
         this.populationSizes = populationSizes;
         this.times = times;
         this.stepwise = stepwise;
@@ -136,13 +140,44 @@ public class EmpiricalDemographicFunction extends BEASTObject implements Demogra
         return 0;
     }
 
-    private final double[] populationSizes;
-    private final double[] times;
-    private final boolean stepwise;
+    private double[] populationSizes;
+    private double[] times;
+    private boolean stepwise;
     
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+
+	public double[] getPopulationSizes() {
+		return populationSizes;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setPopulationSizes(double[] populationSizes) {
+		this.populationSizes = populationSizes;
+	}
+
+	public Boolean getStepwise() {
+		return stepwise;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setStepwise(Boolean stepwise) {
+		this.stepwise = stepwise;
+	}
+
+	public double[] getTimes() {
+		return times;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTimes(double[] times) {
+		this.times = times;
 	}
 
 }

@@ -56,4 +56,5 @@ public interface Sequence extends Attributable, Comparable<Object> {
 	 * @return the length
 	 */
     int getLength();
+
 }

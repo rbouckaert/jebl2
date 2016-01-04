@@ -15,4 +15,5 @@ import jebl.util.Attributable;
 public interface Edge extends Attributable {
 
     double getLength();
+
 }

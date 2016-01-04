@@ -110,4 +110,5 @@ public class ResampledAlignment extends BEASTObject implements Alignment {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
 }

@@ -1,12 +1,16 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 // Global alignment using the Needleman-Wunsch algorithm (affine gap costs)
 
 public class OldNeedlemanWunschAffine extends AlignAffine {
 
-	public OldNeedlemanWunschAffine(Scores sub, float d, float e) {
+	public OldNeedlemanWunschAffine(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d,
+		@Param(name="e", description="auto converted jebl2 parameter") Float e) {
 		super(sub, d, e);
 	}
 
@@ -106,4 +110,33 @@ public class OldNeedlemanWunschAffine extends AlignAffine {
         }
         B0 = new TracebackAffine(maxk, n, m);
     }
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	public Float getE() {
+		return e;
+	}
+
+	public void setE(Float e) {
+		this.e = e;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

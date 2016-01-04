@@ -4,6 +4,7 @@
 
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.sequences.Sequence;
 import jebl.evolution.taxa.Taxon;
 
@@ -26,7 +27,8 @@ public class FastaExporter extends BEASTObject implements SequenceExporter {
     /**
      * Constructor
      */
-    public FastaExporter(Writer writer) {
+    public FastaExporter(
+		@Param(name="writer", description="auto converted jebl2 parameter") Writer writer) {
         this.writer = new PrintWriter(writer);
     }
 
@@ -44,11 +46,22 @@ public class FastaExporter extends BEASTObject implements SequenceExporter {
         }
     }
 
-    private final PrintWriter writer;
+    private PrintWriter writer;
     
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+
+	public Writer getWriter() {
+		return writer;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setWriter(Writer writer) {
+		this.writer = new PrintWriter(writer);
 	}
 
 }

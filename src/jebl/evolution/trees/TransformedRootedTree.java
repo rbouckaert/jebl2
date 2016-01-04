@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 
 /**
@@ -30,7 +31,9 @@ public class TransformedRootedTree extends FilteredRootedTree {
 	    private String name;
 	}
 
-    public TransformedRootedTree(final RootedTree source, Transform transform) {
+    public TransformedRootedTree(
+		@Param(name="source", description="auto converted jebl2 parameter") final RootedTree source,
+		@Param(name="transform", description="auto converted jebl2 parameter") Transform transform) {
         super(source);
         this.transform = transform;
     }
@@ -111,5 +114,26 @@ public class TransformedRootedTree extends FilteredRootedTree {
         return pathLength;
     }
 
-    private final Transform transform;
+    private Transform transform;
+
+	@Override
+	public RootedTree getSource() {
+		return source;
+	}
+
+	@Override
+	public void setSource(RootedTree source) {
+		this.source = source;
+	}
+
+	public Transform getTransform() {
+		return transform;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTransform(Transform transform) {
+		this.transform = transform;
+	}
+
 }

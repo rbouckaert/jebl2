@@ -27,4 +27,5 @@ public class Pam180 extends AminoAcidScores {
             {   0, -4, -3, -3, -3, -3, -3, -2, -3,  5,  2, -4,  2, -2, -2, -2,  0, -8, -4,  6}};
 
   public Pam180() { buildScores(residueScores); }
+
 }

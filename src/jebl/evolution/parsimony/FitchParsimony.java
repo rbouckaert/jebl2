@@ -9,6 +9,7 @@
 
 package jebl.evolution.parsimony;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Pattern;
 import jebl.evolution.alignments.Patterns;
 import jebl.evolution.graphs.Node;
@@ -37,7 +38,7 @@ public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 
 	private final SequenceType sequenceType;
 	private final int stateCount;
-	private final boolean gapsAreStates;
+	private boolean gapsAreStates;
 
 	private Map<Node, boolean[][]> stateSets = new HashMap<>();
 	private Map<Node, State[]> states = new HashMap<>();
@@ -46,7 +47,7 @@ public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 //    private boolean[][] intersection;  // as nodes are not guaranteed to be called in post-order
 
 	private RootedTree tree = null;
-	private final List<Pattern> patterns;
+	private List<Pattern> patterns;
 	private List<Taxon> taxa;
 
 	private boolean hasCalculatedSteps = false;
@@ -54,7 +55,9 @@ public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 
 	private final double[] siteScores;
 
-	public FitchParsimony(List<Pattern> patterns, boolean gapsAreStates) {
+	public FitchParsimony(
+		@Param(name="patterns", description="auto converted jebl2 parameter") List<Pattern> patterns,
+		@Param(name="gapsAreStates", description="auto converted jebl2 parameter") Boolean gapsAreStates) {
 		if (patterns == null || patterns.size() == 0) {
 			throw new IllegalArgumentException("The patterns cannot be null or empty");
 		}
@@ -75,7 +78,9 @@ public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 		this.siteScores = new double[patterns.size()];
 	}
 
-	public FitchParsimony(Patterns patterns, boolean gapsAreStates) {
+	public FitchParsimony(
+		@Param(name="patterns", description="auto converted jebl2 parameter") Patterns patterns,
+		@Param(name="gapsAreStates", description="auto converted jebl2 parameter") Boolean gapsAreStates) {
 		this(patterns.getPatterns(), gapsAreStates);
 	}
 
@@ -343,6 +348,27 @@ public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+
+	public Boolean getGapsAreStates() {
+		return gapsAreStates;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setGapsAreStates(Boolean gapsAreStates) {
+		this.gapsAreStates = gapsAreStates;
+	}
+
+	public List<Pattern> getPatterns() {
+		return patterns;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setPatterns(List<Pattern> patterns) {
+		this.patterns = patterns;
 	}
 
 }

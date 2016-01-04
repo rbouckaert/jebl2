@@ -24,4 +24,5 @@ public class Hamming extends NucleotideScores {
 	public String toString() {
         return "Hamming (0/-1)";
     }
+
 }

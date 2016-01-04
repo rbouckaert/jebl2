@@ -20,4 +20,5 @@ public interface ImmediateSequenceImporter {
     }
 
     void importSequences(Callback callback, ProgressListener progressListener) throws IOException, ImportException;
+
 }

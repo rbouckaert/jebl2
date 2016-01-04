@@ -7,6 +7,7 @@
 
 package jebl.evolution.substmodel;
 
+import beast.core.Param;
 import jebl.math.MachineAccuracy;
 
 /**
@@ -49,7 +50,7 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 
 
 	/** dimension of rate matrix */
-	private final int dimension_;
+	private int dimension_;
 
 	/** transition probability matrix */
 	private final double[][] transProb;
@@ -58,7 +59,8 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 
 	/**
 	 */
-	public MatrixExponential(int dimension)	{
+	public MatrixExponential(
+		@Param(name="dimension", description="auto converted jebl2 parameter") Integer dimension)	{
 		this.dimension_ = dimension;
 		if(dimension<=0) {
 		  throw new IllegalArgumentException("Invalid dimension:"+dimension);
@@ -79,7 +81,8 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 	 *
 	 * @param r rate matrix
 	 */
-	public MatrixExponential(RateMatrix r)	{
+	public MatrixExponential(
+		@Param(name="r", description="auto converted jebl2 parameter") RateMatrix r)	{
 		int dimension = r.getDimension();
 		this.dimension_ = dimension;
 		transProb = new double[dimension][dimension];
@@ -92,6 +95,7 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 		ordr = new int[dimension];
 		evali = new double[dimension];
 		setMatrix(r);
+		this.r = r;
 	}
 
 	public final double getTransitionProbability(int from, int to) {
@@ -913,4 +917,21 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 			}
 		}
 	}
+
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setDimension(Integer dimension) {
+		this.dimension_ = dimension;
+	}
+
+	public RateMatrix getR() {
+		return r;
+	}
+
+	public void setR(RateMatrix r) {
+		this.r = r;
+	}
+
+	private RateMatrix r;
 }

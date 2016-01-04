@@ -404,4 +404,5 @@ public interface SequenceType {
             return buffer.toString();
         }
     }
+
 }

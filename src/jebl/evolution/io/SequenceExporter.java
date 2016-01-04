@@ -17,4 +17,5 @@ public interface SequenceExporter {
      * exportSequences.
      */
     void exportSequences(Collection<? extends Sequence> sequences) throws IOException;
+
 }

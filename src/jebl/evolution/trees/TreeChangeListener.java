@@ -23,4 +23,5 @@ public abstract class TreeChangeListener {
      * @param treeChangeEvent the new set of selected nodes.
      */
     public abstract void selectionChanged(TreeSelectionChangeEvent treeChangeEvent);
+
 }

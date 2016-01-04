@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 import jebl.util.FixedBitSet;
 
@@ -25,11 +26,17 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
 
     private boolean debug = false;
 
-	public MRCACConsensusTreeBuilder(Tree[] trees, double supportThreshold) {
+	public MRCACConsensusTreeBuilder(
+		@Param(name="trees", description="auto converted jebl2 parameter") Tree[] trees,
+		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold) {
 	    this(trees, supportThreshold, DEFAULT_SUPPORT_ATTRIBUTE_NAME, true);
 	}
 
-    public MRCACConsensusTreeBuilder(Tree[] trees, double supportThreshold, String supportAttributeName, boolean asPercent) {
+    public MRCACConsensusTreeBuilder(
+		@Param(name="trees", description="auto converted jebl2 parameter") Tree[] trees,
+		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold,
+		@Param(name="supportAttributeName", description="auto converted jebl2 parameter") String supportAttributeName,
+		@Param(name="asPercent", description="auto converted jebl2 parameter") Boolean asPercent) {
         super(trees, supportAttributeName, asPercent);
         this.trees = new RootedTree[trees.length];
         for(int i = 0; i < trees.length; ++i) {
@@ -41,6 +48,8 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
         for(int iTree = 0; iTree < trees.length; ++iTree) {
             info[iTree] = new TreeInfo(this.trees[iTree]);
         }
+        
+        this.asPercent = asPercent;
     }
 
     @Override
@@ -300,4 +309,39 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
         }
         return consensus;
     }
+
+	public Boolean getAsPercent() {
+		return asPercent;
+	}
+
+	public void setAsPercent(Boolean asPercent) {
+		this.asPercent = asPercent;
+	}
+
+	@Override
+	public String getSupportAttributeName() {
+		return supportAttributeName;
+	}
+
+	public void setSupportAttributeName(String supportAttributeName) {
+		this.supportAttributeName = supportAttributeName;
+	}
+
+	public Double getSupportThreshold() {
+		return supportThreshold;
+	}
+
+	public void setSupportThreshold(Double supportThreshold) {
+		this.supportThreshold = supportThreshold;
+	}
+
+	public Tree[] getTrees() {
+		return trees;
+	}
+
+//	public void setTrees(Tree[] trees) {
+//		this.trees = trees;
+//	}
+
+	Boolean asPercent;
 }

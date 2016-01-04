@@ -151,4 +151,5 @@ public class ConstExponential extends ExponentialGrowth {
 	//
 
 	private double N1 = 0.0;
+
 }

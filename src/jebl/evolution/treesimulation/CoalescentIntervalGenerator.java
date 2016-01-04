@@ -8,6 +8,7 @@
  */
 package jebl.evolution.treesimulation;
 
+import beast.core.Param;
 import beast.core.BEASTObject;
 import jebl.evolution.coalescent.DemographicFunction;
 
@@ -26,7 +27,8 @@ import jebl.evolution.coalescent.DemographicFunction;
  */
 public class CoalescentIntervalGenerator extends BEASTObject implements IntervalGenerator {
 
-    public CoalescentIntervalGenerator(DemographicFunction demographicFunction) {
+    public CoalescentIntervalGenerator(
+		@Param(name="demographicFunction", description="auto converted jebl2 parameter") DemographicFunction demographicFunction) {
         this.demographicFunction = demographicFunction;
     }
 
@@ -219,4 +221,13 @@ public class CoalescentIntervalGenerator extends BEASTObject implements Interval
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public DemographicFunction getDemographicFunction() {
+		return demographicFunction;
+	}
+
+	public void setDemographicFunction(DemographicFunction demographicFunction) {
+		this.demographicFunction = demographicFunction;
+	}
+
 }

@@ -125,4 +125,5 @@ public class ConstLogistic extends LogisticGrowth {
 	//
 
 	private double N1 = 0.0;
+
 }

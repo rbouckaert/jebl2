@@ -1,5 +1,7 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
@@ -21,7 +23,9 @@ public class ReRootedTree extends FilteredRootedTree {
 		private String name;
 	}
 
-    public ReRootedTree(final RootedTree source, RootingType rootingType) {
+    public ReRootedTree(
+		@Param(name="source", description="auto converted jebl2 parameter") final RootedTree source,
+		@Param(name="rootingType", description="auto converted jebl2 parameter") RootingType rootingType) {
         super(source);
 	    switch (rootingType) {
 		    case MID_POINT:
@@ -31,6 +35,7 @@ public class ReRootedTree extends FilteredRootedTree {
 		    default:
 			    throw new IllegalArgumentException("Unknown enum value");
 	    }
+	    this.rootingType = rootingType;
     }
 
 	// PRIVATE members
@@ -38,4 +43,24 @@ public class ReRootedTree extends FilteredRootedTree {
 //    private final Node rootChild2;
 //    private final double rootLength1;
 //    private final double rootLength2;
+
+	public RootingType getRootingType() {
+		return rootingType;
+	}
+
+	public void setRootingType(RootingType rootingType) {
+		this.rootingType = rootingType;
+	}
+
+	@Override
+	public RootedTree getSource() {
+		return source;
+	}
+
+	@Override
+	public void setSource(RootedTree source) {
+		this.source = source;
+	}
+
+	RootingType rootingType;
 }

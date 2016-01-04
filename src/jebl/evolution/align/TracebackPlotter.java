@@ -14,4 +14,5 @@ public interface TracebackPlotter {
     void traceBack(Traceback t);
 
     void finishedTraceBack();   
+
 }

@@ -27,4 +27,5 @@ public class Blosum90 extends AminoAcidScores {
             {  -1, -3, -4, -5, -2, -3, -3, -5, -4,  3,  0, -3,  0, -2, -3, -2, -1, -3, -3,  5}};
 
   public Blosum90() { buildScores(residueScores); }
+
 }

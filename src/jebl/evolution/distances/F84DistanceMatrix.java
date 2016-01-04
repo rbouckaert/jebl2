@@ -1,5 +1,6 @@
 package jebl.evolution.distances;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.alignments.Pattern;
 import jebl.evolution.sequences.Nucleotides;
@@ -17,12 +18,18 @@ import jebl.util.ProgressListener;
 
 public class F84DistanceMatrix extends BasicDistanceMatrix {
 
-    public F84DistanceMatrix(Alignment alignment, ProgressListener progress) {
+    public F84DistanceMatrix(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment,
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress) {
         super(alignment.getTaxa(), new Initialaizer().getDistances(alignment, progress));
+        this.alignment = alignment;
+    	this.progress = progress;
     }
 
-    public F84DistanceMatrix(Alignment alignment) {
+    public F84DistanceMatrix(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment) {
         super(alignment.getTaxa(), new Initialaizer().getDistances(alignment, null));
+        this.alignment = alignment;
     }
 
     static class Initialaizer {
@@ -90,4 +97,23 @@ public class F84DistanceMatrix extends BasicDistanceMatrix {
             return distances;
         }
     }
+
+	public Alignment getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(Alignment alignment) {
+		this.alignment = alignment;
+	}
+
+	public ProgressListener getProgress() {
+		return progress;
+	}
+
+	public void setProgress(ProgressListener progress) {
+		this.progress = progress;
+	}
+
+	private Alignment alignment;
+	private ProgressListener progress;
 }

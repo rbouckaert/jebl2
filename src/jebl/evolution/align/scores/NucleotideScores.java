@@ -1,5 +1,6 @@
 package jebl.evolution.align.scores;
 
+import beast.core.Param;
 import jebl.evolution.sequences.NucleotideState;
 import jebl.evolution.sequences.Nucleotides;
 import jebl.evolution.sequences.State;
@@ -34,7 +35,8 @@ public class NucleotideScores extends Scores {
     protected NucleotideScores() {
     }
 
-    public NucleotideScores(NucleotideScores scores) {
+    public NucleotideScores(
+		@Param(name="scores", description="auto converted jebl2 parameter") NucleotideScores scores) {
         name = scores.name;
         alphabet = scores.getAlphabet();
         match = scores.match;
@@ -46,29 +48,49 @@ public class NucleotideScores extends Scores {
      * @param match match score
      * @param misMatch mismatch score
      */
-    public NucleotideScores(float match, float misMatch) {
+    public NucleotideScores(
+		@Param(name="match", description="auto converted jebl2 parameter") Float match,
+		@Param(name="misMatch", description="auto converted jebl2 parameter") Float misMatch) {
         this("", match, misMatch);
     }
 
-    public NucleotideScores(float match, float misMatch, float ambiguousMatch) {
+    public NucleotideScores(
+		@Param(name="match", description="auto converted jebl2 parameter") Float match,
+		@Param(name="misMatch", description="auto converted jebl2 parameter") Float misMatch,
+		@Param(name="ambiguousMatch", description="auto converted jebl2 parameter") Float ambiguousMatch) {
         this("", match, misMatch, misMatch, ambiguousMatch, false);
     }
 
-    public NucleotideScores(String name, float match, float misMatch) {
-        this(name, match, misMatch, misMatch, 0, true);
+    public NucleotideScores(
+		@Param(name="name", description="auto converted jebl2 parameter") String name,
+		@Param(name="match", description="auto converted jebl2 parameter") Float match,
+		@Param(name="misMatch", description="auto converted jebl2 parameter") Float misMatch) {
+        this(name, match, misMatch, misMatch, 0f, true);
     }
 
-    public NucleotideScores(String name, float match, float mismatchTransition, float mismatchTransversion) {
+    public NucleotideScores(
+		@Param(name="name", description="auto converted jebl2 parameter") String name,
+		@Param(name="match", description="auto converted jebl2 parameter") Float match,
+		@Param(name="mismatchTransition", description="auto converted jebl2 parameter") Float mismatchTransition,
+		@Param(name="mismatchTransversion", description="auto converted jebl2 parameter") Float mismatchTransversion) {
         this.name = name;
         buildScores(match, mismatchTransition, mismatchTransversion, 0, false);
     }
 
-    public NucleotideScores(String name, float match, float mismatchTransition, float mismatchTransversion, float ambiguousMatch, boolean useWeightedAmbigousMatches) {
+    public NucleotideScores(
+		@Param(name="name", description="auto converted jebl2 parameter") String name,
+		@Param(name="match", description="auto converted jebl2 parameter") Float match,
+		@Param(name="mismatchTransition", description="auto converted jebl2 parameter") Float mismatchTransition,
+		@Param(name="mismatchTransversion", description="auto converted jebl2 parameter") Float mismatchTransversion,
+		@Param(name="ambiguousMatch", description="auto converted jebl2 parameter") Float ambiguousMatch,
+		@Param(name="useWeightedAmbigousMatches", description="auto converted jebl2 parameter") Boolean useWeightedAmbigousMatches) {
         this.name = name;
         buildScores(match, mismatchTransition, mismatchTransversion, ambiguousMatch, true, useWeightedAmbigousMatches);
     }
 
-    public NucleotideScores(Scores scores, double percentmatches) {
+    public NucleotideScores(
+		@Param(name="scores", description="auto converted jebl2 parameter") Scores scores,
+		@Param(name="percentmatches", description="auto converted jebl2 parameter") Double percentmatches) {
         double match = Math.log(percentmatches/(4 *.25 *.25));
         double mismatch = Math.log((1-percentmatches)/(12 * .25 *.25));
 
@@ -92,7 +114,6 @@ public class NucleotideScores extends Scores {
      * example, if misamtch=0 and match = 1, then score(A,R)=0.5, score(T,R)=0, score(R,R)=0.5, score(B,B)=0.33.
      */
     void buildScores(float match, float mismatchTransition, float mismatchTransversion, float ambiguousMatch, boolean includeAmbiguities, boolean useWeightedAmbigousMatches) {
-
         this.match = match;
         this.mismatchTransition = mismatchTransition;
         this.mismatchTransversion = mismatchTransversion;
@@ -174,5 +195,80 @@ public class NucleotideScores extends Scores {
         }
         return result;
     }
-}
 
+	public Float getAmbiguousMatch() {
+		return ambiguousMatch;
+	}
+
+	public void setAmbiguousMatch(Float ambiguousMatch) {
+		this.ambiguousMatch = ambiguousMatch;
+	}
+
+	public Float getMatch() {
+		return match;
+	}
+
+	public void setMatch(Float match) {
+		this.match = match;
+	}
+
+	public Float getMisMatch() {
+		return misMatch;
+	}
+
+	public void setMisMatch(Float misMatch) {
+		this.misMatch = misMatch;
+	}
+
+	public Float getMismatchTransition() {
+		return mismatchTransition;
+	}
+
+	public void setMismatchTransition(Float mismatchTransition) {
+		this.mismatchTransition = mismatchTransition;
+	}
+
+	public Float getMismatchTransversion() {
+		return mismatchTransversion;
+	}
+
+	public void setMismatchTransversion(Float mismatchTransversion) {
+		this.mismatchTransversion = mismatchTransversion;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getPercentmatches() {
+		return percentmatches;
+	}
+
+	public void setPercentmatches(Double percentmatches) {
+		this.percentmatches = percentmatches;
+	}
+
+	public Scores getScores() {
+		return scores;
+	}
+
+	public void setScores(Scores scores) {
+		this.scores = scores;
+	}
+
+	public Boolean getUseWeightedAmbigousMatches() {
+		return useWeightedAmbigousMatches;
+	}
+
+	public void setUseWeightedAmbigousMatches(Boolean useWeightedAmbigousMatches) {
+		this.useWeightedAmbigousMatches = useWeightedAmbigousMatches;
+	}
+
+	private Scores scores;
+	private Boolean useWeightedAmbigousMatches;
+	private Double percentmatches;
+	private Float ambiguousMatch;
+	private Float misMatch;
+
+}

@@ -8,6 +8,8 @@
  */
 package jebl.evolution.sequences;
 
+import beast.core.Param;
+
 /**
  * @author Andrew Rambaut
  * @author Alexei Drummond
@@ -20,7 +22,19 @@ public class SequenceStateException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SequenceStateException(String s) {
+	public SequenceStateException(
+		@Param(name="s", description="auto converted jebl2 parameter") String s) {
         super(s);
+        this.s = s;
     }
+
+	public String getS() {
+		return s;
+	}
+
+	public void setS(String s) {
+		this.s = s;
+	}
+
+	private String s;
 }

@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.io.ImportException;
 import jebl.evolution.io.NexusImporter;
@@ -25,7 +26,8 @@ public class CalculateSplitRates {
 	private List<List<TimeInterval>> intervalList;
 	private DensityMap densityMap;
 
-	public CalculateSplitRates(NexusImporter importer) {
+	public CalculateSplitRates(
+		@Param(name="importer", description="auto converted jebl2 parameter") NexusImporter importer) {
 		this.importer = importer;
 		treeList = new ArrayList<>(100);
 		//cladeList = new ArrayList<>(100);
@@ -629,6 +631,13 @@ public class CalculateSplitRates {
 		}
 	}
 
+
+	public NexusImporter getImporter() {
+		return importer;
+	}
+
+	public void setImporter(NexusImporter importer) {
+		this.importer = importer;
+	}
+
 }
-
-

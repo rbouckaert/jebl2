@@ -1,5 +1,6 @@
 package jebl.evolution.sequences;
 
+import beast.core.Param;
 import jebl.evolution.taxa.Taxon;
 
 import java.util.Map;
@@ -18,7 +19,8 @@ public abstract class FilteredSequence extends BEASTObject implements Sequence {
      *
      * @param source
      */
-    public FilteredSequence(Sequence source) {
+    public FilteredSequence(
+		@Param(name="source", description="auto converted jebl2 parameter") Sequence source) {
 
         this.source = source;
     }
@@ -145,12 +147,23 @@ public abstract class FilteredSequence extends BEASTObject implements Sequence {
 
     // private members
 
-    private final Sequence source;
+    Sequence source;
     private State[] sequence = null;
     
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+
+	public Sequence getSource() {
+		return source;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setSource(Sequence source) {
+		this.source = source;
 	}
 
 }

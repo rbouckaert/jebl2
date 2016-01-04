@@ -33,4 +33,5 @@ public class Blosum50 extends AminoAcidScores {
     @Override
 	public String getName() { return "Blosum50"; }
 
+
 }

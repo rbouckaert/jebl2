@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 //import java.util.ArrayList;
@@ -15,7 +16,9 @@ public class NeedlemanWunschLinearSpace extends AlignLinearSpace {
     int u;     // Halfway through seq1
     int[][] c; // Best alignment from (0,0) to (i,j) passes through (u, c[i][j])
 
-    public NeedlemanWunschLinearSpace(Scores sub, float d) {
+    public NeedlemanWunschLinearSpace(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d) {
         super(sub, d);
     }
 
@@ -132,4 +135,25 @@ public class NeedlemanWunschLinearSpace extends AlignLinearSpace {
 
     @Override
 	public float getScore() { return F[1][m]; }
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

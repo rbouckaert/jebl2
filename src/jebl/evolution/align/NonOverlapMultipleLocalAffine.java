@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 import java.util.ArrayList;
@@ -21,7 +22,11 @@ public class NonOverlapMultipleLocalAffine extends AlignRepeatAffine {
 	private ArrayList<LocalAlignment> localAligns = new ArrayList<>();
 	private SmithWatermanLinearSpaceAffine swlsa;
 
-	public NonOverlapMultipleLocalAffine(Scores sub, float d, float e, int T) {
+	public NonOverlapMultipleLocalAffine(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d,
+		@Param(name="e", description="auto converted jebl2 parameter") Float e,
+		@Param(name="T", description="auto converted jebl2 parameter") Integer T) {
 		super(sub, d, e, T);
 	}
 
@@ -172,6 +177,46 @@ public class NonOverlapMultipleLocalAffine extends AlignRepeatAffine {
 	public void printf(Output out) {
     	swlsa.printf(out);
     }
+
+	@Override
+	public Integer getT() {
+		return T;
+	}
+
+	@Override
+	public void setT(Integer T) {
+		this.T = T;
+	}
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	@Override
+	public Float getE() {
+		return e;
+	}
+
+	@Override
+	public void setE(Float e) {
+		this.e = e;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
 }
 
 /**

@@ -127,4 +127,5 @@ public class Expansion extends ExponentialGrowth {
 	//
 
 	private double N1 = 0.0;
+
 }

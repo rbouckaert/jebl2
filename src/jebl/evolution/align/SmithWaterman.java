@@ -1,11 +1,14 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 import jebl.util.ProgressListener;
 
 public class SmithWaterman extends AlignSimple {
 
-    public SmithWaterman(Scores sub, float d) {
+    public SmithWaterman(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d) {
         super(sub, d);
     }
 
@@ -54,4 +57,25 @@ public class SmithWaterman extends AlignSimple {
 	public void doAlignment(String sq1, String sq2) {
         doAlignment(sq1, sq2, null);
     }
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

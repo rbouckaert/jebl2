@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 
@@ -15,9 +16,16 @@ abstract class AlignAffine extends Align {
     private int oldn = 0;
     private int oldm = 0;
 
-    public AlignAffine(Scores sub, float openGapPenalty, float extendGapPenalty) {
+    public AlignAffine(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="openGapPenalty", description="auto converted jebl2 parameter") Float openGapPenalty,
+		@Param(name="extendGapPenalty", description="auto converted jebl2 parameter") Float extendGapPenalty) {
         super(sub, openGapPenalty);
         setGapExtend(extendGapPenalty);
+        
+    	this.extendGapPenalty = extendGapPenalty;
+    	this.openGapPenalty = openGapPenalty;
+
     }
 
     /**
@@ -118,5 +126,33 @@ abstract class AlignAffine extends Align {
             }
         }
     }
-}
 
+	public Float getExtendGapPenalty() {
+		return extendGapPenalty;
+	}
+
+	public void setExtendGapPenalty(Float extendGapPenalty) {
+		this.extendGapPenalty = extendGapPenalty;
+	}
+
+	public Float getOpenGapPenalty() {
+		return openGapPenalty;
+	}
+
+	public void setOpenGapPenalty(Float openGapPenalty) {
+		this.openGapPenalty = openGapPenalty;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+	Float extendGapPenalty;
+	Float openGapPenalty;
+	
+}

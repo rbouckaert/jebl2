@@ -144,4 +144,5 @@ public class ExponentialLogistic extends LogisticGrowth {
     
     // the transition time
     private double time = 1.0;
+
 }

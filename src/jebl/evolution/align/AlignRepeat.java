@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 abstract class AlignRepeat extends Align {
@@ -8,7 +9,10 @@ abstract class AlignRepeat extends Align {
     TracebackSimple[][] B;         	// the traceback matrix
     int T;							// threshold
 
-    public AlignRepeat(Scores sub, float d, int T) {
+    public AlignRepeat(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d,
+		@Param(name="T", description="auto converted jebl2 parameter") Integer T) {
         super(sub, d);
         this.T = T;
     }
@@ -91,4 +95,33 @@ abstract class AlignRepeat extends Align {
             out.println();
         }
     }
+
+	public Integer getT() {
+		return T;
+	}
+
+	public void setT(Integer T) {
+		this.T = T;
+	}
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

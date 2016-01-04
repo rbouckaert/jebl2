@@ -239,4 +239,5 @@ public abstract class Scores extends BEASTObject implements ScoreMatrix {
 		// TODO nothing to do
 	}
 
+
 }

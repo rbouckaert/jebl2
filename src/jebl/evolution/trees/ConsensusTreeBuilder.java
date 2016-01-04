@@ -24,7 +24,7 @@ public abstract class ConsensusTreeBuilder<T extends Tree> extends BEASTObject i
     /** Name of attribute specifing amount of support for branch */
     final static public String DEFAULT_SUPPORT_ATTRIBUTE_NAME = "Consensus support(%)";
 
-	private String supportAttributeName;
+	String supportAttributeName;
 	private boolean supportAsPercent;
 
     /**
@@ -152,5 +152,6 @@ public abstract class ConsensusTreeBuilder<T extends Tree> extends BEASTObject i
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
 
 }

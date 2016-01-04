@@ -1,9 +1,11 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.trees.Tree;
 import jebl.evolution.trees.Utils;
 import java.io.Writer;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 
 import beast.core.BEASTObject;
@@ -14,7 +16,8 @@ import beast.core.BEASTObject;
  * @version $Id: NewickExporter.java 429 2006-08-26 18:17:39Z rambaut $
  */
 public class NewickExporter extends BEASTObject implements TreeExporter {
-    public NewickExporter(Writer writer) {
+    public NewickExporter(
+		@Param(name="writer", description="auto converted jebl2 parameter") Writer writer) {
         this.writer = writer;
     }
 
@@ -46,11 +49,23 @@ public class NewickExporter extends BEASTObject implements TreeExporter {
         writer.write(Utils.toNewick(Utils.rootTheTree(tree)));
     }
 
-    private final Writer writer;
+    private Writer writer;
     
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+
+	public Writer getWriter() {
+		return writer;
+	}
+
+	
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setWriter(Writer writer) {
+		this.writer = new PrintWriter(writer);
 	}
 
 }

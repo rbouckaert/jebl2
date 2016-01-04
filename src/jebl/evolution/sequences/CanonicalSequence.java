@@ -1,5 +1,6 @@
 package jebl.evolution.sequences;
 
+import beast.core.Param;
 import jebl.evolution.taxa.Taxon;
 import jebl.util.AttributableHelper;
 
@@ -31,7 +32,10 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
      * @param sequenceString
      */
 
-    public CanonicalSequence(SequenceType sequenceType, Taxon taxon, CharSequence sequenceString) {
+    public CanonicalSequence(
+		@Param(name="sequenceType", description="auto converted jebl2 parameter") SequenceType sequenceType,
+		@Param(name="taxon", description="auto converted jebl2 parameter") Taxon taxon,
+		@Param(name="sequenceString", description="auto converted jebl2 parameter") CharSequence sequenceString) {
 
         if (sequenceType == null) {
             throw new IllegalArgumentException("sequenceType is not allowed to be null");
@@ -54,6 +58,7 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
             }
             sequence[i] = (byte)state.getIndex();
         }
+        this.sequenceString = sequenceString;
     }
 
     /**
@@ -63,7 +68,10 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
      * @param sequenceType
      * @param states
      */
-    public CanonicalSequence(SequenceType sequenceType, Taxon taxon, State[] states) {
+    public CanonicalSequence(
+		@Param(name="sequenceType", description="auto converted jebl2 parameter") SequenceType sequenceType,
+		@Param(name="taxon", description="auto converted jebl2 parameter") Taxon taxon,
+		@Param(name="states", description="auto converted jebl2 parameter") State[] states) {
 
         this.sequenceType = sequenceType;
         this.taxon = taxon;
@@ -203,8 +211,8 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
 
     // private members
 
-    private final Taxon taxon;
-    private final SequenceType sequenceType;
+    private Taxon taxon;
+    private SequenceType sequenceType;
     private final byte[] sequence;
 
    // private Map<String, Object> attributeMap = null;
@@ -213,5 +221,32 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+
+	public CharSequence getSequenceString() {
+		return sequenceString;
+	}
+
+	public void setSequenceString(CharSequence sequenceString) {
+		this.sequenceString = sequenceString;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setSequenceType(SequenceType sequenceType) {
+		this.sequenceType = sequenceType;
+	}
+
+//	public void setStates(State[] states) {
+//		this.states = states;
+//	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTaxon(Taxon taxon) {
+		this.taxon = taxon;
+	}
+
+	CharSequence sequenceString;
 
 }

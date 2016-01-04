@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -17,7 +18,8 @@ import beast.core.BEASTObject;
  */
 public abstract class FilteredRootedTree extends BEASTObject implements RootedTree {
 
-    public FilteredRootedTree(final RootedTree source) {
+    public FilteredRootedTree(
+		@Param(name="source", description="auto converted jebl2 parameter") RootedTree source) {
         this.source = source;
     }
 
@@ -184,10 +186,18 @@ public abstract class FilteredRootedTree extends BEASTObject implements RootedTr
 
 	// PRIVATE members
 
-	protected final RootedTree source;
+	protected RootedTree source;
 
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setSource(RootedTree source) {
+		this.source = source;
+	}
+
 }

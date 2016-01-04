@@ -81,4 +81,5 @@ public interface Tree extends Graph {
     Node getNode(Taxon taxon);
 
     void renameTaxa(Taxon from, Taxon to);
+
 }

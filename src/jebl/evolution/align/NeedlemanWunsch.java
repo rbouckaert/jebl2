@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ public class NeedlemanWunsch extends AlignSimple {
     private int curr = 1;
     private float maxScore = 0;
 
-    public NeedlemanWunsch(Scores sub, float d) {
+    public NeedlemanWunsch(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d) {
         super(sub, d);
     }
 
@@ -82,4 +85,25 @@ public class NeedlemanWunsch extends AlignSimple {
      */
     @Override
 	public float getScore() { return maxScore; }
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

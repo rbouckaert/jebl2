@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.distances.DistanceMatrix;
 import jebl.evolution.graphs.Node;
@@ -32,7 +33,8 @@ import beast.core.BEASTObject;
 
 public class NexusExporter extends BEASTObject implements AlignmentExporter, SequenceExporter, TreeExporter {
 
-	public NexusExporter(Writer writer) {
+	public NexusExporter(
+		@Param(name="writer", description="auto converted jebl2 parameter") Writer writer) {
 		this(writer, true);
 	}
 
@@ -40,7 +42,9 @@ public class NexusExporter extends BEASTObject implements AlignmentExporter, Seq
      *
      * @param writer where export text goes
      */
-    public NexusExporter(Writer writer, boolean writeMetaComments) {
+    public NexusExporter(
+		@Param(name="writer", description="auto converted jebl2 parameter") Writer writer,
+		@Param(name="writeMetaComments", description="auto converted jebl2 parameter") Boolean writeMetaComments) {
 		this(writer, writeMetaComments, false);
     }
 
@@ -48,7 +52,10 @@ public class NexusExporter extends BEASTObject implements AlignmentExporter, Seq
      *
      * @param writer where export text goes
      */
-    public NexusExporter(Writer writer, boolean writeMetaComments, boolean interleave) {
+    public NexusExporter(
+		@Param(name="writer", description="auto converted jebl2 parameter") Writer writer,
+		@Param(name="writeMetaComments", description="auto converted jebl2 parameter") Boolean writeMetaComments,
+		@Param(name="interleave", description="auto converted jebl2 parameter") Boolean interleave) {
 		this.writeMetaComments = writeMetaComments;
         this.interleave = interleave;
         this.writer = new PrintWriter(writer);
@@ -441,7 +448,7 @@ public class NexusExporter extends BEASTObject implements AlignmentExporter, Seq
     }
 
     private Set<Taxon> taxa = null;
-    protected final PrintWriter writer;
+    protected PrintWriter writer;
 	private boolean writeMetaComments;
     private boolean interleave;
     public static final int MAX_ROW_LENGTH = 60;
@@ -449,6 +456,33 @@ public class NexusExporter extends BEASTObject implements AlignmentExporter, Seq
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+
+	public Boolean getInterleave() {
+		return interleave;
+	}
+
+	public void setInterleave(Boolean interleave) {
+		this.interleave = interleave;
+	}
+
+	public Boolean getWriteMetaComments() {
+		return writeMetaComments;
+	}
+
+	public void setWriteMetaComments(Boolean writeMetaComments) {
+		this.writeMetaComments = writeMetaComments;
+	}
+
+	public Writer getWriter() {
+		return writer;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setWriter(Writer writer) {
+		this.writer = new PrintWriter(writer);
 	}
 
 }

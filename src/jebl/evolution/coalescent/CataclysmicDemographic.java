@@ -133,4 +133,5 @@ public class CataclysmicDemographic extends ExponentialGrowth {
 
 	private double d;
 	private double catTime;
+
 }

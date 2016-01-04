@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.distances.*;
 import jebl.evolution.sequences.Sequence;
 import jebl.evolution.taxa.Taxon;
@@ -22,13 +23,23 @@ import java.util.List;
  */
 public class SequenceAlignmentsDistanceMatrix extends BasicDistanceMatrix {
     
-    public SequenceAlignmentsDistanceMatrix(List<Sequence> seqs, PairwiseAligner aligner, ProgressListener progress)
+    public SequenceAlignmentsDistanceMatrix(
+		@Param(name="seqs", description="auto converted jebl2 parameter") List<Sequence> seqs,
+		@Param(name="aligner", description="auto converted jebl2 parameter") PairwiseAligner aligner,
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress)
             throws CannotBuildDistanceMatrixException
     {
         super(getTaxa(seqs), getDistances(seqs, aligner, getDefaultDistanceModel(seqs), progress));
+        this.seqs = seqs;
+        this.aligner = aligner;
+        this.progress = progress;
     }
 
-    public SequenceAlignmentsDistanceMatrix(List<Sequence> seqs, PairwiseAligner aligner, ProgressListener progress, TreeBuilderFactory.DistanceModel model)
+    public SequenceAlignmentsDistanceMatrix(
+		@Param(name="seqs", description="auto converted jebl2 parameter") List<Sequence> seqs,
+		@Param(name="aligner", description="auto converted jebl2 parameter") PairwiseAligner aligner,
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress,
+		@Param(name="model", description="auto converted jebl2 parameter") TreeBuilderFactory.DistanceModel model)
             throws CannotBuildDistanceMatrixException
     {
         super(getTaxa(seqs), getDistances(seqs, aligner, model, progress));
@@ -36,6 +47,10 @@ public class SequenceAlignmentsDistanceMatrix extends BasicDistanceMatrix {
         if (model != TreeBuilderFactory.DistanceModel.JukesCantor && isProtein) {
             throw new IllegalArgumentException("Model " + model + " does not support protein sequences");
         }
+        this.seqs = seqs;
+        this.aligner = aligner;
+        this.progress = progress;
+        this.model = model;
     }
 
     static List<Taxon> getTaxa(List<Sequence> seqs) {
@@ -107,4 +122,41 @@ public class SequenceAlignmentsDistanceMatrix extends BasicDistanceMatrix {
         }
         return d;
     }
+
+	public PairwiseAligner getAligner() {
+		return aligner;
+	}
+
+	public void setAligner(PairwiseAligner aligner) {
+		this.aligner = aligner;
+	}
+
+	public TreeBuilderFactory.DistanceModel getModel() {
+		return model;
+	}
+
+	public void setModel(TreeBuilderFactory.DistanceModel model) {
+		this.model = model;
+	}
+
+	public ProgressListener getProgress() {
+		return progress;
+	}
+
+	public void setProgress(ProgressListener progress) {
+		this.progress = progress;
+	}
+
+	public List<Sequence> getSeqs() {
+		return seqs;
+	}
+
+	public void setSeqs(List<Sequence> seqs) {
+		this.seqs = seqs;
+	}
+
+	private PairwiseAligner aligner;
+	private TreeBuilderFactory.DistanceModel model;
+	private ProgressListener progress;
+	private List<Sequence> seqs;
 }

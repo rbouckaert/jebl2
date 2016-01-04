@@ -52,4 +52,5 @@ public interface TreeImporter extends Iterable<Tree> {
      * Any type of tree is fine.
      */
 	List<Tree> importTrees() throws IOException, ImportException;
+
 }

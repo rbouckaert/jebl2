@@ -60,4 +60,5 @@ public abstract class BaseEdge implements Edge {
     // PRIVATE members
 
     private AttributableHelper helper = null;
+
 }

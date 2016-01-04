@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -211,7 +212,9 @@ public class CompactRootedTree extends AttributableImp implements RootedTree {
      *
      * @param t
      */
-    public CompactRootedTree(RootedTree t) {
+    public CompactRootedTree(
+		@Param(name="t", description="auto converted jebl2 parameter") RootedTree t) {
+    	this.t = t;
         conceptuallyUnrooted = t.conceptuallyUnrooted();
 
         final int nNodes = t.getNodes().size();
@@ -623,4 +626,15 @@ abstract class AttributableImp extends BEASTObject implements Attributable {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public RootedTree getT() {
+		return t;
+	}
+
+	public void setT(RootedTree t) {
+		this.t = t;
+	}
+	
+	RootedTree t;
+
 }

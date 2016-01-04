@@ -25,4 +25,5 @@ public interface Sequences {
     Set<Sequence> getSequences();
 
     Sequence getSequence(Taxon taxon);
+
 }

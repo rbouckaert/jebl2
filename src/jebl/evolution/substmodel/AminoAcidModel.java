@@ -38,4 +38,5 @@ public abstract class AminoAcidModel extends AbstractRateMatrix
         setSequenceType(SequenceType.AMINO_ACID);
         setFrequencies(f);
     }
+
 }

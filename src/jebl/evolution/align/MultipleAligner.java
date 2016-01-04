@@ -18,4 +18,5 @@ public interface MultipleAligner {
     Alignment doAlign(Alignment a1, Alignment a2, ProgressListener progress);
 
     Alignment doAlign(Alignment alignment, Sequence sequence, ProgressListener progress);
+
 }

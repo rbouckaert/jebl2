@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import beast.core.BEASTObject;
 import jebl.evolution.align.scores.Scores;
 
@@ -26,12 +27,14 @@ public class ProfileCharacter extends BEASTObject {
     private  float gapFraction;
     private boolean isImmutable = false;
 
-    public ProfileCharacter(int alphabetSize) {
+    public ProfileCharacter(
+		@Param(name="alphabetSize", description="auto converted jebl2 parameter") Integer alphabetSize) {
         if (alphabetSize < 0) {
             throw new IllegalArgumentException("Expected a nonnegative alphabet size, got " + alphabetSize);
         }
         characters = new char[alphabetSize +1];
         count = new int[alphabetSize +1];
+        this.alphabetSize = alphabetSize;
     }
 
     private static int MAX_CHAR = 128;
@@ -228,4 +231,15 @@ public class ProfileCharacter extends BEASTObject {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Integer getAlphabetSize() {
+		return alphabetSize;
+	}
+
+	public void setAlphabetSize(Integer alphabetSize) {
+		this.alphabetSize = alphabetSize;
+	}
+	
+	private Integer alphabetSize;
+
 }

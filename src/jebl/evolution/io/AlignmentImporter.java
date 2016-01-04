@@ -17,4 +17,5 @@ public interface AlignmentImporter {
 	 * importAlignment.
 	 */
 	List<Alignment> importAlignments() throws IOException, ImportException;
+
 }

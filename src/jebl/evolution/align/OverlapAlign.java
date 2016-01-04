@@ -1,12 +1,15 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 // Overlap matching (simple gap costs)
 
 public class OverlapAlign extends AlignSimple {
 	
-	public OverlapAlign(Scores sub, float d) {
+	public OverlapAlign(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d) {
 		super(sub, d);
 	}
 
@@ -54,4 +57,25 @@ public void doAlignment(String sq1, String sq2) {
     else                        // the maximum score was F[maxi][m]
       B0 = new TracebackSimple(maxi, m);
   }
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
 import jebl.evolution.trees.RootedTree;
@@ -30,9 +31,12 @@ public class NewickImporter extends BEASTObject implements TreeImporter {
      * @param reader  tree text
      * @param unquotedLabels if true, try to read unqouted lables containing spaces
      */
-    public NewickImporter(Reader reader, boolean unquotedLabels) {
+    public NewickImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="unquotedLabels", description="auto converted jebl2 parameter") Boolean unquotedLabels) {
         helper = new ImportHelper(reader);
         this.unquotedLabels = unquotedLabels;
+        this.reader = reader;
     }
 
     /**
@@ -232,4 +236,22 @@ public class NewickImporter extends BEASTObject implements TreeImporter {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Reader getReader() {
+		return reader;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
+	public Boolean getUnquotedLabels() {
+		return unquotedLabels;
+	}
+
+	public void setUnquotedLabels(Boolean unquotedLabels) {
+		this.unquotedLabels = unquotedLabels;
+	}
+
+	private Reader reader;
 }

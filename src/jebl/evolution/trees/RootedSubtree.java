@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -27,8 +28,12 @@ final public class RootedSubtree extends BEASTObject implements RootedTree {
      * @param tree a rooted tree
      * @param includedTaxa
      */
-    public RootedSubtree(RootedTree tree, Set<Taxon> includedTaxa) {
+    public RootedSubtree(
+		@Param(name="tree", description="auto converted jebl2 parameter") RootedTree tree,
+		@Param(name="includedTaxa", description="auto converted jebl2 parameter") Set<Taxon> includedTaxa) {
         createNodes(tree, tree.getRootNode(), includedTaxa);
+        this.tree = tree;
+        this.includedTaxa = includedTaxa;
     }
 
     /**
@@ -754,4 +759,23 @@ final public class RootedSubtree extends BEASTObject implements RootedTree {
 		// nothing to do
 	}
 
+
+	public Set<Taxon> getIncludedTaxa() {
+		return includedTaxa;
+	}
+
+	public void setIncludedTaxa(Set<Taxon> includedTaxa) {
+		this.includedTaxa = includedTaxa;
+	}
+
+	public RootedTree getTree() {
+		return tree;
+	}
+
+	public void setTree(RootedTree tree) {
+		this.tree = tree;
+	}
+	
+	Set<Taxon> includedTaxa;
+	RootedTree tree;
 }

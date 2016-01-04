@@ -1,5 +1,7 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
+
 /**
  * @author Matt Kearse
  * @version $Id: AlignmentResult.java 650 2007-03-12 20:09:10Z twobeers $
@@ -16,7 +18,8 @@ class AlignmentResult {
     // values: true, false, false, true, true, false, true
     // then the resulting alignment is: a--bc-d
 
-    public AlignmentResult(int size) {
+    public AlignmentResult(
+		@Param(name="size", description="auto converted jebl2 parameter") Integer size) {
         this.size = 0;
         // TT: Wouldn't a BitSet be better?
         values =new boolean[size];
@@ -38,4 +41,13 @@ class AlignmentResult {
         }
         System.out.println ();
     }
+
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
 }

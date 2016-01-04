@@ -18,4 +18,5 @@ public interface DistanceMatrixImporter {
      * importDistances.
      */
     List<DistanceMatrix> importDistanceMatrices() throws IOException, ImportException;
+
 }

@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -31,7 +32,9 @@ public class MutableRootedTree extends BEASTObject implements RootedTree {
      * @param tree      Unrooted tree to root
      * @param outGroup  Node in tree assumed to be the outgroup
      */
-    public MutableRootedTree(Tree tree, Node outGroup) {
+    public MutableRootedTree(
+		@Param(name="tree", description="auto converted jebl2 parameter") Tree tree,
+		@Param(name="outGroup", description="auto converted jebl2 parameter") Node outGroup) {
         if( ! tree.isExternal(outGroup) ) throw new IllegalArgumentException("Outgroup must be a tip");
 
         // Adjacency of node to become new root.
@@ -54,6 +57,9 @@ public class MutableRootedTree extends BEASTObject implements RootedTree {
         } catch (NoEdgeException e) {
             // bug
         }
+        
+        this.tree = tree;
+        this.outGroup = outGroup;
     }
 
     /**
@@ -61,12 +67,14 @@ public class MutableRootedTree extends BEASTObject implements RootedTree {
      *
      * @param tree      Rooted tree to copy
      */
-    public MutableRootedTree(RootedTree tree) {
+    public MutableRootedTree(
+		@Param(name="tree", description="auto converted jebl2 parameter") RootedTree tree) {
         try {
             rootNode = rootAdjacenciesWith(tree, tree.getRootNode(), null);
         } catch (NoEdgeException e) {
             // bug
         }
+        this.tree = tree;
     }
 
     /**
@@ -876,4 +884,23 @@ public class MutableRootedTree extends BEASTObject implements RootedTree {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Node getOutGroup() {
+		return outGroup;
+	}
+
+	public void setOutGroup(Node outGroup) {
+		this.outGroup = outGroup;
+	}
+
+	public Tree getTree() {
+		return tree;
+	}
+
+	public void setTree(Tree tree) {
+		this.tree = tree;
+	}
+	
+	Node outGroup;
+	Tree tree;
 }

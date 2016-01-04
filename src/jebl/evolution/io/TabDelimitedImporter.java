@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.distances.BasicDistanceMatrix;
 import jebl.evolution.distances.DistanceMatrix;
 import jebl.evolution.taxa.Taxon;
@@ -22,7 +23,12 @@ public class TabDelimitedImporter extends BEASTObject implements DistanceMatrixI
     /**
      * Constructor
      */
-    public TabDelimitedImporter(Reader reader, Triangle triangle, boolean diagonal, boolean rowLabels, boolean columnLabels) {
+    public TabDelimitedImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="triangle", description="auto converted jebl2 parameter") Triangle triangle,
+		@Param(name="diagonal", description="auto converted jebl2 parameter") Boolean diagonal,
+		@Param(name="rowLabels", description="auto converted jebl2 parameter") Boolean rowLabels,
+		@Param(name="columnLabels", description="auto converted jebl2 parameter") Boolean columnLabels) {
         helper = new ImportHelper(reader);
         this.triangle = triangle;
         this.diagonal = diagonal;
@@ -32,6 +38,7 @@ public class TabDelimitedImporter extends BEASTObject implements DistanceMatrixI
         if (!rowLabels && !columnLabels) {
             throw new IllegalArgumentException("The matrix must have either row labels or column labels (or both)");
         }
+        this.reader = reader;
     }
 
     /**
@@ -160,13 +167,63 @@ public class TabDelimitedImporter extends BEASTObject implements DistanceMatrixI
     }
 
     private final ImportHelper helper;
-    private final Triangle triangle;
-    private final boolean diagonal;
-    private final boolean rowLabels;
-    private final boolean columnLabels;
+    private Triangle triangle;
+    private boolean diagonal;
+    private boolean rowLabels;
+    private boolean columnLabels;
 
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Boolean getColumnLabels() {
+		return columnLabels;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setColumnLabels(Boolean columnLabels) {
+		this.columnLabels = columnLabels;
+	}
+
+	public Boolean getDiagonal() {
+		return diagonal;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setDiagonal(Boolean diagonal) {
+		this.diagonal = diagonal;
+	}
+
+	public Reader getReader() {
+		return reader;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
+	public Boolean getRowLabels() {
+		return rowLabels;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setRowLabels(Boolean rowLabels) {
+		this.rowLabels = rowLabels;
+	}
+
+	public Triangle getTriangle() {
+		return triangle;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTriangle(Triangle triangle) {
+		this.triangle = triangle;
+	}
+
+	private Reader reader;
 }

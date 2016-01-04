@@ -30,4 +30,5 @@ public final class CodonState extends State {
 	public boolean isGap() {
 		return this == Codons.GAP_STATE;
 	}
+
 }

@@ -14,4 +14,5 @@ public interface TreeBuilder<T extends Tree> {
     void addProgressListener(ProgressListener listener);
 
     void removeProgressListener(ProgressListener listener);
+
 }

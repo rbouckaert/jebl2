@@ -280,4 +280,5 @@ public class BasicAlignment extends BEASTObject implements Alignment {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
 }

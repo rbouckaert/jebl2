@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
 import jebl.util.FixedBitSet;
@@ -24,12 +25,14 @@ public class TreeBiPartitionInfo {
         public boolean has;
     }
 
-    final List<Taxon> taxa;
-    final RootedTree t;
+    List<Taxon> taxa;
+    RootedTree t;
     final int        nTips;
     HashMap<FixedBitSet, BiPartiotionInfo> all;
 
-    public TreeBiPartitionInfo(RootedTree t, List<Taxon> taxa) {
+    public TreeBiPartitionInfo(
+		@Param(name="t", description="auto converted jebl2 parameter") RootedTree t,
+		@Param(name="taxa", description="auto converted jebl2 parameter") List<Taxon> taxa) {
         this.t = t;
         this.taxa = taxa;
         nTips = t.getExternalNodes().size();
@@ -136,4 +139,25 @@ public class TreeBiPartitionInfo {
         double d = din + dout;
         return ( norm == DistanceNorm.NORM1 ) ? d : Math.sqrt(d);
     }
+
+	public RootedTree getT() {
+		return t;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setT(RootedTree t) {
+		this.t = t;
+	}
+
+	public List<Taxon> getTaxa() {
+		return taxa;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTaxa(List<Taxon> taxa) {
+		this.taxa = taxa;
+	}
+
 }

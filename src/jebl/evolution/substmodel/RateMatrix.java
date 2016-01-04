@@ -71,4 +71,5 @@ public interface RateMatrix extends  Cloneable, Serializable {
      *	the probabilities. This method may well take the most time!
      */
     void setDistance(double distance);
+
 }

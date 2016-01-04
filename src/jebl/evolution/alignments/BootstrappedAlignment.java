@@ -1,5 +1,6 @@
 package jebl.evolution.alignments;
 
+import beast.core.Param;
 import beast.util.Randomizer;
 
 /**
@@ -12,7 +13,9 @@ import beast.util.Randomizer;
  */
 public class BootstrappedAlignment extends ResampledAlignment {
 
-    public BootstrappedAlignment(Alignment srcAlignment, long seed) {
+    public BootstrappedAlignment(
+		@Param(name="srcAlignment", description="auto converted jebl2 parameter") Alignment srcAlignment,
+		@Param(name="seed", description="auto converted jebl2 parameter") long seed) {
     	Randomizer.setSeed(seed);
         final int nSites = srcAlignment.getSiteCount();
         int[] sites = new int[nSites];
@@ -22,10 +25,33 @@ public class BootstrappedAlignment extends ResampledAlignment {
         }
 
         init(srcAlignment, sites);
+        
+        this.srcAlignment = srcAlignment;
+        this.seed = seed;
     }
     
 
-    public BootstrappedAlignment(Alignment srcAlignment) {
+    public BootstrappedAlignment(
+		@Param(name="srcAlignment", description="auto converted jebl2 parameter") Alignment srcAlignment) {
         this(srcAlignment, Randomizer.getSeed());
     }
+
+	public long getSeed() {
+		return seed;
+	}
+
+	public void setSeed(long seed) {
+		this.seed = seed;
+	}
+
+	public Alignment getSrcAlignment() {
+		return srcAlignment;
+	}
+
+	public void setSrcAlignment(Alignment srcAlignment) {
+		this.srcAlignment = srcAlignment;
+	}
+
+	private Alignment srcAlignment;
+	private long seed;
 }

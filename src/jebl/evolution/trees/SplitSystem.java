@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.taxa.Taxon;
 
 import java.io.PrintWriter;
@@ -23,7 +24,9 @@ public class SplitSystem
 	 * @param taxa  the list of taxa
 	 * @param size     number of splits
 	 */
-	public SplitSystem(final Collection<Taxon> taxa, int size)
+	public SplitSystem(
+		@Param(name="taxa", description="auto converted jebl2 parameter") final Collection<Taxon> taxa,
+		@Param(name="size", description="auto converted jebl2 parameter") Integer size)
 	{
 		this.taxa = Collections.unmodifiableList(new ArrayList<>(taxa));
 
@@ -31,6 +34,8 @@ public class SplitSystem
 		splitCount = size;
 
 		splits = new boolean[splitCount][labelCount];
+		
+		this.size = size;
 	}
 
 	/** get number of splits */
@@ -116,4 +121,21 @@ public class SplitSystem
 	private int labelCount, splitCount;
 	private List<Taxon> taxa;
 	private boolean[][] splits;
+
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
+
+	public void setTaxa(final Collection<Taxon> taxa) {
+		this.taxa.clear();
+		this.taxa.addAll(taxa);
+	}
+	
+	private int size;
+
 }

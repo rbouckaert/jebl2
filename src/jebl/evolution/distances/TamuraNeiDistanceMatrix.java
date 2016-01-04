@@ -1,5 +1,6 @@
 package jebl.evolution.distances;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.alignments.Pattern;
 import jebl.evolution.sequences.Nucleotides;
@@ -32,10 +33,19 @@ public class TamuraNeiDistanceMatrix extends BasicDistanceMatrix {
     /**
      * @throws CannotBuildDistanceMatrixException only if useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable is false
      */
-    public TamuraNeiDistanceMatrix(Alignment alignment, ProgressListener progress, boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable) throws CannotBuildDistanceMatrixException {
+    public TamuraNeiDistanceMatrix(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment,
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress,
+		@Param(name="useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable", description="auto converted jebl2 parameter") Boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable) throws CannotBuildDistanceMatrixException {
         super(alignment.getTaxa(), new Initializer().getDistances(alignment, progress, useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable));
+        this.alignment = alignment;
+        this.progress = progress;
+        this.useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable = useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
     }
-    public TamuraNeiDistanceMatrix(Alignment alignment, ProgressListener progress) throws CannotBuildDistanceMatrixException {
+    
+    public TamuraNeiDistanceMatrix(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment,
+		@Param(name="progress", description="auto converted jebl2 parameter") ProgressListener progress) throws CannotBuildDistanceMatrixException {
         this(alignment,progress,false);
     }
 
@@ -175,4 +185,32 @@ public class TamuraNeiDistanceMatrix extends BasicDistanceMatrix {
         }
 
     }
+
+	public Alignment getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(Alignment alignment) {
+		this.alignment = alignment;
+	}
+
+	public ProgressListener getProgress() {
+		return progress;
+	}
+
+	public void setProgress(ProgressListener progress) {
+		this.progress = progress;
+	}
+
+	public Boolean getUseTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable() {
+		return useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
+	}
+
+	public void setUseTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable(Boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable) {
+		this.useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable = useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
+	}
+
+	private Alignment alignment;
+	private ProgressListener progress;
+	private Boolean useTwiceMaximumDistanceWhenPairwiseDistanceNotCalculatable;
 }

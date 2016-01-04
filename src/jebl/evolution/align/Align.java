@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import beast.core.BEASTObject;
 import jebl.evolution.align.scores.Scores;
 
@@ -14,7 +15,9 @@ public abstract class Align extends BEASTObject {
     int m = 0;           // their lengths
     Traceback B0;                    // the starting point of the traceback
 
-    public Align(Scores sub, float d) {
+    public Align(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d) {
         setGapOpen(d);
         setScores(sub);
     }
@@ -262,6 +265,23 @@ public abstract class Align extends BEASTObject {
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+
+	public Float getD() {
+		return d;
+	}
+
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	public Scores getSub() {
+		return sub;
+	}
+
+	public void setSub(Scores sub) {
+		this.sub = sub;
 	}
 
 }

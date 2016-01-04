@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 
 import java.util.Set;
@@ -14,12 +15,18 @@ import java.util.Set;
 public final class TreeSelectionChangeEvent {
     private Set<Node> selectedNodes;
 
-    public TreeSelectionChangeEvent(Set<Node> selectedNodes){
+    public TreeSelectionChangeEvent(
+		@Param(name="selectedNodes", description="auto converted jebl2 parameter") Set<Node> selectedNodes){
         this.selectedNodes =   selectedNodes;
     }
 
-    public Set<Node> getSelectedNodes(){
-        return selectedNodes;
-    }
+
+	public Set<Node> getSelectedNodes() {
+		return selectedNodes;
+	}
+
+	public void setSelectedNodes(Set<Node> selectedNodes) {
+		this.selectedNodes = selectedNodes;
+	}
 
 }

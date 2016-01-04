@@ -140,9 +140,10 @@ public class ScoresFactory {
 
 //                new NucleotideScores("Assembly", 10.0f, -9.0f),
 
-                new NucleotideScores("Transition/Transversion", 5, 1, -4, 0, true),
-                new NucleotideScores("Identity",1,0, 0),
+                new NucleotideScores("Transition/Transversion", 5f, 1f, -4f, 0f, true),
+                new NucleotideScores("Identity", 1f, 0f, 0f),
 
                 /*,new Hamming()*/};
     }
+
 }

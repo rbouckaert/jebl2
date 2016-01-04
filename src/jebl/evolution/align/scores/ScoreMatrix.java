@@ -21,4 +21,5 @@ public interface ScoreMatrix {
      * @return a string containing the valid characters for this score matrix.
      */
     String getAlphabet();
+
 }

@@ -17,4 +17,5 @@ public abstract class Traceback extends BEASTObject {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
 }

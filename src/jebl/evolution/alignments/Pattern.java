@@ -87,4 +87,5 @@ public interface Pattern {
      * @return the count
      */
     int getStateCount(State state);
+
 }

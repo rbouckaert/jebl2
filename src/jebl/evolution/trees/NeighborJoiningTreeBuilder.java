@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.distances.DistanceMatrix;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -26,7 +27,8 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
      *
      * @param distanceMatrix distance matrix
      */
-    public NeighborJoiningTreeBuilder(DistanceMatrix distanceMatrix) {
+    public NeighborJoiningTreeBuilder(
+		@Param(name="distanceMatrix", description="auto converted jebl2 parameter") DistanceMatrix distanceMatrix) {
         super(distanceMatrix, 3);
 
         this.tree = new SimpleTree();
@@ -138,5 +140,14 @@ public class NeighborJoiningTreeBuilder extends ClusteringTreeBuilder<Tree> {
         // Some large distances foil the method
         return Math.max(d, 0.0);
     }
+
+
+	public DistanceMatrix getDistanceMatrix() {
+		return distanceMatrix;
+	}
+
+	public void setDistanceMatrix(DistanceMatrix distanceMatrix) {
+		this.distanceMatrix = distanceMatrix;
+	}
 
 }

@@ -1,5 +1,6 @@
 package jebl.evolution.alignments;
 
+import beast.core.Param;
 import jebl.evolution.sequences.Sequence;
 import jebl.evolution.sequences.SequenceType;
 import jebl.evolution.sequences.State;
@@ -22,7 +23,9 @@ public class ConsensusSequence extends BEASTObject implements Sequence {
      *
      * @param source
      */
-    public ConsensusSequence(Taxon taxon, Alignment source) {
+    public ConsensusSequence(
+		@Param(name="taxon", description="auto converted jebl2 parameter") Taxon taxon,
+		@Param(name="source", description="auto converted jebl2 parameter") Alignment source) {
         this(taxon, source, false);
     }
 
@@ -31,7 +34,10 @@ public class ConsensusSequence extends BEASTObject implements Sequence {
      *
      * @param source
      */
-    public ConsensusSequence(Taxon taxon, Alignment source, boolean includeAmbiguities) {
+    public ConsensusSequence(
+		@Param(name="taxon", description="auto converted jebl2 parameter") Taxon taxon,
+		@Param(name="source", description="auto converted jebl2 parameter") Alignment source,
+		@Param(name="includeAmbiguities", description="auto converted jebl2 parameter") Boolean includeAmbiguities) {
 
         this.taxon = taxon;
         this.source = source;
@@ -169,10 +175,10 @@ public class ConsensusSequence extends BEASTObject implements Sequence {
 
     // private members
 
-    private final Taxon taxon;
-    private final Alignment source;
+    private Taxon taxon;
+    private Alignment source;
     private byte[] sequence = null;
-    private final boolean includeAmbiguities;
+    private boolean includeAmbiguities;
 
     private final AttributableHelper attributableHelper = new AttributableHelper();
 
@@ -180,4 +186,28 @@ public class ConsensusSequence extends BEASTObject implements Sequence {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Boolean getIncludeAmbiguities() {
+		return includeAmbiguities;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setIncludeAmbiguities(Boolean includeAmbiguities) {
+		this.includeAmbiguities = includeAmbiguities;
+	}
+
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setSource(Alignment source) {
+		this.source = source;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTaxon(Taxon taxon) {
+		this.taxon = taxon;
+	}
+
 }

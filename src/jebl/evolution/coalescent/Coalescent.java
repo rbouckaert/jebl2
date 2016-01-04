@@ -9,6 +9,7 @@
 
 package jebl.evolution.coalescent;
 
+import beast.core.Param;
 import jebl.math.*;
 import jebl.evolution.trees.RootedTree;
 
@@ -26,11 +27,15 @@ public class Coalescent implements MultivariateFunction {
 
 	// PUBLIC STUFF
 
-	public Coalescent(RootedTree tree, DemographicFunction demographicFunction) {
+	public Coalescent(
+		@Param(name="tree", description="auto converted jebl2 parameter") RootedTree tree,
+		@Param(name="demographicFunction", description="auto converted jebl2 parameter") DemographicFunction demographicFunction) {
 		this(new Intervals(tree), demographicFunction);
 	}
 
-	public Coalescent(IntervalList intervals, DemographicFunction demographicFunction) {
+	public Coalescent(
+		@Param(name="intervals", description="auto converted jebl2 parameter") IntervalList intervals,
+		@Param(name="demographicFunction", description="auto converted jebl2 parameter") DemographicFunction demographicFunction) {
 
 		this.intervals = intervals;
 		this.demographicFunction = demographicFunction;
@@ -153,8 +158,38 @@ public class Coalescent implements MultivariateFunction {
 	}
 
 	/** The demographic function. */
-	private final DemographicFunction demographicFunction;
+	private DemographicFunction demographicFunction;
 
 	/** The intervals. */
-	private final IntervalList intervals;
+	private IntervalList intervals;
+
+	public DemographicFunction getDemographicFunction() {
+		return demographicFunction;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setDemographicFunction(DemographicFunction demographicFunction) {
+		this.demographicFunction = demographicFunction;
+	}
+
+	public IntervalList getIntervals() {
+		return intervals;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setIntervals(IntervalList intervals) {
+		this.intervals = intervals;
+	}
+
+	public RootedTree getTree() {
+		return tree;
+	}
+
+	public void setTree(RootedTree tree) {
+		this.tree = tree;
+	}
+
+	private RootedTree tree;
 }

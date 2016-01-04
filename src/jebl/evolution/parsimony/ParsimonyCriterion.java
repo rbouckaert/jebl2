@@ -48,4 +48,5 @@ public interface ParsimonyCriterion {
      * @return an array containing the reconstructed states for this node
      */
     State[] getStates(Tree tree, Node node);
+
 }

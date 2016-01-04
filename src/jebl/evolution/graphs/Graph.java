@@ -100,4 +100,5 @@ public interface Graph extends Attributable {
             return graph.getAdjacencies(node).size();
         }
     }
+
 }

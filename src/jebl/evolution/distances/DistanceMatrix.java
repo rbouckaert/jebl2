@@ -52,4 +52,5 @@ public interface DistanceMatrix {
      * @return the distances
      */
     double[][] getDistances();
+
 }

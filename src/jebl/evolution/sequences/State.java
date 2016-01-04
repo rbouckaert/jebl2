@@ -124,4 +124,5 @@ public abstract class State implements Comparable<State> {
         return ((double)sameStates)/totalStates;
     }
 
+
 }

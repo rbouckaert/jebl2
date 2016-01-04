@@ -126,4 +126,5 @@ public interface IntervalList {
 			return intervals.getLineageCount(i);
 		}
 	};
+
 }

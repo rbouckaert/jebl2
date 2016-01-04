@@ -8,4 +8,5 @@ public class SystemOut extends Output {
 	public final void println(String s) { System.out.println(s); }
     @Override
 	public final void println() { System.out.println(); }
+
 }

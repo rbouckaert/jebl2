@@ -52,4 +52,5 @@ public final class AminoAcidState extends State {
 	public boolean isStop() {
 		return this == AminoAcids.STOP_STATE;
 	}
+
 }

@@ -9,6 +9,7 @@
 
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.sequences.SequenceType;
 import jebl.util.ProgressListener;
 
@@ -55,7 +56,8 @@ public class ImportHelper {
      * finished using it.
      * @param reader
      */
-    public ImportHelper(Reader reader) {
+    public ImportHelper(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader) {
         this.reader = new LineNumberReader(reader);
         this.commentWriter = null;
     }
@@ -64,7 +66,9 @@ public class ImportHelper {
         this.expectedInputLength = l;
     }
 
-    public ImportHelper(Reader reader, Writer commentWriter) {
+    public ImportHelper(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="commentWriter", description="auto converted jebl2 parameter") Writer commentWriter) {
         this.reader = new LineNumberReader(reader);
         this.commentWriter = new BufferedWriter(commentWriter);
     }
@@ -781,4 +785,18 @@ public class ImportHelper {
         }
         return token;
     }
+
+	public Writer getCommentWriter() {
+		return commentWriter;
+	}
+
+
+	public Reader getReader() {
+		return reader;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = new LineNumberReader(reader);
+	}
+
 }

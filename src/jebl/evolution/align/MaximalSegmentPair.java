@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 /**
@@ -9,8 +10,9 @@ import jebl.evolution.align.scores.Scores;
  */
 public class MaximalSegmentPair extends AlignSimple {
 	
-	public MaximalSegmentPair(Scores sub) {
-		super(sub, Integer.MAX_VALUE);
+	public MaximalSegmentPair(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub) {
+		super(sub, (float) Integer.MAX_VALUE);
 	}
     
 	/**
@@ -55,4 +57,15 @@ public class MaximalSegmentPair extends AlignSimple {
         }
         return next;
     }
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

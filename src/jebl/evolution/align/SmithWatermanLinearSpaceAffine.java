@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 import jebl.util.ProgressListener;
 
@@ -15,7 +16,10 @@ public class SmithWatermanLinearSpaceAffine extends AlignLinearSpaceAffine {
     int start1, start2;   		// Best alignment begins at (start1, start2)
     int end1, end2;       		// Best alignment ends at (end1, end2)
 
-    public SmithWatermanLinearSpaceAffine(Scores sub, float d, float e) {
+    public SmithWatermanLinearSpaceAffine(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d,
+		@Param(name="e", description="auto converted jebl2 parameter") Float e) {
         super(sub, d, e);
     }
 
@@ -121,5 +125,33 @@ public class SmithWatermanLinearSpaceAffine extends AlignLinearSpaceAffine {
         nwa1.traceback(plotter);
     }
 
-}
 
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	public Float getE() {
+		return e;
+	}
+
+	public void setE(Float e) {
+		this.e = e;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
+}

@@ -135,4 +135,5 @@ public class LogisticGrowth extends ExponentialGrowth {
 	//
 
 	private double c;
+
 }

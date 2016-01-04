@@ -24,4 +24,5 @@ public interface PairwiseAligner {
     Result doAlignment(Sequence seq1, Sequence seq2, ProgressListener progress);
 
     double getScore(Sequence seq1, Sequence seq2);
+
 }

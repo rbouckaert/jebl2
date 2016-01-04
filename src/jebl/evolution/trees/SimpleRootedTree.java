@@ -925,4 +925,5 @@ final public class SimpleRootedTree extends BEASTObject implements RootedTree {
 		// nothing to do
 	}
 
+
 }

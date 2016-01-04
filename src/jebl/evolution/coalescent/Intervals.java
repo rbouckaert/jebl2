@@ -9,6 +9,7 @@
 
 package jebl.evolution.coalescent;
 
+import beast.core.Param;
 import jebl.evolution.trees.RootedTree;
 import jebl.evolution.trees.RootedTreeUtils;
 import jebl.evolution.graphs.Node;
@@ -27,7 +28,8 @@ import beast.core.BEASTObject;
  */
 public class Intervals extends BEASTObject implements IntervalList {
 
-	public Intervals(RootedTree tree) {
+	public Intervals(
+		@Param(name="tree", description="auto converted jebl2 parameter") RootedTree tree) {
 		this(tree.getNodes().size());
 
 		if (!RootedTreeUtils.isBinary(tree)) {
@@ -39,9 +41,11 @@ public class Intervals extends BEASTObject implements IntervalList {
 		for (Node node : tree.getInternalNodes()) {
 			addCoalescentEvent(tree.getHeight(node));
 		}
+		this.tree = tree;
 	}
 
-	public Intervals(int maxEventCount) {
+	public Intervals(
+		@Param(name="maxEventCount", description="auto converted jebl2 parameter") Integer maxEventCount) {
 		events = new Event[maxEventCount];
 		for (int i = 0; i < maxEventCount; i++) {
 			events[i] = new Event();
@@ -54,6 +58,8 @@ public class Intervals extends BEASTObject implements IntervalList {
 		lineageCounts = new int[maxEventCount - 1];
 
 		intervalsKnown = false;
+		
+		this.maxEventCount = maxEventCount;
 	}
 
 	public void copyIntervals(Intervals source) {
@@ -243,4 +249,23 @@ public class Intervals extends BEASTObject implements IntervalList {
 		// nothing to do
 	}
 
-};
+
+	public Integer getMaxEventCount() {
+		return maxEventCount;
+	}
+
+	public void setMaxEventCount(Integer maxEventCount) {
+		this.maxEventCount = maxEventCount;
+	}
+
+	public RootedTree getTree() {
+		return tree;
+	}
+
+	public void setTree(RootedTree tree) {
+		this.tree = tree;
+	}
+
+	Integer maxEventCount;
+	RootedTree tree;
+}

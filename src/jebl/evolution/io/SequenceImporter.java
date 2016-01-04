@@ -28,4 +28,5 @@ public interface SequenceImporter {
 	 * importSequences.
 	 */
 	List<Sequence> importSequences() throws IOException, ImportException;
+
 }

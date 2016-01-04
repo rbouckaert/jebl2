@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 abstract class AlignRepeatAffine extends AlignRepeat {
@@ -10,7 +11,11 @@ abstract class AlignRepeatAffine extends AlignRepeat {
     float e;
 
 
-    public AlignRepeatAffine(Scores sub, float d, float e, int T) {
+    public AlignRepeatAffine(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d,
+		@Param(name="e", description="auto converted jebl2 parameter") Float e,
+		@Param(name="T", description="auto converted jebl2 parameter") Integer T) {
         super(sub, d, T);
         setGapExtend(e);
     }
@@ -106,4 +111,43 @@ abstract class AlignRepeatAffine extends AlignRepeat {
             }
         }
     }
+
+	@Override
+	public Integer getT() {
+		return T;
+	}
+
+	@Override
+	public void setT(Integer T) {
+		this.T = T;
+	}
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	public Float getE() {
+		return e;
+	}
+
+	public void setE(Float e) {
+		this.e = e;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
+
 }

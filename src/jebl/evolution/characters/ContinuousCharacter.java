@@ -1,5 +1,6 @@
 package jebl.evolution.characters;
 
+import beast.core.Param;
 import java.util.*;
 
 import beast.core.BEASTObject;
@@ -16,7 +17,9 @@ public class ContinuousCharacter extends BEASTObject implements Character{
 	 * @param name the name of the character
 	 * @param desc the description of the character
 	 */
-	public ContinuousCharacter(String name, String desc) {
+	public ContinuousCharacter(
+		@Param(name="name", description="auto converted jebl2 parameter") String name,
+		@Param(name="desc", description="auto converted jebl2 parameter") String desc) {
 		this.name = name;
 		this.charType = CharacterType.CONTINUOUS;
 		this.desc = desc;
@@ -29,7 +32,10 @@ public class ContinuousCharacter extends BEASTObject implements Character{
 	 * @param desc the description of the character
 	 * @param taxa the Set<Taxon> containing the taxa
 	 */
-	public ContinuousCharacter(String name, String desc, Set<Taxon> taxa) {
+	public ContinuousCharacter(
+		@Param(name="name", description="auto converted jebl2 parameter") String name,
+		@Param(name="desc", description="auto converted jebl2 parameter") String desc,
+		@Param(name="taxa", description="auto converted jebl2 parameter") Set<Taxon> taxa) {
 		this.name = name;
 		this.charType = CharacterType.CONTINUOUS;
 		this.desc = desc;
@@ -99,6 +105,10 @@ public class ContinuousCharacter extends BEASTObject implements Character{
 	@Override
 	public void initAndValidate() throws Exception {
 		// nothing to do
+	}
+
+	public void setTaxa(Set<Taxon> taxa) {
+		this.taxa = taxa;
 	}
 
 }

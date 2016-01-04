@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Blosum60;
 import jebl.evolution.align.scores.NucleotideScores;
 import jebl.evolution.align.scores.Scores;
@@ -59,8 +60,13 @@ public class BartonSternberg extends BEASTObject implements MultipleAligner {
         return origScores != null ? scores : null;
     }
 
-    public BartonSternberg(Scores scores, float gapOpen, float gapExtend, int refinementIterations,
-                           boolean freeGapsAtEnds, boolean fastGuide) {
+    public BartonSternberg(
+		@Param(name="scores", description="auto converted jebl2 parameter") Scores scores,
+		@Param(name="gapOpen", description="auto converted jebl2 parameter") Float gapOpen,
+		@Param(name="gapExtend", description="auto converted jebl2 parameter") Float gapExtend,
+		@Param(name="refinementIterations", description="auto converted jebl2 parameter") Integer refinementIterations,
+		@Param(name="freeGapsAtEnds", description="auto converted jebl2 parameter") Boolean freeGapsAtEnds,
+		@Param(name="fastGuide", description="auto converted jebl2 parameter") Boolean fastGuide) {
 //        if (true) throw new RuntimeException("testing");
        this.gapOpen = gapOpen;
        this.gapExtend = gapExtend;
@@ -275,7 +281,7 @@ public class BartonSternberg extends BEASTObject implements MultipleAligner {
             if (count++ >= maximum) break;
         }
         long start = System.currentTimeMillis();
-        BartonSternberg alignment = new BartonSternberg( new Blosum60(), 20, 1, 2, true, false);
+        BartonSternberg alignment = new BartonSternberg( new Blosum60(), 20f, 1f, 2, true, false);
         String[] sequences = sequenceStrings.toArray(new String[0]);
         System.out.println("aligning " + sequences.length);
         try {
@@ -377,4 +383,53 @@ public class BartonSternberg extends BEASTObject implements MultipleAligner {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Boolean getFastGuide() {
+		return fastGuide;
+	}
+
+	public void setFastGuide(Boolean fastGuide) {
+		this.fastGuide = fastGuide;
+	}
+
+	public Boolean getFreeGapsAtEnds() {
+		return freeGapsAtEnds;
+	}
+
+	public void setFreeGapsAtEnds(Boolean freeGapsAtEnds) {
+		this.freeGapsAtEnds = freeGapsAtEnds;
+	}
+
+	public Float getGapExtend() {
+		return gapExtend;
+	}
+
+	public void setGapExtend(Float gapExtend) {
+		this.gapExtend = gapExtend;
+	}
+
+	public Float getGapOpen() {
+		return gapOpen;
+	}
+
+	public void setGapOpen(Float gapOpen) {
+		this.gapOpen = gapOpen;
+	}
+
+	public Integer getRefinementIterations() {
+		return refinementIterations;
+	}
+
+	public void setRefinementIterations(Integer refinementIterations) {
+		this.refinementIterations = refinementIterations;
+	}
+
+	public Scores getScores() {
+		return scores;
+	}
+
+	public void setScores(Scores scores) {
+		this.scores = scores;
+	}
+
 }

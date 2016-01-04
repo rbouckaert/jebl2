@@ -1,5 +1,6 @@
 package jebl.evolution.align.scores;
 
+import beast.core.Param;
 import jebl.evolution.sequences.SequenceType;
 import jebl.evolution.substmodel.RateMatrix;
 
@@ -13,7 +14,8 @@ public class SubstScoreMatrix extends Scores {
     SequenceType sequenceType;
     String alphabet;
 
-    public SubstScoreMatrix(RateMatrix rateMatrix) {
+    public SubstScoreMatrix(
+		@Param(name="rateMatrix", description="auto converted jebl2 parameter") RateMatrix rateMatrix) {
 
         alphabet = SequenceType.Utils.getAlphabet(sequenceType);
 
@@ -23,6 +25,7 @@ public class SubstScoreMatrix extends Scores {
         rateMatrix.getTransitionProbabilities(transProbs);
 
         buildScores(log(transProbs));
+        this.rateMatrix = rateMatrix;
     }
 
     private float[][] log(double[][] values) {
@@ -47,4 +50,15 @@ public class SubstScoreMatrix extends Scores {
 	public String getAlphabet() {
         return alphabet;
     }
+
+	public RateMatrix getRateMatrix() {
+		return rateMatrix;
+	}
+
+	public void setRateMatrix(RateMatrix rateMatrix) {
+		this.rateMatrix = rateMatrix;
+	}
+	
+	private RateMatrix rateMatrix;
+
 }

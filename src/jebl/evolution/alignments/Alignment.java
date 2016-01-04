@@ -24,4 +24,5 @@ public interface Alignment extends Sequences, Patterns {
     List<Sequence> getSequenceList();
 
 	int getSiteCount();
+
 }

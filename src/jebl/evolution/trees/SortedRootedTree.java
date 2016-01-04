@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.Param;
 import jebl.evolution.graphs.Node;
 
 import java.util.Collections;
@@ -27,7 +28,9 @@ public class SortedRootedTree extends FilteredRootedTree {
 		private String name;
 	}
 
-    public SortedRootedTree(final RootedTree source, BranchOrdering branchOrdering) {
+    public SortedRootedTree(
+		@Param(name="source", description="auto converted jebl2 parameter") final RootedTree source,
+		@Param(name="branchOrdering", description="auto converted jebl2 parameter") BranchOrdering branchOrdering) {
         super(source);
 	    switch (branchOrdering) {
 		    case INCREASING_NODE_DENSITY:
@@ -59,9 +62,13 @@ public class SortedRootedTree extends FilteredRootedTree {
 		    default:
 			    throw new IllegalArgumentException("Unknown enum value");
 	    }
+	    
+	    this.branchOrdering = branchOrdering;
     }
 
-    public SortedRootedTree(RootedTree source, Comparator<Node> comparator) {
+    public SortedRootedTree(
+		@Param(name="source", description="auto converted jebl2 parameter") RootedTree source,
+		@Param(name="comparator", description="auto converted jebl2 parameter") Comparator<Node> comparator) {
 	    super(source);
         this.comparator = comparator;
     }
@@ -75,5 +82,35 @@ public class SortedRootedTree extends FilteredRootedTree {
 
 	// PRIVATE members
 
-    private final Comparator<Node> comparator;
+    private Comparator<Node> comparator;
+
+	public BranchOrdering getBranchOrdering() {
+		return branchOrdering;
+	}
+
+	public void setBranchOrdering(BranchOrdering branchOrdering) {
+		this.branchOrdering = branchOrdering;
+	}
+
+	public Comparator<Node> getComparator() {
+		return comparator;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setComparator(Comparator<Node> comparator) {
+		this.comparator = comparator;
+	}
+
+	@Override
+	public RootedTree getSource() {
+		return source;
+	}
+
+	@Override
+	public void setSource(RootedTree source) {
+		this.source = source;
+	}
+	
+	BranchOrdering branchOrdering;
 }

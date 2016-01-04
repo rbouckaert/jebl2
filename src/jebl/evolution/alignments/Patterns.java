@@ -43,4 +43,5 @@ public interface Patterns {
 	 */
 	SequenceType getSequenceType();
 
+
 }

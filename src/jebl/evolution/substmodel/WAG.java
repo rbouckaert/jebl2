@@ -7,6 +7,8 @@
 
 package jebl.evolution.substmodel;
 
+import beast.core.Param;
+
 /**
  * WAG model of amino acid evolution (S. Whelan and N. Goldman 2000)
  *
@@ -27,10 +29,11 @@ public class WAG extends AminoAcidModel
      *
      * @param f amino acid frequencies
      */
-    public WAG(double[] f)
+    public WAG(
+		@Param(name="f", description="auto converted jebl2 parameter") double[] f)
     {
         super(f);
-
+        this.f = f;
     }
 
     /**
@@ -206,4 +209,15 @@ public class WAG extends AminoAcidModel
 	public String getUniqueName() {
         return "WAG";
     }
+
+	public double[] getF() {
+		return f;
+	}
+
+	public void setF(double[] f) {
+		this.f = f;
+	}
+	
+	private double[] f;
+
 }

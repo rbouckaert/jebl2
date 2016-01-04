@@ -8,6 +8,7 @@
  */
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.alignments.BasicAlignment;
 import jebl.evolution.distances.BasicDistanceMatrix;
@@ -87,14 +88,20 @@ public class NexusImporter extends BEASTObject implements AlignmentImporter, Seq
      * @param expectedLength Expected length of the input in bytes, or 0 if unknown. Used for optimization and tracking
      *                       progress.
      */
-    public NexusImporter(Reader reader, long expectedLength) {
+    public NexusImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="expectedLength", description="auto converted jebl2 parameter") long expectedLength) {
         helper = new ImportHelper(reader);
         helper.setExpectedInputLength(expectedLength);
         initHelper();
+        this.reader = reader;
+        this.expectedLength = expectedLength;
     }
 
-    public NexusImporter(Reader reader) {
+    public NexusImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader) {
         this(reader, 0);
+        this.reader = reader;
     }
 
     /**
@@ -105,9 +112,14 @@ public class NexusImporter extends BEASTObject implements AlignmentImporter, Seq
      * @param expectedInputLength Expected length of the input in bytes, or 0 if unknown. Used for optimization and tracking
      *                            progress.
      */
-    public NexusImporter(Reader reader, boolean compactTrees, long expectedInputLength) {
+    public NexusImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="compactTrees", description="auto converted jebl2 parameter") Boolean compactTrees,
+		@Param(name="expectedInputLength", description="auto converted jebl2 parameter") long expectedInputLength) {
         this(reader, expectedInputLength);
         this.compactTrees = compactTrees;
+        this.reader = reader;
+        this.expectedInputLength = expectedInputLength;
     }
 
     /**
@@ -116,7 +128,9 @@ public class NexusImporter extends BEASTObject implements AlignmentImporter, Seq
      * @deprecated Use NexusImporter(Reader reader, boolean compactTrees, long expectedInputLength)
      */
     @Deprecated
-    public NexusImporter(Reader reader, boolean compactTrees) {
+    public NexusImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="compactTrees", description="auto converted jebl2 parameter") Boolean compactTrees) {
         // a wild guess on the low side
         this(reader, compactTrees, 4*1024);
     }
@@ -1483,4 +1497,40 @@ public class NexusImporter extends BEASTObject implements AlignmentImporter, Seq
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Boolean getCompactTrees() {
+		return compactTrees;
+	}
+
+	public void setCompactTrees(Boolean compactTrees) {
+		this.compactTrees = compactTrees;
+	}
+
+	public long getExpectedInputLength() {
+		return expectedInputLength;
+	}
+
+	public void setExpectedInputLength(long expectedInputLength) {
+		this.expectedInputLength = expectedInputLength;
+	}
+
+	public long getExpectedLength() {
+		return expectedLength;
+	}
+
+	public void setExpectedLength(long expectedLength) {
+		this.expectedLength = expectedLength;
+	}
+
+	public Reader getReader() {
+		return reader;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
+	private long expectedInputLength;
+	private long expectedLength;
+	private Reader reader;
 }

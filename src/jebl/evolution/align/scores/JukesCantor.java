@@ -1,5 +1,7 @@
 package jebl.evolution.align.scores;
 
+import beast.core.Param;
+
 /**
  * Jukes Cantor assumes equal substitution frequencies and equal nucleotide
  * equilibrium frequencies.
@@ -14,7 +16,8 @@ public class JukesCantor extends NucleotideScores {
 	 * 
 	 * @param d evolutionary distance used to calculate values
 	 */
-	public JukesCantor(float d) {
+	public JukesCantor(
+		@Param(name="d", description="evolutionary distance used to calculate values") Float d) {
         name = "JukesCantor";
 
         double p = (0.25 + 0.75 * Math.exp(-4.0/3.0 * d));	        //diagonal values on the substitution matrix.
@@ -24,6 +27,18 @@ public class JukesCantor extends NucleotideScores {
 		float mismatch = (float)(Math.log(q/0.25)/Math.log(2.0));
 		
 		buildScores(match, 0,mismatch, mismatch, false);
+
+		this.d = d;
 	}
     
+
+	public Float getD() {
+		return d;
+	}
+
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	Float d;
 }

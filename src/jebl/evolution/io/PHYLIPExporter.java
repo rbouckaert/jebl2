@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.sequences.Sequence;
 import jebl.evolution.trees.RootedTree;
@@ -30,7 +31,8 @@ public class PHYLIPExporter extends BEASTObject implements AlignmentExporter, Tr
      *
      * @param writer where export text goes
      */
-    public PHYLIPExporter(Writer writer) {
+    public PHYLIPExporter(
+		@Param(name="writer", description="auto converted jebl2 parameter") Writer writer) {
         this.writer = new PrintWriter(writer);
     }
 
@@ -125,4 +127,15 @@ public class PHYLIPExporter extends BEASTObject implements AlignmentExporter, Tr
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Writer getWriter() {
+		return writer;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setWriter(Writer writer) {
+		this.writer = new PrintWriter(writer);
+	}
+
 }

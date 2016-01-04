@@ -60,4 +60,5 @@ public abstract class BaseNode implements Node {
     // PRIVATE members
 
     private AttributableHelper helper = null;
+
 }

@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import jebl.evolution.sequences.BasicSequence;
 import jebl.evolution.sequences.Sequence;
 import jebl.evolution.sequences.SequenceType;
@@ -39,10 +40,10 @@ public class FastaImporter extends BEASTObject implements SequenceImporter, Imme
     public static final String descriptionPropertyName = "description";
 
     private final ImportHelper helper;
-    private final SequenceType sequenceType;
+    private SequenceType sequenceType;
     private final boolean closeReaderAtEnd;
 
-    private final Reader reader;
+    private Reader reader;
     private IllegalCharacterPolicy illegalCharacterPolicy = IllegalCharacterPolicy.abort;
 
     /**
@@ -57,9 +58,13 @@ public class FastaImporter extends BEASTObject implements SequenceImporter, Imme
      * @param sequenceType
      * @throws FileNotFoundException
      */
-    public FastaImporter(File file, SequenceType sequenceType) throws FileNotFoundException {
+    public FastaImporter(
+		@Param(name="file", description="auto converted jebl2 parameter") File file,
+		@Param(name="sequenceType", description="auto converted jebl2 parameter") SequenceType sequenceType) throws FileNotFoundException {
         this(new BufferedReader(new FileReader(file)), sequenceType, true);
         helper.setExpectedInputLength(file.length());
+        this.file = file;
+        this.sequenceType = sequenceType;
     }
 
     public void setIllegalCharacterPolicy(IllegalCharacterPolicy newPolicy) {
@@ -80,7 +85,9 @@ public class FastaImporter extends BEASTObject implements SequenceImporter, Imme
      * @param reader       holds sequences data
      * @param sequenceType pre specified sequences type. We should try and guess them some day.
      */
-    public FastaImporter(Reader reader, SequenceType sequenceType) {
+    public FastaImporter(
+		@Param(name="reader", description="auto converted jebl2 parameter") Reader reader,
+		@Param(name="sequenceType", description="auto converted jebl2 parameter") SequenceType sequenceType) {
         this(reader, sequenceType, false);
     }
 
@@ -268,4 +275,34 @@ public class FastaImporter extends BEASTObject implements SequenceImporter, Imme
 		// nothing to do
 	}
 
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public Reader getReader() {
+		return reader;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
+	public SequenceType getSequenceType() {
+		return sequenceType;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setSequenceType(SequenceType sequenceType) {
+		this.sequenceType = sequenceType;
+	}
+	
+	private File file;
 }

@@ -1,5 +1,6 @@
 package jebl.evolution.distances;
 
+import beast.core.Param;
 import jebl.evolution.taxa.Taxon;
 import jebl.util.ProgressListener;
 
@@ -16,7 +17,9 @@ import beast.core.BEASTObject;
  */
 public class BasicDistanceMatrix extends BEASTObject implements DistanceMatrix {
 
-    public BasicDistanceMatrix(Collection<Taxon> taxa, double[][] distances) {
+    public BasicDistanceMatrix(
+		@Param(name="taxa", description="auto converted jebl2 parameter") Collection<Taxon> taxa,
+		@Param(name="distances", description="auto converted jebl2 parameter") double[][] distances) {
 
         if (distances == null || distances.length == 0) {
             throw new IllegalArgumentException("Source distance matrix is null or empty");
@@ -128,8 +131,8 @@ public class BasicDistanceMatrix extends BEASTObject implements DistanceMatrix {
         return distances;
     }
 
-    private final List<Taxon> taxa;
-    private final double[][] distances;
+    private List<Taxon> taxa;
+    private double[][] distances;
 
     protected interface PairwiseDistanceCalculator {
         double calculatePairwiseDistance(int taxon1, int taxon2) throws CannotBuildDistanceMatrixException;
@@ -181,4 +184,23 @@ public class BasicDistanceMatrix extends BEASTObject implements DistanceMatrix {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setDistances(double[][] distances) {
+		this.distances = distances;
+	}
+
+//	public Collection<Taxon> getTaxa() {
+//		return taxa;
+//	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setTaxa(Collection<Taxon> taxa) {
+		this.taxa.clear();
+		this.taxa.addAll(taxa);
+	}
+
 }

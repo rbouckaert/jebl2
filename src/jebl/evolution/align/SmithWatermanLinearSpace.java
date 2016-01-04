@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.align.scores.Scores;
 
 public class SmithWatermanLinearSpace extends AlignLinearSpace {
@@ -9,7 +10,9 @@ public class SmithWatermanLinearSpace extends AlignLinearSpace {
     int start1, start2;   		// Best alignment begins at (start1, start2)
     int end1, end2;       		// Best alignment ends at (end1, end2)
     
-    public SmithWatermanLinearSpace(Scores sub, float d) {
+    public SmithWatermanLinearSpace(
+		@Param(name="sub", description="auto converted jebl2 parameter") Scores sub,
+		@Param(name="d", description="auto converted jebl2 parameter") Float d) {
     	super(sub, d);
     }
     
@@ -97,5 +100,26 @@ public class SmithWatermanLinearSpace extends AlignLinearSpace {
     }
 
 
+
+
+	@Override
+	public Float getD() {
+		return d;
+	}
+
+	@Override
+	public void setD(Float d) {
+		this.d = d;
+	}
+
+	@Override
+	public Scores getSub() {
+		return sub;
+	}
+
+	@Override
+	public void setSub(Scores sub) {
+		this.sub = sub;
+	}
 
 }

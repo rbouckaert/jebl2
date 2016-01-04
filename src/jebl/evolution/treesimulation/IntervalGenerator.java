@@ -23,4 +23,5 @@ public interface IntervalGenerator {
 	 * @return the interval time
 	 */
     double getInterval(double criticalValue, int lineageCount, double currentHeight);
+
 }

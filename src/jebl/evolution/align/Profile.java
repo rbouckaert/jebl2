@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.Param;
 import jebl.evolution.alignments.Alignment;
 import jebl.evolution.sequences.Sequence;
 
@@ -18,7 +19,7 @@ import beast.core.BEASTObject;
  */
 class Profile extends BEASTObject {
     ProfileCharacter[] profile;
-    private final int alphabetSize;
+    private int alphabetSize;
 //    int length;
     int sequenceCount;
     private boolean automaticallyCalculatedAlphabetSize = false;
@@ -31,11 +32,13 @@ class Profile extends BEASTObject {
     }
 
 
-    public Profile(int alphabetSize) {
+    public Profile(
+		@Param(name="alphabetSize", description="auto converted jebl2 parameter") Integer alphabetSize) {
         this.alphabetSize = alphabetSize;
         if (alphabetSize < 0) {
             throw new IllegalArgumentException("Nonnegative alphabet size expected, got " + alphabetSize);
         }
+        this.alphabetSize = alphabetSize;
     }
 
     /**
@@ -49,10 +52,14 @@ class Profile extends BEASTObject {
      * @param sequence
      * @see #createImmutableProfile(int, String)
      */
-    public Profile(int sequenceNumber,String sequence) {
+    public Profile(
+		@Param(name="sequenceNumber", description="auto converted jebl2 parameter") Integer sequenceNumber,
+		@Param(name="sequence", description="auto converted jebl2 parameter") String sequence) {
         this(calculateAlphabetSize(new String[] {sequence}));
         addSequence(sequenceNumber,sequence);
         automaticallyCalculatedAlphabetSize = true;
+        this.sequenceNumber = sequenceNumber;
+        this.sequence = sequence;
     }
 
     /**
@@ -83,16 +90,26 @@ class Profile extends BEASTObject {
         }
     }
 
-    public Profile(Alignment alignment, int alphabetSize) {
+    public Profile(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment,
+		@Param(name="alphabetSize", description="auto converted jebl2 parameter") Integer alphabetSize) {
         this(alignment, alphabetSize , 0);
+        this.alignment = alignment;
+        this.alphabetSize = alphabetSize;
     }
 
-    public Profile(Alignment alignment, int alphabetSize, int offset) {
+    public Profile(
+		@Param(name="alignment", description="auto converted jebl2 parameter") Alignment alignment,
+		@Param(name="alphabetSize", description="auto converted jebl2 parameter") Integer alphabetSize,
+		@Param(name="offset", description="auto converted jebl2 parameter") Integer offset) {
         this.alphabetSize = alphabetSize;
         final List<Sequence> sequenceList = alignment.getSequenceList();
         for(int i = 0; i < sequenceList.size(); ++i) {
             addSequence(i + offset, sequenceList.get(i).getString());
         }
+        this.alignment = alignment;
+        this.alphabetSize = alphabetSize;
+        this.offset = offset;
     }
 
     /**
@@ -125,7 +142,7 @@ class Profile extends BEASTObject {
         assertMutable();
         sequence=sequence.toUpperCase();
         if (automaticallyCalculatedAlphabetSize)
-            throw new IllegalStateException("if the constructor 'public Profile(int sequenceNumber,String sequence)'  is used, it's not safe to add new sequences");
+            throw new IllegalStateException("if the constructor 'public Profile(Integer sequenceNumber,String sequence)'  is used, it's not safe to add new sequences");
         if (supportsFreeEndGaps) sequence=supportFreeEndGaps( sequence);
         sequenceCount++;
         if (sequenceCount == 1) {
@@ -371,4 +388,51 @@ class Profile extends BEASTObject {
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+	public Alignment getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(Alignment alignment) {
+		this.alignment = alignment;
+	}
+
+	public Integer getAlphabetSize() {
+		return alphabetSize;
+	}
+
+	/** should not be used other than from BEAST framework **/
+	@Deprecated
+	public void setAlphabetSize(Integer alphabetSize) {
+		this.alphabetSize = alphabetSize;
+	}
+
+	public Integer getOffset() {
+		return offset;
+	}
+
+	public void setOffset(Integer offset) {
+		this.offset = offset;
+	}
+
+	public String getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(String sequence) {
+		this.sequence = sequence;
+	}
+
+	public Integer getSequenceNumber() {
+		return sequenceNumber;
+	}
+
+	public void setSequenceNumber(Integer sequenceNumber) {
+		this.sequenceNumber = sequenceNumber;
+	}
+	
+	private Integer sequenceNumber;
+	private String sequence;
+	private Integer offset;
+	private Alignment alignment;
 }

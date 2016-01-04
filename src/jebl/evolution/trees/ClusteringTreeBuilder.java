@@ -217,7 +217,7 @@ public abstract class ClusteringTreeBuilder<T extends Tree> extends BEASTObject 
         distance = null;
     }
 
-    final protected DistanceMatrix distanceMatrix;
+    protected DistanceMatrix distanceMatrix;
 
     // Number of current clusters
     protected int numClusters;
@@ -247,5 +247,6 @@ public abstract class ClusteringTreeBuilder<T extends Tree> extends BEASTObject 
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
 
 }

@@ -1,5 +1,6 @@
 package jebl.evolution.characters;
 
+import beast.core.Param;
 import java.util.*;
 
 import beast.core.BEASTObject;
@@ -17,7 +18,10 @@ public class DiscreteCharacter extends BEASTObject implements Character{
 	 * @param desc the description of the character
 	 * @param numOfStates the number of possible states for the character
 	 */
-	public DiscreteCharacter(String name, String desc, int numOfStates) {
+	public DiscreteCharacter(
+		@Param(name="name", description="auto converted jebl2 parameter") String name,
+		@Param(name="desc", description="auto converted jebl2 parameter") String desc,
+		@Param(name="numOfStates", description="auto converted jebl2 parameter") Integer numOfStates) {
 		this.name = name;
 		this.charType = CharacterType.DISCRETE;
 		this.desc = desc;
@@ -31,7 +35,11 @@ public class DiscreteCharacter extends BEASTObject implements Character{
 	 * @param numOfStates the number of possible states for the character
 	 * @param taxa the Set<Taxon> containing the taxa with this character
 	 */
-	public DiscreteCharacter(String name, String desc, int numOfStates, Set<Taxon> taxa) {
+	public DiscreteCharacter(
+		@Param(name="name", description="auto converted jebl2 parameter") String name,
+		@Param(name="desc", description="auto converted jebl2 parameter") String desc,
+		@Param(name="numOfStates", description="auto converted jebl2 parameter") Integer numOfStates,
+		@Param(name="taxa", description="auto converted jebl2 parameter") Set<Taxon> taxa) {
 		this.name = name;
 		this.charType = CharacterType.DISCRETE;
 		this.desc = desc;
@@ -136,4 +144,14 @@ public class DiscreteCharacter extends BEASTObject implements Character{
 	public void initAndValidate() throws Exception {
 		// nothing to do
 	}
+
+
+	public void setNumOfStates(Integer numOfStates) {
+		this.numOfStates = numOfStates;
+	}
+
+	public void setTaxa(Set<Taxon> taxa) {
+		this.taxa = taxa;
+	}
+
 }

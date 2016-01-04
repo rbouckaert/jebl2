@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.Param;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class ByteBuilder implements CharSequence, Appendable {
     private static final Logger logger = Logger.getLogger(ByteBuilder.class.getName());
-    final int maxCapacity;
+    int maxCapacity;
     int current = 0;
     byte[] data;
 
@@ -40,7 +41,8 @@ public class ByteBuilder implements CharSequence, Appendable {
      * grow to, you should pass in Integer.MAX_VALUE here
      * @param maxCapacity The maximum, NOT the initial capacity of this ByteBuilder
      */
-    public ByteBuilder(int maxCapacity) {
+    public ByteBuilder(
+		@Param(name="maxCapacity", description="auto converted jebl2 parameter") Integer maxCapacity) {
         this.maxCapacity = maxCapacity;
         if (maxCapacity < 0) {
             throw new IllegalArgumentException("maxCapacity must be positive, but got " + maxCapacity);
@@ -112,4 +114,15 @@ public class ByteBuilder implements CharSequence, Appendable {
 	public String toString() {
         return new String(data, 0, current);
     }
+
+	public Integer getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	/** should not be used other than by BEAST framework **/
+	@Deprecated
+	public void setMaxCapacity(Integer maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
+
 }
