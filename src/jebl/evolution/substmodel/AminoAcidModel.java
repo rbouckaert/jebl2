@@ -30,13 +30,19 @@ public abstract class AminoAcidModel extends AbstractRateMatrix
 	private static final long serialVersionUID = 1L;
 
 	// Constructor
-    protected AminoAcidModel(double[] f)
+    protected AminoAcidModel(Double[] f)
     {
         // Dimension = 20
         super(20);
 
         setSequenceType(SequenceType.AMINO_ACID);
-        setFrequencies(f);
+        
+    	double [] freqs = new double[f.length];
+    	for (int i = 0 ; i < f.length; i++) {
+    		freqs[i] = f[i];
+    	}
+
+        setFrequencies(freqs);
     }
 
 }

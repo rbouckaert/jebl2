@@ -39,20 +39,21 @@ public class TreeSimulator  extends BEASTObject {
 	public TreeSimulator(
 		@Param(name="taxonPrefix", description="auto converted jebl2 parameter") String taxonPrefix,
 		@Param(name="taxonCount", description="auto converted jebl2 parameter") Integer taxonCount) {
-		this(taxonPrefix, new int[] { taxonCount }, new double[] { 0.0 } );
+		this(taxonPrefix, Arrays.asList(new Integer[] { taxonCount }), 
+				Arrays.asList(new Double[] { 0.0 }) );
 		this.taxonPrefix = taxonPrefix;
 		this.taxonCount = taxonCount;
 	}
 
 	public TreeSimulator(
 		@Param(name="taxonPrefix", description="auto converted jebl2 parameter") String taxonPrefix,
-		@Param(name="samplingTimes", description="auto converted jebl2 parameter") double[] samplingTimes) {
+		@Param(name="samplingTimes", description="auto converted jebl2 parameter") List<Double> samplingTimes) {
 //		this.intervalGenerator = intervalGenerator;
 
 		List<Taxon> taxonList = new ArrayList<>();
-		for (int i = 0; i < samplingTimes.length; i++) {
-			Taxon taxon = Taxon.getTaxon(taxonPrefix + Integer.toString(i + 1) + "_" + Double.toString(samplingTimes[i]));
-			taxon.setAttribute("height", samplingTimes[i]);
+		for (int i = 0; i < samplingTimes.size(); i++) {
+			Taxon taxon = Taxon.getTaxon(taxonPrefix + Integer.toString(i + 1) + "_" + Double.toString(samplingTimes.get(i)));
+			taxon.setAttribute("height", samplingTimes.get(i));
 			taxonList.add(taxon);
 		}
 
@@ -64,14 +65,14 @@ public class TreeSimulator  extends BEASTObject {
 
 	public TreeSimulator(
 		@Param(name="taxonPrefix", description="auto converted jebl2 parameter") String taxonPrefix,
-		@Param(name="samplingCounts", description="auto converted jebl2 parameter") int[] samplingCounts,
-		@Param(name="samplingTimes", description="auto converted jebl2 parameter") double[] samplingTimes) {
+		@Param(name="samplingCounts", description="auto converted jebl2 parameter") List<Integer> samplingCounts,
+		@Param(name="samplingTimes", description="auto converted jebl2 parameter") List<Double> samplingTimes) {
 		List<Taxon> taxonList = new ArrayList<>();
 		int k =0;
-		for (int i = 0; i < samplingCounts.length; i++) {
-			for (int j = 0; j < samplingCounts[i]; j++) {
-				Taxon taxon = Taxon.getTaxon(taxonPrefix + Integer.toString(k + 1) + "_" + Double.toString(samplingTimes[i]));
-				taxon.setAttribute("height", samplingTimes[i]);
+		for (int i = 0; i < samplingCounts.size(); i++) {
+			for (int j = 0; j < samplingCounts.get(i); j++) {
+				Taxon taxon = Taxon.getTaxon(taxonPrefix + Integer.toString(k + 1) + "_" + Double.toString(samplingTimes.get(i)));
+				taxon.setAttribute("height", samplingTimes.get(i));
 				taxonList.add(taxon);
 				k++;
 			}
@@ -215,7 +216,7 @@ public class TreeSimulator  extends BEASTObject {
 //				0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0
 //		};
 
-		double[] samplingTimes = new double[] {
+		Double[] samplingTimes = new Double[] {
 				0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 5.0, 5.0, 5.0, 5.0
 		};
 
@@ -232,7 +233,7 @@ public class TreeSimulator  extends BEASTObject {
 		constantPopulation.setN0(10);
 
 		IntervalGenerator intervals = new CoalescentIntervalGenerator(exponentialGrowth);
-		TreeSimulator sim = new TreeSimulator("tip", samplingTimes);
+		TreeSimulator sim = new TreeSimulator("tip", Arrays.asList(samplingTimes));
 //		RootedTree tree1 = sim.simulate(true);
 //		RootedTree tree2 = sim.oldSimulate(true);
 //
@@ -295,19 +296,27 @@ public class TreeSimulator  extends BEASTObject {
 		this.heightAttributeName = heightAttributeName;
 	}
 
-	public int[] getSamplingCounts() {
+	public List<Integer> getSamplingCounts() {
 		return samplingCounts;
 	}
 
-	public void setSamplingCounts(int[] samplingCounts) {
+	public void setSamplingCounts(List<Integer> samplingCounts) {
 		this.samplingCounts = samplingCounts;
 	}
 
-	public double[] getSamplingTimes() {
+	public void setSamplingCounts(Integer samplingCounts) {
+		this.samplingCounts.add(samplingCounts);
+	}
+
+	public List<Double> getSamplingTimes() {
 		return samplingTimes;
 	}
-	public void setSamplingTimes(double[] samplingTimes) {
+	public void setSamplingTimes(List<Double> samplingTimes) {
 		this.samplingTimes = samplingTimes;
+	}
+
+	public void setSamplingTimes(Double samplingTimes) {
+		this.samplingTimes.add(samplingTimes);
 	}
 
 	public List<Taxon> getTaxa() {
@@ -317,6 +326,10 @@ public class TreeSimulator  extends BEASTObject {
 	public void setTaxa(Collection<Taxon> taxa) {
 		this.taxa.clear();
 		this.taxa.addAll(taxa);
+ 	}
+
+	public void setTaxa(Taxon taxa) {
+		this.taxa.add(taxa);
  	}
 
 	public Integer getTaxonCount() {
@@ -337,6 +350,6 @@ public class TreeSimulator  extends BEASTObject {
 
 	String taxonPrefix;
 	Integer taxonCount;	
-	int[] samplingCounts;
-	double[] samplingTimes;
+	List<Integer> samplingCounts;
+	List<Double> samplingTimes;
 }

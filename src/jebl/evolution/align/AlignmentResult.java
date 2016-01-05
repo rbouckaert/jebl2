@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 
 /**
@@ -9,7 +10,7 @@ import beast.core.Param;
  * Used for representing the results of a sequence alignment. Basically just stores
  * an array representing whether or not each position in the alignment is a gap or not.
  */
-class AlignmentResult {
+class AlignmentResult extends BEASTObject {
     int size;
     boolean values[];
     // true represents a character from the original sequence, and false represents a gap
@@ -48,6 +49,11 @@ class AlignmentResult {
 
 	public void setSize(Integer size) {
 		this.size = size;
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
 	}
 
 }

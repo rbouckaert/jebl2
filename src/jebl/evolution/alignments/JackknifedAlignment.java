@@ -64,11 +64,11 @@ public class JackknifedAlignment extends ResampledAlignment {
 		this.percent = percent;
 	}
 
-	public long getSeed() {
+	public Long getSeed() {
 		return seed;
 	}
 
-	public void setSeed(long seed) {
+	public void setSeed(Long seed) {
 		this.seed = seed;
 	}
 

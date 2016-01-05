@@ -8,16 +8,16 @@
  */
 package jebl.evolution.sequences;
 
-import beast.core.Param;
-import jebl.evolution.taxa.Taxon;
-import jebl.util.AttributableHelper;
-
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import beast.core.BEASTObject;
+import beast.core.Param;
+import jebl.evolution.taxa.Taxon;
+import jebl.util.AttributableHelper;
 
 /**
  * A codon implementation of the Sequence interface.
@@ -36,13 +36,13 @@ public class CodonSequence extends BEASTObject implements Sequence {
      */
     public CodonSequence(
 		@Param(name="taxon", description="auto converted jebl2 parameter") Taxon taxon,
-		@Param(name="states", description="auto converted jebl2 parameter") State[] states) {
+		@Param(name="states", description="auto converted jebl2 parameter") List<State> states) {
 
         this.sequenceType = SequenceType.CODON;
         this.taxon = taxon;
-        this.sequenceStates = new CodonState[states.length];
-        for (int i = 0; i < states.length; i++) {
-            sequenceStates[i] = states[i];
+        this.sequenceStates = new CodonState[states.size()];
+        for (int i = 0; i < states.size(); i++) {
+            sequenceStates[i] = states.get(i);
         }
     }
 
@@ -79,8 +79,8 @@ public class CodonSequence extends BEASTObject implements Sequence {
      * @return an array of state objects.
      */
     @Override
-	public State[] getStates() {
-        return sequenceType.toStateArray(getStateIndices());
+	public List<State> getStates() {
+        return Arrays.asList(sequenceType.toStateArray(getStateIndices()));
     }
 
     @Override
@@ -224,9 +224,9 @@ public class CodonSequence extends BEASTObject implements Sequence {
 		// nothing to do
 	}
 
-//	public void setStates(State[] states) {
-//		this.states = states;
-//	}
+	public void setStates(State states) {
+		throw new RuntimeException("Not implmented yet");
+	}
 
 	/** should not be used other than by BEAST framework **/
 	@Deprecated

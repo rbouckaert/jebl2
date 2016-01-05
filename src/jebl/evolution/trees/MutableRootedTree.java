@@ -901,6 +901,10 @@ public class MutableRootedTree extends BEASTObject implements RootedTree {
 		this.tree = tree;
 	}
 	
+	public void setTree(RootedTree tree) {
+		this.tree = tree;
+	}
+
 	Node outGroup;
 	Tree tree;
 }

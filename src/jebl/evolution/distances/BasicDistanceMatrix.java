@@ -1,6 +1,6 @@
 package jebl.evolution.distances;
 
-import beast.core.Param;
+
 import jebl.evolution.taxa.Taxon;
 import jebl.util.ProgressListener;
 
@@ -18,8 +18,8 @@ import beast.core.BEASTObject;
 public class BasicDistanceMatrix extends BEASTObject implements DistanceMatrix {
 
     public BasicDistanceMatrix(
-		@Param(name="taxa", description="auto converted jebl2 parameter") Collection<Taxon> taxa,
-		@Param(name="distances", description="auto converted jebl2 parameter") double[][] distances) {
+		Collection<Taxon> taxa,
+		double[][] distances) {
 
         if (distances == null || distances.length == 0) {
             throw new IllegalArgumentException("Source distance matrix is null or empty");
@@ -203,4 +203,7 @@ public class BasicDistanceMatrix extends BEASTObject implements DistanceMatrix {
 		this.taxa.addAll(taxa);
 	}
 
+	public void setTaxa(Taxon taxa) {
+		this.taxa.add(taxa);
+	}
 }

@@ -147,7 +147,7 @@ public class BasicAlignment extends BEASTObject implements Alignment {
         int i = 0;
         int maxLen = 0;
         for (Sequence seq : getSequenceList()) {
-            seqs[i] = seq.getStates();
+            seqs[i] = seq.getStates().toArray(new State[]{});
             if (seqs[i].length > maxLen) {
                 maxLen = seqs[i].length;
             }

@@ -19,7 +19,7 @@ public class TranslatedSequence extends FilteredSequence {
 
 	@Override
 	protected State[] filterSequence(Sequence source) {
-		return jebl.evolution.sequences.Utils.translate(source.getStates(), geneticCode);
+		return jebl.evolution.sequences.Utils.translate(source.getStates().toArray(new State[]{}), geneticCode);
 	}
 
     /**

@@ -1506,19 +1506,19 @@ public class NexusImporter extends BEASTObject implements AlignmentImporter, Seq
 		this.compactTrees = compactTrees;
 	}
 
-	public long getExpectedInputLength() {
+	public Long getExpectedInputLength() {
 		return expectedInputLength;
 	}
 
-	public void setExpectedInputLength(long expectedInputLength) {
+	public void setExpectedInputLength(Long expectedInputLength) {
 		this.expectedInputLength = expectedInputLength;
 	}
 
-	public long getExpectedLength() {
+	public Long getExpectedLength() {
 		return expectedLength;
 	}
 
-	public void setExpectedLength(long expectedLength) {
+	public void setExpectedLength(Long expectedLength) {
 		this.expectedLength = expectedLength;
 	}
 

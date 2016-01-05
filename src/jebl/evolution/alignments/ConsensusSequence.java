@@ -7,6 +7,8 @@ import jebl.evolution.sequences.State;
 import jebl.evolution.taxa.Taxon;
 import jebl.util.AttributableHelper;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -77,11 +79,11 @@ public class ConsensusSequence extends BEASTObject implements Sequence {
      * @return an array of state objects.
      */
     @Override
-	public State[] getStates() {
+	public List<State> getStates() {
         if (sequence == null) {
             sequence = jebl.evolution.sequences.Utils.getStateIndices(constructConsensus(source, includeAmbiguities));
         }
-        return getSequenceType().toStateArray(sequence);
+        return Arrays.asList(getSequenceType().toStateArray(sequence));
     }
 
     @Override

@@ -1,7 +1,10 @@
 package jebl.evolution.trees;
 
 import beast.core.Param;
+import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Node;
+import jebl.evolution.graphs.Graph.NoEdgeException;
+import jebl.evolution.taxa.Taxon;
 import jebl.util.FixedBitSet;
 
 import java.util.*;
@@ -29,20 +32,20 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
     private double supportThreshold;
 
     public GreedyRootedConsensusTreeBuilder(
-		@Param(name="trees", description="auto converted jebl2 parameter") RootedTree[] trees,
+		@Param(name="trees", description="auto converted jebl2 parameter") List<RootedTree> trees,
 		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold) {
-        super(trees);
-        this.rtrees = trees;
+        super(trees.toArray(new RootedTree[]{}));
+        this.rtrees = trees.toArray(new RootedTree[]{});
         this.supportThreshold = supportThreshold;
     }
 
 	public GreedyRootedConsensusTreeBuilder(
-		@Param(name="trees", description="auto converted jebl2 parameter") RootedTree[] trees,
+		@Param(name="trees", description="auto converted jebl2 parameter") List<RootedTree> trees,
 		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold,
 		@Param(name="supportAttributeName", description="auto converted jebl2 parameter") String supportAttributeName,
 		@Param(name="asPercent", description="auto converted jebl2 parameter") Boolean asPercent) {
-	    super(trees, supportAttributeName, asPercent);
-	    this.rtrees = trees;
+	    super(trees.toArray(new RootedTree[]{}), supportAttributeName, asPercent);
+	    this.rtrees = trees.toArray(new RootedTree[]{});
 	    this.supportThreshold = supportThreshold;
 	    this.asPercent = asPercent;
 	}
@@ -334,14 +337,20 @@ class GreedyRootedConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> 
 		this.supportThreshold = supportThreshold;
 	}
 
-	public RootedTree[] getTrees() {
-		return rtrees;
+	public List<RootedTree> getTrees() {
+		return Arrays.asList(rtrees);
 	}
 
 	/** should not be used other than by BEAST framework **/
 	@Deprecated
 	public void setTrees(RootedTree[] trees) {
 		this.rtrees = trees;
+	}
+
+	public void setTrees(RootedTree trees) {
+		List<RootedTree> t = getTrees();
+		t.add(trees);
+		this.rtrees = t.toArray(new RootedTree[]{});
 	}
 
 	Boolean asPercent;

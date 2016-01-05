@@ -1,5 +1,7 @@
 package jebl.evolution.trees;
 
+import java.util.Arrays;
+
 import jebl.evolution.distances.DistanceMatrix;
 import jebl.evolution.taxa.Taxon;
 
@@ -106,9 +108,9 @@ public class TreeBuilderFactory {
 
         switch (method) {
             case GREEDY:
-                return new GreedyRootedConsensusTreeBuilder(trees, supportThreshold);
+                return new GreedyRootedConsensusTreeBuilder(Arrays.asList(trees), supportThreshold);
             case MRCAC:
-                return new MRCACConsensusTreeBuilder(trees, supportThreshold);
+                return new MRCACConsensusTreeBuilder(Arrays.asList(trees), supportThreshold);
             default:
                 throw new IllegalArgumentException("Unknown consensus method: " + method);
         }

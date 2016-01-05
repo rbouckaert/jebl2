@@ -1,5 +1,6 @@
 package jebl.evolution.align;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.util.ProgressListener;
 
@@ -7,7 +8,7 @@ import jebl.util.ProgressListener;
  * @author Matt Kearse
  * @version $Id: CompoundAlignmentProgressListener.java 1057 2010-05-24 03:20:46Z matt_kearse $
  */
-class CompoundAlignmentProgressListener  {
+class CompoundAlignmentProgressListener extends BEASTObject  {
     //private boolean cancelled = false;
     private int sectionsCompleted = 0;
     private int totalSections;
@@ -80,6 +81,12 @@ class CompoundAlignmentProgressListener  {
 
 	public void setTotalSections(Integer totalSections) {
 		this.totalSections = totalSections;
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
 	}
 
 }

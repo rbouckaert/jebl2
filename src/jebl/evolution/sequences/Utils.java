@@ -8,6 +8,8 @@
  */
 package jebl.evolution.sequences;
 
+import java.util.Arrays;
+
 import jebl.evolution.taxa.Taxon;
 
 /**
@@ -28,7 +30,7 @@ public class Utils {
      * @return
      */
     public static Sequence translate(final Sequence sequence, GeneticCode geneticCode) {
-        return new BasicSequence(SequenceType.AMINO_ACID, sequence.getTaxon(), translate(sequence.getStates(), geneticCode));
+        return new BasicSequence(SequenceType.AMINO_ACID, sequence.getTaxon(), Arrays.asList(translate(sequence.getStates().toArray(new State[]{}), geneticCode)));
     }
 
     /**
@@ -41,7 +43,7 @@ public class Utils {
      * @return
      */
     public static Sequence translate(final Sequence sequence, GeneticCode geneticCode, int readingFrame) {
-        return new BasicSequence(SequenceType.AMINO_ACID, sequence.getTaxon(), translate(sequence.getStates(), geneticCode, readingFrame));
+        return new BasicSequence(SequenceType.AMINO_ACID, sequence.getTaxon(), Arrays.asList(translate(sequence.getStates().toArray(new State[]{}), geneticCode, readingFrame)));
     }
 
     /**
@@ -192,10 +194,10 @@ public class Utils {
     public static String translateCharSequence(final CharSequence nucleotideSequence, GeneticCode geneticCode) {
         Sequence seq = new BasicSequence(SequenceType.NUCLEOTIDE, Taxon.getTaxon("x"), nucleotideSequence);
         seq = new GaplessSequence(seq);
-        State[] states = seq.getStates();
+        State[] states = seq.getStates().toArray(new State[]{});
 
         states = translate(states, geneticCode);
-        seq = new BasicSequence(SequenceType.AMINO_ACID, Taxon.getTaxon("x"), states);
+        seq = new BasicSequence(SequenceType.AMINO_ACID, Taxon.getTaxon("x"), Arrays.asList(states));
         return seq.getString();
     }
 

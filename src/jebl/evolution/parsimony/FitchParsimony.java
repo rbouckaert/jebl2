@@ -78,11 +78,11 @@ public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 		this.siteScores = new double[patterns.size()];
 	}
 
-	public FitchParsimony(
-		@Param(name="patterns", description="auto converted jebl2 parameter") Patterns patterns,
-		@Param(name="gapsAreStates", description="auto converted jebl2 parameter") Boolean gapsAreStates) {
-		this(patterns.getPatterns(), gapsAreStates);
-	}
+//	public FitchParsimony(
+//		@Param(name="patterns", description="auto converted jebl2 parameter") Patterns patterns,
+//		@Param(name="gapsAreStates", description="auto converted jebl2 parameter") Boolean gapsAreStates) {
+//		this(patterns.getPatterns(), gapsAreStates);
+//	}
 
 	/**
 	 * Calculates the minimum number of siteScores for the parsimony reconstruction of a
@@ -369,6 +369,10 @@ public class FitchParsimony extends BEASTObject implements ParsimonyCriterion {
 	@Deprecated
 	public void setPatterns(List<Pattern> patterns) {
 		this.patterns = patterns;
+	}
+	
+	public void setPatterns(Pattern pattern) {
+		this.patterns.add(pattern);
 	}
 
 }

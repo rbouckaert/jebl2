@@ -9,6 +9,7 @@
 
 package jebl.evolution.io;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.evolution.sequences.SequenceType;
 import jebl.util.ProgressListener;
@@ -26,7 +27,7 @@ import java.util.regex.Pattern;
  *
  * @version $Id: ImportHelper.java 931 2008-07-01 01:31:28Z richardmoir $
  */
-public class ImportHelper {
+public class ImportHelper extends BEASTObject {
     // Private stuff
 
     private LineNumberReader reader;
@@ -797,6 +798,12 @@ public class ImportHelper {
 
 	public void setReader(Reader reader) {
 		this.reader = new LineNumberReader(reader);
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
 	}
 
 }

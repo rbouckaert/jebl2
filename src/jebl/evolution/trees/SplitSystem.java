@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.evolution.taxa.Taxon;
 
@@ -14,8 +15,7 @@ import java.util.*;
  *
  * @author Korbinian Strimmer
  */
-public class SplitSystem
-{
+public class SplitSystem extends BEASTObject {
 	//
 	// Public stuff
 	//
@@ -136,6 +136,16 @@ public class SplitSystem
 		this.taxa.addAll(taxa);
 	}
 	
+	public void setTaxa(Taxon taxa) {
+		this.taxa.add(taxa);
+	}
+
 	private int size;
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
+	}
 
 }

@@ -8,7 +8,9 @@ import java.util.Set;
 
 import beast.core.BEASTObject;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -71,13 +73,13 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
     public CanonicalSequence(
 		@Param(name="sequenceType", description="auto converted jebl2 parameter") SequenceType sequenceType,
 		@Param(name="taxon", description="auto converted jebl2 parameter") Taxon taxon,
-		@Param(name="states", description="auto converted jebl2 parameter") State[] states) {
+		@Param(name="states", description="auto converted jebl2 parameter") List<State> states) {
 
         this.sequenceType = sequenceType;
         this.taxon = taxon;
-        this.sequence = new byte[states.length];
+        this.sequence = new byte[states.size()];
         for (int i = 0; i < sequence.length; i++) {
-            sequence[i] = (byte)states[i].getIndex();
+            sequence[i] = (byte)states.get(i).getIndex();
         }
     }
 
@@ -115,8 +117,8 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
      * @return an array of state objects.
      */
     @Override
-	public State[] getStates() {
-        return sequenceType.toStateArray(sequence);
+	public List<State> getStates() {
+        return Arrays.asList(sequenceType.toStateArray(sequence));
     }
 
     @Override
@@ -237,9 +239,9 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
 		this.sequenceType = sequenceType;
 	}
 
-//	public void setStates(State[] states) {
-//		this.states = states;
-//	}
+	public void setStates(State states) {
+		throw new RuntimeException("Not implmented yet");
+	}
 
 	/** should not be used other than by BEAST framework **/
 	@Deprecated

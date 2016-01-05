@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.evolution.graphs.Node;
 
@@ -12,7 +13,7 @@ import java.util.Set;
  * @version $Id: TreeSelectionChangeEvent.java 913 2008-05-22 04:53:39Z matt_kearse $
  */
 
-public final class TreeSelectionChangeEvent {
+public final class TreeSelectionChangeEvent extends BEASTObject {
     private Set<Node> selectedNodes;
 
     public TreeSelectionChangeEvent(
@@ -27,6 +28,13 @@ public final class TreeSelectionChangeEvent {
 
 	public void setSelectedNodes(Set<Node> selectedNodes) {
 		this.selectedNodes = selectedNodes;
+	}
+
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
 	}
 
 }

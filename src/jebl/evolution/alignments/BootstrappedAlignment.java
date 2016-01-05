@@ -36,11 +36,11 @@ public class BootstrappedAlignment extends ResampledAlignment {
         this(srcAlignment, Randomizer.getSeed());
     }
 
-	public long getSeed() {
+	public Long getSeed() {
 		return seed;
 	}
 
-	public void setSeed(long seed) {
+	public void setSeed(Long seed) {
 		this.seed = seed;
 	}
 

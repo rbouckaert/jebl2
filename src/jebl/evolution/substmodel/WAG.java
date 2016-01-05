@@ -7,6 +7,8 @@
 
 package jebl.evolution.substmodel;
 
+import java.util.List;
+
 import beast.core.Param;
 
 /**
@@ -30,12 +32,12 @@ public class WAG extends AminoAcidModel
      * @param f amino acid frequencies
      */
     public WAG(
-		@Param(name="f", description="auto converted jebl2 parameter") double[] f)
+		@Param(name="f", description="auto converted jebl2 parameter") List<Double> f)
     {
-        super(f);
+        super(f.toArray(new Double[]{}));
         this.f = f;
     }
-
+    
     /**
      * get the frequencies of the original data set that
      * formed the basis for the estimation of the rate matrix
@@ -210,14 +212,19 @@ public class WAG extends AminoAcidModel
         return "WAG";
     }
 
-	public double[] getF() {
+	public List<Double> getF() {
 		return f;
 	}
 
-	public void setF(double[] f) {
-		this.f = f;
+	public void setF(List<Double> f) {
+		this.f.clear();
+		this.f.addAll(f);
+	}
+
+	public void setF(Double f) {
+		this.f.add(f);
 	}
 	
-	private double[] f;
+	private List<Double> f;
 
 }

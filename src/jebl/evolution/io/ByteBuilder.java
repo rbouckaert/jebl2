@@ -1,5 +1,6 @@
 package jebl.evolution.io;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
  * @author Joseph Heled
  * @version $Id: ByteBuilder.java 879 2008-01-31 04:23:43Z twobeers $
  */
-public class ByteBuilder implements CharSequence, Appendable {
+public class ByteBuilder extends BEASTObject implements CharSequence, Appendable {
     private static final Logger logger = Logger.getLogger(ByteBuilder.class.getName());
     int maxCapacity;
     int current = 0;
@@ -123,6 +124,12 @@ public class ByteBuilder implements CharSequence, Appendable {
 	@Deprecated
 	public void setMaxCapacity(Integer maxCapacity) {
 		this.maxCapacity = maxCapacity;
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
 	}
 
 }

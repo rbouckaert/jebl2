@@ -7,6 +7,7 @@
 
 package jebl.evolution.substmodel;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.math.MachineAccuracy;
 
@@ -18,7 +19,7 @@ import jebl.math.MachineAccuracy;
  *
  * @author Korbinian Strimmer
  */
-public class MatrixExponential implements Cloneable, java.io.Serializable
+public class MatrixExponential extends BEASTObject implements Cloneable, java.io.Serializable
 {
 	//
 	// Public stuff
@@ -102,7 +103,7 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 		return transProb[from][to];
 	}
 
-	public int getDimension() { return dimension_;	}
+	public Integer getDimension() { return dimension_;	}
 
     public void updateByRelativeRates(double[][] relativeRates) {
 		/* compute eigenvalues and eigenvectors */
@@ -934,4 +935,12 @@ public class MatrixExponential implements Cloneable, java.io.Serializable
 	}
 
 	private RateMatrix r;
+
+
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
+	}
 }

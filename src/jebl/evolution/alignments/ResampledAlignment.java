@@ -6,6 +6,7 @@ import jebl.evolution.sequences.SequenceType;
 import jebl.evolution.sequences.State;
 import jebl.evolution.taxa.Taxon;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -56,7 +57,7 @@ public class ResampledAlignment extends BEASTObject implements Alignment {
         Sequence[] newSeqs = new Sequence[nSeqs];
         for(int k = 0; k < nSeqs; ++k) {
             Sequence src = seqs.get(k);
-            newSeqs[k] = new BasicSequence(src.getSequenceType(), src.getTaxon(), newSeqsStates[k]);
+            newSeqs[k] = new BasicSequence(src.getSequenceType(), src.getTaxon(), Arrays.asList(newSeqsStates[k]));
         }
         alignment = new BasicAlignment(newSeqs);
     }

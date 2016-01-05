@@ -9,6 +9,11 @@
 package jebl.evolution.coalescent;
 
 import beast.core.Param;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import beast.core.BEASTObject;
 import jebl.evolution.coalescent.DemographicFunction;
 
@@ -20,11 +25,11 @@ import jebl.evolution.coalescent.DemographicFunction;
 public class EmpiricalDemographicFunction extends BEASTObject implements DemographicFunction {
 
     public EmpiricalDemographicFunction(
-		@Param(name="populationSizes", description="auto converted jebl2 parameter") double[] populationSizes,
-		@Param(name="times", description="auto converted jebl2 parameter") double[] times,
+		@Param(name="populationSizes", description="auto converted jebl2 parameter") List<Double> populationSizes,
+		@Param(name="times", description="auto converted jebl2 parameter") List<Double> times,
 		@Param(name="stepwise", description="auto converted jebl2 parameter") Boolean stepwise) {
-        this.populationSizes = populationSizes;
-        this.times = times;
+        this.populationSizes = populationSizes.toArray(new Double[]{});
+        this.times = times.toArray(new Double[]{});
         this.stepwise = stepwise;
     }
 
@@ -140,8 +145,8 @@ public class EmpiricalDemographicFunction extends BEASTObject implements Demogra
         return 0;
     }
 
-    private double[] populationSizes;
-    private double[] times;
+    private Double[] populationSizes;
+    private Double[] times;
     private boolean stepwise;
     
 	@Override
@@ -150,14 +155,19 @@ public class EmpiricalDemographicFunction extends BEASTObject implements Demogra
 	}
 
 
-	public double[] getPopulationSizes() {
-		return populationSizes;
+	public List<Double> getPopulationSizes() {
+		return Arrays.asList(populationSizes);
 	}
 
 	/** should not be used other than by BEAST framework **/
 	@Deprecated
-	public void setPopulationSizes(double[] populationSizes) {
+	public void setPopulationSizes(Double[] setPopulationSizes) {
 		this.populationSizes = populationSizes;
+	}
+	public void setPopulationSizes(Double setPopulationSize) {
+		List<Double> t = getPopulationSizes();
+		t.add(setPopulationSize);
+		this.populationSizes = t.toArray(new Double[]{});
 	}
 
 	public Boolean getStepwise() {
@@ -170,14 +180,19 @@ public class EmpiricalDemographicFunction extends BEASTObject implements Demogra
 		this.stepwise = stepwise;
 	}
 
-	public double[] getTimes() {
-		return times;
+	public List<Double> getTimes() {
+		return Arrays.asList(populationSizes);
 	}
 
 	/** should not be used other than by BEAST framework **/
 	@Deprecated
-	public void setTimes(double[] times) {
+	public void setTimes(Double[] times) {
 		this.times = times;
 	}
 
+	public void setTimes(Double times) {
+		List<Double> t = getTimes();
+		t.add(times);
+		this.times = t.toArray(new Double[]{});
+	}
 }

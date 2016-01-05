@@ -8,6 +8,8 @@
  */
 package jebl.evolution.sequences;
 
+import java.util.List;
+
 import jebl.evolution.taxa.Taxon;
 import jebl.util.Attributable;
 
@@ -39,7 +41,7 @@ public interface Sequence extends Attributable, Comparable<Object> {
 	/**
 	 * @return an array of state objects.
 	 */
-	State[] getStates();
+	List<State> getStates();
 
 	/**
 	 * @return an array of state indices.

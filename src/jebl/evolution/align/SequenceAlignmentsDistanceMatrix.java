@@ -155,6 +155,10 @@ public class SequenceAlignmentsDistanceMatrix extends BasicDistanceMatrix {
 		this.seqs = seqs;
 	}
 
+	public void setSeqs(Sequence seq) {
+		this.seqs.add(seq);
+	}
+
 	private PairwiseAligner aligner;
 	private TreeBuilderFactory.DistanceModel model;
 	private ProgressListener progress;

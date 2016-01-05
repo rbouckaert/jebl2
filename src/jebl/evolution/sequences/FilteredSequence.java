@@ -3,6 +3,8 @@ package jebl.evolution.sequences;
 import beast.core.Param;
 import jebl.evolution.taxa.Taxon;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,11 +55,11 @@ public abstract class FilteredSequence extends BEASTObject implements Sequence {
      * @return an array of state objects.
      */
     @Override
-	public State[] getStates() {
+	public List<State> getStates() {
         if (sequence == null) {
             sequence = filterSequence(source);
         }
-        return sequence;
+        return Arrays.asList(sequence);
     }
 
     @Override

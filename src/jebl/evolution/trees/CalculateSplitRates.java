@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.io.ImportException;
@@ -15,7 +16,7 @@ import java.util.*;
  * Time: 1:13:51 PM
  * To change this template use File | Settings | File Templates.
  */
-public class CalculateSplitRates {
+public class CalculateSplitRates extends BEASTObject {
 
 	List<RootedTree> treeList;
 	NexusImporter importer;
@@ -638,6 +639,12 @@ public class CalculateSplitRates {
 
 	public void setImporter(NexusImporter importer) {
 		this.importer = importer;
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
 	}
 
 }

@@ -27,25 +27,25 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
     private boolean debug = false;
 
 	public MRCACConsensusTreeBuilder(
-		@Param(name="trees", description="auto converted jebl2 parameter") Tree[] trees,
+		@Param(name="trees", description="auto converted jebl2 parameter") List<Tree> trees,
 		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold) {
 	    this(trees, supportThreshold, DEFAULT_SUPPORT_ATTRIBUTE_NAME, true);
 	}
 
     public MRCACConsensusTreeBuilder(
-		@Param(name="trees", description="auto converted jebl2 parameter") Tree[] trees,
+		@Param(name="trees", description="auto converted jebl2 parameter") List<Tree> trees,
 		@Param(name="supportThreshold", description="auto converted jebl2 parameter") Double supportThreshold,
 		@Param(name="supportAttributeName", description="auto converted jebl2 parameter") String supportAttributeName,
 		@Param(name="asPercent", description="auto converted jebl2 parameter") Boolean asPercent) {
-        super(trees, supportAttributeName, asPercent);
-        this.trees = new RootedTree[trees.length];
-        for(int i = 0; i < trees.length; ++i) {
-            this.trees[i] = (RootedTree)trees[i];
+        super(trees.toArray(new Tree[]{}), supportAttributeName, asPercent);
+        this.trees = new RootedTree[trees.size()];
+        for(int i = 0; i < trees.size(); ++i) {
+            this.trees[i] = (RootedTree)trees.get(i);
         }
         this.supportThreshold = supportThreshold;
 
-        info = new TreeInfo[trees.length];
-        for(int iTree = 0; iTree < trees.length; ++iTree) {
+        info = new TreeInfo[trees.size()];
+        for(int iTree = 0; iTree < trees.size(); ++iTree) {
             info[iTree] = new TreeInfo(this.trees[iTree]);
         }
         
@@ -335,13 +335,15 @@ class MRCACConsensusTreeBuilder extends ConsensusTreeBuilder<RootedTree> {
 		this.supportThreshold = supportThreshold;
 	}
 
-	public Tree[] getTrees() {
-		return trees;
+	public List<Tree> getTrees() {
+		return Arrays.asList(trees);
 	}
 
-//	public void setTrees(Tree[] trees) {
-//		this.trees = trees;
-//	}
+	public void setTrees(Tree trees) {
+		List<Tree> t = getTrees();
+		t.add(trees);
+		this.trees = t.toArray(new RootedTree[]{});
+	}
 
 	Boolean asPercent;
 }

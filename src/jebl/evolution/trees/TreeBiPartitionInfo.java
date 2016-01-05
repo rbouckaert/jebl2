@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.evolution.graphs.Node;
 import jebl.evolution.taxa.Taxon;
@@ -15,7 +16,7 @@ import java.util.LinkedHashMap;
  * @author Joseph Heled
  * @version $Id: TreeBiPartitionInfo.java 923 2008-06-15 20:45:11Z pepster $
  */
-public class TreeBiPartitionInfo {
+public class TreeBiPartitionInfo extends BEASTObject {
     class BiPartiotionInfo {
         BiPartiotionInfo(Node n) {
             this.n = n;
@@ -158,6 +159,16 @@ public class TreeBiPartitionInfo {
 	@Deprecated
 	public void setTaxa(List<Taxon> taxa) {
 		this.taxa = taxa;
+	}
+
+	public void setTaxa(Taxon taxa) {
+		this.taxa.add(taxa);
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
 	}
 
 }

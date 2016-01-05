@@ -9,6 +9,7 @@
 
 package jebl.evolution.coalescent;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.math.*;
 import jebl.evolution.trees.RootedTree;
@@ -23,7 +24,7 @@ import jebl.evolution.trees.RootedTree;
  * @author Andrew Rambaut
  * @author Alexei Drummond
  */
-public class Coalescent implements MultivariateFunction {
+public class Coalescent extends BEASTObject implements MultivariateFunction {
 
 	// PUBLIC STUFF
 
@@ -192,4 +193,10 @@ public class Coalescent implements MultivariateFunction {
 	}
 
 	private RootedTree tree;
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
+	}
 }

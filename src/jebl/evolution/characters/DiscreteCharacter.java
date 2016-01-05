@@ -96,7 +96,7 @@ public class DiscreteCharacter extends BEASTObject implements Character{
 	 * 
 	 * @return the number of possible states for the character
 	 */
-	public double getNumOfStates(){ return numOfStates; }
+	public Integer getNumOfStates(){ return numOfStates; }
 	
 	/**
 	 * 

@@ -257,6 +257,10 @@ public class NucleotideScores extends Scores {
 		this.scores = scores;
 	}
 
+	public void setScores(NucleotideScores scores) {
+		this.scores = scores;
+	}
+
 	public Boolean getUseWeightedAmbigousMatches() {
 		return useWeightedAmbigousMatches;
 	}

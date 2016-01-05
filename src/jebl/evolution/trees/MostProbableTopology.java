@@ -1,5 +1,6 @@
 package jebl.evolution.trees;
 
+import beast.core.BEASTObject;
 import beast.core.Param;
 import jebl.evolution.graphs.Edge;
 import jebl.evolution.graphs.Graph;
@@ -18,7 +19,7 @@ import java.util.*;
  * @author Joseph Heled
  * @version $Id: MostProbableTopology.java 889 2008-02-27 01:13:21Z matt_kearse $
  */
-public class MostProbableTopology {
+public class MostProbableTopology extends BEASTObject {
     /**
      * Set of input trees
      */
@@ -490,6 +491,12 @@ public class MostProbableTopology {
 	public void setTrees(Collection<? extends Tree> trees) {
 		this.trees.clear();
 		this.trees.addAll(trees);
+	}
+
+	@Override
+	public void initAndValidate() throws Exception {
+		// nothing to do
+		
 	}
 
 }
