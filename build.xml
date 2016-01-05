@@ -1,157 +1,213 @@
-<!--              ANT build file for JAM              -->
+<!-- Build JEBL. It is also used by Hudson JEBL project. JUnit test is available for this build. -->
+<project basedir="." default="addon" name="BUILD_JEBL">
+	<description>
+	    Build JEBL. 
+            Also used by Hudson JEBL project. 
+	    JUnit test is available for this build.
+	    $Id: build_JEBL.xml $
+	</description>
 
-<project name="JEBL" default="dist" basedir=".">
-    <description>
-        Build file for JEBL
-    </description>
-    <!-- set global properties for this build -->
-    <property name="src" location="src"/>
-    <property name="build" location="build"/>
-    <property name="build-mac-only" location="build-mac-only"/>
+	<!-- set global properties for this build -->
+	<property name="srcJEBL" location="src" />
+	<property name="buildJEBL" location="build" />
+	<property name="libJEBL" location="lib" />
+	<property name="release_dir" value="release" />
+	<property name="distJEBL" location="${buildJEBL}/dist" />
+	<property name="beast2path" location="../beast2" />
+	<property name="libBeast2" location="${beast2path}/lib" />
+	<property name="srcBeast2" location="${beast2path}/src" />
+	<property name="beast2classpath" location="${beast2path}/build" />
+	<property name="Add_on_dir" value="${release_dir}/add-on" />
+	<property name="version" value="0.0.1" />
 
-    <property name="lib" location="lib"/>
-    <property name="dist" location="dist"/>
+    <import file="${beast2path}/build.xml" />
 
-    <property environment="env"/>
+	<property name="main_class_BEAST" value="beast.app.BeastMCMC" />
+	<property name="report" value="${buildJEBL}/junitreport"/>
 
-    <target name="init">
-        <!-- Create the time stamp -->
-        <tstamp/>
-        <!-- Create the build directory structure used by compile -->
-        <mkdir dir="${build}"/>
-        <mkdir dir="${build-mac-only}"/>
-        <mkdir dir="${dist}"/>
-    </target>
+	<path id="classpath">
+        <pathelement path="${buildJEBL}"/>
+		<fileset dir="${libBeast2}" includes="junit-4.8.2.jar"/>
+		<fileset dir="${libBeast2}" includes="jam.jar"/>
+		<fileset dir="${libBeast2}" includes="beagle.jar"/>
+        <pathelement path="${beast2classpath}"/>
+	</path>
 
-    <target name="compile-jam" depends="init">
-        <!-- Compile the java code from ${jamsrc} into ${build} -->
+	<!-- start -->
+	<target name="initJEBL">
+		<echo message="${ant.project.name}: ${ant.file}" />
+	</target>
 
-        <condition property="isMac">
-            <os family="mac"/>
-        </condition>
-        <javac source="1.5" srcdir="${src}" target="1.5" destdir="${build}" debug="true">
-            <include name="org/**/*"/>
-            <exclude name="org/**/maconly/*" unless = "isMac"/>
-        </javac>
+	<target name="cleanJEBL">
+    	<delete dir="${buildJEBL}" />
+	</target>
 
-        <!-- Utils.class was getting included in jebl.jar    -->
-        <!-- twice and Pack200 was having issues.            -->
-        <!-- Doesn't seem to be the case for me, the class is missing! RM-->
-        <!--<delete file="${build}/org/virion/jam/mac/Utils.class"/>-->
+	<!-- clean previous build, and then compile Java source code, and Juint test -->
+	<target name="build_all_JEBL" depends="cleanJEBL,compile-allJEBL,junitJEBL"
+        description="Clean and Build all run-time stuff">
+	</target>
 
-        <copy todir="${build}">
-            <fileset dir="${src}" includes="org/**/*.png"/>
-        </copy>
-    </target>
+	<!-- clean previous build, compile Java source code, and Junit test, and make the beast.jar and beauti.jar -->
+	<target name="build_jar_all_JEBL" depends="cleanJEBL,compile-allJEBL,junitJEBL,dist_all_JEBL"
+        description="Clean and Build all run-time stuff">
+	</target>
 
-    <target name="clean">
-        <mkdir dir="${build}"/>
-        <delete includeEmptyDirs="true">
-            <fileset dir="${build}" includes="**/*"/>
-        </delete>
 
-    </target>
+	<!-- No JUnit Test, clean previous build, compile Java source code, and make the JEBL.jar and beauti.jar -->
+	<target name="build_jar_all_JEBL_NoJUnitTest" depends="cleanJEBL,compile-allJEBL,dist_all_JEBL"
+        description="Clean and Build all run-time stuff">
+	</target>
 
-    <target name="compile-jam-mac-only" depends="init">
-        <!-- Compile the java code from ${jamsrc} into ${build} -->
-        <condition property="isMac">
-            <os family="mac"/>
-        </condition>
-        <javac source="1.5" srcdir="${src}" target="1.5" destdir="${build-mac-only}">
-            <include name="org/**/maconly/*"/>
-        </javac>
-    </target>
+	<!-- compile Java source code -->
+	<target name="compile-allJEBL" depends="initJEBL,compile-all">
 
-    <target name="dist-jam-mac-only" depends="compile-jam-mac-only" description="generate the -mac-only distribution">
-        <!-- Create the distribution directory -->
-        <mkdir dir="${dist}"/>
 
-        <!-- create the mac-only jar file -->
-        <jar jarfile="${lib}/jam-mac-only.jar">
-            <fileset dir="${build-mac-only}" includes="**/mac*/**/*.class,*.properties"/>
+	    <!-- Capture the path as a delimited property using the refid attribute -->
+	    <property name="myclasspath" refid="classpath"/>
+	    <!-- Emit the property to the ant console -->
+	    <echo message="Classpath = ${myclasspath}"/>               
+
+		<mkdir dir="${buildJEBL}" />
+
+		<!-- Compile the java code from ${srcJEBL} into ${buildJEBL} /bin -->
+		<javac srcdir="${srcJEBL}" destdir="${buildJEBL}" classpathref="classpath" 
+		       fork="true"
+		       memoryinitialsize="256m"
+		       memorymaximumsize="256m"
+			   source="1.8"
+		       target="1.8">
+			<include name="jebl/**/**" />
+			<!-- compile JUnit test classes -->
+			<include name="test/**" />
+		</javac>
+		<copy todir="${buildJEBL}">
+			<fileset dir="${srcJEBL}" includes="**/*.properties" />
+			<fileset dir="${srcJEBL}" includes="**/*.png" />
+		</copy>
+		<echo message="Successfully compiled." />
+	</target>
+
+	<!-- make the beast.jar and beauti.jar -->
+	<target name="dist_all_JEBL" depends="compile-allJEBL" description="create JEBL jar">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${distJEBL}" />
+
+		<!-- Put everything in ${buildJEBL} into the beast.jar file -->
+		<jar jarfile="${distJEBL}/JEBL.jar">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Main-Class" value="${main_class_BEAST}" />
+			</manifest>
+			<fileset dir="${buildJEBL}">
+				<include name="jebl/**/*.class" />
+			</fileset>
+			<fileset dir="${beast2classpath}">
+				<include name="beast/**/*.class" />
+				<include name="beast/**/*.properties" />
+				<include name="beast/**/*.png" />
+				<include name="beagle/**/*.class" />
+				<include name="org/**/*.class" />
+			</fileset>
+		</jar>
+		<jar jarfile="${distJEBL}/JEBL.src.jar">
+			<fileset dir="${srcJEBL}">
+				<include name="jebl/**/*.java" />
+				<include name="jebl/**/*.png" />
+			</fileset>
         </jar>
-    </target>
+		<jar jarfile="${distJEBL}/JEBL.addon.jar">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+			</manifest>
+			<fileset dir="${buildJEBL}">
+				<include name="jebl/**/*.png" />
+				<include name="jebl/**/*.class" />
+				<include name="**/*.properties" />
+			</fileset>
+		</jar>
+	</target>
+
+	<!-- run beast.jar -->
+	<target name="run_JEBL">
+		<java jar="${distJEBL}/JEBL.jar" fork="true" />
+	</target>
+
+	
+	<!-- JUnit test -->
+	<target name="junitJEBL">
+		<mkdir dir="${report}" />
+		<junit printsummary="yes"> <!--showoutput='yes'-->
+			<classpath>
+				<path refid="classpath" />
+				<path location="${buildJEBL}" />
+			</classpath>
+
+			<formatter type="xml" />
+
+			<batchtest fork="yes" todir="${report}">
+				<fileset dir="${srcJEBL}">
+                    <include name="test/**/*Test.java"/>                                         
+				</fileset>
+				<fileset dir="${srcBeast2}">
+                    <include name="test/beast/integration/**/*Test.java"/>                                         
+                    <exclude name="test/beast/integration/**/ResumeTest.java"/>                                         
+				</fileset>
+			</batchtest>
+		</junit>
+		<echo message="JUnit test finished." />
+	</target>
+    
+    <target name="junitreport">
+		<junitreport todir="${report}">
+			<fileset dir="${report}" includes="*.xml"/>
+			<report format="frames" todir="${report}"/>
+		</junitreport>
+		<echo message="JUnit test report finished." />
+	</target>
 
 
-    <target name="dist-jam" depends="compile-jam" description="generate the JAM distribution">
-        <!-- Create the distribution directory -->
-        <mkdir dir="${dist}"/>
-        <delete file="${dist}/jam.jar"/>
-        <!-- Put everything in ${build} into the jam.jar file -->
-        <jar jarfile="${dist}/jam.jar">
-            <fileset dir="${build}" includes="org/**/*.class,org/**/*.properties,org/**/*.png"/>
-            <zipgroupfileset dir="${lib}" includes="jam-mac-only.jar"/>
+	<target name="addon"
+	        depends="build_jar_all_JEBL_NoJUnitTest"
+	        description="release BEAST 2 add-on version of JEBL">
+
+		<delete dir="${Add_on_dir}" />
+		<!-- Create the release directory -->
+		<mkdir dir="${Add_on_dir}" />
+		<mkdir dir="${Add_on_dir}/doc" />
+		<mkdir dir="${Add_on_dir}/lib" />
+		<mkdir dir="${Add_on_dir}/examples" />
+		<mkdir dir="${Add_on_dir}/templates" />
+
+		<copy todir="${Add_on_dir}">
+			<fileset file="version.xml"/>
+		</copy>
+		<copy todir="${Add_on_dir}/examples">
+			<fileset dir="examples" />
+		</copy>
+		<!--
+		<copy todir="${Add_on_dir}/doc">
+			<fileset file="doc/readme.txt"/>
+		</copy>
+		-->
+		<copy todir="${Add_on_dir}/lib">
+			<fileset dir="${distJEBL}" includes="JEBL.addon.jar" />
+		</copy>
+		<copy todir="${Add_on_dir}">
+			<fileset dir="${distJEBL}" includes="JEBL.src.jar" />
+		</copy>
+		<!--
+		<copy todir="${Add_on_dir}/templates">
+			<fileset file="templates/JEBL.xml" />
+			<fileset file="templates/AutoPartition.xml" />
+		</copy>
+		-->
+
+		<jar jarfile="${distJEBL}/JEBL.addon.v${version}.zip">
+			<fileset dir="${Add_on_dir}">
+				<include name="**/*" />
+			</fileset>
         </jar>
-    </target>
+		<echo message="Add-on version v${version} release is finished." />
+	</target>
 
-    <target name="compile-jebl" depends="init">
-        <!-- Compile the java code from ${src} into ${build} -->
-        <javac source="1.5" srcdir="${src}" destdir="${build}" debug="true" target="1.5">
-            <include name="jebl/**/*"/>
-        </javac>
-        <copy todir="${build}">
-            <fileset dir="${src}" includes="jebl/**/*.png"/>
-        </copy>
-    </target>
-
-    <target name="dist-jebl" depends="compile-jebl" description="generate the JEBL distribution">
-        <!-- Create the distribution directory -->
-        <mkdir dir="${dist}"/>
-
-        <!-- Put everything in ${build} into the jebl-${DSTAMP}.jar file -->
-        <jar jarfile="${dist}/jebl.jar">
-            <fileset dir="${build}" includes="jebl/**/*.class,jebl/**/*.properties,jebl/**/*.png"/>
-            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
-        </jar>
-    </target>
-
-    <target name="dist" depends="dist-jebl,dist-jam" description="generate the distribution">
-        <!-- Create the distribution directory -->
-        <mkdir dir="${dist}"/>
-
-        <!-- Put everything in ${build} into the jebl-${DSTAMP}.jar file -->
-        <jar jarfile="${dist}/jebl.jar">
-            <fileset dir="${build}" includes="**/*.class,**/*.properties,**/*.png"/>
-            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
-        </jar>
-    </target>
-
-    <target name="dist-clean" depends="clean,compile-jebl,compile-jam" description="generate the distribution">
-        <!-- For some reason I don't fully understand, running the standard distribute
-         script doesn't always work if you have done a previous build on a previous version
-         of the source code. For some reason, it just doesn't compile some files. This
-         script seems to work better.-->
-        <mkdir dir="${dist}"/>
-
-        <!-- Put everything in ${build} into the jebl-${DSTAMP}.jar file -->
-        <jar jarfile="${dist}/jebl.jar">
-            <fileset dir="${build}" includes="**/*.class,**/*.properties,**/*.png"/>
-            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
-        </jar>
-    </target>
-
-
-   <property name="api" location="doc/api"/>
-
-   <target name="document" depends="clean-api,prepare-api">
-      <javadoc destdir="${api}"
-               version="false"
-               use="true"
-               author="true"
-               windowtitle="Java Evolutionary Biology Library"
-               doctitle="Java Evolutionary Biology Library">
-         <fileset dir="src"/>
-         <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
-      </javadoc>
-   </target>
-
-
-   <target name="prepare-api">
-      <mkdir dir="${api}"/>
-   </target>
-
-
-   <target name="clean-api">
-      <delete dir="${api}"/>
-   </target>
 </project>
