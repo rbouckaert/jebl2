@@ -108,7 +108,7 @@ public class ResampledAlignment extends BEASTObject implements Alignment {
     }
 
     @Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

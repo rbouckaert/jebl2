@@ -78,7 +78,7 @@ public class TaxonomicLevel extends BEASTObject {
     private static Map<String, TaxonomicLevel> taxonomicLevels = new HashMap<>();
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

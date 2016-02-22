@@ -127,7 +127,7 @@ public class ByteBuilder extends BEASTObject implements CharSequence, Appendable
 	}
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 		
 	}

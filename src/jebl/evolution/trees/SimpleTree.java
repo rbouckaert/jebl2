@@ -479,7 +479,7 @@ public final class SimpleTree extends BEASTObject implements Tree {
 	}
 	
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

@@ -150,7 +150,7 @@ public class EmpiricalDemographicFunction extends BEASTObject implements Demogra
     private boolean stepwise;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

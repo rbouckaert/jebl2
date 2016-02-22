@@ -143,7 +143,7 @@ public class SplitSystem extends BEASTObject {
 	private int size;
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 		
 	}

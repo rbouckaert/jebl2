@@ -228,7 +228,7 @@ public class ProfileCharacter extends BEASTObject {
     }
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

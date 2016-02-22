@@ -380,7 +380,7 @@ public class BartonSternberg extends BEASTObject implements MultipleAligner {
     }
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

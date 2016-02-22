@@ -244,7 +244,7 @@ public abstract class ClusteringTreeBuilder<T extends Tree> extends BEASTObject 
     protected int numberOfRootSubtrees;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

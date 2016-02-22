@@ -16,6 +16,7 @@ import jebl.evolution.taxa.Taxon;
 import java.util.*;
 
 import beast.core.BEASTObject;
+import beast.core.Param;
 
 /**
  * A basic implementation of the Alignment interface.
@@ -37,7 +38,7 @@ public class BasicAlignment extends BEASTObject implements Alignment {
      * objects are not copied.
      * @param sequences
      */
-    public BasicAlignment(Collection<? extends Sequence> sequences) {
+    public BasicAlignment(@Param(name="sequence", description="a collection of sequences") List<Sequence> sequences) {
         for (Sequence sequence : sequences) {
             put(sequence);
         }
@@ -277,7 +278,7 @@ public class BasicAlignment extends BEASTObject implements Alignment {
     }
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

@@ -21,7 +21,7 @@ public class JEBL2BEASTTree extends Tree implements StateNodeInitialiser {
 	
 	
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		TreeBuilder<RootedTree> builder = treeInput.get();
 		jebl.evolution.trees.RootedTree jeblTree = builder.build();
 		jebl.evolution.graphs.Node jeblRoot = jeblTree.getRootNode();
@@ -65,7 +65,7 @@ public class JEBL2BEASTTree extends Tree implements StateNodeInitialiser {
 	}
 	
 	@Override
-	public void initStateNodes() throws Exception {
+	public void initStateNodes() {
         if (initialInput.get() != null) {
         	initialInput.get().assignFrom(this);
         }

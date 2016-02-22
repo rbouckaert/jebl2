@@ -454,7 +454,7 @@ public class NexusExporter extends BEASTObject implements AlignmentExporter, Seq
     public static final int MAX_ROW_LENGTH = 60;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

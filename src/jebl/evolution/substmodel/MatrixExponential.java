@@ -939,7 +939,7 @@ public class MatrixExponential extends BEASTObject implements Cloneable, java.io
 
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 		
 	}

@@ -173,7 +173,7 @@ public class TabDelimitedImporter extends BEASTObject implements DistanceMatrixI
     private boolean columnLabels;
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

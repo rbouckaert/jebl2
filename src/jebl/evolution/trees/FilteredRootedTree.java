@@ -189,7 +189,7 @@ public abstract class FilteredRootedTree extends BEASTObject implements RootedTr
 	protected RootedTree source;
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

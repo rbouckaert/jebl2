@@ -310,7 +310,7 @@ abstract public class AbstractRateMatrix extends BEASTObject implements RateMatr
     protected final double[] getFrequencies() {  return frequency; }
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

@@ -149,7 +149,7 @@ public abstract class ConsensusTreeBuilder<T extends Tree> extends BEASTObject i
     private final List<ProgressListener> listeners = new ArrayList<>();
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

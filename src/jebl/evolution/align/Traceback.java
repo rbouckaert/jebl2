@@ -14,7 +14,7 @@ public abstract class Traceback extends BEASTObject {
 	public String toString() { return "("+getX() + ", " + getY()+")";};
 	
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

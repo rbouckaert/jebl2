@@ -235,7 +235,7 @@ public abstract class Scores extends BEASTObject implements ScoreMatrix {
     }*/
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// TODO nothing to do
 	}
 

@@ -245,7 +245,7 @@ public class Intervals extends BEASTObject implements IntervalList {
 	private int intervalCount = 0;
 	
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

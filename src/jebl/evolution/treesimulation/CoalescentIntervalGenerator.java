@@ -218,7 +218,7 @@ public class CoalescentIntervalGenerator extends BEASTObject implements Interval
     }
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

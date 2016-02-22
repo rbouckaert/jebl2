@@ -921,7 +921,7 @@ final public class SimpleRootedTree extends BEASTObject implements RootedTree {
     }
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

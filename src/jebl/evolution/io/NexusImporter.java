@@ -1494,7 +1494,7 @@ public class NexusImporter extends BEASTObject implements AlignmentImporter, Seq
     protected final ImportHelper helper;
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

@@ -233,7 +233,7 @@ public class NewickImporter extends BEASTObject implements TreeImporter {
     }
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

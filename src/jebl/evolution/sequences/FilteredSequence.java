@@ -153,7 +153,7 @@ public abstract class FilteredSequence extends BEASTObject implements Sequence {
     private State[] sequence = null;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

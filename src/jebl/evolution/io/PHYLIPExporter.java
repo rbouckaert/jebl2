@@ -124,7 +124,7 @@ public class PHYLIPExporter extends BEASTObject implements AlignmentExporter, Tr
     }
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

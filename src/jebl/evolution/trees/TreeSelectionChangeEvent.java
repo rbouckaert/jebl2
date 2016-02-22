@@ -32,7 +32,7 @@ public final class TreeSelectionChangeEvent extends BEASTObject {
 
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 		
 	}

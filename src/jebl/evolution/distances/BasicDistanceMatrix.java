@@ -181,7 +181,7 @@ public class BasicDistanceMatrix extends BEASTObject implements DistanceMatrix {
     }
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

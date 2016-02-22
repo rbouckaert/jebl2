@@ -271,7 +271,7 @@ public class FastaImporter extends BEASTObject implements SequenceImporter, Imme
     }
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

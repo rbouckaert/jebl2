@@ -103,7 +103,7 @@ public class ContinuousCharacter extends BEASTObject implements Character{
 	private Set<Taxon> taxa;
 	
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

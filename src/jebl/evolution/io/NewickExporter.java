@@ -52,7 +52,7 @@ public class NewickExporter extends BEASTObject implements TreeExporter {
     private Writer writer;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

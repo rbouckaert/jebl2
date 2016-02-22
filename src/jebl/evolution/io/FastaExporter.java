@@ -49,7 +49,7 @@ public class FastaExporter extends BEASTObject implements SequenceExporter {
     private PrintWriter writer;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

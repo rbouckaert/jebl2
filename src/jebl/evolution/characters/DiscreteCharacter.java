@@ -141,7 +141,7 @@ public class DiscreteCharacter extends BEASTObject implements Character{
 	private int numOfStates;
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

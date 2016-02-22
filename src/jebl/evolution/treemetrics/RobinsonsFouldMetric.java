@@ -93,7 +93,7 @@ public class RobinsonsFouldMetric extends BEASTObject implements RootedTreeMetri
 	private final Map<Taxon, Integer> taxonMap;
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

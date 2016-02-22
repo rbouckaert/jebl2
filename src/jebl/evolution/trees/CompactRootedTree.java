@@ -623,7 +623,7 @@ abstract class AttributableImp extends BEASTObject implements Attributable {
     }
 
     @Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

@@ -220,7 +220,7 @@ public class CodonSequence extends BEASTObject implements Sequence {
     }
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

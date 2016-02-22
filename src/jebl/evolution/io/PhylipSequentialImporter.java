@@ -82,7 +82,7 @@ public class PhylipSequentialImporter extends BEASTObject implements SequenceImp
     private int maxNameLength = 10;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

@@ -218,7 +218,7 @@ public final class Taxon extends BEASTObject implements Attributable, Comparable
     }
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

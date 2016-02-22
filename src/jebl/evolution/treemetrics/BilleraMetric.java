@@ -28,7 +28,7 @@ public class BilleraMetric extends BEASTObject implements RootedTreeMetric {
     }
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

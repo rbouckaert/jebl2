@@ -195,7 +195,7 @@ public class Coalescent extends BEASTObject implements MultivariateFunction {
 	private RootedTree tree;
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 		
 	}

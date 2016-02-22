@@ -116,7 +116,7 @@ public class ConstantPopulation extends BEASTObject implements DemographicFuncti
 	private double N0;
 	
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

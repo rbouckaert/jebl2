@@ -220,7 +220,7 @@ public class CanonicalSequence extends BEASTObject implements Sequence {
    // private Map<String, Object> attributeMap = null;
     
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 

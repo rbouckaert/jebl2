@@ -185,7 +185,7 @@ public class ConsensusSequence extends BEASTObject implements Sequence {
     private final AttributableHelper attributableHelper = new AttributableHelper();
 
 	@Override
-	public void initAndValidate() throws Exception {
+	public void initAndValidate() {
 		// nothing to do
 	}
 
